@@ -7,7 +7,7 @@
 <meta name="apple-mobile-web-app-status-bar-style" content="black-translucent">
 <meta name="theme-color" content="#0a1a14">
 <title>Claudi · Entrenament</title>
-<link href="https://fonts.googleapis.com/css2?family=DM+Sans:ital,opsz,wght@0,9..40,300;0,9..40,400;0,9..40,500;0,9..40,600;1,9..40,400&family=DM+Mono:wght@400;500&display=swap" rel="stylesheet">
+<link href="https://fonts.googleapis.com/css2?family=DM+Sans:opsz,wght@9..40,300;9..40,400;9..40,500;9..40,600&family=DM+Mono:wght@400;500&display=swap" rel="stylesheet">
 <style>
 :root{
   --g:#1D9E75;--gd:#0d6e50;--gl:rgba(29,158,117,0.15);
@@ -24,34 +24,22 @@
 html,body{height:100%;overflow:hidden}
 body{font-family:'DM Sans',sans-serif;background:var(--bg);color:var(--t);max-width:430px;margin:0 auto;display:flex;flex-direction:column}
 .mono{font-family:'DM Mono',monospace}
-
-/* HEADER */
 .hdr{background:var(--bg2);padding:50px 18px 12px;border-bottom:1px solid var(--bdr);flex-shrink:0}
 .hdr-row{display:flex;justify-content:space-between;align-items:flex-start}
 .hdr-name{font-size:11px;color:var(--t3);letter-spacing:.5px;text-transform:uppercase}
 .hdr-title{font-size:20px;font-weight:600;color:var(--t);letter-spacing:-.3px;margin-top:1px}
 .hdr-right{text-align:right}
-.hdr-pes{font-size:18px;font-weight:600;color:var(--g);font-family:'DM Mono',monospace}
 .hdr-sub{font-size:11px;color:var(--t3);margin-top:2px}
-.hdr-race{font-size:11px;color:var(--a);margin-top:2px}
-
-/* TABS */
 .tabs{display:flex;background:var(--bg2);border-bottom:1px solid var(--bdr);flex-shrink:0}
 .tab{flex:1;padding:10px 4px;font-size:11px;font-weight:500;color:var(--t3);text-align:center;cursor:pointer;border-bottom:2px solid transparent;transition:all .15s;letter-spacing:.3px}
 .tab.on{color:var(--g);border-bottom-color:var(--g)}
-
-/* SCROLL AREA */
 .pages{flex:1;overflow-y:auto;overflow-x:hidden;-webkit-overflow-scrolling:touch}
 .page{display:none;padding:14px 16px 24px}
 .page.on{display:block}
-
-/* CARDS */
 .card{background:var(--card);border-radius:var(--rad);border:1px solid var(--bdr);padding:13px 15px;margin-bottom:9px}
 .card-row{display:flex;justify-content:space-between;align-items:flex-start}
 .card-title{font-size:14px;font-weight:500;color:var(--t)}
 .card-sub{font-size:11px;color:var(--t2);margin-top:2px;line-height:1.5}
-
-/* BADGES */
 .bdg{font-size:9px;padding:3px 8px;border-radius:99px;font-weight:600;letter-spacing:.4px;display:inline-block}
 .bdg-push{background:rgba(29,158,117,.2);color:#5dcaa5}
 .bdg-pull{background:rgba(29,158,117,.12);color:#9fe1cb}
@@ -59,13 +47,9 @@ body{font-family:'DM Sans',sans-serif;background:var(--bg);color:var(--t);max-wi
 .bdg-run{background:rgba(55,138,221,.2);color:#85b7eb}
 .bdg-bici{background:rgba(239,159,39,.2);color:#ef9f27}
 .bdg-rest{background:rgba(255,255,255,.06);color:var(--t2)}
-.bdg-done{background:rgba(29,158,117,.25);color:#5dcaa5}
-
-/* CHECK */
+.bdg-mob{background:rgba(180,100,220,.2);color:#d4a0f0}
 .chk{width:30px;height:30px;border-radius:50%;border:1.5px solid var(--bdr2);background:none;cursor:pointer;color:var(--t2);font-size:14px;display:flex;align-items:center;justify-content:center;transition:all .2s;flex-shrink:0}
 .chk.on{background:var(--g);border-color:var(--g);color:#fff}
-
-/* STATS */
 .sgrid{display:grid;grid-template-columns:1fr 1fr;gap:8px;margin-bottom:10px}
 .sgrid3{display:grid;grid-template-columns:1fr 1fr 1fr;gap:8px;margin-bottom:10px}
 .sc{background:var(--bg3);border-radius:var(--radsm);padding:11px 12px}
@@ -73,15 +57,9 @@ body{font-family:'DM Sans',sans-serif;background:var(--bg);color:var(--t);max-wi
 .sc-l{font-size:10px;color:var(--t2);margin-top:2px}
 .sc-d{font-size:10px;margin-top:2px}
 .cg{color:#5dcaa5}.ca{color:#fac775}.cr{color:#f09595}.cb{color:#85b7eb}
-
-/* PROGRESS */
 .pb-wrap{background:var(--bg3);border-radius:99px;height:4px;overflow:hidden;margin:5px 0 12px}
 .pb{height:4px;border-radius:99px;background:var(--g);transition:width .4s}
-
-/* SECTION TITLE */
 .st{font-size:10px;font-weight:600;color:var(--t3);text-transform:uppercase;letter-spacing:.8px;margin:14px 0 7px}
-
-/* FORM */
 .fg{margin-bottom:11px}
 .fl{font-size:11px;color:var(--t2);margin-bottom:4px;display:block;font-weight:500}
 .fi{width:100%;background:var(--bg3);border:1px solid var(--bdr2);border-radius:var(--radsm);padding:9px 11px;font-size:14px;color:var(--t);font-family:'DM Sans',sans-serif;outline:none;transition:border-color .15s;-webkit-appearance:none}
@@ -89,18 +67,15 @@ body{font-family:'DM Sans',sans-serif;background:var(--bg);color:var(--t);max-wi
 .fi::placeholder{color:var(--t3)}
 .fg2{display:grid;grid-template-columns:1fr 1fr;gap:9px}
 .fg3{display:grid;grid-template-columns:1fr 1fr 1fr;gap:7px}
-.fg4{display:grid;grid-template-columns:1fr 1fr 1fr 1fr;gap:6px}
 .btn{width:100%;padding:12px;background:var(--g);color:#fff;border:none;border-radius:var(--radsm);font-size:14px;font-weight:600;cursor:pointer;font-family:'DM Sans',sans-serif;transition:background .15s;margin-top:4px}
 .btn:active{background:var(--gd)}
 .btn-sec{background:none;color:var(--t2);border:1px solid var(--bdr2);margin-top:7px}
-.btn-sm{padding:7px 14px;font-size:12px;width:auto;margin-top:0}
-
-/* GYM */
+.btn-warn{background:none;color:var(--a);border:1px solid rgba(239,159,39,.3);margin-top:7px}
 .ex-card{background:var(--bg3);border-radius:var(--radsm);border:1px solid var(--bdr);margin-bottom:7px;overflow:hidden}
 .ex-hdr{padding:10px 13px;display:flex;justify-content:space-between;align-items:center;cursor:pointer}
 .ex-name{font-size:13px;font-weight:500;color:var(--t)}
 .ex-prev{font-size:10px;color:var(--t3);margin-top:1px}
-.ex-body{padding:0 13px 11px;border-top:1px solid var(--bdr)}
+.ex-body{padding:0 13px 11px;border-top:1px solid var(--bdr);display:none}
 .ex-body.op{display:block}
 .series-hdr{display:grid;grid-template-columns:28px 1fr 1fr;gap:7px;padding:7px 0 4px}
 .series-hdr span{font-size:9px;color:var(--t3);text-align:center;text-transform:uppercase;letter-spacing:.4px}
@@ -108,50 +83,39 @@ body{font-family:'DM Sans',sans-serif;background:var(--bg);color:var(--t);max-wi
 .serie-n{font-size:11px;color:var(--t3);text-align:center;font-family:'DM Mono',monospace}
 .serie-in{background:var(--card2);border:1px solid var(--bdr);border-radius:6px;padding:7px;font-size:13px;color:var(--t);text-align:center;font-family:'DM Mono',monospace;width:100%;outline:none;-webkit-appearance:none}
 .serie-in:focus{border-color:var(--g)}
-.ex-hist{font-size:10px;color:var(--t3);padding:6px 0 2px;border-top:1px solid var(--bdr);margin-top:4px}
-.ex-hist span{color:var(--t2)}
-
-/* MODAL */
 .modal-bg{position:fixed;inset:0;background:rgba(0,0,0,.7);z-index:200;display:flex;align-items:flex-end;justify-content:center;max-width:430px;margin:0 auto}
-.modal{background:var(--bg2);border-radius:20px 20px 0 0;padding:20px 18px 36px;width:100%;max-height:88vh;overflow-y:auto}
-.modal-title{font-size:17px;font-weight:600;color:var(--t);margin-bottom:4px}
-.modal-sub{font-size:12px;color:var(--t2);margin-bottom:16px}
+.modal{background:var(--bg2);border-radius:20px 20px 0 0;padding:20px 18px 36px;width:100%;max-height:90vh;overflow-y:auto}
+.modal-title{font-size:17px;font-weight:600;color:var(--t);margin-bottom:3px}
+.modal-sub{font-size:12px;color:var(--t2);margin-bottom:14px}
 .modal-close{float:right;background:var(--bg3);border:none;color:var(--t2);width:28px;height:28px;border-radius:50%;cursor:pointer;font-size:16px;display:flex;align-items:center;justify-content:center}
-
-/* TOAST */
-.toast{position:fixed;bottom:20px;left:50%;transform:translateX(-50%);background:var(--g);color:#fff;padding:9px 20px;border-radius:99px;font-size:13px;font-weight:500;opacity:0;transition:opacity .3s;pointer-events:none;white-space:nowrap;z-index:300;max-width:430px}
+.toast{position:fixed;bottom:20px;left:50%;transform:translateX(-50%);background:var(--g);color:#fff;padding:9px 20px;border-radius:99px;font-size:13px;font-weight:500;opacity:0;transition:opacity .3s;pointer-events:none;white-space:nowrap;z-index:300}
 .toast.on{opacity:1}
-
-/* CHART */
 .chart-wrap{position:relative;width:100%;margin:8px 0 4px}
-
-/* TOGGLE */
 .tgl-row{display:flex;gap:6px;margin-bottom:11px}
 .tgl{flex:1;padding:7px;background:var(--bg3);border:1px solid var(--bdr);border-radius:var(--radsm);font-size:11px;font-weight:500;color:var(--t2);cursor:pointer;text-align:center;transition:all .15s}
 .tgl.on{background:var(--gl);border-color:var(--g);color:var(--g)}
-
-/* HIST ITEM */
 .hi{display:flex;justify-content:space-between;align-items:center;padding:9px 0;border-bottom:1px solid var(--bdr)}
 .hi:last-child{border-bottom:none}
 .hi-left{flex:1}
 .hi-date{font-size:11px;color:var(--t3)}
-.hi-title{font-size:13px;font-weight:500;color:var(--t);margin-top:1px}
 .hi-right{font-size:15px;font-weight:600;color:var(--t);font-family:'DM Mono',monospace;text-align:right}
 .hi-delta{font-size:10px;margin-top:1px;text-align:right}
-
-/* MAFBOX */
 .mafbox{background:rgba(55,138,221,.1);border:1px solid rgba(55,138,221,.2);border-radius:var(--radsm);padding:9px 12px;margin-bottom:12px;font-size:11px;color:#85b7eb;line-height:1.6}
-
-/* BICI TYPE */
-.bici-type-row{display:flex;gap:8px;margin-bottom:12px}
-.bici-type-btn{flex:1;padding:9px;background:var(--bg3);border:1px solid var(--bdr);border-radius:var(--radsm);font-size:12px;font-weight:500;color:var(--t2);cursor:pointer;text-align:center;transition:all .15s}
-.bici-type-btn.on{background:var(--al);border-color:var(--a);color:var(--a)}
-
-/* CALENDAR DAY */
-.cal-day{background:var(--card);border-radius:var(--rad);border:1px solid var(--bdr);margin-bottom:8px;overflow:hidden;cursor:pointer;transition:border-color .15s}
-.cal-day:active{border-color:var(--bdr2)}
+.info-box{background:var(--bg3);border-radius:var(--radsm);padding:10px 13px;margin-bottom:9px}
+.info-box-title{font-size:10px;color:var(--t3);text-transform:uppercase;letter-spacing:.6px;margin-bottom:5px;font-weight:600}
+.info-box-body{font-size:12px;color:var(--t2);line-height:1.7;white-space:pre-line}
+.info-box-green{background:rgba(29,158,117,.1);border:1px solid rgba(29,158,117,.2)}
+.info-box-green .info-box-title{color:#5dcaa5}
+.info-box-blue{background:rgba(55,138,221,.08);border:1px solid rgba(55,138,221,.15)}
+.info-box-blue .info-box-title{color:#85b7eb}
+.info-box-amber{background:rgba(239,159,39,.08);border:1px solid rgba(239,159,39,.15)}
+.info-box-amber .info-box-title{color:#fac775}
+.week-nav{display:flex;align-items:center;justify-content:space-between;margin-bottom:12px;background:var(--bg3);border-radius:var(--radsm);padding:8px 12px}
+.week-nav-btn{background:none;border:none;color:var(--t2);font-size:18px;cursor:pointer;padding:0 6px;line-height:1}
+.week-nav-label{font-size:13px;font-weight:500;color:var(--t)}
+.cal-day{background:var(--card);border-radius:var(--rad);border:1px solid var(--bdr);margin-bottom:8px;overflow:hidden}
 .cal-day.today{border-color:rgba(29,158,117,.4)}
-.cal-day-hdr{padding:11px 14px;display:flex;justify-content:space-between;align-items:center}
+.cal-day-hdr{padding:11px 14px;display:flex;justify-content:space-between;align-items:center;cursor:pointer}
 .cal-day-date{font-size:11px;color:var(--t3)}
 .cal-day-name{font-size:14px;font-weight:500;color:var(--t);margin-top:1px}
 .cal-day-body{padding:0 14px 12px;border-top:1px solid var(--bdr)}
@@ -159,13 +123,9 @@ body{font-family:'DM Sans',sans-serif;background:var(--bg);color:var(--t);max-wi
 .cal-day-meta{display:flex;gap:6px;flex-wrap:wrap;padding-top:7px}
 .cal-metric{background:var(--bg3);border-radius:6px;padding:4px 8px;font-size:10px;color:var(--t2)}
 .cal-metric span{color:var(--t);font-weight:500;font-family:'DM Mono',monospace}
-
-/* WEEK NAV */
-.week-nav{display:flex;align-items:center;justify-content:space-between;margin-bottom:12px;background:var(--bg3);border-radius:var(--radsm);padding:8px 12px}
-.week-nav-btn{background:none;border:none;color:var(--t2);font-size:18px;cursor:pointer;padding:0 6px;line-height:1}
-.week-nav-label{font-size:13px;font-weight:500;color:var(--t)}
-
-/* RUN CARD */
+.sub-activity{background:var(--bg3);border-radius:var(--radsm);border:1px solid var(--bdr);padding:10px 13px;margin-bottom:8px}
+.sub-activity-hdr{display:flex;justify-content:space-between;align-items:center;margin-bottom:6px}
+.sub-activity-title{font-size:13px;font-weight:500;color:var(--t)}
 .run-card{background:var(--bg3);border-radius:var(--radsm);border:1px solid var(--bdr);padding:11px 13px;margin-bottom:8px}
 .run-card-hdr{display:flex;justify-content:space-between;align-items:center;margin-bottom:9px}
 .run-card-title{font-size:13px;font-weight:500;color:var(--t)}
@@ -173,12 +133,9 @@ body{font-family:'DM Sans',sans-serif;background:var(--bg);color:var(--t);max-wi
 .rm{text-align:center}
 .rm-v{font-size:13px;font-weight:500;color:var(--t);font-family:'DM Mono',monospace}
 .rm-l{font-size:9px;color:var(--t3);text-transform:uppercase;letter-spacing:.4px;margin-top:1px}
-
-/* RESPONSIVE TEXT */
-@media(max-width:380px){
-  .sc-n{font-size:18px}
-  .card-title{font-size:13px}
-}
+.reprogram-btn{font-size:11px;color:var(--a);background:none;border:1px solid rgba(239,159,39,.25);border-radius:6px;padding:4px 10px;cursor:pointer;margin-top:6px}
+.reprogram-tag{font-size:9px;background:rgba(239,159,39,.15);color:#fac775;border-radius:99px;padding:2px 7px;margin-left:6px}
+select.fi{appearance:none}
 </style>
 </head>
 <body>
@@ -190,9 +147,7 @@ body{font-family:'DM Sans',sans-serif;background:var(--bg);color:var(--t);max-wi
       <div class="hdr-title" id="hdr-title">Calendari</div>
     </div>
     <div class="hdr-right">
-      <div class="hdr-pes" id="hdr-pes">— kg</div>
       <div class="hdr-sub" id="hdr-date"></div>
-      <div class="hdr-race" id="hdr-race"></div>
     </div>
   </div>
 </div>
@@ -207,9 +162,7 @@ body{font-family:'DM Sans',sans-serif;background:var(--bg);color:var(--t);max-wi
 
 <div class="pages">
 
-<!-- ══════════════════════════════════════════════
-     TAB 0: CALENDARI
-══════════════════════════════════════════════ -->
+<!-- TAB 0: CALENDARI -->
 <div class="page on" id="tab-0">
   <div class="week-nav">
     <button class="week-nav-btn" onclick="changeWeek(-1)">‹</button>
@@ -219,9 +172,7 @@ body{font-family:'DM Sans',sans-serif;background:var(--bg);color:var(--t);max-wi
   <div id="cal-list"></div>
 </div>
 
-<!-- ══════════════════════════════════════════════
-     TAB 1: GYM
-══════════════════════════════════════════════ -->
+<!-- TAB 1: GYM -->
 <div class="page" id="tab-1">
   <div class="tgl-row">
     <div class="tgl on" onclick="gymTab('push')">PUSH</div>
@@ -231,9 +182,7 @@ body{font-family:'DM Sans',sans-serif;background:var(--bg);color:var(--t);max-wi
   <div id="gym-content"></div>
 </div>
 
-<!-- ══════════════════════════════════════════════
-     TAB 2: RUN
-══════════════════════════════════════════════ -->
+<!-- TAB 2: RUN -->
 <div class="page" id="tab-2">
   <div class="mafbox">Maffetone Claudi: FC ≤148 ppm (FCmàx 190) · Si passes → camina fins a 138 · MAF pace = ritme a FC 148 constant</div>
   <div class="sgrid">
@@ -244,15 +193,13 @@ body{font-family:'DM Sans',sans-serif;background:var(--bg);color:var(--t);max-wi
     <div class="sc"><div class="sc-n" id="run-km">0.0</div><div class="sc-l">km totals acum.</div></div>
     <div class="sc"><div class="sc-n ca" id="run-fc">—</div><div class="sc-l">FC mig general</div></div>
   </div>
-  <div class="st">Evolució MAF pace (min/km)</div>
+  <div class="st">Evolució MAF pace (min/km) — com més baix millor</div>
   <div class="chart-wrap" style="height:100px"><canvas id="chart-maf"></canvas></div>
   <div class="st">Historial de runs</div>
   <div id="run-hist-list"></div>
 </div>
 
-<!-- ══════════════════════════════════════════════
-     TAB 3: PES I MIDES
-══════════════════════════════════════════════ -->
+<!-- TAB 3: PES -->
 <div class="page" id="tab-3">
   <div class="sgrid">
     <div class="sc"><div class="sc-n" id="p-actual">99.2</div><div class="sc-l">Pes actual (kg)</div></div>
@@ -266,7 +213,6 @@ body{font-family:'DM Sans',sans-serif;background:var(--bg);color:var(--t);max-wi
   <div class="chart-wrap" style="height:100px"><canvas id="chart-pes"></canvas></div>
   <div class="st">Evolució % grasa</div>
   <div class="chart-wrap" style="height:80px"><canvas id="chart-grasa"></canvas></div>
-
   <div class="st">Nova mesura</div>
   <div class="card">
     <div class="fg2">
@@ -296,40 +242,29 @@ body{font-family:'DM Sans',sans-serif;background:var(--bg);color:var(--t);max-wi
     <div class="fg"><label class="fl">Notes</label><input class="fi" placeholder="Observacions..." id="p-notes"></div>
     <button class="btn" onclick="savePes()">Guardar mesura</button>
   </div>
-
   <div class="st">Historial de mesures</div>
   <div class="card" id="pes-hist-list"><div style="color:var(--t3);font-size:12px">Sense dades</div></div>
 </div>
 
-
-<!-- ══════════════════════════════════════════════
-     TAB 4: RESUM
-══════════════════════════════════════════════ -->
+<!-- TAB 4: RESUM -->
 <div class="page" id="tab-4">
   <div class="sgrid">
     <div class="sc"><div class="sc-n cg" id="rs-fetes">0</div><div class="sc-l">Sessions fetes</div><div class="sc-d" id="rs-pct" style="font-size:10px;color:var(--t2)">de 0 previstes</div></div>
-    <div class="sc"><div class="sc-n ca" id="rs-adherencia">0%</div><div class="sc-l">Adherència</div><div class="sc-d" style="font-size:10px;color:var(--t2)">objectiu &gt;80%</div></div>
+    <div class="sc"><div class="sc-n ca" id="rs-adherencia">0%</div><div class="sc-l">Adherència</div><div class="sc-d" style="font-size:10px;color:var(--t2)">objectiu >80%</div></div>
   </div>
   <div class="sgrid">
-    <div class="sc"><div class="sc-n" id="rs-pes">—</div><div class="sc-l">Pes actual (kg)</div><div class="sc-d cg" id="rs-perdut" style="font-size:10px">— kg perduts</div></div>
-    <div class="sc"><div class="sc-n cb" id="rs-dies">—</div><div class="sc-l">Dies fins cursa</div><div class="sc-d" style="font-size:10px;color:var(--t2)">26 abril 2026</div></div>
+    <div class="sc"><div class="sc-n" id="rs-pes">—</div><div class="sc-l">Pes actual (kg)</div><div class="sc-d cg" id="rs-perdut" style="font-size:10px">—</div></div>
+    <div class="sc"><div class="sc-n cb" id="rs-maf">—</div><div class="sc-l">MAF pace actual</div><div class="sc-d" style="font-size:10px;color:var(--t2)">min/km a FC 148</div></div>
   </div>
-
   <div class="st">Progrés objectiu pes (99.2 → 90 kg)</div>
   <div class="pb-wrap" style="height:8px"><div class="pb" id="rs-pb-pes" style="height:8px;width:0%"></div></div>
-
-  <div class="st">Progrés pla d'entrenament</div>
+  <div class="st">Adherència al pla</div>
   <div class="pb-wrap" style="height:8px"><div class="pb" id="rs-pb-pla" style="height:8px;width:0%"></div></div>
-
   <div class="st">Per setmana</div>
   <div id="rs-setmanes"></div>
-
-  <div class="st">Run — millora MAF pace</div>
-  <div id="rs-run-prog"></div>
-
-  <div class="st">Exportar dades per analitzar</div>
+  <div class="st">Exportar dades per a Claude</div>
   <div class="card">
-    <div class="card-title" style="margin-bottom:6px">Exporta les teves dades</div>
+    <div class="card-title" style="margin-bottom:6px">Genera el resum per analitzar</div>
     <div class="card-sub" style="margin-bottom:12px">Copia el JSON i envia'l a Claude per analitzar el progrés i programar les properes setmanes.</div>
     <button class="btn" onclick="exportData()">Generar resum per a Claude</button>
     <div id="export-box" style="display:none;margin-top:12px">
@@ -341,7 +276,6 @@ body{font-family:'DM Sans',sans-serif;background:var(--bg);color:var(--t);max-wi
 
 </div><!-- end pages -->
 
-<!-- MODAL -->
 <div class="modal-bg" id="modal" style="display:none" onclick="closeModalBg(event)">
   <div class="modal" id="modal-inner">
     <div id="modal-content"></div>
@@ -352,264 +286,325 @@ body{font-family:'DM Sans',sans-serif;background:var(--bg);color:var(--t);max-wi
 
 <script src="https://cdnjs.cloudflare.com/ajax/libs/Chart.js/4.4.1/chart.umd.js"></script>
 <script>
-// ════════════════════════════════════════════════
-// DATA
-// ════════════════════════════════════════════════
-const RACE_DATE = new Date('2026-04-26');
-const START_DATE = new Date('2026-03-15');
-
-const GYM_PUSH = [
-  {name:'Press mancuernes inclinat', mat:'Banc inclinat + mancuernes', series:3},
-  {name:'Màquina press pit assegut', mat:'Màquina press pit', series:3},
-  {name:'Tancaments politja', mat:'Politja multifuncions', series:3},
-  {name:'Obertura màquina pit', mat:'Pec deck', series:3},
-  {name:'Press militar màquina', mat:'Màquina press militar', series:3},
-  {name:'Elevació lateral politja', mat:'Politja baixa unilateral', series:3},
-  {name:'Elevació frontal mancuernes', mat:'Mancuernes', series:3},
+// ══════════════════════════════════════════
+// GYM DATA
+// ══════════════════════════════════════════
+const GYM_PUSH=[
+  {name:'Press mancuernes inclinat',mat:'Banc inclinat + mancuernes',series:3},
+  {name:'Màquina press pit assegut',mat:'Màquina press pit',series:3},
+  {name:'Tancaments politja',mat:'Politja multifuncions',series:3},
+  {name:'Obertura màquina pit',mat:'Pec deck',series:3},
+  {name:'Press militar màquina',mat:'Màquina press militar',series:3},
+  {name:'Elevació lateral politja',mat:'Politja baixa unilateral',series:3},
+  {name:'Elevació frontal mancuernes',mat:'Mancuernes',series:3},
 ];
-const GYM_PULL = [
-  {name:'Lat Pulldown barra ampla', mat:'Politja barra ampla', series:3},
-  {name:'Rem politja agafador V', mat:'Politja agafador V', series:3},
-  {name:'Rem màquina T', mat:'Màquina rem T', series:3},
-  {name:'Pullover politja', mat:'Politja alta', series:3},
-  {name:'Obertura posterior màquina', mat:'Màquina trapezi posterior', series:3},
-  {name:'Planxa abdominal', mat:'Sòl / estora', series:4},
-  {name:'Dead bug', mat:'Sòl', series:3},
-  {name:'Pallof press antirotació', mat:'Politja lateral', series:3},
+const GYM_PULL=[
+  {name:'Lat Pulldown barra ampla',mat:'Politja barra ampla',series:3},
+  {name:'Rem politja agafador V',mat:'Politja agafador V',series:3},
+  {name:'Rem màquina T',mat:'Màquina rem T',series:3},
+  {name:'Pullover politja',mat:'Politja alta',series:3},
+  {name:'Obertura posterior màquina',mat:'Màquina trapezi posterior',series:3},
+  {name:'Planxa abdominal',mat:'Sòl / estora',series:4},
+  {name:'Dead bug',mat:'Sòl',series:3},
+  {name:'Pallof press antirotació',mat:'Politja lateral',series:3},
 ];
-const GYM_CAMES = [
-  {name:'Sentadilla multipower', mat:'Multipower / barra lliure', series:3},
-  {name:'Màquina hip thrust', mat:'Màquina hip thrust', series:3},
-  {name:'Premsa de cames', mat:'Màquina prensa', series:3},
-  {name:'Extensió quàdriceps', mat:'Màquina extensió quàd.', series:3},
-  {name:'Curl isquiotibials', mat:'Màquina isquio', series:3},
-  {name:'Elevació bessons', mat:'Màquina bessons', series:3},
-  {name:'Abductor gluti mig', mat:'Màquina abductor', series:2},
+const GYM_CAMES=[
+  {name:'Sentadilla multipower',mat:'Multipower / barra lliure',series:3},
+  {name:'Màquina hip thrust',mat:'Màquina hip thrust',series:3},
+  {name:'Premsa de cames',mat:'Màquina prensa',series:3},
+  {name:'Extensió quàdriceps',mat:'Màquina extensió quàd.',series:3},
+  {name:'Curl isquiotibials',mat:'Màquina isquio',series:3},
+  {name:'Elevació bessons',mat:'Màquina bessons',series:3},
+  {name:'Abductor gluti mig',mat:'Màquina abductor (obrir)',series:2},
 ];
 
+const MOB_ROUTINE = `1. Gat-vaca: 4×10 reps lentes · Mobilitza tota la columna
+2. Isquiotibials en decúbit: 30 seg/cama · Corda o tovallola al peu
+3. Hip hinge amb pal: 3×10 · Pal a l'esquena, bisagra de maluc
+4. Pigeon pose: 45 seg/costat · Obre piriformi i cadena posterior
+5. Rotació toràcica en quadrupèdia: 3×8/costat · Gir màxim al sostre
+6. Child's pose amb extensió lateral: 30 seg centre + 20 seg/costat
+7. Prone cobra: 3×10 seg · Enforteix extensors lumbars`;
 
-const RUN_DETAIL = {
-  '2026-03-16': {
-    titol: 'Run 1-A — Caminar/Córrer [1+2]',
-    objectiu: 'Primer contacte amb el Maffetone. L\'objectiu NO és córrer ràpid, és aprendre a controlar la FC.',
-    escalfament: '5 min caminant ràpid (5:30–6:30 min/km). Activació suau, no t\'acceleris.',
-    bloc: '[1 min TROT + 2 min CAMINAR] × 5 cicles\n→ Trot: FC ≤148 ppm MÀXIM\n→ Ritme trot esperat: 8:30–10:00 min/km (molt lent, és normal)\n→ Si FC puja de 148 → camina IMMEDIATAMENT sense negociar\n→ Ritme caminar: 6:30–7:30 min/km',
-    cooldown: '5 min caminant suau fins parar completament.',
-    consells: ['Activa alerta FC > 148 al Garmin ABANS de sortir','Si camines el 80% del temps → perfecte, és diagnòstic normal','No et frustris pel ritme lent: és el procés','Post: 10 min mobilitat cadena posterior obligatòria'],
-    garmin: 'Zona 2 · Alerta FC 148 · Interval timer: 1min/2min'
+// ══════════════════════════════════════════
+// GYM DETAIL
+// ══════════════════════════════════════════
+const GYM_DETAIL = {
+  PUSH: {
+    objectiu: 'Sessió de pit i espatlla. Focus en contracció muscular, no en pes. Escalfa les articulacions bé.',
+    escalfament: '5 min cinta suau o 10 min mobilitat espatlles: rotacions de braç, creu al pit, obertures.',
+    notes: 'Descans 90 seg entre sèries als compostos (press). 60 seg als aïllaments (elevacions).\nNo arribes al fracàs muscular: les últimes 2 reps han de costar però ser possibles.\nAcabar sempre amb 10 min mobilitat cadena posterior.',
+    consells: ['Si notes dolor a l\'espatlla → redueix el rang de moviment o baixa el pes','Les elevacions laterals: pes lleuger i forma perfecta valen més que pes alt','Press inclinat: omòplats enrere i avall durant tot el moviment'],
+    mob: MOB_ROUTINE
   },
-  '2026-03-19': {
-    titol: 'Run 1-B — Caminar/Córrer [1+2]',
-    objectiu: 'Igual que 1-A. Compara si la FC s\'aguanta millor al mateix ritme.',
-    escalfament: '5 min caminant ràpid.',
-    bloc: '[1 min TROT + 2 min CAMINAR] × 5 cicles\n→ FC ≤148 ppm SEMPRE\n→ Compara ritme amb Run 1-A: ha millorat?\n→ La FC s\'aguanta més temps per sota de 148?',
-    cooldown: '5 min caminant.',
-    consells: ['Anota el ritme mig del trot per comparar','Si el ritme ha millorat 5-10 seg/km → sistema aeròbic responent','Si és igual → normal, l\'adaptació triga 3-4 setmanes'],
-    garmin: 'Zona 2 · Alerta FC 148 · Interval timer: 1min/2min'
+  PULL: {
+    objectiu: 'Sessió d\'esquena i core. L\'esquena forta protegeix la columna. El core és fonamental per la protusió.',
+    escalfament: '5 min mobilitat: rotacions espatlles, gat-vaca 10 reps, estirament toràcic.',
+    notes: 'Al rem: tira amb els colzes, no amb les mans. Imagina que els teus braços són ganxos.\nLat Pulldown: omòplats avall i junts quan tires. No encongeixis les espatlles.\nPlanxa i dead bug: respiració activa, no aguantis la respiració.\nAcabar amb 10 min mobilitat.',
+    consells: ['Pallof press: els braços estesos i NO giris el tronc → és antirotació, no rotació','Dead bug: l\'esquena PLANA al sòl tot el temps, si s\'aixeca → redueix el rang','Si notes molèstia lumbar en algun exercici → atura i fem mobilitat'],
+    mob: MOB_ROUTINE
   },
-  '2026-03-24': {
-    titol: 'Run 2-A — Caminar/Córrer [2+1]',
-    objectiu: 'Progressió S1: doblem el temps de trot. Si la FC no aguanta, tornem a [1+2] sense patir.',
-    escalfament: '5 min caminant ràpid.',
-    bloc: '[2 min TROT + 1 min CAMINAR] × 6–7 cicles\n→ FC ≤148 ppm SEMPRE\n→ Ritme trot: 8:00–9:30 min/km\n→ Si FC puja de 148 durant el trot → canvia a [1:30+1:30]\n→ Si FC no aguanta [1:30] → torna a [1+2] sense vergonya',
-    cooldown: '5 min caminant.',
-    consells: ['L\'adaptació aeròbica triga 3-4 setmanes, sigues pacient','Si has de tornar a [1+2] NO és un fracàs, és intel·ligència','Anota quants cicles has pogut fer a [2+1]'],
-    garmin: 'Zona 2 · Alerta FC 148 · Interval timer: 2min/1min'
-  },
-  '2026-03-27': {
-    titol: 'Run 2-B — Caminar/Córrer [2+1]',
-    objectiu: 'Consolidar el [2+1]. Si va bé, prova 1 cicle de 3 min al final.',
-    escalfament: '5 min caminant.',
-    bloc: '[2 min TROT + 1 min CAMINAR] × 6–7 cicles\n→ FC ≤148 ppm\n→ Opció: si els últims cicles la FC aguanta bé (<145) → prova 1 cicle de 3 min al final\n→ No forçar si la FC no acompanya',
-    cooldown: '5 min caminant.',
-    consells: ['Compara ritme mig amb Run 2-A','Si pots fer el cicle de 3 min → molt bona senyal','Post: 10 min mobilitat'],
-    garmin: 'Zona 2 · Alerta FC 148'
-  },
-  '2026-03-31': {
-    titol: 'Run 3-A — ★ TEST MAF PACE',
-    objectiu: 'Primer test MAF pace real. Busca un tram pla d\'1 km i anota el ritme exacte a FC 145–148. Serà el teu punt de referència.',
-    escalfament: '8 min caminant ràpid (escalfament llarg perquè és sessió de test).',
-    bloc: 'Opció A (si S2 normal): [3 min TROT + 1 min CAMINAR]\nOpció B (si S2 molt bé): [5 min TROT + 1 min CAMINAR]\n→ FC ≤148 ppm SEMPRE\n→ Ritme esperat: 7:45–8:45 min/km\n\n★ TEST MAF PACE (obligatori):\n→ Tram pla d\'1 km sense vent\n→ Corre mantenint FC entre 145–148 ppm constant\n→ Anota el ritme exacte (min/km) → aquest és el teu MAF pace S3\n→ El compararàs a S7, S11... per veure la millora aeròbica',
-    cooldown: '5 min caminant. Estiraments 12 min.',
-    consells: ['El MAF pace és L\'INDICADOR més important del progrés aeròbic','En 4-8 setmanes hauria de millorar 20-40 seg/km al mateix FC','Anota-ho al camp MAF pace del formulari','Si el ritme és 9:30+/km → totalment normal per la setmana 3'],
-    garmin: 'Zona 2 · Alerta FC 148 · Marca el km de test manualment'
-  },
-  '2026-04-03': {
-    titol: 'Run 3-B — 30 min continu',
-    objectiu: 'Consolidar els intervals llargs. Objectiu: que el trot es vagi fent natural sense disparar FC.',
-    escalfament: '8 min caminant.',
-    bloc: 'Mateix protocol que Run 3-A\n→ [3+1] o [5+1] segons com et trobis\n→ FC ≤148 ppm\n→ Compara ritme mig amb 3-A\n→ Anota el % de temps que has passat corrent vs caminant',
-    cooldown: '5 min caminant.',
-    consells: ['Si ritme ha millorat 10-20 seg vs 3-A → excel·lent!','Objectiu proper: 30 min continus sense aturar a FC <148','Cada setmana que passa, el cos s\'adapta'],
-    garmin: 'Zona 2 · Alerta FC 148'
-  },
-  '2026-04-07': {
-    titol: 'Run Deload A — Recuperació activa',
-    objectiu: 'DELOAD: menys intensitat, menys pressió. El cos consolida les adaptacions d\'aquesta setmana.',
-    escalfament: '5 min caminant.',
-    bloc: 'Trot continu SUAU 20 min\n→ FC objectiu: 120–138 ppm (PER SOTA del Maffetone)\n→ Ritme: 9:00–10:30 min/km (MÉS LENT que les setmanes anteriors)\n→ Cap interval, cap pressió\n→ Camina quan et vengui de gust',
-    cooldown: '5 min caminant.',
-    consells: ['Deload = entrenar menys perquè el cos millori MÉS','La sensació de "poc esforç" és l\'objectiu avui','No intentis batre marques','El cos fa les adaptacions durant la recuperació, no durant l\'esforç'],
-    garmin: 'Z1-Z2 · FC objectiu 120–138'
-  },
-  '2026-04-10': {
-    titol: 'Run Deload B — Recuperació activa',
-    objectiu: 'Igual que Deload A. Relax total.',
-    escalfament: '5 min caminant.',
-    bloc: 'Trot suau 20 min\n→ FC 120–138 ppm\n→ Ritme 9:00–10:30 min/km\n→ Si vols caminar → camines',
-    cooldown: '5 min caminant.',
-    consells: ['Últim run abans del pic de S5','Cames fresques = millor rendiment a S5','Gaudir del moviment sense pressió'],
-    garmin: 'Z1-Z2 · FC objectiu 120–138'
-  },
-  '2026-04-14': {
-    titol: 'Run 5-A — ★ TEST 5 km',
-    objectiu: 'TEST DE PROGRÉS. Completa 5 km de la manera que sigui (corrent + caminant). Compara amb el MAF pace de S3.',
-    escalfament: '8 min caminant ràpid.',
-    bloc: 'TEST 5 km:\n→ FC ≤152 ppm (pots pujar lleugerament a Z3 avui)\n→ Ritme objectiu: 7:30–8:30 min/km\n→ Si FC > 152 → camina 1 min i reprèn\n→ L\'objectiu és completar els 5 km\n\n★ REGISTRE OBLIGATORI:\n→ Temps total 5 km\n→ Km corrent vs km caminant\n→ FC mig i FC màx\n→ Ritme mig trot\n→ MAF pace si el mesures → compara amb S3!',
-    cooldown: '5 min caminant. Estiraments 12 min.',
-    consells: ['Si corres TOT el 5km → estàs molt per sobre del previst!','Si camines el 30-40% → perfecte, és el progrés esperat','Compara km corrent vs S1: de ~0.8km a ?km','El temps total dels 5km serà el teu benchmark futur'],
-    garmin: 'Z2-Z3 · Alerta FC 152 · Distància objectiu 5km'
-  },
-  '2026-04-17': {
-    titol: 'Run 5-B — 35 min continu',
-    objectiu: 'Consolidar el progrés de 5-A. Si 5-A ha anat molt bé, intent primer 5km CONTINU.',
-    escalfament: '8 min caminant.',
-    bloc: 'Trot continu 35 min\n→ FC ≤148 ppm (Maffetone estricte)\n→ Ritme: el que et permeti aguantar FC <148\n→ Si Run 5-A molt bé → intent 5km continu sense aturar!\n→ Si has de caminar → ok, però intenta trams llargs',
-    cooldown: '5 min caminant.',
-    consells: ['Possible primer 5km continu de la teva vida a FC controlada!','Si camines una mica → no passa res, ja hi arribaràs','Anota el % temps corrent: l\'objectiu és apropar-se al 100%'],
-    garmin: 'Zona 2 · Alerta FC 148 · Distància objectiu 5km'
-  },
-  '2026-04-21': {
-    titol: 'Run Tapering — 20 min molt suau',
-    objectiu: 'TAPERING: cames fresques per la cursa del 26. No entrenar, activar.',
-    escalfament: '5 min caminant.',
-    bloc: 'Trot molt lent 15 min\n→ FC <135 ppm\n→ Ritme: tan lent com calgui\n→ Sense pressió de cap tipus',
-    cooldown: '5 min caminant suau.',
-    consells: ['El descans MILLORA el rendiment a la cursa','No facis res extra avui','Cames fresques el 26 = millor experiència als 80km','Hidratació i alimentació bé avui i demà'],
-    garmin: 'Z1 · FC <135'
+  CAMES: {
+    objectiu: 'Sessió de gluti, quàdriceps i isquiotibials. Gluti fort = columna protegida = corres millor.',
+    escalfament: '5 min: sentadilles sense pes 2×15, ponts de gluti 2×15, mobilitat malucs.',
+    notes: 'Sentadilla: genolls cap als peus (no cap endins), pit amunt, profunditat paral·lela mínima.\nHip thrust: extensió COMPLETA del maluc a dalt, apreta el gluti 1 seg.\nAbductor = obrir les cames (coixinets per fora dels genolls).\nAcabar amb 15 min mobilitat (especialment important per la protusió).',
+    consells: ['Hip thrust: és normal notar tensió lumbar, però si hi ha dolor → atura','Sentadilla: pes lleuger i forma perfecta al principi, puja lentament','Curl isquiotibials: baixa molt lent (3 seg), és on es treballa de veritat'],
+    mob: MOB_ROUTINE
   }
 };
 
-const WEEK_DATA = [
-  {label:'S1 · Activació i base', days:[
+// ══════════════════════════════════════════
+// BICI DETAIL
+// ══════════════════════════════════════════
+const BICI_DETAIL = {
+  'Z2-40': {
+    objectiu: 'Base aeròbica. Sessió de fons en zona 2. L\'objectiu NO és suar molt, és acumular temps a FC baixa cremant grasa.',
+    escalfament: '5 min a Z1 (FC <114). Cadència lliure, resistència mínima. El cos s\'ha d\'activar progressivament.',
+    bloc: 'BASE Z2 (30 min):\n→ FC objectiu: 120–135 ppm\n→ Cadència: 85–95 rpm\n→ Resistència: baixa-moderada\n→ Test: pots parlar en frases completes? Perfecte.\n→ Si FC puja de 140 → baixa resistència immediatament',
+    cooldown: '5 min a Z1 progressivament. No paris de cop.',
+    consells: ['La sensació de "poc esforç" és l\'objectiu: el sistema aeròbic treballa eficientment','Cadència alta (>90 rpm) millora la tècnica de pedaleig i protegeix els genolls','Hidratació: 1 glop cada 10-15 min encara que no tinguis set'],
+    zones: 'Z1: <114 · Z2: 114–148 · Objectiu sessió: 120–135'
+  },
+  'Z2-Z3-45': {
+    objectiu: 'Primera sessió amb blocs de qualitat. La Z2 és la base, els blocs Z3 són l\'estímul que fa millorar el sistema cardiovascular.',
+    escalfament: '5 min Z1. Progressió suau fins Z2.',
+    bloc: 'BASE Z2 (20 min): FC 120–135\n\nBLOC Z3 #1 (4 min): FC 149–163\n→ Augmenta resistència moderadament\n→ Cadència 85 rpm\n→ Sensació: pots parlar però amb frases molt curtes\n\nRECUPERACIÓ Z2 (4 min): FC torna a 120–135\n\nBLOC Z3 #2 (4 min): FC 149–163\n\nRECUPERACIÓ Z2 (3 min)',
+    cooldown: '5 min Z1 progressiu.',
+    consells: ['Als blocs Z3: no passis de 163 ppm (FCmàx 190 × 86%)','Si la FC no baixa durant la recuperació → la resistència és massa alta','Anota la FC mig dels blocs Z3 per comparar setmanes futures'],
+    zones: 'Z2: 114–148 · Z3: 149–163 · No superar 163'
+  },
+  'Z2-Z3-50': {
+    objectiu: 'Tres blocs Z3. Sessió de qualitat progressiva. Si la setmana anterior ha anat bé, pots pujar lleugerament la intensitat.',
+    escalfament: '10 min Z1→Z2 progressiu.',
+    bloc: 'BASE Z2 (20 min): FC 120–135\n\nBLOC Z3 #1 (5 min): FC 149–163\nRECUPERACIÓ Z2 (3 min)\nBLOC Z3 #2 (5 min): FC 149–163\nRECUPERACIÓ Z2 (3 min)\nBLOC Z3 #3 (5 min): FC 149–163',
+    cooldown: '4 min Z1.',
+    consells: ['Tres blocs és la càrrega màxima d\'aquesta fase','Si el 3r bloc et costa molt → és normal, és el que fa millorar','Cadència 82–88 rpm als blocs Z3'],
+    zones: 'Z2: 120–135 · Z3: 149–163'
+  },
+  'Z1-Z2-35': {
+    objectiu: 'Sessió de deload. Cames fresques. NO és per suar, és per activar sense acumular fatiga.',
+    escalfament: '5 min Z1.',
+    bloc: 'Z1-Z2 MÉS SUAU QUE MAI (25 min):\n→ FC ≤128 ppm TOT el temps\n→ Cadència alta: 90–95 rpm\n→ Resistència mínima\n→ Conversa còmoda durant tota la sessió',
+    cooldown: '5 min Z1.',
+    consells: ['Si puges de 128 ppm → baixa resistència','La sensació ha de ser quasi de no fer res','Setmana deload: el cos es recupera i millora'],
+    zones: 'Z1-Z2 suau: ≤128 ppm'
+  },
+  'Z2-Z4-55': {
+    objectiu: 'Sessió de pic pre-cursa. Simula la variabilitat d\'intensitat d\'un recorregut real de gravel.',
+    escalfament: '10 min Z1→Z2.',
+    bloc: 'BASE Z2 (15 min): FC 120–135\n\nBLOC Z3 #1 (5 min): FC 149–163\nRECUPERACIÓ Z2 (3 min)\nBLOC Z3/Z4 #2 (5 min): FC 164–176\nRECUPERACIÓ Z2 (3 min)\nBLOC Z3 #3 (5 min): FC 149–163\nBASE Z2 (4 min)',
+    cooldown: '5 min Z1.',
+    consells: ['El bloc Z4 és intens: és normal que costi molt','Si FC > 176 → baixa resistència immediatament','Si en algun moment et sents malament → Z2 i descansa'],
+    zones: 'Z2: 120–135 · Z3: 149–163 · Z4: 164–176'
+  },
+  'gravel-60': {
+    objectiu: 'Primera sortida llarga de gravel. Z2 estricta tot el recorregut. L\'objectiu és acumular temps en Z2, no fer km ràpids.',
+    escalfament: '10 min al pla a ritme molt suau abans d\'atacar qualsevol pujada.',
+    bloc: 'TOTA LA SORTIDA EN Z2 (FC 120–135):\n→ A les pujades: canvia a plats petits per mantenir FC\n→ A les baixades: aprofita per recuperar\n→ No atacar mai: si la FC puja de 140 → baixa cadència o para\n→ Porta bidon mínim 500ml',
+    cooldown: 'Últims 10 min al pla suau.',
+    consells: ['Primera hora és clau: si surts massa fort, patiràs la 2a hora','Nutrició: gel o barreta si superes 60 min','Anota: km, desnivell, FC mig al Garmin'],
+    zones: 'Z2 estricta: 120–135 · Màxim esporàdic: 145'
+  },
+  'gravel-90': {
+    objectiu: 'Sortida llarga amb primer bloc de Z2+. Progressió respecte la setmana anterior.',
+    escalfament: '10 min suau.',
+    bloc: '0–60 min: Z2 (FC 120–135)\n60–75 min: Z2+ (FC 135–148) — pujades o lleuger increment\n75–90 min: Z1 tornada tranquil·la',
+    cooldown: 'Últims 10 min molt suau.',
+    consells: ['Nutrició: gel als 45 min, no esperes a tenir gana','Hidratació: 1 glop cada 10-15 min','Si et sents bé a la Z2+ → signe que la base aeròbica millora'],
+    zones: 'Z2: 120–135 · Z2+: 135–148'
+  },
+  'gravel-120': {
+    objectiu: 'Primera sortida de 2h. Mantenir Z2 tot el temps. Test real de la resistència aeròbica.',
+    escalfament: '10 min suau.',
+    bloc: '0–70 min: Z2 (FC 120–135)\n70–100 min: Z2+ (FC 135–148) si et trobes bé\nÚltims 20 min: Z1 tornada',
+    cooldown: '10 min molt suau.',
+    consells: ['Gel als 45 i 90 min: obligatori','2 bidons (1L total) o repostatge si pots','Si a la 2a hora notes que la FC puja sola → has anat massa fort a la 1a'],
+    zones: 'Z2: 120–135 · Z2+: 135–148'
+  },
+  'gravel-150': {
+    objectiu: 'Simulació de la cursa. Prova la nutrició i l\'estratègia de ritme que faràs el dia gran.',
+    escalfament: '10 min suau.',
+    bloc: '0–60 min: Z2 ESTRICTA (120–135) — 1a hora MÉS LENTA DEL QUE CREUS\n60–120 min: Z2+ (135–148)\n120–150 min: Z3 (149–163) si et sents\n\nNUTRICIÓ (PROVA AVUI LO QUE FARÀS A LA CURSA):\n→ Gel cada 45 min (min 45, 90, 135)\n→ Barreta als 60 min\n→ 2 bidons: 1 aigua + 1 isotònic',
+    cooldown: '10 min Z1.',
+    consells: ['1a hora lenta = clau per arribar bé a la 2a hora i mitja','Si surts massa fort els primers 30 min patiràs molt al final','Anota com t\'ha anat la nutrició per ajustar el dia de la cursa'],
+    zones: 'Z2: 120–135 · Z2+: 135–148 · Z3: 149–163'
+  }
+};
+
+// ══════════════════════════════════════════
+// RUN DETAIL
+// ══════════════════════════════════════════
+const RUN_DETAIL = {
+  '2026-03-16':{titol:'Run 1-A — [1+2]',objectiu:'Primer contacte Maffetone. L\'objectiu NO és córrer ràpid, és aprendre a controlar la FC.',escalfament:'5 min caminant ràpid (5:30–6:30 min/km). Activació suau.',bloc:'[1 min TROT + 2 min CAMINAR] × 5 cicles\n→ FC ≤148 ppm MÀXIM\n→ Ritme trot esperat: 8:30–10:00 min/km\n→ Si FC puja de 148 → camina IMMEDIATAMENT\n→ Ritme caminar: 6:30–7:30 min/km',cooldown:'5 min caminant suau.',consells:['Activa alerta FC > 148 al Garmin ABANS de sortir','Si camines el 80% del temps → perfecte, és diagnòstic normal','Post: 10 min mobilitat cadena posterior obligatòria'],garmin:'Zona 2 · Alerta FC 148 · Interval timer: 1min/2min'},
+  '2026-03-19':{titol:'Run 1-B — [1+2]',objectiu:'Igual que 1-A. Compara si la FC s\'aguanta millor al mateix ritme.',escalfament:'5 min caminant ràpid.',bloc:'[1 min TROT + 2 min CAMINAR] × 5 cicles\n→ FC ≤148 ppm SEMPRE\n→ Compara ritme amb Run 1-A\n→ La FC s\'aguanta més temps per sota de 148?',cooldown:'5 min caminant.',consells:['Anota el ritme mig del trot per comparar','Si el ritme ha millorat 5-10 seg/km → sistema aeròbic responent'],garmin:'Zona 2 · Alerta FC 148 · Interval timer: 1min/2min'},
+  '2026-03-24':{titol:'Run 2-A — [2+1]',objectiu:'Progressió S1: doblem el temps de trot. Si la FC no aguanta, tornem a [1+2] sense patir.',escalfament:'5 min caminant ràpid.',bloc:'[2 min TROT + 1 min CAMINAR] × 6–7 cicles\n→ FC ≤148 ppm SEMPRE\n→ Ritme trot: 8:00–9:30 min/km\n→ Si FC > 148 durant el trot → canvia a [1:30+1:30]',cooldown:'5 min caminant.',consells:['L\'adaptació aeròbica triga 3-4 setmanes, sigues pacient','Si has de tornar a [1+2] NO és un fracàs'],garmin:'Zona 2 · Alerta FC 148 · Interval timer: 2min/1min'},
+  '2026-03-27':{titol:'Run 2-B — [2+1]',objectiu:'Consolidar el [2+1]. Si va bé, prova 1 cicle de 3 min al final.',escalfament:'5 min caminant.',bloc:'[2 min TROT + 1 min CAMINAR] × 6–7 cicles\n→ FC ≤148 ppm\n→ Si FC aguanta bé (<145) → prova 1 cicle de 3 min al final',cooldown:'5 min caminant.',consells:['Compara ritme mig amb Run 2-A','Si pots fer el cicle de 3 min → molt bona senyal'],garmin:'Zona 2 · Alerta FC 148'},
+  '2026-03-31':{titol:'Run 3-A — TEST MAF PACE',objectiu:'Primer test MAF pace real. Busca un tram pla d\'1 km i anota el ritme exacte a FC 145–148.',escalfament:'8 min caminant ràpid (escalfament llarg, és sessió de test).',bloc:'Opció A (S2 normal): [3+1]\nOpció B (S2 molt bé): [5+1]\n→ FC ≤148 ppm\n\n★ TEST MAF PACE (obligatori):\n→ Tram pla d\'1 km sense vent\n→ FC entre 145–148 constant\n→ Anota el ritme exacte (min/km) → MAF pace S3',cooldown:'5 min caminant. 12 min mobilitat.',consells:['MAF pace = l\'indicador més important del progrés aeròbic','En 4-8 setmanes hauria de millorar 20-40 seg/km','Anota-ho al camp MAF pace del formulari'],garmin:'Zona 2 · Alerta FC 148 · Marca km de test'},
+  '2026-04-03':{titol:'Run 3-B — 30 min continu',objectiu:'Consolidar els intervals llargs. Objectiu: que el trot es vagi fent natural.',escalfament:'8 min caminant.',bloc:'[3+1] o [5+1] segons com et trobis\n→ FC ≤148 ppm\n→ Compara ritme amb 3-A\n→ Anota % temps corrent vs caminant',cooldown:'5 min caminant.',consells:['Si ritme ha millorat 10-20 seg vs 3-A → excel·lent','Objectiu proper: 30 min continus a FC <148'],garmin:'Zona 2 · Alerta FC 148'},
+  '2026-04-07':{titol:'Run Deload A — Recuperació',objectiu:'DELOAD: menys intensitat. El cos consolida adaptacions.',escalfament:'5 min caminant.',bloc:'Trot suau 20 min\n→ FC 120–138 ppm (per sota Maffetone)\n→ Ritme: 9:00–10:30 min/km\n→ Cap pressió, cap interval',cooldown:'5 min caminant.',consells:['La sensació de "poc esforç" és l\'objectiu','El cos millora durant la recuperació, no durant l\'esforç'],garmin:'Z1-Z2 suau · FC objectiu 120–138'},
+  '2026-04-10':{titol:'Run Deload B — Recuperació',objectiu:'Igual que Deload A. Relax total. Cames fresques.',escalfament:'5 min caminant.',bloc:'Trot suau 20 min\n→ FC 120–138 ppm\n→ Ritme 9–10:30 min/km',cooldown:'5 min caminant.',consells:['Últim run abans del pic de S5','Cames fresques = millor rendiment'],garmin:'Z1-Z2 · FC objectiu 120–138'},
+  '2026-04-14':{titol:'Run 5-A — TEST 5 km',objectiu:'TEST DE PROGRÉS. Completa 5 km com sigui (corrent + caminant). Compara amb MAF pace S3.',escalfament:'8 min caminant ràpid.',bloc:'TEST 5 km:\n→ FC ≤152 ppm (pots pujar a Z3)\n→ Ritme: 7:30–8:30 min/km\n→ Si FC > 152 → camina 1 min i reprèn\n\n★ REGISTRE:\n→ Temps total 5 km\n→ Km corrent vs caminant\n→ FC mig i màx\n→ Compara MAF pace amb S3!',cooldown:'5 min caminant. 12 min mobilitat.',consells:['Si corres TOT → estàs molt per sobre del previst','Si camines 30-40% → perfecte, és el progrés esperat'],garmin:'Z2-Z3 · Alerta FC 152 · Objectiu 5km'},
+  '2026-04-17':{titol:'Run 5-B — 35 min continu',objectiu:'Consolidar progrés 5-A. Intent primer 5km continu si 5-A ha anat molt bé.',escalfament:'8 min caminant.',bloc:'Trot continu 35 min\n→ FC ≤148 ppm\n→ Si 5-A molt bé → intent 5km continu!\n→ Anota % temps corrent',cooldown:'5 min caminant.',consells:['Possible primer 5km continu!','Anota el % temps corrent: objectiu apropar-se al 100%'],garmin:'Zona 2 · Alerta FC 148'},
+  '2026-04-21':{titol:'Run Tapering — 20 min suau',objectiu:'TAPERING: cames fresques. No entrenar, activar.',escalfament:'5 min caminant.',bloc:'Trot molt lent 15 min\n→ FC <135 ppm\n→ Tan lent com calgui\n→ Sense pressió',cooldown:'5 min caminant suau.',consells:['El descans millora el rendiment','No facis res extra avui'],garmin:'Z1 · FC <135'},
+};
+
+// ══════════════════════════════════════════
+// WEEK DATA
+// ══════════════════════════════════════════
+const WEEK_DATA=[
+  {label:'S1 · Activació i base',days:[
     {date:'2026-03-15',dia:'Dg',tipus:'PUSH',nom:'Torso A — PUSH',detail:'Press inclinat · Press pit · Tancaments politja · Obertura pit · Press militar · Elevació lateral · Elevació frontal'},
     {date:'2026-03-16',dia:'Dl',tipus:'RUN',nom:'Run 1-A — [1+2]',detail:'[1 min trot + 2 min caminar] × 5 · FC ≤148 · 20 min · Configura alerta Garmin > 148'},
     {date:'2026-03-17',dia:'Dm',tipus:'CAMES',nom:'Cames A',detail:'Sentadilla · Hip thrust · Premsa · Extensió quàd · Curl isquio · Bessons · Abductor'},
-    {date:'2026-03-18',dia:'Dc',tipus:'BICI',nom:'Spinning Z2 · 40 min',detail:'FC 120–135 · Cadència 85–95 rpm · Zona 2 estricta · Pots parlar en frases'},
-    {date:'2026-03-19',dia:'Dj',tipus:'RUN',nom:'Run 1-B — [1+2]',detail:'[1 min trot + 2 min caminar] × 5 · FC ≤148 · 20 min · Compara ritme amb 1-A'},
+    {date:'2026-03-18',dia:'Dc',tipus:'BICI',nom:'Spinning Z2 · 40 min',detail:'FC 120–135 · Cadència 85–95 rpm · Zona 2 estricta',biciKey:'Z2-40'},
+    {date:'2026-03-19',dia:'Dj',tipus:'RUN',nom:'Run 1-B — [1+2]',detail:'[1 min trot + 2 min caminar] × 5 · FC ≤148 · 20 min'},
     {date:'2026-03-20',dia:'Dv',tipus:'PULL',nom:'Torso B — PULL',detail:'Lat Pulldown · Rem V · Rem T · Pullover · Obertura posterior · Planxa · Dead bug · Pallof press'},
-    {date:'2026-03-21',dia:'Ds',tipus:'RUN+BICI',nom:'Run lleuger + Tenis + Gravel',detail:'Matí: 15 min trot suau FC <140 + Tenis · Tarda: Gravel 60–90 min Z2 (115–135)'},
-    {date:'2026-03-22',dia:'Dg',tipus:'DESCANS',nom:'Descans actiu',detail:'Passeig 20–30 min + 15 min mobilitat cadena posterior'},
+    {date:'2026-03-21',dia:'Ds',tipus:'MULTI',nom:'Run + Tenis + Gravel',detail:'Matí: 15 min trot suau FC <140 + Tenis · Tarda: Gravel 60–90 min Z2',
+      subActivitats:[
+        {clau:'RUN',nom:'Run lleuger 15 min',detail:'Trot suau FC <140 · Escalfament per al tenis'},
+        {clau:'TENIS',nom:'Tenis',detail:'Sessió d\'entrenament dissabte'},
+        {clau:'BICI',nom:'Gravel 60–90 min',detail:'Z2 estricta FC 115–135 · Ruta plana · Bidon 500ml',biciKey:'gravel-60'},
+      ]},
+    {date:'2026-03-22',dia:'Dg',tipus:'DESCANS',nom:'Descans actiu + Mobilitat',detail:'Passeig 20–30 min + 15 min mobilitat cadena posterior'},
   ]},
-  {label:'S2 · Consolidació', days:[
+  {label:'S2 · Consolidació',days:[
     {date:'2026-03-23',dia:'Dl',tipus:'PUSH',nom:'Torso A — PUSH +càrrega',detail:'Igual S1 +2.5 kg on puguis · 4 sèries màquina press pit'},
-    {date:'2026-03-24',dia:'Dm',tipus:'RUN',nom:'Run 2-A — [2+1]',detail:'[2 min trot + 1 min caminar] × 6–7 · FC ≤148 · 25 min · Si passa FC → [1:30+1:30]'},
+    {date:'2026-03-24',dia:'Dm',tipus:'RUN',nom:'Run 2-A — [2+1]',detail:'[2 min trot + 1 min caminar] × 6–7 · FC ≤148 · 25 min'},
     {date:'2026-03-25',dia:'Dc',tipus:'CAMES',nom:'Cames B (+Split squat)',detail:'Sentadilla · Hip thrust · Split squat búlgar 3×8 · Premsa · Curl isquio · Bessons · Abductor'},
-    {date:'2026-03-26',dia:'Dj',tipus:'BICI',nom:'Spinning Z2+Z3 · 45 min',detail:'20 min Z2 + BLOC Z3 #1 4 min (149–163) + rec Z2 + BLOC Z3 #2 4 min + Z1 tornada'},
-    {date:'2026-03-27',dia:'Dv',tipus:'RUN',nom:'Run 2-B — [2+1]',detail:'[2 min trot + 1 min caminar] · FC ≤148 · 25 min · Si FC aguanta prova 1 cicle de 3 min'},
-    {date:'2026-03-28',dia:'Ds',tipus:'PULL',nom:'Torso B — PULL S2',detail:'Igual S1 PULL · Augmenta pes on sigui possible'},
-    {date:'2026-03-28',dia:'Ds',tipus:'RUN+BICI',nom:'Run + Tenis + Gravel 90 min',detail:'Matí: 20 min suau FC <145 + Tenis · Tarda: Gravel 90 min Z2→Z2+ · Gel 45 min'},
-    {date:'2026-03-29',dia:'Dg',tipus:'DESCANS',nom:'Descans actiu',detail:'15 min mobilitat · Pes dimecres al matí en dejú'},
+    {date:'2026-03-26',dia:'Dj',tipus:'BICI',nom:'Spinning Z2+Z3 · 45 min',detail:'20 min Z2 + 2 blocs Z3 4 min (149–163) + rec Z2',biciKey:'Z2-Z3-45'},
+    {date:'2026-03-27',dia:'Dv',tipus:'RUN',nom:'Run 2-B — [2+1]',detail:'[2 min trot + 1 min caminar] · FC ≤148 · 25 min'},
+    {date:'2026-03-28',dia:'Ds',tipus:'MULTI',nom:'Run + Tenis + Gravel 90 min',detail:'Matí: 20 min suau FC <145 + Tenis · Tarda: Gravel 90 min Z2',
+      subActivitats:[
+        {clau:'RUN',nom:'Run lleuger 20 min',detail:'Trot suau FC <145'},
+        {clau:'TENIS',nom:'Tenis',detail:'Sessió dissabte'},
+        {clau:'BICI',nom:'Gravel 90 min',detail:'Z2 (120–135) → Z2+ (135–148) · Gel 45 min',biciKey:'gravel-90'},
+      ]},
+    {date:'2026-03-29',dia:'Dg',tipus:'DESCANS',nom:'Descans actiu + Mobilitat',detail:'15 min mobilitat · Pes dimecres al matí en dejú'},
   ]},
-  {label:'S3 · Càrrega progressiva', days:[
-    {date:'2026-03-30',dia:'Dl',tipus:'PUSH',nom:'Torso A — PUSH 4 sèries',detail:'4 sèries als principals · Press inclinat · Press pit · Tancaments · Press militar · Elevació lateral'},
-    {date:'2026-03-31',dia:'Dm',tipus:'RUN',nom:'Run 3-A — ★ TEST MAF PACE',detail:'[3+1] o [5+1] · FC ≤148 · 30 min · ★ TEST: tram pla 1km a FC 145–148, anota ritme exacte'},
-    {date:'2026-04-01',dia:'Dc',tipus:'CAMES',nom:'Cames C (màxim volum)',detail:'4 sèries sentadilla · 4 sèries hip thrust · Split squat · Premsa · Curl · Bessons'},
-    {date:'2026-04-02',dia:'Dj',tipus:'BICI',nom:'Spinning Z2+Z3 · 50 min (3 blocs)',detail:'20 min Z2 + 3 blocs Z3 5 min (149–163) amb rec Z2 entre blocs · No superar 163'},
-    {date:'2026-04-03',dia:'Dv',tipus:'RUN',nom:'Run 3-B — 30 min continu',detail:'Igual protocol 3-A · FC ≤148 · Compara ritme amb 3-A · Anota % temps corrent'},
-    {date:'2026-04-04',dia:'Ds',tipus:'PULL',nom:'Torso B — PULL S3 (4 sèries)',detail:'4 sèries Lat Pulldown · 4 sèries Rem V · 4 sèries Rem T · Planxa 4×45 seg'},
-    {date:'2026-04-05',dia:'Dg',tipus:'BICI',nom:'Gravel 2h',detail:'70 min Z2 (120–135) + 30 min Z2+ (135–148) + 20 min Z1 · Gel 45 i 90 min · 2 bidons'},
+  {label:'S3 · Càrrega progressiva',days:[
+    {date:'2026-03-30',dia:'Dl',tipus:'PUSH',nom:'Torso A — PUSH 4 sèries',detail:'4 sèries als principals'},
+    {date:'2026-03-31',dia:'Dm',tipus:'RUN',nom:'Run 3-A — TEST MAF PACE',detail:'[3+1] o [5+1] · FC ≤148 · 30 min · ★ TEST: tram pla 1km a FC 145–148'},
+    {date:'2026-04-01',dia:'Dc',tipus:'CAMES',nom:'Cames C (màxim volum)',detail:'4 sèries sentadilla · 4 sèries hip thrust · Split squat · Premsa · Curl'},
+    {date:'2026-04-02',dia:'Dj',tipus:'BICI',nom:'Spinning Z2+Z3 · 50 min',detail:'20 min Z2 + 3 blocs Z3 5 min (149–163)',biciKey:'Z2-Z3-50'},
+    {date:'2026-04-03',dia:'Dv',tipus:'RUN',nom:'Run 3-B — 30 min',detail:'[3+1] o [5+1] · FC ≤148 · Compara ritme amb 3-A'},
+    {date:'2026-04-04',dia:'Ds',tipus:'MULTI',nom:'Tenis + Gravel 2h',detail:'Tenis + Gravel 2h Z2',
+      subActivitats:[
+        {clau:'TENIS',nom:'Tenis',detail:'Sessió dissabte'},
+        {clau:'BICI',nom:'Gravel 2h',detail:'70 min Z2 + 30 min Z2+ + 20 min Z1 · Gel 45 i 90 min',biciKey:'gravel-120'},
+      ]},
+    {date:'2026-04-05',dia:'Dg',tipus:'PULL',nom:'Torso B — PULL S3 (4 sèries)',detail:'4 sèries Lat Pulldown · Rem V · Rem T · Planxa 4×45 seg'},
   ]},
-  {label:'S4 · DELOAD', days:[
-    {date:'2026-04-06',dia:'Dl',tipus:'PUSH',nom:'Torso A DELOAD (–30% vol)',detail:'2 sèries tot · Pesos iguals · Sense fracasar · Fàcil · 15 min mobilitat post'},
-    {date:'2026-04-07',dia:'Dm',tipus:'RUN',nom:'Run Deload A · 25 min suau',detail:'Trot suau FC 120–138 · Ritme 9–10 min/km · Cap pressió · Gaudir'},
-    {date:'2026-04-08',dia:'Dc',tipus:'PULL',nom:'Torso B DELOAD',detail:'2 sèries tot · Lat Pulldown · Rem V · Rem T · Planxa 3×40 seg'},
-    {date:'2026-04-09',dia:'Dj',tipus:'BICI',nom:'Spinning Z1-Z2 suau · 35 min',detail:'FC ≤135 · Cadència alta 90–95 rpm · Resistència mínima · Cames fresques'},
-    {date:'2026-04-10',dia:'Dv',tipus:'RUN',nom:'Run Deload B · 25 min suau',detail:'FC 120–138 · Ritme 9–10 min/km · Relax total'},
-    {date:'2026-04-11',dia:'Ds',tipus:'CAMES',nom:'Cames Deload',detail:'2 sèries sentadilla · 2 sèries hip thrust · 2 sèries premsa · Fàcil'},
-    {date:'2026-04-11',dia:'Ds',tipus:'RUN+BICI',nom:'Tenis + Gravel tranquil 90 min',detail:'Tenis + Gravel FC ≤130 tot el temps · Ruta còmoda · Gaudir'},
-    {date:'2026-04-12',dia:'Dg',tipus:'DESCANS',nom:'Descans total + mesures',detail:'Repòs · ★ Pes + plecs i perímetres (cada 4 setmanes)'},
+  {label:'S4 · DELOAD',days:[
+    {date:'2026-04-06',dia:'Dl',tipus:'PUSH',nom:'Torso A DELOAD (–30% vol)',detail:'2 sèries tot · Pesos iguals · Fàcil'},
+    {date:'2026-04-07',dia:'Dm',tipus:'RUN',nom:'Run Deload A · 25 min suau',detail:'FC 120–138 · Ritme 9–10 min/km · Gaudir'},
+    {date:'2026-04-08',dia:'Dc',tipus:'PULL',nom:'Torso B DELOAD',detail:'2 sèries tot · Fàcil'},
+    {date:'2026-04-09',dia:'Dj',tipus:'BICI',nom:'Spinning Z1-Z2 suau · 35 min',detail:'FC ≤128 · Cadència alta 90–95 rpm',biciKey:'Z1-Z2-35'},
+    {date:'2026-04-10',dia:'Dv',tipus:'RUN',nom:'Run Deload B · 25 min suau',detail:'FC 120–138 · Ritme 9–10 min/km'},
+    {date:'2026-04-11',dia:'Ds',tipus:'MULTI',nom:'Tenis + Gravel tranquil',detail:'Tenis + Gravel FC ≤130',
+      subActivitats:[
+        {clau:'TENIS',nom:'Tenis',detail:'Sessió dissabte'},
+        {clau:'BICI',nom:'Gravel tranquil 90 min',detail:'FC ≤130 tot el temps · Ruta còmoda',biciKey:'gravel-90'},
+      ]},
+    {date:'2026-04-12',dia:'Dg',tipus:'DESCANS',nom:'Descans total + mesures',detail:'Repòs · Pes + plecs i perímetres'},
   ]},
-  {label:'S5 · Pic pre-cursa', days:[
-    {date:'2026-04-13',dia:'Dl',tipus:'PUSH',nom:'Torso A PUSH — Pic de força',detail:'4 sèries · Intenta marques personals · Últim gym fort abans de la cursa'},
-    {date:'2026-04-14',dia:'Dm',tipus:'RUN',nom:'Run 5-A — ★ TEST 5 km',detail:'FC ≤152 · Corre els 5 km al ritme que puguis · ★ Registra: temps total, km corrent, FC mig, ritme mig · Compara MAF pace S3!'},
-    {date:'2026-04-15',dia:'Dc',tipus:'CAMES',nom:'Cames D — Pic',detail:'4×8 sentadilla pes fort · 4×12 hip thrust · Split squat · Premsa · Curl'},
-    {date:'2026-04-16',dia:'Dj',tipus:'BICI',nom:'Spinning Z2-Z4 · 55 min simulació',detail:'15 min Z2 + BLOC Z3 5min + rec + BLOC Z3/Z4 5min (164–176) + rec + BLOC Z3 5min + Z2 + Z1'},
-    {date:'2026-04-17',dia:'Dv',tipus:'RUN',nom:'Run 5-B — 35 min continu',detail:'FC ≤148 · Intent 5km continu · Compara amb MAF pace'},
-    {date:'2026-04-18',dia:'Ds',tipus:'PULL',nom:'Torso B PULL — Pic S5',detail:'4 sèries tot · Màxim volum PULL · Planxa 4×50 seg'},
-    {date:'2026-04-19',dia:'Dg',tipus:'RUN+BICI',nom:'Tenis + Gravel 2h30 SIMULACIÓ',detail:'★ 1a hora Z2 ESTRICTA (120–135) · Z2+ (135–148) · Z3 si et sents · Prova nutrició cursa: gel cada 45 min'},
+  {label:'S5 · Pic',days:[
+    {date:'2026-04-13',dia:'Dl',tipus:'PUSH',nom:'Torso A PUSH — Pic',detail:'4 sèries · Intenta marques personals'},
+    {date:'2026-04-14',dia:'Dm',tipus:'RUN',nom:'Run 5-A — TEST 5 km',detail:'FC ≤152 · Corre els 5 km · Compara MAF pace S3'},
+    {date:'2026-04-15',dia:'Dc',tipus:'CAMES',nom:'Cames D — Pic',detail:'4×8 sentadilla · 4×12 hip thrust · Split squat'},
+    {date:'2026-04-16',dia:'Dj',tipus:'BICI',nom:'Spinning Z2-Z4 · 55 min',detail:'Simulació: 3 blocs Z3 + 1 bloc Z4',biciKey:'Z2-Z4-55'},
+    {date:'2026-04-17',dia:'Dv',tipus:'RUN',nom:'Run 5-B — 35 min continu',detail:'FC ≤148 · Intent 5km continu'},
+    {date:'2026-04-18',dia:'Ds',tipus:'MULTI',nom:'Tenis + Gravel 2h30',detail:'Tenis + Gravel simulació',
+      subActivitats:[
+        {clau:'TENIS',nom:'Tenis',detail:'Sessió dissabte'},
+        {clau:'BICI',nom:'Gravel 2h30 — simulació',detail:'1a hora Z2 ESTRICTA · Prova nutrició cursa',biciKey:'gravel-150'},
+      ]},
+    {date:'2026-04-19',dia:'Dg',tipus:'DESCANS',nom:'Descans + Revisió',detail:'Repòs · 15 min mobilitat'},
   ]},
-  {label:'S6 · Tapering + Cursa', days:[
+  {label:'S6 · Tapering',days:[
     {date:'2026-04-20',dia:'Dl',tipus:'PUSH',nom:'Gym molt lleuger',detail:'2 sèries fàcils · Activar, no entrenar'},
-    {date:'2026-04-21',dia:'Dm',tipus:'RUN',nom:'Run suau 20 min',detail:'Trot molt lent · Cames fresques · FC <135'},
+    {date:'2026-04-21',dia:'Dm',tipus:'RUN',nom:'Run suau 20 min',detail:'Trot molt lent · FC <135'},
     {date:'2026-04-22',dia:'Dc',tipus:'DESCANS',nom:'Descans o passeig',detail:'Repòs · Mobilitat 15 min'},
-    {date:'2026-04-23',dia:'Dj',tipus:'BICI',nom:'Spinning 25 min activació',detail:'FC ≤128 · Girs de cames suaus'},
-    {date:'2026-04-24',dia:'Dv',tipus:'DESCANS',nom:'Descans pre-cursa',detail:'Repòs total · Prepara el material · Hidratació i alimentació correcta'},
-    {date:'2026-04-25',dia:'Ds',tipus:'DESCANS',nom:'Descans + preparació',detail:'Descansa · Revisa material · Menja bé · Dorm prou'},
-    {date:'2026-04-26',dia:'Dg',tipus:'CURSA',nom:'★ CURSA 80 km!',detail:'Z2/Z3 · 1a hora MOLT conservadora · Gel cada 45 min · 2+ bidons · GAUDEIX-HO'},
+    {date:'2026-04-23',dia:'Dj',tipus:'BICI',nom:'Spinning 25 min activació',detail:'FC ≤128 · Activació suau',biciKey:'Z1-Z2-35'},
+    {date:'2026-04-24',dia:'Dv',tipus:'DESCANS',nom:'Descans pre-gran dia',detail:'Repòs total · Prepara material · Menja bé · Dorm prou'},
+    {date:'2026-04-25',dia:'Ds',tipus:'DESCANS',nom:'Descans',detail:'Descansa · Material a punt'},
+    {date:'2026-04-26',dia:'Dg',tipus:'BICI',nom:'Gravel 80 km',detail:'Z2/Z3 · 1a hora molt conservadora · Gel cada 45 min · Gaudeix',biciKey:'gravel-150'},
   ]},
 ];
 
-// ════════════════════════════════════════════════
+// ══════════════════════════════════════════
 // STORAGE
-// ════════════════════════════════════════════════
-const S = {
+// ══════════════════════════════════════════
+const S={
   get(k){try{const v=localStorage.getItem(k);return v?JSON.parse(v):null}catch{return null}},
   set(k,v){try{localStorage.setItem(k,JSON.stringify(v))}catch{}},
   getArr(k){return this.get(k)||[]},
 };
 
-// ════════════════════════════════════════════════
-// STATE
-// ════════════════════════════════════════════════
-let currentTab = 0;
-let currentWeek = 0;
-let currentGymTab = 'push';
-let charts = {};
-
-// ════════════════════════════════════════════════
-// UTILS
-// ════════════════════════════════════════════════
-function fmtDate(d){
-  const days=['Dg','Dl','Dm','Dc','Dj','Dv','Ds'];
-  const dt=new Date(d+'T12:00:00');
-  return `${days[dt.getDay()]} ${dt.getDate()}/${dt.getMonth()+1}`;
+// ══════════════════════════════════════════
+// SEED INITIAL DATA
+// ══════════════════════════════════════════
+function seedData(){
+  if(S.get('seeded_v2')) return;
+  const done=S.get('done')||{};
+  done['2026-03-15_PUSH']=true;
+  done['2026-03-16_RUN']=true;
+  done['2026-03-17_CAMES']=true;
+  S.set('done',done);
+  // Run data
+  const runs=[{date:'2026-03-16',tipus:'RUN',km:'2.46',temps:'25',kmrun:'0.72',kmwalk:'1.74',fcmig:'117',fcmax:'152',ritme:'7:03',maf:'7:45',pct:'24',rpe:'3',notes:'',savedAt:'2026-03-16T00:00:00.000Z'}];
+  S.set('run_sessions',runs);
+  // Gym data
+  const gym=[
+    {date:'2026-03-15',tipus:'PUSH',rpe:'4',notes:'',exercicis:[
+      {name:'Press mancuernes inclinat',series:[{kg:'20',reps:''},{kg:'',reps:''},{kg:'',reps:''}]},
+      {name:'Màquina press pit assegut',series:[{kg:'20',reps:''},{kg:'',reps:''},{kg:'',reps:''}]},
+      {name:'Tancaments politja',series:[{kg:'',reps:''},{kg:'',reps:''},{kg:'',reps:''}]},
+      {name:'Obertura màquina pit',series:[{kg:'35',reps:''},{kg:'',reps:''},{kg:'',reps:''}]},
+      {name:'Press militar màquina',series:[{kg:'20',reps:''},{kg:'',reps:''},{kg:'',reps:''}]},
+      {name:'Elevació lateral politja',series:[{kg:'11',reps:''},{kg:'',reps:''},{kg:'',reps:''}]},
+      {name:'Elevació frontal mancuernes',series:[{kg:'10',reps:''},{kg:'',reps:''},{kg:'',reps:''}]},
+    ],savedAt:'2026-03-15T00:00:00.000Z'},
+    {date:'2026-03-17',tipus:'CAMES',rpe:'5',notes:'',exercicis:[
+      {name:'Sentadilla multipower',series:[{kg:'15',reps:'12'},{kg:'15',reps:'10'},{kg:'15',reps:'9'}]},
+      {name:'Màquina hip thrust',series:[{kg:'20',reps:'13'},{kg:'20',reps:'12'},{kg:'20',reps:'12'}]},
+      {name:'Premsa de cames',series:[{kg:'58',reps:'13'},{kg:'58',reps:'13'},{kg:'58',reps:'13'}]},
+      {name:'Extensió quàdriceps',series:[{kg:'52',reps:'12'},{kg:'52',reps:'10'},{kg:'52',reps:'8'}]},
+      {name:'Curl isquiotibials',series:[{kg:'45',reps:'12'},{kg:'45',reps:'12'},{kg:'45',reps:'12'}]},
+      {name:'Elevació bessons',series:[{kg:'20',reps:'12'},{kg:'20',reps:'12'},{kg:'20',reps:'12'}]},
+      {name:'Abductor gluti mig',series:[{kg:'52',reps:'15'},{kg:'52',reps:'13'}]},
+    ],savedAt:'2026-03-17T00:00:00.000Z'},
+  ];
+  S.set('gym_sessions',gym);
+  S.set('seeded_v2',true);
 }
+
+// ══════════════════════════════════════════
+// STATE
+// ══════════════════════════════════════════
+let currentTab=0,currentWeek=0,currentGymTab='push',charts={};
+
+// ══════════════════════════════════════════
+// UTILS
+// ══════════════════════════════════════════
+function fmtDate(d){const days=['Dg','Dl','Dm','Dc','Dj','Dv','Ds'];const dt=new Date(d+'T12:00:00');return `${days[dt.getDay()]} ${dt.getDate()}/${dt.getMonth()+1}`;}
 function today(){return new Date().toISOString().slice(0,10)}
 function daysTo(date){return Math.ceil((new Date(date)-new Date())/86400000)}
-function showToast(msg){
-  const t=document.getElementById('toast');
-  t.textContent=msg;t.classList.add('on');
-  setTimeout(()=>t.classList.remove('on'),2200);
-}
-function badgeClass(t){
-  const m={PUSH:'bdg-push',PULL:'bdg-pull',CAMES:'bdg-cames',RUN:'bdg-run',BICI:'bdg-bici','RUN+BICI':'bdg-run',DESCANS:'bdg-rest',CURSA:'bdg-push'};
-  return m[t]||'bdg-rest';
-}
-function badgeLabel(t){
-  const m={'RUN+BICI':'RUN+BICI'};
-  return m[t]||t;
-}
+function showToast(msg){const t=document.getElementById('toast');t.textContent=msg;t.classList.add('on');setTimeout(()=>t.classList.remove('on'),2200);}
+function badgeClass(t){const m={PUSH:'bdg-push',PULL:'bdg-pull',CAMES:'bdg-cames',RUN:'bdg-run',BICI:'bdg-bici',MULTI:'bdg-run',DESCANS:'bdg-rest',TENIS:'bdg-rest',MOB:'bdg-mob'};return m[t]||'bdg-rest';}
+function v(id){const el=document.getElementById(id);return el?el.value:'';}
 
-// ════════════════════════════════════════════════
+// ══════════════════════════════════════════
 // HEADER
-// ════════════════════════════════════════════════
+// ══════════════════════════════════════════
 function updateHeader(){
   const now=new Date();
   const dd=['Diumenge','Dilluns','Dimarts','Dimecres','Dijous','Divendres','Dissabte'];
   document.getElementById('hdr-date').textContent=`${dd[now.getDay()]} ${now.getDate()}/${now.getMonth()+1}`;
-  const dt=daysTo('2026-04-26');
-  document.getElementById('hdr-race').textContent=dt>0?`${dt} dies per la cursa`:'Cursa avui!';
-  const pesos=S.getArr('pesos');
-  if(pesos.length){
-    const last=pesos[pesos.length-1];
-    document.getElementById('hdr-pes').textContent=`${last.pes} kg`;
-  }
 }
 
-// ════════════════════════════════════════════════
-// TAB NAVIGATION
-// ════════════════════════════════════════════════
+// ══════════════════════════════════════════
+// TABS
+// ══════════════════════════════════════════
 function goTab(i){
   document.querySelectorAll('.tab').forEach((t,j)=>t.classList.toggle('on',j===i));
   document.querySelectorAll('.page').forEach((p,j)=>p.classList.toggle('on',j===i));
@@ -622,102 +617,207 @@ function goTab(i){
   if(i===4)renderResum();
 }
 
-// ════════════════════════════════════════════════
+// ══════════════════════════════════════════
 // CALENDARI
-// ════════════════════════════════════════════════
-function changeWeek(dir){
-  currentWeek=Math.max(0,Math.min(WEEK_DATA.length-1,currentWeek+dir));
-  renderCal();
-}
+// ══════════════════════════════════════════
+function changeWeek(dir){currentWeek=Math.max(0,Math.min(WEEK_DATA.length-1,currentWeek+dir));renderCal();}
 
 function renderCal(){
   const wk=WEEK_DATA[currentWeek];
   document.getElementById('week-nav-label').textContent=wk.label;
-  const list=document.getElementById('cal-list');
   const done=S.get('done')||{};
+  const reprogram=S.get('reprogram')||{};
   const td=today();
+  const list=document.getElementById('cal-list');
+
   list.innerHTML=wk.days.map(day=>{
-    const isDone=done[day.date+'_'+day.tipus]||false;
     const isToday=day.date===td;
+    const isMulti=day.tipus==='MULTI';
+
+    if(isMulti){
+      const subsDone=day.subActivitats.map(sa=>done[day.date+'_'+sa.clau]||false);
+      const allDone=subsDone.every(Boolean);
+      const someDone=subsDone.some(Boolean);
+      const metrics=getMetricsSummary(day.date,day.subActivitats.map(s=>s.clau));
+      return `<div class="cal-day${isToday?' today':''}">
+        <div class="cal-day-hdr" onclick="openMultiDay('${day.date}',${currentWeek},${wk.days.indexOf(day)})">
+          <div>
+            <div class="cal-day-date">${fmtDate(day.date)}${isToday?' · Avui':''}</div>
+            <div class="cal-day-name">${day.nom}</div>
+          </div>
+          <div style="display:flex;align-items:center;gap:6px">
+            <span class="bdg bdg-run">MULTI</span>
+            <div style="width:30px;height:30px;border-radius:50%;border:1.5px solid ${allDone?'var(--g)':someDone?'var(--a)':'var(--bdr2)'};background:${allDone?'var(--g)':someDone?'rgba(239,159,39,.2)':'none'};display:flex;align-items:center;justify-content:center;font-size:12px;color:${allDone?'#fff':someDone?'#fac775':'var(--t2)'}">
+              ${allDone?'✓':someDone?`${subsDone.filter(Boolean).length}/${subsDone.length}`:''}
+            </div>
+          </div>
+        </div>
+        <div class="cal-day-body">
+          <div style="display:flex;flex-direction:column;gap:5px;padding-top:9px">
+            ${day.subActivitats.map((sa,si)=>`
+              <div style="display:flex;justify-content:space-between;align-items:center;background:var(--bg3);border-radius:8px;padding:7px 11px">
+                <div>
+                  <div style="font-size:12px;font-weight:500;color:var(--t)">${sa.nom}</div>
+                  <div style="font-size:10px;color:var(--t3);margin-top:1px">${sa.detail}</div>
+                </div>
+                <button class="chk${done[day.date+'_'+sa.clau]?' on':''}" onclick="event.stopPropagation();toggleSubDone('${day.date}','${sa.clau}',${si},this)">${done[day.date+'_'+sa.clau]?'✓':''}</button>
+              </div>`).join('')}
+          </div>
+          ${metrics?`<div class="cal-day-meta" style="margin-top:8px">${metrics}</div>`:''}
+        </div>
+      </div>`;
+    }
+
+    const isDone=done[day.date+'_'+day.tipus]||false;
+    const isReprogram=reprogram[day.date+'_'+day.tipus];
     const metrics=S.get('metrics_'+day.date+'_'+day.tipus)||{};
     let metaHtml='';
     if(isDone&&Object.keys(metrics).length){
       const items=[];
       if(metrics.km) items.push(`<div class="cal-metric">km <span>${metrics.km}</span></div>`);
-      if(metrics.fcmig) items.push(`<div class="cal-metric">FC mig <span>${metrics.fcmig}</span></div>`);
+      if(metrics.fcmig) items.push(`<div class="cal-metric">FC <span>${metrics.fcmig}</span></div>`);
       if(metrics.ritme) items.push(`<div class="cal-metric">ritme <span>${metrics.ritme}</span></div>`);
       if(metrics.rpe) items.push(`<div class="cal-metric">RPE <span>${metrics.rpe}</span></div>`);
-      if(metrics.pes_ex) items.push(`<div class="cal-metric">càrrega <span>${metrics.pes_ex}</span></div>`);
       if(items.length) metaHtml=`<div class="cal-day-meta">${items.join('')}</div>`;
     }
-    return `<div class="cal-day${isToday?' today':''}" onclick="openDay('${day.date}','${day.tipus}',${WEEK_DATA[currentWeek].days.indexOf(day)})">
-      <div class="cal-day-hdr">
+
+    return `<div class="cal-day${isToday?' today':''}">
+      <div class="cal-day-hdr" onclick="openDay('${day.date}','${day.tipus}')">
         <div>
-          <div class="cal-day-date">${fmtDate(day.date)}${isToday?' · Avui':''}</div>
+          <div class="cal-day-date">${fmtDate(day.date)}${isToday?' · Avui':''}${isReprogram?`<span class="reprogram-tag">reprogramada</span>`:''}</div>
           <div class="cal-day-name">${day.nom}</div>
         </div>
-        <div style="display:flex;align-items:center;gap:8px">
-          <span class="bdg ${badgeClass(day.tipus)}">${badgeLabel(day.tipus)}</span>
+        <div style="display:flex;align-items:center;gap:6px">
+          <span class="bdg ${badgeClass(day.tipus)}">${day.tipus}</span>
           <button class="chk${isDone?' on':''}" onclick="event.stopPropagation();toggleDone('${day.date}','${day.tipus}',this)">${isDone?'✓':''}</button>
         </div>
       </div>
       <div class="cal-day-body">
         <div class="cal-day-detail">${day.detail}</div>
         ${metaHtml}
+        ${!isDone&&day.tipus!=='DESCANS'?`<button class="reprogram-btn" onclick="event.stopPropagation();openReprogramModal('${day.date}','${day.tipus}','${encodeURIComponent(day.nom)}')">Reprogramar sessió</button>`:''}
       </div>
     </div>`;
   }).join('');
+}
+
+function getMetricsSummary(date,tipus_arr){
+  let items=[];
+  tipus_arr.forEach(t=>{
+    const m=S.get('metrics_'+date+'_'+t)||{};
+    if(m.km) items.push(`<div class="cal-metric">${t} km <span>${m.km}</span></div>`);
+    if(m.fcmig) items.push(`<div class="cal-metric">${t} FC <span>${m.fcmig}</span></div>`);
+  });
+  return items.join('');
 }
 
 function toggleDone(date,tipus,btn){
   const key=date+'_'+tipus;
   const done=S.get('done')||{};
   if(!done[key]){
-    done[key]=true;
-    S.set('done',done);
-    btn.classList.add('on');
-    btn.textContent='✓';
-    openRegisterModal(date,tipus);
+    done[key]=true; S.set('done',done);
+    btn.classList.add('on'); btn.textContent='✓';
+    openDay(date,tipus);
   } else {
-    done[key]=false;
-    S.set('done',done);
-    btn.classList.remove('on');
-    btn.textContent='';
+    done[key]=false; S.set('done',done);
+    btn.classList.remove('on'); btn.textContent='';
     showToast('Sessió desmarcada');
     renderCal();
   }
 }
 
-function openDay(date,tipus,idx){
-  openRegisterModal(date,tipus);
+function toggleSubDone(date,tipus,idx,btn){
+  const key=date+'_'+tipus;
+  const done=S.get('done')||{};
+  if(!done[key]){
+    done[key]=true; S.set('done',done);
+    btn.classList.add('on'); btn.textContent='✓';
+    openRegisterModal(date,tipus,tipus);
+  } else {
+    done[key]=false; S.set('done',done);
+    btn.classList.remove('on'); btn.textContent='';
+    showToast('Activitat desmarcada');
+    renderCal();
+  }
 }
 
-// ════════════════════════════════════════════════
-// MODAL REGISTRE
-// ════════════════════════════════════════════════
-function openRegisterModal(date,tipus){
-  const wkDay=WEEK_DATA.flatMap(w=>w.days).find(d=>d.date===date&&d.tipus===tipus);
-  const saved=S.get('metrics_'+date+'_'+tipus)||{};
-  let html='';
-  const nom=wkDay?wkDay.nom:tipus;
+function openMultiDay(date,wi,di){
+  // just re-render, clicking individual sub-activities handles the rest
+}
 
-  if(tipus==='RUN'||tipus==='RUN+BICI'){
-    const rd = RUN_DETAIL[date] || {};
-    const consellsHtml = rd.consells ? rd.consells.map(c=>`<div style="display:flex;gap:6px;margin-bottom:4px"><span style="color:var(--g);flex-shrink:0">→</span><span>${c}</span></div>`).join('') : '';
+function openDay(date,tipus){openRegisterModal(date,tipus,tipus);}
+
+// ══════════════════════════════════════════
+// REPROGRAM MODAL
+// ══════════════════════════════════════════
+function openReprogramModal(date,tipus,nomEnc){
+  const nom=decodeURIComponent(nomEnc);
+  const reprogram=S.get('reprogram')||{};
+  const existing=reprogram[date+'_'+tipus]||'';
+  document.getElementById('modal-content').innerHTML=`
+    <button class="modal-close" onclick="closeModal()">✕</button>
+    <div class="modal-title">Reprogramar sessió</div>
+    <div class="modal-sub">${nom} · ${fmtDate(date)}</div>
+    <div class="fg">
+      <label class="fl">Nova data</label>
+      <input class="fi" type="date" id="reprogram-date" value="${existing||''}">
+    </div>
+    <div style="font-size:11px;color:var(--t3);margin-bottom:12px;line-height:1.6">La sessió es marcarà com a "reprogramada" al calendari original i apareixerà com a nota a la nova data.</div>
+    <button class="btn" onclick="saveReprogram('${date}','${tipus}','${nomEnc}')">Confirmar reprogramació</button>
+    <button class="btn btn-sec" onclick="closeModal()">Cancel·lar</button>`;
+  document.getElementById('modal').style.display='flex';
+}
+
+function saveReprogram(date,tipus,nomEnc){
+  const novaData=v('reprogram-date');
+  if(!novaData){showToast('Tria una data');return;}
+  const reprogram=S.get('reprogram')||{};
+  reprogram[date+'_'+tipus]=novaData;
+  S.set('reprogram',reprogram);
+  const reprogramList=S.getArr('reprogram_list');
+  const nom=decodeURIComponent(nomEnc);
+  const existing=reprogramList.findIndex(r=>r.origDate===date&&r.tipus===tipus);
+  const entry={origDate:date,tipus,nom,novaData};
+  if(existing>=0) reprogramList[existing]=entry; else reprogramList.push(entry);
+  S.set('reprogram_list',reprogramList);
+  closeModal();
+  showToast(`Sessió reprogramada per al ${fmtDate(novaData)}`);
+  renderCal();
+}
+
+// ══════════════════════════════════════════
+// REGISTER MODAL
+// ══════════════════════════════════════════
+function openRegisterModal(date,tipus,subTipus){
+  const wkDay=WEEK_DATA.flatMap(w=>w.days).find(d=>d.date===date&&(d.tipus===tipus||d.tipus==='MULTI'));
+  const saved=S.get('metrics_'+date+'_'+subTipus)||{};
+  let nom='';
+  if(wkDay){
+    if(wkDay.tipus==='MULTI'){
+      const sa=wkDay.subActivitats.find(s=>s.clau===subTipus);
+      nom=sa?sa.nom:tipus;
+    } else nom=wkDay.nom;
+  } else nom=tipus;
+
+  let html='';
+
+  if(subTipus==='RUN'){
+    const rd=RUN_DETAIL[date]||{};
+    const consellsHtml=rd.consells?rd.consells.map(c=>`<div style="display:flex;gap:6px;margin-bottom:4px"><span style="color:var(--g);flex-shrink:0">→</span><span>${c}</span></div>`).join(''):'';
     html=`
     <button class="modal-close" onclick="closeModal()">✕</button>
     <div class="modal-title">${rd.titol||nom}</div>
     <div class="modal-sub">${fmtDate(date)}</div>
-    ${rd.objectiu?`<div style="background:rgba(29,158,117,0.1);border:1px solid rgba(29,158,117,0.2);border-radius:9px;padding:10px 13px;margin-bottom:12px;font-size:12px;color:#9fe1cb;line-height:1.6"><strong style="color:#5dcaa5;display:block;margin-bottom:4px">Objectiu</strong>${rd.objectiu}</div>`:''}
-    ${rd.escalfament?`<div style="background:var(--bg3);border-radius:9px;padding:10px 13px;margin-bottom:8px"><div style="font-size:10px;color:var(--t3);text-transform:uppercase;letter-spacing:.6px;margin-bottom:5px;font-weight:600">Escalfament</div><div style="font-size:12px;color:var(--t2);line-height:1.6">${rd.escalfament}</div></div>`:''}
-    ${rd.bloc?`<div style="background:rgba(55,138,221,0.08);border:1px solid rgba(55,138,221,0.15);border-radius:9px;padding:10px 13px;margin-bottom:8px"><div style="font-size:10px;color:#85b7eb;text-transform:uppercase;letter-spacing:.6px;margin-bottom:5px;font-weight:600">Bloc principal</div><div style="font-size:12px;color:var(--t2);line-height:1.7;white-space:pre-line">${rd.bloc}</div></div>`:'<div class="mafbox">FC ≤148 ppm · Si passes → camines · MAF pace = ritme a FC 148</div>'}
-    ${rd.cooldown?`<div style="background:var(--bg3);border-radius:9px;padding:10px 13px;margin-bottom:8px"><div style="font-size:10px;color:var(--t3);text-transform:uppercase;letter-spacing:.6px;margin-bottom:5px;font-weight:600">Cooldown</div><div style="font-size:12px;color:var(--t2)">${rd.cooldown}</div></div>`:''}
-    ${rd.consells?`<div style="background:var(--bg3);border-radius:9px;padding:10px 13px;margin-bottom:12px"><div style="font-size:10px;color:var(--t3);text-transform:uppercase;letter-spacing:.6px;margin-bottom:7px;font-weight:600">Consells Maffetone</div><div style="font-size:11px;color:var(--t2);line-height:1.7">${consellsHtml}</div></div>`:''}
-    ${rd.garmin?`<div style="font-size:10px;color:var(--t3);margin-bottom:12px;padding:6px 10px;background:var(--bg3);border-radius:6px">⌚ Garmin: ${rd.garmin}</div>`:''}
-    <div style="font-size:12px;font-weight:600;color:var(--t);margin-bottom:10px;text-transform:uppercase;letter-spacing:.5px">Registra les dades</div>
+    ${rd.objectiu?`<div class="info-box info-box-green"><div class="info-box-title">Objectiu</div><div class="info-box-body">${rd.objectiu}</div></div>`:''}
+    ${rd.escalfament?`<div class="info-box"><div class="info-box-title">Escalfament</div><div class="info-box-body">${rd.escalfament}</div></div>`:''}
+    ${rd.bloc?`<div class="info-box info-box-blue"><div class="info-box-title">Bloc principal</div><div class="info-box-body">${rd.bloc}</div></div>`:`<div class="mafbox">FC ≤148 ppm · Si passes → camines · MAF pace = ritme a FC 148</div>`}
+    ${rd.cooldown?`<div class="info-box"><div class="info-box-title">Cooldown</div><div class="info-box-body">${rd.cooldown}</div></div>`:''}
+    ${rd.consells?`<div class="info-box"><div class="info-box-title">Consells Maffetone</div><div class="info-box-body">${consellsHtml}</div></div>`:''}
+    ${rd.garmin?`<div style="font-size:10px;color:var(--t3);margin-bottom:12px;padding:6px 10px;background:var(--bg3);border-radius:6px">Garmin: ${rd.garmin}</div>`:''}
+    <div class="st">Registra les dades</div>
     <div class="fg2">
-      <div class="fg"><label class="fl">Distància total (km)</label><input class="fi" id="m-km" type="number" step="0.1" placeholder="2.4" value="${saved.km||''}"></div>
-      <div class="fg"><label class="fl">Temps total (min)</label><input class="fi" id="m-temps" type="number" step="1" placeholder="25" value="${saved.temps||''}"></div>
+      <div class="fg"><label class="fl">km totals</label><input class="fi" id="m-km" type="number" step="0.1" placeholder="2.4" value="${saved.km||''}"></div>
+      <div class="fg"><label class="fl">Temps (min)</label><input class="fi" id="m-temps" type="number" placeholder="25" value="${saved.temps||''}"></div>
     </div>
     <div class="fg2">
       <div class="fg"><label class="fl">Km corrent</label><input class="fi" id="m-kmrun" type="number" step="0.1" placeholder="0.8" value="${saved.kmrun||''}"></div>
@@ -728,33 +828,38 @@ function openRegisterModal(date,tipus){
       <div class="fg"><label class="fl">FC màx (ppm)</label><input class="fi" id="m-fcmax" type="number" placeholder="152" value="${saved.fcmax||''}"></div>
     </div>
     <div class="fg2">
-      <div class="fg"><label class="fl">Ritme mig trot (min/km)</label><input class="fi" id="m-ritme" placeholder="9:20" value="${saved.ritme||''}"></div>
+      <div class="fg"><label class="fl">Ritme mig trot</label><input class="fi" id="m-ritme" placeholder="9:20" value="${saved.ritme||''}"></div>
       <div class="fg"><label class="fl">MAF pace (min/km)</label><input class="fi" id="m-maf" placeholder="9:45" value="${saved.maf||''}"></div>
     </div>
     <div class="fg2">
       <div class="fg"><label class="fl">% temps corrent</label><input class="fi" id="m-pct" type="number" placeholder="33" value="${saved.pct||''}"></div>
       <div class="fg"><label class="fl">RPE (1–10)</label><input class="fi" id="m-rpe" type="number" min="1" max="10" placeholder="5" value="${saved.rpe||''}"></div>
     </div>
-    <div class="fg"><label class="fl">Notes / sensacions</label><input class="fi" id="m-notes" placeholder="Com ha anat? FC s'ha disparat?" value="${saved.notes||''}"></div>
-    <button class="btn" onclick="saveRun('${date}','${tipus}')">Guardar run</button>`;
-  } else if(tipus==='PUSH'||tipus==='PULL'||tipus==='CAMES'){
-    const exList=tipus==='PUSH'?GYM_PUSH:tipus==='PULL'?GYM_PULL:GYM_CAMES;
+    <div class="fg"><label class="fl">Notes</label><input class="fi" id="m-notes" placeholder="Sensacions, FC s'ha disparat?" value="${saved.notes||''}"></div>
+    <button class="btn" onclick="saveRun('${date}','${subTipus}')">Guardar run</button>`;
+
+  } else if(subTipus==='PUSH'||subTipus==='PULL'||subTipus==='CAMES'){
+    const exList=subTipus==='PUSH'?GYM_PUSH:subTipus==='PULL'?GYM_PULL:GYM_CAMES;
+    const gd=GYM_DETAIL[subTipus];
     const gymHist=S.getArr('gym_sessions');
-    const prevSession=gymHist.filter(s=>s.tipus===tipus).slice(-1)[0];
+    const prevSession=gymHist.filter(s=>s.tipus===subTipus&&s.date!==date).slice(-1)[0];
+    const consHtml=gd.consells.map(c=>`<div style="display:flex;gap:6px;margin-bottom:4px"><span style="color:var(--g);flex-shrink:0">→</span><span>${c}</span></div>`).join('');
     html=`
     <button class="modal-close" onclick="closeModal()">✕</button>
     <div class="modal-title">${nom}</div>
-    <div class="modal-sub">${fmtDate(date)} · Introdueix pesos per cada sèrie</div>
+    <div class="modal-sub">${fmtDate(date)}</div>
+    <div class="info-box info-box-green"><div class="info-box-title">Objectiu</div><div class="info-box-body">${gd.objectiu}</div></div>
+    <div class="info-box"><div class="info-box-title">Escalfament</div><div class="info-box-body">${gd.escalfament}</div></div>
+    <div class="info-box info-box-blue"><div class="info-box-title">Notes d'execució</div><div class="info-box-body">${gd.notes}</div></div>
+    <div class="info-box"><div class="info-box-title">Consells</div><div class="info-box-body">${consHtml}</div></div>
+    <div class="st">Registra els pesos</div>
     ${exList.map((ex,ei)=>{
       const prevData=prevSession&&prevSession.exercicis&&prevSession.exercicis[ei];
-      const prevText=prevData?'Anterior: '+prevData.series.filter(s=>s.kg).map((s,i)=>`S${i+1}:${s.kg}kg×${s.reps}`).join(' '):'Sense historial';
+      const prevText=prevData?'Ant: '+prevData.series.filter(s=>s.kg).map((s,i)=>`S${i+1}:${s.kg}kg×${s.reps||'—'}`).join(' '):'Primera vegada';
       const curData=saved.exercicis&&saved.exercicis[ei];
       return `<div class="ex-card">
         <div class="ex-hdr" onclick="toggleEx(${ei})">
-          <div>
-            <div class="ex-name">${ex.name}</div>
-            <div class="ex-prev">${prevText}</div>
-          </div>
+          <div><div class="ex-name">${ex.name}</div><div class="ex-prev">${prevText}</div></div>
           <span style="color:var(--t3);font-size:16px" id="ex-arrow-${ei}">›</span>
         </div>
         <div class="ex-body" id="ex-body-${ei}">
@@ -770,18 +875,34 @@ function openRegisterModal(date,tipus){
         </div>
       </div>`;
     }).join('')}
-    <div class="fg"><label class="fl">RPE general (1–10)</label><input class="fi" id="m-rpe" type="number" min="1" max="10" placeholder="6" value="${saved.rpe||''}"></div>
-    <div class="fg"><label class="fl">Notes</label><input class="fi" id="m-notes" placeholder="Sensacions, dolors, progressions..." value="${saved.notes||''}"></div>
-    <button class="btn" onclick="saveGym('${date}','${tipus}',${exList.length})">Guardar sessió gym</button>`;
-  } else if(tipus==='BICI'){
+    <div class="fg" style="margin-top:10px"><label class="fl">RPE general (1–10)</label><input class="fi" id="m-rpe" type="number" min="1" max="10" placeholder="6" value="${saved.rpe||''}"></div>
+    <div class="fg"><label class="fl">Notes</label><input class="fi" id="m-notes" placeholder="Sensacions, progressions..." value="${saved.notes||''}"></div>
+    <button class="btn" onclick="saveGym('${date}','${subTipus}',${exList.length})">Guardar sessió gym</button>`;
+
+  } else if(subTipus==='BICI'){
+    const wkDayFull=WEEK_DATA.flatMap(w=>w.days).find(d=>d.date===date&&(d.tipus==='BICI'||d.tipus==='MULTI'));
+    let biciKey='Z2-40';
+    if(wkDayFull){
+      if(wkDayFull.biciKey) biciKey=wkDayFull.biciKey;
+      else if(wkDayFull.tipus==='MULTI'){
+        const sa=wkDayFull.subActivitats.find(s=>s.clau==='BICI');
+        if(sa&&sa.biciKey) biciKey=sa.biciKey;
+      }
+    }
+    const bd=BICI_DETAIL[biciKey]||BICI_DETAIL['Z2-40'];
+    const isGravel=biciKey.startsWith('gravel');
+    const consHtml=bd.consells.map(c=>`<div style="display:flex;gap:6px;margin-bottom:4px"><span style="color:var(--a);flex-shrink:0">→</span><span>${c}</span></div>`).join('');
     html=`
     <button class="modal-close" onclick="closeModal()">✕</button>
     <div class="modal-title">${nom}</div>
-    <div class="modal-sub">${fmtDate(date)}</div>
-    <div class="bici-type-row">
-      <div class="bici-type-btn on" id="bici-type-spin" onclick="setBiciType('spinning')">Spinning</div>
-      <div class="bici-type-btn" id="bici-type-grav" onclick="setBiciType('gravel')">Gravel</div>
-    </div>
+    <div class="modal-sub">${fmtDate(date)} · ${isGravel?'Gravel':'Spinning'}</div>
+    <div class="info-box info-box-green"><div class="info-box-title">Objectiu</div><div class="info-box-body">${bd.objectiu}</div></div>
+    <div class="info-box"><div class="info-box-title">Escalfament</div><div class="info-box-body">${bd.escalfament}</div></div>
+    <div class="info-box info-box-amber"><div class="info-box-title">Sessió</div><div class="info-box-body">${bd.bloc}</div></div>
+    <div class="info-box"><div class="info-box-title">Cooldown</div><div class="info-box-body">${bd.cooldown}</div></div>
+    <div class="info-box"><div class="info-box-title">Consells</div><div class="info-box-body">${consHtml}</div></div>
+    <div style="font-size:10px;color:var(--t3);margin-bottom:12px;padding:6px 10px;background:var(--bg3);border-radius:6px">Zones: ${bd.zones}</div>
+    <div class="st">Registra les dades</div>
     <div class="fg2">
       <div class="fg"><label class="fl">Durada (min)</label><input class="fi" id="m-dur" type="number" placeholder="40" value="${saved.dur||''}"></div>
       <div class="fg"><label class="fl">FC mig (ppm)</label><input class="fi" id="m-fcmig" type="number" placeholder="128" value="${saved.fcmig||''}"></div>
@@ -790,34 +911,41 @@ function openRegisterModal(date,tipus){
       <div class="fg"><label class="fl">FC màx (ppm)</label><input class="fi" id="m-fcmax" type="number" placeholder="148" value="${saved.fcmax||''}"></div>
       <div class="fg"><label class="fl">Cadència mig (rpm)</label><input class="fi" id="m-cad" type="number" placeholder="90" value="${saved.cad||''}"></div>
     </div>
-    <div id="gravel-fields" style="display:none">
-      <div class="fg2">
-        <div class="fg"><label class="fl">Km recorreguts</label><input class="fi" id="m-km" type="number" step="0.1" placeholder="32.5" value="${saved.km||''}"></div>
-        <div class="fg"><label class="fl">Desnivell (m)</label><input class="fi" id="m-desn" type="number" placeholder="350" value="${saved.desn||''}"></div>
-      </div>
-    </div>
+    ${isGravel?`<div class="fg2">
+      <div class="fg"><label class="fl">Km recorreguts</label><input class="fi" id="m-km" type="number" step="0.1" placeholder="32.5" value="${saved.km||''}"></div>
+      <div class="fg"><label class="fl">Desnivell (m)</label><input class="fi" id="m-desn" type="number" placeholder="350" value="${saved.desn||''}"></div>
+    </div>`:''}
     <div class="fg2">
       <div class="fg"><label class="fl">Zona principal</label>
-        <select class="fi" id="m-zona"><option value="">—</option><option value="Z1">Z1</option><option value="Z2" selected>Z2</option><option value="Z2-Z3">Z2-Z3</option><option value="Z3">Z3</option></select>
+        <select class="fi" id="m-zona"><option value="">—</option><option value="Z1">Z1</option><option value="Z2">Z2</option><option value="Z2-Z3">Z2-Z3</option><option value="Z3">Z3</option></select>
       </div>
       <div class="fg"><label class="fl">RPE (1–10)</label><input class="fi" id="m-rpe" type="number" min="1" max="10" placeholder="4" value="${saved.rpe||''}"></div>
     </div>
     <div class="fg"><label class="fl">Notes</label><input class="fi" id="m-notes" placeholder="Sensacions, meteorologia..." value="${saved.notes||''}"></div>
-    <button class="btn" onclick="saveBici('${date}','${tipus}')">Guardar sessió bici</button>`;
+    <button class="btn" onclick="saveBici('${date}','${subTipus}')">Guardar sessió bici</button>`;
+
+  } else if(subTipus==='DESCANS'||subTipus==='MOB'){
+    html=`
+    <button class="modal-close" onclick="closeModal()">✕</button>
+    <div class="modal-title">${nom}</div>
+    <div class="modal-sub">${fmtDate(date)}</div>
+    <div class="info-box info-box-green"><div class="info-box-title">Rutina de mobilitat (10–15 min)</div><div class="info-box-body">${MOB_ROUTINE}</div></div>
+    <div style="font-size:11px;color:var(--t2);margin-bottom:12px;line-height:1.6">Fes-la sempre al final de l'entrenament o al matí. Especialment important per la protusió discal.</div>
+    <div class="fg"><label class="fl">Notes</label><input class="fi" id="m-notes" placeholder="Com et trobes avui?" value="${saved.notes||''}"></div>
+    <button class="btn" onclick="saveGeneric('${date}','${subTipus}')">Marcar com a fet</button>`;
+
   } else {
     html=`
     <button class="modal-close" onclick="closeModal()">✕</button>
     <div class="modal-title">${nom}</div>
     <div class="modal-sub">${fmtDate(date)}</div>
-    <div style="color:var(--t2);font-size:13px;margin-bottom:16px;line-height:1.6">${wkDay?wkDay.detail:''}</div>
-    <div class="fg"><label class="fl">RPE (1–10)</label><input class="fi" id="m-rpe" type="number" min="1" max="10" placeholder="3" value="${saved.rpe||''}"></div>
+    ${wkDay?`<div class="info-box"><div class="info-box-title">Detall</div><div class="info-box-body">${wkDay.detail||''}</div></div>`:''}
     <div class="fg"><label class="fl">Notes</label><input class="fi" id="m-notes" placeholder="Notes..." value="${saved.notes||''}"></div>
-    <button class="btn" onclick="saveGeneric('${date}','${tipus}')">Marcar com a fet</button>`;
+    <button class="btn" onclick="saveGeneric('${date}','${subTipus}')">Marcar com a fet</button>`;
   }
 
   document.getElementById('modal-content').innerHTML=html;
   document.getElementById('modal').style.display='flex';
-  if(saved.biciType) setBiciType(saved.biciType);
 }
 
 function toggleEx(i){
@@ -825,106 +953,68 @@ function toggleEx(i){
   const arrow=document.getElementById('ex-arrow-'+i);
   const isOpen=body.style.display==='block';
   body.style.display=isOpen?'none':'block';
-  arrow.textContent=isOpen?'›':'‹';
+  if(arrow) arrow.textContent=isOpen?'›':'‹';
 }
 
-function setBiciType(type){
-  document.getElementById('bici-type-spin').classList.toggle('on',type==='spinning');
-  document.getElementById('bici-type-grav').classList.toggle('on',type==='gravel');
-  document.getElementById('gravel-fields').style.display=type==='gravel'?'block':'none';
-  window._biciType=type;
-}
+function closeModal(){document.getElementById('modal').style.display='none';renderCal();}
+function closeModalBg(e){if(e.target===document.getElementById('modal'))closeModal();}
 
-function closeModal(){
-  document.getElementById('modal').style.display='none';
-  renderCal();
-}
-function closeModalBg(e){
-  if(e.target===document.getElementById('modal')) closeModal();
-}
-
-// ════════════════════════════════════════════════
-// SAVE FUNCTIONS
-// ════════════════════════════════════════════════
-function v(id){const el=document.getElementById(id);return el?el.value:''}
-
+// ══════════════════════════════════════════
+// SAVE
+// ══════════════════════════════════════════
 function saveRun(date,tipus){
-  const data={
-    date,tipus,
-    km:v('m-km'),temps:v('m-temps'),kmrun:v('m-kmrun'),kmwalk:v('m-kmwalk'),
-    fcmig:v('m-fcmig'),fcmax:v('m-fcmax'),ritme:v('m-ritme'),maf:v('m-maf'),
-    pct:v('m-pct'),rpe:v('m-rpe'),notes:v('m-notes'),
-    savedAt:new Date().toISOString()
-  };
+  const data={date,tipus,km:v('m-km'),temps:v('m-temps'),kmrun:v('m-kmrun'),kmwalk:v('m-kmwalk'),fcmig:v('m-fcmig'),fcmax:v('m-fcmax'),ritme:v('m-ritme'),maf:v('m-maf'),pct:v('m-pct'),rpe:v('m-rpe'),notes:v('m-notes'),savedAt:new Date().toISOString()};
   S.set('metrics_'+date+'_'+tipus,data);
   const runs=S.getArr('run_sessions');
   const idx=runs.findIndex(r=>r.date===date&&r.tipus===tipus);
   if(idx>=0) runs[idx]=data; else runs.push(data);
   S.set('run_sessions',runs);
   markDone(date,tipus);
-  closeModal();
-  showToast('Run guardat!');
+  closeModal(); showToast('Run guardat!');
 }
 
 function saveGym(date,tipus,numEx){
-  const exercicis=Array.from({length:numEx},(_,ei)=>{
-    const exList=tipus==='PUSH'?GYM_PUSH:tipus==='PULL'?GYM_PULL:GYM_CAMES;
-    return {
-      name:exList[ei].name,
-      series:Array.from({length:exList[ei].series},(_,si)=>({
-        kg:document.getElementById('kg-'+ei+'-'+si)?.value||'',
-        reps:document.getElementById('reps-'+ei+'-'+si)?.value||''
-      }))
-    };
-  });
+  const exList=tipus==='PUSH'?GYM_PUSH:tipus==='PULL'?GYM_PULL:GYM_CAMES;
+  const exercicis=Array.from({length:numEx},(_,ei)=>({
+    name:exList[ei].name,
+    series:Array.from({length:exList[ei].series},(_,si)=>({
+      kg:document.getElementById('kg-'+ei+'-'+si)?.value||'',
+      reps:document.getElementById('reps-'+ei+'-'+si)?.value||''
+    }))
+  }));
   const data={date,tipus,exercicis,rpe:v('m-rpe'),notes:v('m-notes'),savedAt:new Date().toISOString()};
-  const mainEx=exercicis[0];
-  const pesEx=mainEx&&mainEx.series[0]&&mainEx.series[0].kg?mainEx.series[0].kg+'kg':'—';
-  data.pes_ex=pesEx;
   S.set('metrics_'+date+'_'+tipus,data);
   const gym=S.getArr('gym_sessions');
   const idx=gym.findIndex(g=>g.date===date&&g.tipus===tipus);
   if(idx>=0) gym[idx]=data; else gym.push(data);
   S.set('gym_sessions',gym);
   markDone(date,tipus);
-  closeModal();
-  showToast('Sessió gym guardada!');
+  closeModal(); showToast('Gym guardat!');
 }
 
 function saveBici(date,tipus){
-  const data={
-    date,tipus,biciType:window._biciType||'spinning',
-    dur:v('m-dur'),fcmig:v('m-fcmig'),fcmax:v('m-fcmax'),cad:v('m-cad'),
-    km:v('m-km'),desn:v('m-desn'),zona:v('m-zona'),rpe:v('m-rpe'),notes:v('m-notes'),
-    savedAt:new Date().toISOString()
-  };
+  const data={date,tipus,dur:v('m-dur'),fcmig:v('m-fcmig'),fcmax:v('m-fcmax'),cad:v('m-cad'),km:v('m-km'),desn:v('m-desn'),zona:v('m-zona'),rpe:v('m-rpe'),notes:v('m-notes'),savedAt:new Date().toISOString()};
   S.set('metrics_'+date+'_'+tipus,data);
   const bicis=S.getArr('bici_sessions');
   const idx=bicis.findIndex(b=>b.date===date&&b.tipus===tipus);
   if(idx>=0) bicis[idx]=data; else bicis.push(data);
   S.set('bici_sessions',bicis);
   markDone(date,tipus);
-  closeModal();
-  showToast('Sessió bici guardada!');
+  closeModal(); showToast('Bici guardada!');
 }
 
 function saveGeneric(date,tipus){
-  const data={date,tipus,rpe:v('m-rpe'),notes:v('m-notes'),savedAt:new Date().toISOString()};
+  const data={date,tipus,notes:v('m-notes'),savedAt:new Date().toISOString()};
   S.set('metrics_'+date+'_'+tipus,data);
   markDone(date,tipus);
-  closeModal();
-  showToast('Sessió marcada!');
+  closeModal(); showToast('Sessió marcada!');
 }
 
-function markDone(date,tipus){
-  const done=S.get('done')||{};
-  done[date+'_'+tipus]=true;
-  S.set('done',done);
-}
+function markDone(date,tipus){const done=S.get('done')||{};done[date+'_'+tipus]=true;S.set('done',done);}
 
-// ════════════════════════════════════════════════
+// ══════════════════════════════════════════
 // GYM TAB
-// ════════════════════════════════════════════════
+// ══════════════════════════════════════════
 function gymTab(t){
   currentGymTab=t;
   document.querySelectorAll('.tgl').forEach((el,i)=>el.classList.toggle('on',['push','pull','cames'][i]===t));
@@ -935,78 +1025,45 @@ function renderGym(){
   const exList=currentGymTab==='push'?GYM_PUSH:currentGymTab==='pull'?GYM_PULL:GYM_CAMES;
   const tipus=currentGymTab.toUpperCase();
   const gymSessions=S.getArr('gym_sessions').filter(s=>s.tipus===tipus);
-
   const content=document.getElementById('gym-content');
-  content.innerHTML=`
-    <div class="st">${tipus} — ${exList.length} exercicis</div>
-    ${exList.map((ex,ei)=>{
-      const allData=gymSessions.map(sess=>({
-        date:sess.date,
-        series:sess.exercicis&&sess.exercicis[ei]?sess.exercicis[ei].series:[]
-      })).filter(d=>d.series.length);
-      const last=allData.slice(-1)[0];
-      const lastText=last?last.series.filter(s=>s.kg).map((s,i)=>`S${i+1}: ${s.kg}kg×${s.reps||'—'}`).join(' · '):'Sense dades';
-      const lastDate=last?fmtDate(last.date):'—';
-      const maxKg=allData.length?Math.max(...allData.flatMap(d=>d.series.map(s=>parseFloat(s.kg)||0))):0;
-
-      return `<div class="card" style="margin-bottom:9px">
-        <div class="card-row" style="margin-bottom:8px">
-          <div>
-            <div class="card-title">${ex.name}</div>
-            <div class="card-sub">${ex.mat}</div>
-          </div>
-          ${maxKg>0?`<div style="text-align:right"><div style="font-size:16px;font-weight:600;color:var(--g);font-family:'DM Mono',monospace">${maxKg}kg</div><div style="font-size:10px;color:var(--t3)">màx registrat</div></div>`:''}
-        </div>
-        <div style="font-size:11px;color:var(--t2);margin-bottom:6px">Última: ${lastDate}</div>
-        <div style="font-size:11px;color:var(--t3);background:var(--bg3);border-radius:6px;padding:7px 9px">${lastText}</div>
-        ${allData.length>1?`
-        <div class="st" style="margin-top:10px">Historial de càrregues (S1 màxima)</div>
-        ${allData.slice(-5).map(d=>{
-          const maxS=d.series.reduce((a,s)=>Math.max(a,parseFloat(s.kg)||0),0);
-          return `<div class="hi">
-            <div class="hi-left"><div class="hi-date">${fmtDate(d.date)}</div></div>
-            <div class="hi-right">${maxS>0?maxS+'kg':'—'}</div>
-          </div>`;
-        }).join('')}`:''}
-      </div>`;
-    }).join('')}`;
+  content.innerHTML=exList.map((ex,ei)=>{
+    const allData=gymSessions.map(sess=>({date:sess.date,series:sess.exercicis&&sess.exercicis[ei]?sess.exercicis[ei].series:[]})).filter(d=>d.series.length);
+    const last=allData.slice(-1)[0];
+    const lastText=last?last.series.filter(s=>s.kg).map((s,i)=>`S${i+1}: ${s.kg}kg×${s.reps||'—'}`).join(' · '):'Sense dades';
+    const lastDate=last?fmtDate(last.date):'—';
+    const maxKg=allData.length?Math.max(...allData.flatMap(d=>d.series.map(s=>parseFloat(s.kg)||0))):0;
+    return `<div class="card" style="margin-bottom:9px">
+      <div class="card-row" style="margin-bottom:8px">
+        <div><div class="card-title">${ex.name}</div><div class="card-sub">${ex.mat}</div></div>
+        ${maxKg>0?`<div style="text-align:right"><div style="font-size:16px;font-weight:600;color:var(--g);font-family:'DM Mono',monospace">${maxKg}kg</div><div style="font-size:10px;color:var(--t3)">màx registrat</div></div>`:''}
+      </div>
+      <div style="font-size:11px;color:var(--t2);margin-bottom:6px">Última: ${lastDate}</div>
+      <div style="font-size:11px;color:var(--t3);background:var(--bg3);border-radius:6px;padding:7px 9px">${lastText}</div>
+      ${allData.length>1?`<div class="st" style="margin-top:10px">Historial</div>${allData.slice(-5).map(d=>{const mS=d.series.reduce((a,s)=>Math.max(a,parseFloat(s.kg)||0),0);return `<div class="hi"><div class="hi-left"><div class="hi-date">${fmtDate(d.date)}</div></div><div class="hi-right">${mS>0?mS+'kg':'—'}</div></div>`;}).join('')}`:''}
+    </div>`;
+  }).join('');
 }
 
-// ════════════════════════════════════════════════
+// ══════════════════════════════════════════
 // RUN TAB
-// ════════════════════════════════════════════════
+// ══════════════════════════════════════════
 function renderRun(){
   const runs=S.getArr('run_sessions');
-
-  // Stats
   document.getElementById('run-count').textContent=runs.length;
   const totalKm=runs.reduce((a,r)=>a+(parseFloat(r.km)||0),0);
   document.getElementById('run-km').textContent=totalKm.toFixed(1);
   const fcVals=runs.filter(r=>r.fcmig).map(r=>parseFloat(r.fcmig));
   document.getElementById('run-fc').textContent=fcVals.length?Math.round(fcVals.reduce((a,b)=>a+b,0)/fcVals.length)+'ppm':'—';
-
-  // MAF pace
+  function mafToSec(s){if(!s||!s.includes(':'))return null;const p=s.split(':');return parseInt(p[0])*60+parseInt(p[1]||0);}
   const mafRuns=runs.filter(r=>r.maf&&r.maf.includes(':'));
-  function mafToSec(s){const p=s.split(':');return parseInt(p[0])*60+parseInt(p[1]||0);}
-  function secToMaf(s){return Math.floor(s/60)+':'+(s%60).toString().padStart(2,'0');}
-  if(mafRuns.length){
-    const best=mafRuns.reduce((a,b)=>mafToSec(a.maf)<mafToSec(b.maf)?a:b);
-    document.getElementById('run-maf').textContent=best.maf;
-  } else document.getElementById('run-maf').textContent='—';
-
-  // Chart MAF
+  if(mafRuns.length){const best=mafRuns.reduce((a,b)=>mafToSec(a.maf)<mafToSec(b.maf)?a:b);document.getElementById('run-maf').textContent=best.maf;}
+  else document.getElementById('run-maf').textContent='—';
   if(mafRuns.length>1){
     const labels=mafRuns.map(r=>r.date.slice(5));
     const vals=mafRuns.map(r=>mafToSec(r.maf)/60);
     if(charts['maf']) charts['maf'].destroy();
-    charts['maf']=new Chart(document.getElementById('chart-maf'),{
-      type:'line',
-      data:{labels,datasets:[{data:vals,borderColor:'#85b7eb',backgroundColor:'rgba(55,138,221,0.1)',tension:0.3,fill:true,pointRadius:4,pointBackgroundColor:'#85b7eb'}]},
-      options:{responsive:true,maintainAspectRatio:false,plugins:{legend:{display:false}},scales:{y:{reverse:true,ticks:{callback:v=>Math.floor(v)+':'+(Math.round((v%1)*60)).toString().padStart(2,'0')}}}}
-    });
+    charts['maf']=new Chart(document.getElementById('chart-maf'),{type:'line',data:{labels,datasets:[{data:vals,borderColor:'#85b7eb',backgroundColor:'rgba(55,138,221,0.1)',tension:0.3,fill:true,pointRadius:4,pointBackgroundColor:'#85b7eb'}]},options:{responsive:true,maintainAspectRatio:false,plugins:{legend:{display:false}},scales:{y:{reverse:true,ticks:{callback:v=>Math.floor(v)+':'+(Math.round((v%1)*60)).toString().padStart(2,'0')}}}}});
   }
-
-  // Historial
   const hist=document.getElementById('run-hist-list');
   if(!runs.length){hist.innerHTML='<div style="color:var(--t3);font-size:12px">Sense runs registrats</div>';return;}
   hist.innerHTML=runs.slice().reverse().map(r=>`
@@ -1025,25 +1082,11 @@ function renderRun(){
     </div>`).join('');
 }
 
-// ════════════════════════════════════════════════
+// ══════════════════════════════════════════
 // PES TAB
-// ════════════════════════════════════════════════
+// ══════════════════════════════════════════
 function savePes(){
-  const entry={
-    date:v('p-data')||today(),
-    pes:parseFloat(v('p-pes'))||null,
-    grasa:parseFloat(v('p-grasa'))||null,
-    musc:parseFloat(v('p-musc'))||null,
-    aigua:parseFloat(v('p-aigua'))||null,
-    cin:parseFloat(v('p-cin'))||null,
-    abd:parseFloat(v('p-abd'))||null,
-    mal:parseFloat(v('p-mal'))||null,
-    cui:parseFloat(v('p-cui'))||null,
-    pit:parseFloat(v('p-pit'))||null,
-    brac:parseFloat(v('p-brac'))||null,
-    notes:v('p-notes'),
-    savedAt:new Date().toISOString()
-  };
+  const entry={date:v('p-data')||today(),pes:parseFloat(v('p-pes'))||null,grasa:parseFloat(v('p-grasa'))||null,musc:parseFloat(v('p-musc'))||null,aigua:parseFloat(v('p-aigua'))||null,cin:parseFloat(v('p-cin'))||null,abd:parseFloat(v('p-abd'))||null,mal:parseFloat(v('p-mal'))||null,cui:parseFloat(v('p-cui'))||null,pit:parseFloat(v('p-pit'))||null,brac:parseFloat(v('p-brac'))||null,notes:v('p-notes'),savedAt:new Date().toISOString()};
   if(!entry.pes){showToast('Introdueix el pes');return;}
   const pesos=S.getArr('pesos');
   const idx=pesos.findIndex(p=>p.date===entry.date);
@@ -1052,237 +1095,147 @@ function savePes(){
   S.set('pesos',pesos);
   showToast('Mesura guardada!');
   renderPes();
-  updateHeader();
 }
 
 function renderPes(){
   const pesos=S.getArr('pesos');
-
-  // Partida: 99.2kg
-  const partida=99.2, obj=90;
+  const partida=99.2,obj=90;
   const last=pesos.length?pesos[pesos.length-1]:null;
   const pesActual=last?last.pes:partida;
   const perdut=parseFloat((partida-pesActual).toFixed(1));
   const queda=parseFloat((pesActual-obj).toFixed(1));
-  const pct=perdut>0?Math.round(perdut/(partida-obj)*100):0;
-
+  const pct=perdut>0?Math.min(100,Math.round(perdut/(partida-obj)*100)):0;
   document.getElementById('p-actual').textContent=pesActual.toFixed(1);
   document.getElementById('p-queda').textContent=Math.max(0,queda).toFixed(1);
   document.getElementById('p-perdut').textContent=perdut>0?perdut.toFixed(1):'0.0';
   document.getElementById('p-pct').textContent=pct+'%';
-  document.getElementById('hdr-pes').textContent=pesActual.toFixed(1)+' kg';
-
-  // Chart pes
   const pesData=[{date:'2026-03-15',pes:99.2},...pesos];
   const uniquePes=[...new Map(pesData.map(p=>[p.date,p])).values()].sort((a,b)=>a.date.localeCompare(b.date));
   if(uniquePes.length>1){
     if(charts['pes']) charts['pes'].destroy();
-    charts['pes']=new Chart(document.getElementById('chart-pes'),{
-      type:'line',
-      data:{
-        labels:uniquePes.map(p=>p.date.slice(5)),
-        datasets:[
-          {data:uniquePes.map(p=>p.pes),borderColor:'#5dcaa5',backgroundColor:'rgba(29,158,117,0.1)',tension:0.3,fill:true,pointRadius:4,pointBackgroundColor:'#5dcaa5',label:'Pes'},
-          {data:uniquePes.map(()=>obj),borderColor:'rgba(239,159,39,0.5)',borderDash:[4,4],pointRadius:0,label:'Objectiu'}
-        ]
-      },
-      options:{responsive:true,maintainAspectRatio:false,plugins:{legend:{display:false}},scales:{y:{min:obj-2,max:partida+1}}}
-    });
+    charts['pes']=new Chart(document.getElementById('chart-pes'),{type:'line',data:{labels:uniquePes.map(p=>p.date.slice(5)),datasets:[{data:uniquePes.map(p=>p.pes),borderColor:'#5dcaa5',backgroundColor:'rgba(29,158,117,0.1)',tension:0.3,fill:true,pointRadius:4,pointBackgroundColor:'#5dcaa5'},{data:uniquePes.map(()=>obj),borderColor:'rgba(239,159,39,0.4)',borderDash:[4,4],pointRadius:0}]},options:{responsive:true,maintainAspectRatio:false,plugins:{legend:{display:false}},scales:{y:{min:obj-2,max:partida+1}}}});
   }
-
-  // Chart grasa
   const grasaData=uniquePes.filter(p=>p.grasa);
   if(grasaData.length>1){
     if(charts['grasa']) charts['grasa'].destroy();
-    charts['grasa']=new Chart(document.getElementById('chart-grasa'),{
-      type:'line',
-      data:{labels:grasaData.map(p=>p.date.slice(5)),datasets:[{data:grasaData.map(p=>p.grasa),borderColor:'#fac775',backgroundColor:'rgba(239,159,39,0.1)',tension:0.3,fill:true,pointRadius:4,pointBackgroundColor:'#fac775'}]},
-      options:{responsive:true,maintainAspectRatio:false,plugins:{legend:{display:false}}}
-    });
+    charts['grasa']=new Chart(document.getElementById('chart-grasa'),{type:'line',data:{labels:grasaData.map(p=>p.date.slice(5)),datasets:[{data:grasaData.map(p=>p.grasa),borderColor:'#fac775',backgroundColor:'rgba(239,159,39,0.1)',tension:0.3,fill:true,pointRadius:4,pointBackgroundColor:'#fac775'}]},options:{responsive:true,maintainAspectRatio:false,plugins:{legend:{display:false}}}});
   }
-
-  // Historial
   const hist=document.getElementById('pes-hist-list');
-  if(!pesos.length){hist.innerHTML='<div style="color:var(--t3);font-size:12px">Sense mesures. Afegeix la primera!</div>';return;}
+  if(!pesos.length){hist.innerHTML='<div style="color:var(--t3);font-size:12px">Afegeix la primera mesura!</div>';return;}
   hist.innerHTML=pesos.slice().reverse().map((p,i,arr)=>{
     const prev=arr[i+1];
     const delta=prev?parseFloat((p.pes-prev.pes).toFixed(1)):null;
-    const deltaHtml=delta!==null?`<div class="hi-delta ${delta<0?'cg':'cr'}">${delta>0?'+':''}${delta} kg</div>`:'';
     return `<div class="hi">
       <div class="hi-left">
         <div class="hi-date">${fmtDate(p.date)}</div>
-        ${p.grasa?`<div style="font-size:10px;color:var(--t3);margin-top:1px">% grasa: ${p.grasa}%${p.musc?' · músc: '+p.musc+'kg':''}</div>`:''}
+        ${p.grasa?`<div style="font-size:10px;color:var(--t3);margin-top:1px">grasa:${p.grasa}%${p.musc?' musc:'+p.musc+'kg':''}</div>`:''}
         ${p.cin?`<div style="font-size:10px;color:var(--t3);margin-top:1px">cin:${p.cin} abd:${p.abd} mal:${p.mal}</div>`:''}
       </div>
-      <div><div class="hi-right">${p.pes} kg</div>${deltaHtml}</div>
+      <div><div class="hi-right">${p.pes} kg</div>${delta!==null?`<div class="hi-delta ${delta<0?'cg':'cr'}">${delta>0?'+':''}${delta} kg</div>`:''}</div>
     </div>`;
   }).join('');
 }
 
-
-// ════════════════════════════════════════════════
+// ══════════════════════════════════════════
 // RESUM TAB
-// ════════════════════════════════════════════════
+// ══════════════════════════════════════════
 function renderResum(){
-  const done = S.get('done') || {};
-  const pesos = S.getArr('pesos');
-  const runs = S.getArr('run_sessions');
-
-  // Sessions fetes
-  let totalPrev = 0, totalFetes = 0;
-  WEEK_DATA.forEach(wk => wk.days.forEach(d => {
-    if(d.tipus !== 'DESCANS'){
-      totalPrev++;
-      if(done[d.date + '_' + d.tipus]) totalFetes++;
+  const done=S.get('done')||{};
+  const pesos=S.getArr('pesos');
+  const runs=S.getArr('run_sessions');
+  let totalPrev=0,totalFetes=0;
+  WEEK_DATA.forEach(wk=>wk.days.forEach(d=>{
+    if(d.tipus==='MULTI'){
+      d.subActivitats.forEach(sa=>{if(sa.clau!=='TENIS'){totalPrev++;if(done[d.date+'_'+sa.clau])totalFetes++;}});
+    } else if(d.tipus!=='DESCANS'){
+      totalPrev++;if(done[d.date+'_'+d.tipus])totalFetes++;
     }
   }));
-  document.getElementById('rs-fetes').textContent = totalFetes;
-  document.getElementById('rs-pct').textContent = 'de ' + totalPrev + ' previstes';
-  const adh = totalPrev > 0 ? Math.round(totalFetes / totalPrev * 100) : 0;
-  document.getElementById('rs-adherencia').textContent = adh + '%';
-
-  // Pes
-  const partida = 99.2, obj = 90;
-  const last = pesos.length ? pesos[pesos.length-1] : null;
-  const pesActual = last ? last.pes : partida;
-  const perdut = parseFloat((partida - pesActual).toFixed(1));
-  const pct = perdut > 0 ? Math.min(100, Math.round(perdut / (partida - obj) * 100)) : 0;
-  document.getElementById('rs-pes').textContent = pesActual.toFixed(1);
-  document.getElementById('rs-perdut').textContent = perdut > 0 ? '-' + perdut + ' kg perduts' : 'Sense canvis';
-  document.getElementById('rs-pb-pes').style.width = pct + '%';
-  document.getElementById('rs-pb-pla').style.width = adh + '%';
-
-  // Dies
-  const dies = Math.max(0, daysTo('2026-04-26'));
-  document.getElementById('rs-dies').textContent = dies;
-
-  // Per setmana
-  const setEl = document.getElementById('rs-setmanes');
-  setEl.innerHTML = WEEK_DATA.map((wk, wi) => {
-    const wkDays = wk.days.filter(d => d.tipus !== 'DESCANS');
-    const wkFetes = wkDays.filter(d => done[d.date + '_' + d.tipus]).length;
-    const wkPct = wkDays.length > 0 ? Math.round(wkFetes / wkDays.length * 100) : 0;
-    const isActive = wi === currentWeek;
-    return `<div class="card" style="padding:11px 14px;margin-bottom:7px${isActive?';border-color:rgba(29,158,117,.35)':''}">
+  document.getElementById('rs-fetes').textContent=totalFetes;
+  document.getElementById('rs-pct').textContent='de '+totalPrev+' previstes';
+  const adh=totalPrev>0?Math.round(totalFetes/totalPrev*100):0;
+  document.getElementById('rs-adherencia').textContent=adh+'%';
+  const partida=99.2,obj=90;
+  const last=pesos.length?pesos[pesos.length-1]:null;
+  const pesActual=last?last.pes:partida;
+  const perdut=parseFloat((partida-pesActual).toFixed(1));
+  const pct=perdut>0?Math.min(100,Math.round(perdut/(partida-obj)*100)):0;
+  document.getElementById('rs-pes').textContent=pesActual.toFixed(1);
+  document.getElementById('rs-perdut').textContent=perdut>0?'-'+perdut+' kg perduts':'Sense canvis';
+  document.getElementById('rs-pb-pes').style.width=pct+'%';
+  document.getElementById('rs-pb-pla').style.width=adh+'%';
+  function mafToSec(s){if(!s||!s.includes(':'))return null;const p=s.split(':');return parseInt(p[0])*60+parseInt(p[1]||0);}
+  const mafRuns=runs.filter(r=>r.maf&&r.maf.includes(':'));
+  if(mafRuns.length){const best=mafRuns.reduce((a,b)=>mafToSec(a.maf)<mafToSec(b.maf)?a:b);document.getElementById('rs-maf').textContent=best.maf;}
+  const setEl=document.getElementById('rs-setmanes');
+  setEl.innerHTML=WEEK_DATA.map((wk,wi)=>{
+    let wkPrev=0,wkFetes=0;
+    wk.days.forEach(d=>{
+      if(d.tipus==='MULTI') d.subActivitats.forEach(sa=>{if(sa.clau!=='TENIS'){wkPrev++;if(done[d.date+'_'+sa.clau])wkFetes++;}});
+      else if(d.tipus!=='DESCANS'){wkPrev++;if(done[d.date+'_'+d.tipus])wkFetes++;}
+    });
+    const wkPct=wkPrev>0?Math.round(wkFetes/wkPrev*100):0;
+    const isActive=wi===currentWeek;
+    return `<div class="card" style="padding:11px 14px;margin-bottom:7px${isActive?';border-color:rgba(29,158,117,.4)':''}">
       <div style="display:flex;justify-content:space-between;align-items:center;margin-bottom:7px">
         <div>
           <div style="font-size:13px;font-weight:500;color:var(--t)">${wk.label}</div>
-          <div style="font-size:11px;color:var(--t3);margin-top:1px">${wkFetes}/${wkDays.length} sessions${isActive?' · Setmana actual':''}</div>
+          <div style="font-size:11px;color:var(--t3);margin-top:1px">${wkFetes}/${wkPrev} sessions${isActive?' · Setmana actual':''}</div>
         </div>
         <div style="font-size:17px;font-weight:600;font-family:'DM Mono',monospace;color:${wkPct>=80?'#5dcaa5':wkPct>=50?'#fac775':'#f09595'}">${wkPct}%</div>
       </div>
       <div class="pb-wrap" style="margin:0"><div class="pb" style="width:${wkPct}%;background:${wkPct>=80?'var(--g)':wkPct>=50?'var(--a)':'var(--r)'}"></div></div>
     </div>`;
   }).join('');
-
-  // Run progrés
-  const runEl = document.getElementById('rs-run-prog');
-  function mafToSec(s){if(!s||!s.includes(':'))return null;const p=s.split(':');return parseInt(p[0])*60+parseInt(p[1]||0);}
-  const mafRuns = runs.filter(r => r.maf && r.maf.includes(':'));
-  if(mafRuns.length === 0){
-    runEl.innerHTML = '<div style="color:var(--t3);font-size:12px;padding:8px 0">Sense dades MAF pace. S\'omplirà quan registris runs amb MAF pace.</div>';
-  } else {
-    const first = mafRuns[0];
-    const lastR = mafRuns[mafRuns.length-1];
-    const diff = mafToSec(first.maf) - mafToSec(lastR.maf);
-    runEl.innerHTML = `<div class="card" style="padding:11px 14px">
-      <div class="sgrid3">
-        <div class="sc"><div class="sc-n cb">${first.maf}</div><div class="sc-l">MAF pace inicial</div></div>
-        <div class="sc"><div class="sc-n cg">${lastR.maf}</div><div class="sc-l">MAF pace actual</div></div>
-        <div class="sc"><div class="sc-n ${diff>0?'cg':'ca'}">${diff>0?'-'+diff+'s':'='}${diff>0?' seg/km':''}</div><div class="sc-l">Millora</div></div>
-      </div>
-    </div>`;
-  }
-
-  // Km run total
-  const kmTotal = runs.reduce((a, r) => a + (parseFloat(r.km) || 0), 0);
-  const kmCorrent = runs.reduce((a, r) => a + (parseFloat(r.kmrun) || 0), 0);
 }
 
-// ════════════════════════════════════════════════
+// ══════════════════════════════════════════
 // EXPORT
-// ════════════════════════════════════════════════
+// ══════════════════════════════════════════
 function exportData(){
-  const done = S.get('done') || {};
-  const runs = S.getArr('run_sessions');
-  const gym = S.getArr('gym_sessions');
-  const bici = S.getArr('bici_sessions');
-  const pesos = S.getArr('pesos');
-
-  // Summary stats
-  let totalPrev = 0, totalFetes = 0;
-  WEEK_DATA.forEach(wk => wk.days.forEach(d => {
-    if(d.tipus !== 'DESCANS'){ totalPrev++;
-      if(done[d.date + '_' + d.tipus]) totalFetes++; }
+  const done=S.get('done')||{};
+  const runs=S.getArr('run_sessions');
+  const gym=S.getArr('gym_sessions');
+  const bici=S.getArr('bici_sessions');
+  const pesos=S.getArr('pesos');
+  let totalPrev=0,totalFetes=0;
+  WEEK_DATA.forEach(wk=>wk.days.forEach(d=>{
+    if(d.tipus==='MULTI') d.subActivitats.forEach(sa=>{if(sa.clau!=='TENIS'){totalPrev++;if(done[d.date+'_'+sa.clau])totalFetes++;}});
+    else if(d.tipus!=='DESCANS'){totalPrev++;if(done[d.date+'_'+d.tipus])totalFetes++;}
   }));
-  const partida = 99.2;
-  const lastPes = pesos.length ? pesos[pesos.length-1].pes : partida;
-
-  const exportObj = {
-    exportat: new Date().toISOString().slice(0,10),
-    resum: {
-      sessions_fetes: totalFetes,
-      sessions_previstes: totalPrev,
-      adherencia_pct: totalPrev > 0 ? Math.round(totalFetes/totalPrev*100) : 0,
-      pes_partida_kg: partida,
-      pes_actual_kg: lastPes,
-      pes_perdut_kg: parseFloat((partida - lastPes).toFixed(1)),
-      dies_fins_cursa: daysTo('2026-04-26')
-    },
-    runs: runs.map(r => ({
-      data: r.date, sessio: r.tipus,
-      km: r.km, km_corrent: r.kmrun, km_caminant: r.kmwalk,
-      fc_mig: r.fcmig, fc_max: r.fcmax,
-      ritme_trot: r.ritme, maf_pace: r.maf,
-      pct_corrent: r.pct, rpe: r.rpe, notes: r.notes
-    })),
-    gym: gym.map(g => ({
-      data: g.date, tipus: g.tipus, rpe: g.rpe,
-      exercicis: g.exercicis ? g.exercicis.map(e => ({
-        nom: e.name,
-        series: e.series.filter(s => s.kg).map((s,i) => `S${i+1}: ${s.kg}kg×${s.reps}`)
-      })) : []
-    })),
-    bici: bici.map(b => ({
-      data: b.date, tipus: b.biciType, dur_min: b.dur,
-      fc_mig: b.fcmig, fc_max: b.fcmax, cadencia: b.cad,
-      km: b.km, desnivell: b.desn, zona: b.zona, rpe: b.rpe
-    })),
-    pes_mesures: pesos.map(p => ({
-      data: p.date, pes: p.pes, grasa: p.grasa,
-      muscular: p.musc, cintura: p.cin, abdomen: p.abd,
-      maluc: p.mal, cuixa: p.cui
-    })),
-    dies_fet: Object.keys(done).filter(k => done[k])
+  const partida=99.2;
+  const lastPes=pesos.length?pesos[pesos.length-1].pes:partida;
+  const exportObj={
+    exportat:new Date().toISOString().slice(0,10),
+    resum:{sessions_fetes:totalFetes,sessions_previstes:totalPrev,adherencia_pct:totalPrev>0?Math.round(totalFetes/totalPrev*100):0,pes_partida_kg:partida,pes_actual_kg:lastPes,pes_perdut_kg:parseFloat((partida-lastPes).toFixed(1))},
+    runs:runs.map(r=>({data:r.date,sessio:r.tipus,km:r.km,km_corrent:r.kmrun,km_caminant:r.kmwalk,fc_mig:r.fcmig,fc_max:r.fcmax,ritme_trot:r.ritme,maf_pace:r.maf,pct_corrent:r.pct,rpe:r.rpe,notes:r.notes})),
+    gym:gym.map(g=>({data:g.date,tipus:g.tipus,rpe:g.rpe,exercicis:g.exercicis?g.exercicis.map(e=>({nom:e.name,series:e.series.filter(s=>s.kg).map((s,i)=>`S${i+1}: ${s.kg}kg×${s.reps}`)})):[]})),
+    bici:bici.map(b=>({data:b.date,tipus:b.biciType||'spinning',dur_min:b.dur,fc_mig:b.fcmig,fc_max:b.fcmax,cadencia:b.cad,km:b.km,desnivell:b.desn,zona:b.zona,rpe:b.rpe})),
+    pes_mesures:pesos.map(p=>({data:p.date,pes:p.pes,grasa:p.grasa,muscular:p.musc,cintura:p.cin,abdomen:p.abd,maluc:p.mal,cuixa:p.cui})),
+    reprogramades:S.getArr('reprogram_list'),
+    dies_fet:Object.keys(done).filter(k=>done[k])
   };
-
-  const json = JSON.stringify(exportObj, null, 2);
-  document.getElementById('export-text').value = json;
-  document.getElementById('export-box').style.display = 'block';
+  document.getElementById('export-text').value=JSON.stringify(exportObj,null,2);
+  document.getElementById('export-box').style.display='block';
 }
 
 function copyExport(){
-  const t = document.getElementById('export-text');
+  const t=document.getElementById('export-text');
   t.select();
-  try{ navigator.clipboard.writeText(t.value).then(()=>showToast('Copiat!')); }
-  catch{ document.execCommand('copy'); showToast('Copiat!'); }
+  try{navigator.clipboard.writeText(t.value).then(()=>showToast('Copiat!'));}
+  catch{document.execCommand('copy');showToast('Copiat!');}
 }
 
-// ════════════════════════════════════════════════
+// ══════════════════════════════════════════
 // INIT
-// ════════════════════════════════════════════════
+// ══════════════════════════════════════════
 function init(){
+  seedData();
   updateHeader();
-  // Set today's date as default for pes form
   document.getElementById('p-data').value=today();
-  // Find which week we're in
   const td=today();
   for(let i=0;i<WEEK_DATA.length;i++){
-    const days=WEEK_DATA[i].days;
-    if(days.some(d=>d.date>=td)){
-      currentWeek=i;
-      break;
-    }
+    if(WEEK_DATA[i].days.some(d=>d.date>=td)){currentWeek=i;break;}
   }
   renderCal();
 }
@@ -1291,4 +1244,3 @@ init();
 </script>
 </body>
 </html>
-HTMLEOF
