@@ -50,6 +50,8 @@ body{font-family:'DM Sans',sans-serif;background:var(--bg);color:var(--t);max-wi
 .bdg-mob{background:rgba(180,100,220,.2);color:#d4a0f0}
 .chk{width:30px;height:30px;border-radius:50%;border:1.5px solid var(--bdr2);background:none;cursor:pointer;color:var(--t2);font-size:14px;display:flex;align-items:center;justify-content:center;transition:all .2s;flex-shrink:0}
 .chk.on{background:var(--g);border-color:var(--g);color:#fff}
+.chk.skipped{background:var(--r);border-color:var(--r);color:#fff}
+.chk.reprog{background:none;border-color:var(--a);color:var(--a);font-size:18px;font-weight:600}
 .sgrid{display:grid;grid-template-columns:1fr 1fr;gap:8px;margin-bottom:10px}
 .sgrid3{display:grid;grid-template-columns:1fr 1fr 1fr;gap:8px;margin-bottom:10px}
 .sc{background:var(--bg3);border-radius:var(--radsm);padding:11px 12px}
@@ -639,16 +641,17 @@ function buildDayCard(day, date, isToday){
     if(metrics.rpe) items.push(`<div class="cal-metric">RPE <span>${metrics.rpe}</span></div>`);
     if(items.length) metaHtml=`<div class="cal-day-meta">${items.join('')}</div>`;
   }
-  const statusTag = isSkipped?`<span class="reprogram-tag" style="background:rgba(226,75,74,.15);color:#f09595">no feta</span>`:isReprogram?`<span class="reprogram-tag">moguda</span>`:'';
+  const chkStyle = isDone ? 'on' : isSkipped ? 'skipped' : isReprogram ? 'reprog' : '';
+  const chkContent = isDone ? '✓' : isSkipped ? '✗' : isReprogram ? '–' : '';
   return `<div class="cal-day${isToday?' today':''}">
     <div class="cal-day-hdr" onclick="openDay('${date}','${day.tipus}')">
       <div>
-        <div class="cal-day-date">${fmtDate(date)}${isToday?' · Avui':''}${statusTag}</div>
+        <div class="cal-day-date">${fmtDate(date)}${isToday?' · Avui':''}</div>
         <div class="cal-day-name">${day.nom}</div>
       </div>
       <div style="display:flex;align-items:center;gap:6px">
         <span class="bdg ${badgeClass(day.tipus)}">${day.tipus}</span>
-        <button class="chk${isDone?' on':isSkipped?' on':''}${isSkipped?' style=background:var(--r);border-color:var(--r)':''}" onclick="event.stopPropagation();toggleDone('${date}','${day.tipus}',this)">${isDone?'✓':isSkipped?'✗':''}</button>
+        <button class="chk ${chkStyle}" onclick="event.stopPropagation();toggleDone('${date}','${day.tipus}',this)">${chkContent}</button>
       </div>
     </div>
     <div class="cal-day-body">
@@ -729,26 +732,54 @@ function renderCal(){
     if(injForDay.length){
       injHtml=injForDay.map(inj=>{
         const injDone=done[day.date+'_'+inj.tipus+'_inj_'+inj.origDate]||false;
-        return `<div style="background:rgba(239,159,39,.08);border:1px solid rgba(239,159,39,.2);border-radius:8px;padding:9px 11px;margin-top:8px">
-          <div style="font-size:10px;color:#fac775;margin-bottom:4px">Reprogramada de ${fmtDate(inj.origDate)}</div>
-          <div style="display:flex;justify-content:space-between;align-items:center">
+        const injSkipped=skipped[day.date+'_'+inj.tipus+'_inj_'+inj.origDate]||false;
+        const injChkClass=injDone?'on':injSkipped?'skipped':'';
+        const injChkContent=injDone?'✓':injSkipped?'✗':'';
+        return `<div class="cal-day" style="border-color:rgba(239,159,39,.35);margin-top:8px">
+          <div class="cal-day-hdr" onclick="openDay('${day.date}','${inj.tipus}')">
             <div>
-              <div style="font-size:13px;font-weight:500;color:var(--t)">${inj.nom}</div>
+              <div class="cal-day-date" style="color:#fac775">Reprogramada · ${fmtDate(inj.origDate)}</div>
+              <div class="cal-day-name">${inj.nom}</div>
             </div>
-            <button class="chk${injDone?' on':''}" onclick="event.stopPropagation();toggleInjDone('${day.date}','${inj.tipus}','${inj.origDate}',this)">${injDone?'✓':''}</button>
+            <div style="display:flex;align-items:center;gap:6px">
+              <span class="bdg bdg-bici">${inj.tipus}</span>
+              <button class="chk ${injChkClass}" onclick="event.stopPropagation();toggleInjDone('${day.date}','${inj.tipus}','${inj.origDate}',this)">${injChkContent}</button>
+            </div>
           </div>
         </div>`;
       }).join('');
     }
 
-    return buildDayCard(day, day.date, isToday) + (injHtml ? injHtml.replace('<div style="background', `<div style="margin-top:-6px;padding:0 0 8px"><div style="background`) + '</div>' : '');
+    return buildDayCard(day, day.date, isToday) + injHtml;
   }).join('');
 
   // Also show injected sessions for days NOT in this week
   const weekDates=new Set(wk.days.map(d=>d.date));
   const extraInj=injected.filter(s=>weekDates.has(s.targetDate)===false&&WEEK_DATA[currentWeek].days.some(d=>d.date===s.targetDate)===false);
 
-  list.innerHTML=cards;
+  // Show injected sessions targeting dates IN this week but not matched to existing days
+  const weekDates = new Set(wk.days.map(d=>d.date));
+  const orphanInj = injected.filter(s => weekDates.has(s.targetDate) && !wk.days.some(d=>d.date===s.targetDate));
+  let orphanCards = '';
+  orphanInj.forEach(inj => {
+    const injDone=done[inj.targetDate+'_'+inj.tipus+'_inj_'+inj.origDate]||false;
+    const injSkipped=skipped[inj.targetDate+'_'+inj.tipus+'_inj_'+inj.origDate]||false;
+    const injChkClass=injDone?'on':injSkipped?'skipped':'';
+    const injChkContent=injDone?'✓':injSkipped?'✗':'';
+    orphanCards += `<div class="cal-day" style="border-color:rgba(239,159,39,.35)">
+      <div class="cal-day-hdr" onclick="openDay('${inj.targetDate}','${inj.tipus}')">
+        <div>
+          <div class="cal-day-date" style="color:#fac775">${fmtDate(inj.targetDate)} · Reprogramada</div>
+          <div class="cal-day-name">${inj.nom}</div>
+        </div>
+        <div style="display:flex;align-items:center;gap:6px">
+          <span class="bdg bdg-bici">${inj.tipus}</span>
+          <button class="chk ${injChkClass}" onclick="event.stopPropagation();toggleInjDone('${inj.targetDate}','${inj.tipus}','${inj.origDate}',this)">${injChkContent}</button>
+        </div>
+      </div>
+    </div>`;
+  });
+  list.innerHTML = cards + orphanCards;
 }
 
 function getMetricsSummary(date,tipus_arr){
