@@ -49,9 +49,9 @@ body{font-family:'DM Sans',sans-serif;background:var(--bg);color:var(--t);max-wi
 .bdg-rest{background:rgba(255,255,255,.06);color:var(--t2)}
 .bdg-mob{background:rgba(180,100,220,.2);color:#d4a0f0}
 .chk{width:30px;height:30px;border-radius:50%;border:1.5px solid var(--bdr2);background:none;cursor:pointer;color:var(--t2);font-size:14px;display:flex;align-items:center;justify-content:center;transition:all .2s;flex-shrink:0}
-.chk.on{background:var(--g);border-color:var(--g);color:#fff}
-.chk.skipped{background:var(--r);border-color:var(--r);color:#fff}
-.chk.reprog{background:none;border-color:var(--a);color:var(--a);font-size:18px;font-weight:600}
+.chk.on{background:var(--g) !important;border-color:var(--g) !important;color:#fff !important}
+.chk.skipped{background:var(--r) !important;border-color:var(--r) !important;color:#fff !important}
+.chk.reprog{background:rgba(239,159,39,.15) !important;border-color:var(--a) !important;color:var(--a) !important;font-size:20px !important;font-weight:700 !important;line-height:1}
 .sgrid{display:grid;grid-template-columns:1fr 1fr;gap:8px;margin-bottom:10px}
 .sgrid3{display:grid;grid-template-columns:1fr 1fr 1fr;gap:8px;margin-bottom:10px}
 .sc{background:var(--bg3);border-radius:var(--radsm);padding:11px 12px}
@@ -116,7 +116,9 @@ body{font-family:'DM Sans',sans-serif;background:var(--bg);color:var(--t);max-wi
 .week-nav-btn{background:none;border:none;color:var(--t2);font-size:18px;cursor:pointer;padding:0 6px;line-height:1}
 .week-nav-label{font-size:13px;font-weight:500;color:var(--t)}
 .cal-day{background:var(--card);border-radius:var(--rad);border:1px solid var(--bdr);margin-bottom:8px;overflow:hidden}
-.cal-day.today{border-color:rgba(29,158,117,.4)}
+.cal-day.today{border-color:rgba(29,158,117,.5);background:rgba(29,158,117,.06)}
+.cal-day.today-reprogram{border-color:rgba(239,159,39,.5);background:rgba(239,159,39,.05)}
+.cal-day.today .cal-day-date{color:#5dcaa5 !important}
 .cal-day-hdr{padding:11px 14px;display:flex;justify-content:space-between;align-items:center;cursor:pointer}
 .cal-day-date{font-size:11px;color:var(--t3)}
 .cal-day-name{font-size:14px;font-weight:500;color:var(--t);margin-top:1px}
@@ -580,6 +582,19 @@ function seedData(){
   S.set('seeded_v2',true);
 }
 
+function migrateData(){
+  // Clean old "moguda" reprogram tags from reprogram storage
+  const reprogram = S.get('reprogram') || {};
+  // Remove any old string values that were just labels
+  let changed = false;
+  Object.keys(reprogram).forEach(k => {
+    if(reprogram[k] === 'moguda' || reprogram[k] === true || reprogram[k] === false) {
+      delete reprogram[k]; changed = true;
+    }
+  });
+  if(changed) S.set('reprogram', reprogram);
+}
+
 // ══════════════════════════════════════════
 // STATE
 // ══════════════════════════════════════════
@@ -643,7 +658,8 @@ function buildDayCard(day, date, isToday){
   }
   const chkStyle = isDone ? 'on' : isSkipped ? 'skipped' : isReprogram ? 'reprog' : '';
   const chkContent = isDone ? '✓' : isSkipped ? '✗' : isReprogram ? '–' : '';
-  return `<div class="cal-day${isToday?' today':''}">
+  const dayClass = isToday ? (isReprogram ? 'today-reprogram' : 'today') : '';
+  return `<div class="cal-day ${dayClass}">
     <div class="cal-day-hdr" onclick="openDay('${date}','${day.tipus}')">
       <div>
         <div class="cal-day-date">${fmtDate(date)}${isToday?' · Avui':''}</div>
@@ -735,7 +751,8 @@ function renderCal(){
         const injSkipped=skipped[day.date+'_'+inj.tipus+'_inj_'+inj.origDate]||false;
         const injChkClass=injDone?'on':injSkipped?'skipped':'';
         const injChkContent=injDone?'✓':injSkipped?'✗':'';
-        return `<div class="cal-day" style="border-color:rgba(239,159,39,.35);margin-top:8px">
+        const injIsToday = day.date === td;
+        return `<div class="cal-day ${injIsToday?'today-reprogram':''}" style="border-color:rgba(239,159,39,.4);margin-top:8px">
           <div class="cal-day-hdr" onclick="openDay('${day.date}','${inj.tipus}')">
             <div>
               <div class="cal-day-date" style="color:#fac775">Reprogramada · ${fmtDate(inj.origDate)}</div>
@@ -766,7 +783,8 @@ function renderCal(){
     const injSkipped=skipped[inj.targetDate+'_'+inj.tipus+'_inj_'+inj.origDate]||false;
     const injChkClass=injDone?'on':injSkipped?'skipped':'';
     const injChkContent=injDone?'✓':injSkipped?'✗':'';
-    orphanCards += `<div class="cal-day" style="border-color:rgba(239,159,39,.35)">
+    const orphIsToday = inj.targetDate === td;
+    orphanCards += `<div class="cal-day ${orphIsToday?'today-reprogram':''}" style="border-color:rgba(239,159,39,.4)">
       <div class="cal-day-hdr" onclick="openDay('${inj.targetDate}','${inj.tipus}')">
         <div>
           <div class="cal-day-date" style="color:#fac775">${fmtDate(inj.targetDate)} · Reprogramada</div>
@@ -1369,6 +1387,7 @@ function toggleInjDone(date,tipus,origDate,btn){
 
 function init(){
   seedData();
+  migrateData();
   updateHeader();
   document.getElementById('p-data').value=today();
   const td=today();
