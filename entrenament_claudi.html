@@ -751,7 +751,7 @@ function renderCal(){
         const injSkipped=skipped[day.date+'_'+inj.tipus+'_inj_'+inj.origDate]||false;
         const injChkClass=injDone?'on':injSkipped?'skipped':'';
         const injChkContent=injDone?'✓':injSkipped?'✗':'';
-        const injIsToday = day.date === td;
+        const injIsToday = day.date === today();
         return `<div class="cal-day ${injIsToday?'today-reprogram':''}" style="border-color:rgba(239,159,39,.4);margin-top:8px">
           <div class="cal-day-hdr" onclick="openDay('${day.date}','${inj.tipus}')">
             <div>
@@ -771,19 +771,19 @@ function renderCal(){
   }).join('');
 
   // Also show injected sessions for days NOT in this week
-  const weekDates=new Set(wk.days.map(d=>d.date));
   const extraInj=injected.filter(s=>weekDates.has(s.targetDate)===false&&WEEK_DATA[currentWeek].days.some(d=>d.date===s.targetDate)===false);
 
   // Show injected sessions targeting dates IN this week but not matched to existing days
-  const weekDates = new Set(wk.days.map(d=>d.date));
-  const orphanInj = injected.filter(s => weekDates.has(s.targetDate) && !wk.days.some(d=>d.date===s.targetDate));
+  const weekDatesSet = new Set(wk.days.map(d=>d.date));
+  const orphanInj = injected.filter(s => weekDatesSet.has(s.targetDate) && !wk.days.some(d=>d.date===s.targetDate));
   let orphanCards = '';
+  const tdNow = today();
   orphanInj.forEach(inj => {
     const injDone=done[inj.targetDate+'_'+inj.tipus+'_inj_'+inj.origDate]||false;
     const injSkipped=skipped[inj.targetDate+'_'+inj.tipus+'_inj_'+inj.origDate]||false;
     const injChkClass=injDone?'on':injSkipped?'skipped':'';
     const injChkContent=injDone?'✓':injSkipped?'✗':'';
-    const orphIsToday = inj.targetDate === td;
+    const orphIsToday = inj.targetDate === tdNow;
     orphanCards += `<div class="cal-day ${orphIsToday?'today-reprogram':''}" style="border-color:rgba(239,159,39,.4)">
       <div class="cal-day-hdr" onclick="openDay('${inj.targetDate}','${inj.tipus}')">
         <div>
