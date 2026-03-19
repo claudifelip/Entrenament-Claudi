@@ -622,83 +622,133 @@ function goTab(i){
 // ══════════════════════════════════════════
 function changeWeek(dir){currentWeek=Math.max(0,Math.min(WEEK_DATA.length-1,currentWeek+dir));renderCal();}
 
+function buildDayCard(day, date, isToday){
+  const done=S.get('done')||{};
+  const reprogram=S.get('reprogram')||{};
+  const skipped=S.get('skipped')||{};
+  const isDone=done[date+'_'+day.tipus]||false;
+  const isSkipped=skipped[date+'_'+day.tipus]||false;
+  const isReprogram=reprogram[date+'_'+day.tipus];
+  const metrics=S.get('metrics_'+date+'_'+day.tipus)||{};
+  let metaHtml='';
+  if(isDone&&Object.keys(metrics).length){
+    const items=[];
+    if(metrics.km) items.push(`<div class="cal-metric">km <span>${metrics.km}</span></div>`);
+    if(metrics.fcmig) items.push(`<div class="cal-metric">FC <span>${metrics.fcmig}</span></div>`);
+    if(metrics.ritme) items.push(`<div class="cal-metric">ritme <span>${metrics.ritme}</span></div>`);
+    if(metrics.rpe) items.push(`<div class="cal-metric">RPE <span>${metrics.rpe}</span></div>`);
+    if(items.length) metaHtml=`<div class="cal-day-meta">${items.join('')}</div>`;
+  }
+  const statusTag = isSkipped?`<span class="reprogram-tag" style="background:rgba(226,75,74,.15);color:#f09595">no feta</span>`:isReprogram?`<span class="reprogram-tag">moguda</span>`:'';
+  return `<div class="cal-day${isToday?' today':''}">
+    <div class="cal-day-hdr" onclick="openDay('${date}','${day.tipus}')">
+      <div>
+        <div class="cal-day-date">${fmtDate(date)}${isToday?' · Avui':''}${statusTag}</div>
+        <div class="cal-day-name">${day.nom}</div>
+      </div>
+      <div style="display:flex;align-items:center;gap:6px">
+        <span class="bdg ${badgeClass(day.tipus)}">${day.tipus}</span>
+        <button class="chk${isDone?' on':isSkipped?' on':''}${isSkipped?' style=background:var(--r);border-color:var(--r)':''}" onclick="event.stopPropagation();toggleDone('${date}','${day.tipus}',this)">${isDone?'✓':isSkipped?'✗':''}</button>
+      </div>
+    </div>
+    <div class="cal-day-body">
+      <div class="cal-day-detail">${day.detail}</div>
+      ${metaHtml}
+
+    </div>
+  </div>`;
+}
+
+function buildSubCard(sa, date, isToday){
+  const done=S.get('done')||{};
+  const reprogram=S.get('reprogram')||{};
+  const skipped=S.get('skipped')||{};
+  const isDone=done[date+'_'+sa.clau]||false;
+  const isSkipped=skipped[date+'_'+sa.clau]||false;
+  const isMoved=reprogram[date+'_'+sa.clau];
+  const statusTag=isMoved?` <span class="reprogram-tag">moguda</span>`:isSkipped?` <span class="reprogram-tag" style="background:rgba(226,75,74,.15);color:#f09595">no feta</span>`:'';
+  return `<div style="display:flex;justify-content:space-between;align-items:center;background:var(--bg3);border-radius:8px;padding:7px 11px">
+    <div style="flex:1">
+      <div style="font-size:12px;font-weight:500;color:var(--t)">${sa.nom}${statusTag}</div>
+      <div style="font-size:10px;color:var(--t3);margin-top:1px">${sa.detail}</div>
+
+    </div>
+    <button class="chk${isDone?' on':''}" style="${isSkipped?'background:var(--r);border-color:var(--r);color:#fff':''}" onclick="event.stopPropagation();toggleSubDone('${date}','${sa.clau}',this)">${isDone?'✓':isSkipped?'✗':''}</button>
+  </div>`;
+}
+
 function renderCal(){
   const wk=WEEK_DATA[currentWeek];
   document.getElementById('week-nav-label').textContent=wk.label;
   const done=S.get('done')||{};
   const reprogram=S.get('reprogram')||{};
+  const skipped=S.get('skipped')||{};
+  const injected=S.getArr('injected_sessions');
   const td=today();
   const list=document.getElementById('cal-list');
 
-  list.innerHTML=wk.days.map(day=>{
+  // Build day cards for this week
+  let cards = wk.days.map(day=>{
     const isToday=day.date===td;
     const isMulti=day.tipus==='MULTI';
 
     if(isMulti){
-      const subsDone=day.subActivitats.map(sa=>done[day.date+'_'+sa.clau]||false);
-      const allDone=subsDone.every(Boolean);
-      const someDone=subsDone.some(Boolean);
-      const metrics=getMetricsSummary(day.date,day.subActivitats.map(s=>s.clau));
+      // Filter out moved sub-activities, show remaining
+      const activeSubs=day.subActivitats.filter(sa=>!reprogram[day.date+'_'+sa.clau]);
+      const allSubs=day.subActivitats;
+      const subsDone=allSubs.map(sa=>done[day.date+'_'+sa.clau]||skipped[day.date+'_'+sa.clau]||reprogram[day.date+'_'+sa.clau]||false);
+      const doneCnt=allSubs.filter(sa=>done[day.date+'_'+sa.clau]).length;
+      const allHandled=subsDone.every(Boolean);
+      const metrics=getMetricsSummary(day.date,allSubs.map(s=>s.clau));
+      // Injected sessions for this date
+      const injForDay=injected.filter(s=>s.targetDate===day.date);
       return `<div class="cal-day${isToday?' today':''}">
-        <div class="cal-day-hdr" onclick="openMultiDay('${day.date}',${currentWeek},${wk.days.indexOf(day)})">
+        <div class="cal-day-hdr">
           <div>
             <div class="cal-day-date">${fmtDate(day.date)}${isToday?' · Avui':''}</div>
             <div class="cal-day-name">${day.nom}</div>
           </div>
-          <div style="display:flex;align-items:center;gap:6px">
-            <span class="bdg bdg-run">MULTI</span>
-            <div style="width:30px;height:30px;border-radius:50%;border:1.5px solid ${allDone?'var(--g)':someDone?'var(--a)':'var(--bdr2)'};background:${allDone?'var(--g)':someDone?'rgba(239,159,39,.2)':'none'};display:flex;align-items:center;justify-content:center;font-size:12px;color:${allDone?'#fff':someDone?'#fac775':'var(--t2)'}">
-              ${allDone?'✓':someDone?`${subsDone.filter(Boolean).length}/${subsDone.length}`:''}
-            </div>
-          </div>
+          <span class="bdg bdg-run">MULTI</span>
         </div>
         <div class="cal-day-body">
           <div style="display:flex;flex-direction:column;gap:5px;padding-top:9px">
-            ${day.subActivitats.map((sa,si)=>`
-              <div style="display:flex;justify-content:space-between;align-items:center;background:var(--bg3);border-radius:8px;padding:7px 11px">
-                <div>
-                  <div style="font-size:12px;font-weight:500;color:var(--t)">${sa.nom}</div>
-                  <div style="font-size:10px;color:var(--t3);margin-top:1px">${sa.detail}</div>
-                </div>
-                <button class="chk${done[day.date+'_'+sa.clau]?' on':''}" onclick="event.stopPropagation();toggleSubDone('${day.date}','${sa.clau}',${si},this)">${done[day.date+'_'+sa.clau]?'✓':''}</button>
-              </div>`).join('')}
+            ${allSubs.map(sa=>buildSubCard(sa,day.date,isToday)).join('')}
+            ${injForDay.map(inj=>`<div style="background:rgba(239,159,39,.08);border:1px solid rgba(239,159,39,.2);border-radius:8px;padding:7px 11px">
+              <div style="font-size:10px;color:#fac775;margin-bottom:3px">Reprogramada de ${fmtDate(inj.origDate)}</div>
+              ${buildSubCard({clau:inj.tipus,nom:inj.nom,detail:inj.detail||''},day.date,isToday)}
+            </div>`).join('')}
           </div>
           ${metrics?`<div class="cal-day-meta" style="margin-top:8px">${metrics}</div>`:''}
         </div>
       </div>`;
     }
 
-    const isDone=done[day.date+'_'+day.tipus]||false;
-    const isReprogram=reprogram[day.date+'_'+day.tipus];
-    const metrics=S.get('metrics_'+day.date+'_'+day.tipus)||{};
-    let metaHtml='';
-    if(isDone&&Object.keys(metrics).length){
-      const items=[];
-      if(metrics.km) items.push(`<div class="cal-metric">km <span>${metrics.km}</span></div>`);
-      if(metrics.fcmig) items.push(`<div class="cal-metric">FC <span>${metrics.fcmig}</span></div>`);
-      if(metrics.ritme) items.push(`<div class="cal-metric">ritme <span>${metrics.ritme}</span></div>`);
-      if(metrics.rpe) items.push(`<div class="cal-metric">RPE <span>${metrics.rpe}</span></div>`);
-      if(items.length) metaHtml=`<div class="cal-day-meta">${items.join('')}</div>`;
+    // Check injected sessions for this date
+    const injForDay=injected.filter(s=>s.targetDate===day.date);
+    let injHtml='';
+    if(injForDay.length){
+      injHtml=injForDay.map(inj=>{
+        const injDone=done[day.date+'_'+inj.tipus+'_inj_'+inj.origDate]||false;
+        return `<div style="background:rgba(239,159,39,.08);border:1px solid rgba(239,159,39,.2);border-radius:8px;padding:9px 11px;margin-top:8px">
+          <div style="font-size:10px;color:#fac775;margin-bottom:4px">Reprogramada de ${fmtDate(inj.origDate)}</div>
+          <div style="display:flex;justify-content:space-between;align-items:center">
+            <div>
+              <div style="font-size:13px;font-weight:500;color:var(--t)">${inj.nom}</div>
+            </div>
+            <button class="chk${injDone?' on':''}" onclick="event.stopPropagation();toggleInjDone('${day.date}','${inj.tipus}','${inj.origDate}',this)">${injDone?'✓':''}</button>
+          </div>
+        </div>`;
+      }).join('');
     }
 
-    return `<div class="cal-day${isToday?' today':''}">
-      <div class="cal-day-hdr" onclick="openDay('${day.date}','${day.tipus}')">
-        <div>
-          <div class="cal-day-date">${fmtDate(day.date)}${isToday?' · Avui':''}${isReprogram?`<span class="reprogram-tag">reprogramada</span>`:''}</div>
-          <div class="cal-day-name">${day.nom}</div>
-        </div>
-        <div style="display:flex;align-items:center;gap:6px">
-          <span class="bdg ${badgeClass(day.tipus)}">${day.tipus}</span>
-          <button class="chk${isDone?' on':''}" onclick="event.stopPropagation();toggleDone('${day.date}','${day.tipus}',this)">${isDone?'✓':''}</button>
-        </div>
-      </div>
-      <div class="cal-day-body">
-        <div class="cal-day-detail">${day.detail}</div>
-        ${metaHtml}
-        ${!isDone&&day.tipus!=='DESCANS'?`<button class="reprogram-btn" onclick="event.stopPropagation();openReprogramModal('${day.date}','${day.tipus}','${encodeURIComponent(day.nom)}')">Reprogramar sessió</button>`:''}
-      </div>
-    </div>`;
+    return buildDayCard(day, day.date, isToday) + (injHtml ? injHtml.replace('<div style="background', `<div style="margin-top:-6px;padding:0 0 8px"><div style="background`) + '</div>' : '');
   }).join('');
+
+  // Also show injected sessions for days NOT in this week
+  const weekDates=new Set(wk.days.map(d=>d.date));
+  const extraInj=injected.filter(s=>weekDates.has(s.targetDate)===false&&WEEK_DATA[currentWeek].days.some(d=>d.date===s.targetDate)===false);
+
+  list.innerHTML=cards;
 }
 
 function getMetricsSummary(date,tipus_arr){
@@ -726,7 +776,7 @@ function toggleDone(date,tipus,btn){
   }
 }
 
-function toggleSubDone(date,tipus,idx,btn){
+function toggleSubDone(date,tipus,btn){
   const key=date+'_'+tipus;
   const done=S.get('done')||{};
   if(!done[key]){
@@ -762,8 +812,9 @@ function openReprogramModal(date,tipus,nomEnc){
       <label class="fl">Nova data</label>
       <input class="fi" type="date" id="reprogram-date" value="${existing||''}">
     </div>
-    <div style="font-size:11px;color:var(--t3);margin-bottom:12px;line-height:1.6">La sessió es marcarà com a "reprogramada" al calendari original i apareixerà com a nota a la nova data.</div>
-    <button class="btn" onclick="saveReprogram('${date}','${tipus}','${nomEnc}')">Confirmar reprogramació</button>
+    <div style="font-size:11px;color:var(--t3);margin-bottom:14px;line-height:1.6">La sessió es mourà a la nova data. Si aquell dia ja té sessions, s'afegirà com a activitat addicional.</div>
+    <button class="btn" onclick="saveReprogram('${date}','${tipus}','${nomEnc}')">Moure a nova data</button>
+    <button class="btn btn-warn" onclick="markNotDone('${date}','${tipus}')">No faré aquesta sessió</button>
     <button class="btn btn-sec" onclick="closeModal()">Cancel·lar</button>`;
   document.getElementById('modal').style.display='flex';
 }
@@ -771,17 +822,34 @@ function openReprogramModal(date,tipus,nomEnc){
 function saveReprogram(date,tipus,nomEnc){
   const novaData=v('reprogram-date');
   if(!novaData){showToast('Tria una data');return;}
+  const nom=decodeURIComponent(nomEnc);
+  // Store reprogram mapping
   const reprogram=S.get('reprogram')||{};
   reprogram[date+'_'+tipus]=novaData;
   S.set('reprogram',reprogram);
+  // Add to reprogram_list for export
   const reprogramList=S.getArr('reprogram_list');
-  const nom=decodeURIComponent(nomEnc);
   const existing=reprogramList.findIndex(r=>r.origDate===date&&r.tipus===tipus);
   const entry={origDate:date,tipus,nom,novaData};
   if(existing>=0) reprogramList[existing]=entry; else reprogramList.push(entry);
   S.set('reprogram_list',reprogramList);
+  // Add injected session to target date
+  const injected=S.getArr('injected_sessions');
+  const already=injected.findIndex(s=>s.origDate===date&&s.tipus===tipus);
+  const inj={origDate:date,tipus,nom,targetDate:novaData,detail:nom};
+  if(already>=0) injected[already]=inj; else injected.push(inj);
+  S.set('injected_sessions',injected);
   closeModal();
-  showToast(`Sessió reprogramada per al ${fmtDate(novaData)}`);
+  showToast('Sessió moguda al '+fmtDate(novaData));
+  renderCal();
+}
+
+function markNotDone(date,tipus){
+  const skipped=S.get('skipped')||{};
+  skipped[date+'_'+tipus]=true;
+  S.set('skipped',skipped);
+  closeModal();
+  showToast('Sessió marcada com a no feta');
   renderCal();
 }
 
@@ -836,7 +904,12 @@ function openRegisterModal(date,tipus,subTipus){
       <div class="fg"><label class="fl">RPE (1–10)</label><input class="fi" id="m-rpe" type="number" min="1" max="10" placeholder="5" value="${saved.rpe||''}"></div>
     </div>
     <div class="fg"><label class="fl">Notes</label><input class="fi" id="m-notes" placeholder="Sensacions, FC s'ha disparat?" value="${saved.notes||''}"></div>
-    <button class="btn" onclick="saveRun('${date}','${subTipus}')">Guardar run</button>`;
+    <button class="btn" onclick="saveRun('${date}','${subTipus}')">Guardar run</button>
+    ${!saved.savedAt?`<div style="margin-top:16px;border-top:1px solid var(--bdr);padding-top:12px">
+      <div style="font-size:11px;color:var(--t3);margin-bottom:8px">No has pogut fer la sessió?</div>
+      <button class="btn btn-warn" onclick="openReprogramModal('${date}','${subTipus}','${encodeURIComponent(nom)}')">Reprogramar a un altre dia</button>
+      <button class="btn btn-sec" style="color:var(--r);border-color:rgba(226,75,74,.3)" onclick="markNotDone('${date}','${subTipus}')">No faré aquesta sessió</button>
+    </div>`:''}`;
 
   } else if(subTipus==='PUSH'||subTipus==='PULL'||subTipus==='CAMES'){
     const exList=subTipus==='PUSH'?GYM_PUSH:subTipus==='PULL'?GYM_PULL:GYM_CAMES;
@@ -877,7 +950,12 @@ function openRegisterModal(date,tipus,subTipus){
     }).join('')}
     <div class="fg" style="margin-top:10px"><label class="fl">RPE general (1–10)</label><input class="fi" id="m-rpe" type="number" min="1" max="10" placeholder="6" value="${saved.rpe||''}"></div>
     <div class="fg"><label class="fl">Notes</label><input class="fi" id="m-notes" placeholder="Sensacions, progressions..." value="${saved.notes||''}"></div>
-    <button class="btn" onclick="saveGym('${date}','${subTipus}',${exList.length})">Guardar sessió gym</button>`;
+    <button class="btn" onclick="saveGym('${date}','${subTipus}',${exList.length})">Guardar sessió gym</button>
+    ${!saved.savedAt?`<div style="margin-top:16px;border-top:1px solid var(--bdr);padding-top:12px">
+      <div style="font-size:11px;color:var(--t3);margin-bottom:8px">No has pogut fer la sessió?</div>
+      <button class="btn btn-warn" onclick="openReprogramModal('${date}','${subTipus}','${encodeURIComponent(nom)}')">Reprogramar a un altre dia</button>
+      <button class="btn btn-sec" style="color:var(--r);border-color:rgba(226,75,74,.3)" onclick="markNotDone('${date}','${subTipus}')">No faré aquesta sessió</button>
+    </div>`:''}`;
 
   } else if(subTipus==='BICI'){
     const wkDayFull=WEEK_DATA.flatMap(w=>w.days).find(d=>d.date===date&&(d.tipus==='BICI'||d.tipus==='MULTI'));
@@ -922,7 +1000,12 @@ function openRegisterModal(date,tipus,subTipus){
       <div class="fg"><label class="fl">RPE (1–10)</label><input class="fi" id="m-rpe" type="number" min="1" max="10" placeholder="4" value="${saved.rpe||''}"></div>
     </div>
     <div class="fg"><label class="fl">Notes</label><input class="fi" id="m-notes" placeholder="Sensacions, meteorologia..." value="${saved.notes||''}"></div>
-    <button class="btn" onclick="saveBici('${date}','${subTipus}')">Guardar sessió bici</button>`;
+    <button class="btn" onclick="saveBici('${date}','${subTipus}')">Guardar sessió bici</button>
+    ${!saved.savedAt?`<div style="margin-top:16px;border-top:1px solid var(--bdr);padding-top:12px">
+      <div style="font-size:11px;color:var(--t3);margin-bottom:8px">No has pogut fer la sessió?</div>
+      <button class="btn btn-warn" onclick="openReprogramModal('${date}','${subTipus}','${encodeURIComponent(nom)}')">Reprogramar a un altre dia</button>
+      <button class="btn btn-sec" style="color:var(--r);border-color:rgba(226,75,74,.3)" onclick="markNotDone('${date}','${subTipus}')">No faré aquesta sessió</button>
+    </div>`:''}`;
 
   } else if(subTipus==='DESCANS'||subTipus==='MOB'){
     html=`
@@ -932,7 +1015,12 @@ function openRegisterModal(date,tipus,subTipus){
     <div class="info-box info-box-green"><div class="info-box-title">Rutina de mobilitat (10–15 min)</div><div class="info-box-body">${MOB_ROUTINE}</div></div>
     <div style="font-size:11px;color:var(--t2);margin-bottom:12px;line-height:1.6">Fes-la sempre al final de l'entrenament o al matí. Especialment important per la protusió discal.</div>
     <div class="fg"><label class="fl">Notes</label><input class="fi" id="m-notes" placeholder="Com et trobes avui?" value="${saved.notes||''}"></div>
-    <button class="btn" onclick="saveGeneric('${date}','${subTipus}')">Marcar com a fet</button>`;
+    <button class="btn" onclick="saveGeneric('${date}','${subTipus}')">Marcar com a fet</button>
+    <div style="margin-top:16px;border-top:1px solid var(--bdr);padding-top:12px">
+      <div style="font-size:11px;color:var(--t3);margin-bottom:8px">No has pogut fer la sessió?</div>
+      <button class="btn btn-warn" onclick="openReprogramModal('${date}','${subTipus}','${encodeURIComponent(nom)}')">Reprogramar a un altre dia</button>
+      <button class="btn btn-sec" style="color:var(--r);border-color:rgba(226,75,74,.3)" onclick="markNotDone('${date}','${subTipus}')">No faré aquesta sessió</button>
+    </div>`;
 
   } else {
     html=`
@@ -941,7 +1029,12 @@ function openRegisterModal(date,tipus,subTipus){
     <div class="modal-sub">${fmtDate(date)}</div>
     ${wkDay?`<div class="info-box"><div class="info-box-title">Detall</div><div class="info-box-body">${wkDay.detail||''}</div></div>`:''}
     <div class="fg"><label class="fl">Notes</label><input class="fi" id="m-notes" placeholder="Notes..." value="${saved.notes||''}"></div>
-    <button class="btn" onclick="saveGeneric('${date}','${subTipus}')">Marcar com a fet</button>`;
+    <button class="btn" onclick="saveGeneric('${date}','${subTipus}')">Marcar com a fet</button>
+    <div style="margin-top:16px;border-top:1px solid var(--bdr);padding-top:12px">
+      <div style="font-size:11px;color:var(--t3);margin-bottom:8px">No has pogut fer la sessió?</div>
+      <button class="btn btn-warn" onclick="openReprogramModal('${date}','${subTipus}','${encodeURIComponent(nom)}')">Reprogramar a un altre dia</button>
+      <button class="btn btn-sec" style="color:var(--r);border-color:rgba(226,75,74,.3)" onclick="markNotDone('${date}','${subTipus}')">No faré aquesta sessió</button>
+    </div>`;
   }
 
   document.getElementById('modal-content').innerHTML=html;
@@ -1229,6 +1322,20 @@ function copyExport(){
 // ══════════════════════════════════════════
 // INIT
 // ══════════════════════════════════════════
+function toggleInjDone(date,tipus,origDate,btn){
+  const key=date+'_'+tipus+'_inj_'+origDate;
+  const done=S.get('done')||{};
+  if(!done[key]){
+    done[key]=true; S.set('done',done);
+    btn.classList.add('on'); btn.textContent='✓';
+    openRegisterModal(date,tipus,tipus);
+  } else {
+    done[key]=false; S.set('done',done);
+    btn.classList.remove('on'); btn.textContent='';
+    showToast('Desmarcada'); renderCal();
+  }
+}
+
 function init(){
   seedData();
   updateHeader();
