@@ -645,7 +645,7 @@ function buildDayCard(day, date, isToday){
   const skipped=S.get('skipped')||{};
   const isDone=done[date+'_'+day.tipus]||false;
   const isSkipped=skipped[date+'_'+day.tipus]||false;
-  const isReprogram=reprogram[date+'_'+day.tipus];
+  const isReprogram=reprogram[date+'_'+day.tipus] && typeof reprogram[date+'_'+day.tipus]==='string';
   const metrics=S.get('metrics_'+date+'_'+day.tipus)||{};
   let metaHtml='';
   if(isDone&&Object.keys(metrics).length){
@@ -656,7 +656,7 @@ function buildDayCard(day, date, isToday){
     if(metrics.rpe) items.push(`<div class="cal-metric">RPE <span>${metrics.rpe}</span></div>`);
     if(items.length) metaHtml=`<div class="cal-day-meta">${items.join('')}</div>`;
   }
-  const chkStyle = isDone ? 'on' : isSkipped ? 'skipped' : isReprogram ? 'reprog' : '';
+  const chkStyle = isDone ? 'chk on' : isSkipped ? 'chk skipped' : isReprogram ? 'chk reprog' : 'chk';
   const chkContent = isDone ? '✓' : isSkipped ? '✗' : isReprogram ? '–' : '';
   const dayClass = isToday ? (isReprogram ? 'today-reprogram' : 'today') : '';
   return `<div class="cal-day ${dayClass}">
@@ -667,7 +667,7 @@ function buildDayCard(day, date, isToday){
       </div>
       <div style="display:flex;align-items:center;gap:6px">
         <span class="bdg ${badgeClass(day.tipus)}">${day.tipus}</span>
-        <button class="chk ${chkStyle}" onclick="event.stopPropagation();toggleDone('${date}','${day.tipus}',this)">${chkContent}</button>
+        <button class="${chkStyle}" onclick="event.stopPropagation();toggleDone('${date}','${day.tipus}',this)">${chkContent}</button>
       </div>
     </div>
     <div class="cal-day-body">
@@ -813,13 +813,15 @@ function getMetricsSummary(date,tipus_arr){
 function toggleDone(date,tipus,btn){
   const key=date+'_'+tipus;
   const done=S.get('done')||{};
+  const skipped=S.get('skipped')||{};
   if(!done[key]){
     done[key]=true; S.set('done',done);
-    btn.classList.add('on'); btn.textContent='✓';
+    delete skipped[key]; S.set('skipped',skipped);
+    btn.className='chk on'; btn.textContent='✓';
     openDay(date,tipus);
   } else {
     done[key]=false; S.set('done',done);
-    btn.classList.remove('on'); btn.textContent='';
+    btn.className='chk'; btn.textContent='';
     showToast('Sessió desmarcada');
     renderCal();
   }
@@ -828,13 +830,15 @@ function toggleDone(date,tipus,btn){
 function toggleSubDone(date,tipus,btn){
   const key=date+'_'+tipus;
   const done=S.get('done')||{};
+  const skipped=S.get('skipped')||{};
   if(!done[key]){
     done[key]=true; S.set('done',done);
-    btn.classList.add('on'); btn.textContent='✓';
+    delete skipped[key]; S.set('skipped',skipped);
+    btn.className='chk on'; btn.textContent='✓';
     openRegisterModal(date,tipus,tipus);
   } else {
     done[key]=false; S.set('done',done);
-    btn.classList.remove('on'); btn.textContent='';
+    btn.className='chk'; btn.textContent='';
     showToast('Activitat desmarcada');
     renderCal();
   }
@@ -895,8 +899,11 @@ function saveReprogram(date,tipus,nomEnc){
 
 function markNotDone(date,tipus){
   const skipped=S.get('skipped')||{};
+  const done=S.get('done')||{};
   skipped[date+'_'+tipus]=true;
+  delete done[date+'_'+tipus];
   S.set('skipped',skipped);
+  S.set('done',done);
   closeModal();
   showToast('Sessió marcada com a no feta');
   renderCal();
