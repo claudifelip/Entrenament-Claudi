@@ -648,9 +648,13 @@ function renderCal(){
   // Add injected (reprogrammed) sessions to target dates
   inj.forEach(function(s){
     const t=s.targetDate;
-    if(!wk.days.some(function(d){return d.date===t;})) return;
-    if(!dateActs[t]) dateActs[t]=[];
-    dateActs[t].push({clau:s.tipus,nom:s.nom,detail:s.detail||s.nom,isInj:true,origDate:s.origDate});
+    // Show on target date if it falls in this week
+    if(wk.days.some(function(d){return d.date===t;})){
+      if(!dateActs[t]) dateActs[t]=[];
+      dateActs[t].push({clau:s.tipus,nom:s.nom,detail:s.detail||s.nom,isInj:true,origDate:s.origDate});
+    }
+    // Also mark original date: if origDate is in this week, show orange dash
+    // (handled by reprogram[date+'_'+tipus] check in the single-activity rendering)
   });
 
   const cards=wk.days.map(function(day){
@@ -670,7 +674,13 @@ function renderCal(){
         const isRepSub=!a.isInj && reprogram[day.date+'_'+a.clau] && typeof reprogram[day.date+'_'+a.clau]==='string';
         const cls=isDone?'chk on':isSkip?'chk chk-skip':isRepSub?'chk chk-rep':'chk';
         const txt=isDone?'&#10003;':isSkip?'&#10007;':isRepSub?'&ndash;':'';
-        const origDateStr=a.isInj&&a.origDate?a.origDate:'null';
+        const origDateStr=(function(){
+          if(!a.isInj||!a.origDate) return 'null';
+          window._injDates=window._injDates||[];
+          var idx=window._injDates.indexOf(a.origDate);
+          if(idx===-1){idx=window._injDates.length;window._injDates.push(a.origDate);}
+          return idx;
+        })();
         const injBadge=a.isInj?'<span style="font-size:9px;background:rgba(239,159,39,.2);color:#fac775;border-radius:99px;padding:2px 6px;margin-left:5px">de '+fmtDate(a.origDate)+'</span>'
           :isRepSub?'<span style="font-size:9px;background:rgba(239,159,39,.15);color:#fac775;border-radius:99px;padding:2px 6px;margin-left:5px">&rarr; '+fmtDate(reprogram[day.date+'_'+a.clau])+'</span>':'';
         return '<div style="display:flex;justify-content:space-between;align-items:center;background:var(--bg3);border-radius:8px;padding:8px 11px;border:1px solid '+(a.isInj?'rgba(239,159,39,.3)':'var(--bdr)')+';">'
@@ -733,6 +743,66 @@ function getMetricsSummary(date,tipus_arr){
 }
 
 
+
+function buildModalFooter(date,subTipus,nom,origDate){
+  if(origDate&&origDate!=='null'){
+    return '<div style="margin-top:14px;border-top:1px solid var(--bdr);padding-top:12px">'
+      +'<div style="font-size:11px;color:var(--t3);margin-bottom:8px">Sessio reprogramada:</div>'
+      +'<button class="btn btn-warn" onclick="desreprogram(\''+(date)+'\',\''+subTipus+'\',\''+origDate+'\')">Desreprogramar (torna al dia original)</button>'
+      +'<button class="btn btn-sec" style="margin-top:6px;color:var(--r);border-color:rgba(226,75,74,.3)" onclick="markNotDoneInj(\''+(date)+'\',\''+subTipus+'\',\''+origDate+'\')">No fare (elimina del dia)</button>'
+      +'</div>';
+  }
+  return '<div style="margin-top:14px;border-top:1px solid var(--bdr);padding-top:12px">'
+    +'<div style="font-size:11px;color:var(--t3);margin-bottom:8px">No has pogut fer la sessio?</div>'
+    +'<button class="btn btn-warn" onclick="openReprogramModal(\''+(date)+'\',\''+subTipus+'\',\''+encodeURIComponent(nom)+'\')">Reprogramar a un altre dia</button>'
+    +'<button class="btn btn-sec" style="margin-top:6px;color:var(--r);border-color:rgba(226,75,74,.3)" onclick="markNotDone(\''+(date)+'\',\''+subTipus+'\')">No fare aquesta sessio</button>'
+    +'</div>';
+}
+
+function desreprogram(targetDate,tipus,origDate){
+  if(!origDate||origDate==='null'){closeModal();return;}
+  var inj=S.getArr('inj');
+  inj=inj.filter(function(s){return !(s.origDate===origDate&&s.tipus===tipus);});
+  S.set('inj',inj);
+  var reprogram=S.get('reprogram')||{};
+  delete reprogram[origDate+'_'+tipus];
+  S.set('reprogram',reprogram);
+  // Navigate to the week containing the original date
+  for(var i=0;i<WEEK_DATA.length;i++){
+    if(WEEK_DATA[i].days.some(function(d){return d.date===origDate;})){
+      currentWeek=i; break;
+    }
+  }
+  closeModal();
+  showToast('Sessio retornada al dia original');
+  renderCal();
+}
+
+function markNotDoneInj(targetDate,tipus,origDate){
+  if(!origDate||origDate==='null'){closeModal();return;}
+  var inj=S.getArr('inj');
+  inj=inj.filter(function(s){return !(s.origDate===origDate&&s.tipus===tipus);});
+  S.set('inj',inj);
+  var reprogram=S.get('reprogram')||{};
+  delete reprogram[origDate+'_'+tipus];
+  S.set('reprogram',reprogram);
+  var sk=S.get('sk')||{};
+  var done=S.get('done')||{};
+  sk[origDate+'_'+tipus]=true;
+  delete done[origDate+'_'+tipus];
+  S.set('sk',sk);
+  S.set('done',done);
+  // Navigate to the week containing the original date so user sees the red X
+  for(var i=0;i<WEEK_DATA.length;i++){
+    if(WEEK_DATA[i].days.some(function(d){return d.date===origDate;})){
+      currentWeek=i; break;
+    }
+  }
+  closeModal();
+  showToast('Sessio marcada com a no feta');
+  renderCal();
+}
+
 function markNotDone(date,tipus){
   var sk=S.get('sk')||{};
   var done=S.get('done')||{};
@@ -746,11 +816,19 @@ function markNotDone(date,tipus){
 }
 
 
-function openAct(date,tipus,origDate){
-  openRegisterModal(date,tipus,tipus);
+function getOrigDate(idx){
+  if(idx===null||idx===undefined||idx==='null') return null;
+  if(window._injDates&&window._injDates[idx]!==undefined) return window._injDates[idx];
+  return null;
 }
 
-function toggleAct(date,tipus,origDate,btn){
+function openAct(date,tipus,origDateOrKey){
+  var origDate=getOrigDate(origDateOrKey);
+  openRegisterModal(date,tipus,tipus,origDate);
+}
+
+function toggleAct(date,tipus,origDateOrKey,btn){
+  var origDate=getOrigDate(origDateOrKey);
   var key=date+'_'+tipus+(origDate&&origDate!=='null'?'_'+origDate:'');
   var done=S.get('done')||{};
   var sk=S.get('sk')||{};
@@ -842,7 +920,8 @@ function saveReprogram(date,tipus,nomEnc){
 }
 
 
-function openRegisterModal(date,tipus,subTipus){
+function openRegisterModal(date,tipus,subTipus,origDate){
+  origDate=(origDate&&origDate!=='null')?origDate:null;
   const wkDay=WEEK_DATA.flatMap(w=>w.days).find(d=>d.date===date&&(d.tipus===tipus||d.tipus==='MULTI'));
   const saved=S.get('metrics_'+date+'_'+subTipus)||{};
   let nom='';
@@ -891,7 +970,7 @@ function openRegisterModal(date,tipus,subTipus){
     </div>
     <div class="fg"><label class="fl">Notes</label><input class="fi" id="m-notes" placeholder="Sensacions, FC s'ha disparat?" value="${saved.notes||''}"></div>
     <button class="btn" onclick="saveRun('${date}','${subTipus}')">Guardar run</button>
-    <div style="margin-top:14px;border-top:1px solid var(--bdr);padding-top:12px"><div style="font-size:11px;color:var(--t3);margin-bottom:8px">No has pogut fer la sessió?</div><button class="btn btn-warn" onclick="openReprogramModal('${date}','${subTipus}','${encodeURIComponent(nom)}')">Reprogramar</button><button class="btn btn-sec" style="margin-top:6px;color:var(--r);border-color:rgba(226,75,74,.3)" onclick="markNotDone('${date}','${subTipus}')">No faré aquesta sessió</button></div>`;
+    ${buildModalFooter(date,subTipus,nom,origDate)}`;
 
   } else if(subTipus==='PUSH'||subTipus==='PULL'||subTipus==='CAMES'){
     const exList=subTipus==='PUSH'?GYM_PUSH:subTipus==='PULL'?GYM_PULL:GYM_CAMES;
@@ -933,7 +1012,7 @@ function openRegisterModal(date,tipus,subTipus){
     <div class="fg" style="margin-top:10px"><label class="fl">RPE general (1–10)</label><input class="fi" id="m-rpe" type="number" min="1" max="10" placeholder="6" value="${saved.rpe||''}"></div>
     <div class="fg"><label class="fl">Notes</label><input class="fi" id="m-notes" placeholder="Sensacions, progressions..." value="${saved.notes||''}"></div>
     <button class="btn" onclick="saveGym('${date}','${subTipus}',${exList.length})">Guardar sessió gym</button>
-    <div style="margin-top:14px;border-top:1px solid var(--bdr);padding-top:12px"><div style="font-size:11px;color:var(--t3);margin-bottom:8px">No has pogut fer la sessió?</div><button class="btn btn-warn" onclick="openReprogramModal('${date}','${subTipus}','${encodeURIComponent(nom)}')">Reprogramar</button><button class="btn btn-sec" style="margin-top:6px;color:var(--r);border-color:rgba(226,75,74,.3)" onclick="markNotDone('${date}','${subTipus}')">No faré aquesta sessió</button></div>`;
+    ${buildModalFooter(date,subTipus,nom,origDate)}`;
 
   } else if(subTipus==='BICI'){
     const wkDayFull=WEEK_DATA.flatMap(w=>w.days).find(d=>d.date===date&&(d.tipus==='BICI'||d.tipus==='MULTI'));
@@ -979,7 +1058,7 @@ function openRegisterModal(date,tipus,subTipus){
     </div>
     <div class="fg"><label class="fl">Notes</label><input class="fi" id="m-notes" placeholder="Sensacions, meteorologia..." value="${saved.notes||''}"></div>
     <button class="btn" onclick="saveBici('${date}','${subTipus}')">Guardar sessió bici</button>
-    <div style="margin-top:14px;border-top:1px solid var(--bdr);padding-top:12px"><div style="font-size:11px;color:var(--t3);margin-bottom:8px">No has pogut fer la sessió?</div><button class="btn btn-warn" onclick="openReprogramModal('${date}','${subTipus}','${encodeURIComponent(nom)}')">Reprogramar</button><button class="btn btn-sec" style="margin-top:6px;color:var(--r);border-color:rgba(226,75,74,.3)" onclick="markNotDone('${date}','${subTipus}')">No faré aquesta sessió</button></div>`;
+    ${buildModalFooter(date,subTipus,nom,origDate)}`;
 
   } else if(subTipus==='DESCANS'||subTipus==='MOB'){
     html=`
@@ -990,7 +1069,7 @@ function openRegisterModal(date,tipus,subTipus){
     <div style="font-size:11px;color:var(--t2);margin-bottom:12px;line-height:1.6">Fes-la sempre al final de l'entrenament o al matí. Especialment important per la protusió discal.</div>
     <div class="fg"><label class="fl">Notes</label><input class="fi" id="m-notes" placeholder="Com et trobes avui?" value="${saved.notes||''}"></div>
     <button class="btn" onclick="saveGeneric('${date}','${subTipus}')">Marcar com a fet</button>
-    <div style="margin-top:14px;border-top:1px solid var(--bdr);padding-top:12px"><div style="font-size:11px;color:var(--t3);margin-bottom:8px">No has pogut fer la sessió?</div><button class="btn btn-warn" onclick="openReprogramModal('${date}','${subTipus}','${encodeURIComponent(nom)}')">Reprogramar</button><button class="btn btn-sec" style="margin-top:6px;color:var(--r);border-color:rgba(226,75,74,.3)" onclick="markNotDone('${date}','${subTipus}')">No faré aquesta sessió</button></div>`;
+    ${buildModalFooter(date,subTipus,nom,origDate)}`;
 
   } else {
     html=`
@@ -1000,7 +1079,7 @@ function openRegisterModal(date,tipus,subTipus){
     ${wkDay?`<div class="info-box"><div class="info-box-title">Detall</div><div class="info-box-body">${wkDay.detail||''}</div></div>`:''}
     <div class="fg"><label class="fl">Notes</label><input class="fi" id="m-notes" placeholder="Notes..." value="${saved.notes||''}"></div>
     <button class="btn" onclick="saveGeneric('${date}','${subTipus}')">Marcar com a fet</button>
-    <div style="margin-top:14px;border-top:1px solid var(--bdr);padding-top:12px"><div style="font-size:11px;color:var(--t3);margin-bottom:8px">No has pogut fer la sessió?</div><button class="btn btn-warn" onclick="openReprogramModal('${date}','${subTipus}','${encodeURIComponent(nom)}')">Reprogramar</button><button class="btn btn-sec" style="margin-top:6px;color:var(--r);border-color:rgba(226,75,74,.3)" onclick="markNotDone('${date}','${subTipus}')">No faré aquesta sessió</button></div>`;
+    ${buildModalFooter(date,subTipus,nom,origDate)}`;
   }
 
   document.getElementById('modal-content').innerHTML=html;
