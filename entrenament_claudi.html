@@ -454,26 +454,30 @@ const RUN_DETAIL = {
 const WEEK_DATA=[
   {label:'S1 · Activació i base',days:[
     {date:'2026-03-15',dia:'Dg',tipus:'PUSH',nom:'Torso A — PUSH',detail:'Press inclinat · Press pit · Tancaments politja · Obertura pit · Press militar · Elevació lateral · Elevació frontal'},
-    {date:'2026-03-16',dia:'Dl',tipus:'RUN',nom:'Run 1-A — [1+2]',detail:'[1 min trot + 2 min caminar] × 5 · FC ≤148 · 20 min · Configura alerta Garmin > 148'},
+    {date:'2026-03-16',dia:'Dl',tipus:'RUN',nom:'Run 1-A — [1+2]',detail:'[1 min trot + 2 min caminar] × 5 · FC ≤148 · 20 min · Alerta Garmin > 148'},
     {date:'2026-03-17',dia:'Dm',tipus:'CAMES',nom:'Cames A',detail:'Sentadilla · Hip thrust · Premsa · Extensió quàd · Curl isquio · Bessons · Abductor'},
     {date:'2026-03-18',dia:'Dc',tipus:'BICI',nom:'Spinning Z2 · 40 min',detail:'FC 120–135 · Cadència 85–95 rpm · Zona 2 estricta',biciKey:'Z2-40'},
     {date:'2026-03-19',dia:'Dj',tipus:'RUN',nom:'Run 1-B — [1+2]',detail:'[1 min trot + 2 min caminar] × 5 · FC ≤148 · 20 min'},
     {date:'2026-03-20',dia:'Dv',tipus:'PULL',nom:'Torso B — PULL',detail:'Lat Pulldown · Rem V · Rem T · Pullover · Obertura posterior · Planxa · Dead bug · Pallof press'},
-    {date:'2026-03-21',dia:'Ds',tipus:'MULTI',nom:'Run + Tenis + Gravel',detail:'Matí: 15 min trot suau FC <140 + Tenis · Tarda: Gravel 60–90 min Z2',
+    {date:'2026-03-21',dia:'Ds',tipus:'MULTI',nom:'Run + Tenis + Gravel',detail:'Matí: Run 15 min suau + Tenis · Tarda: Gravel 60–90 min Z2',
       subActivitats:[
         {clau:'RUN',nom:'Run lleuger 15 min',detail:'Trot suau FC <140 · Escalfament per al tenis'},
-        {clau:'TENIS',nom:'Tenis',detail:'Sessió d\'entrenament dissabte'},
+        {clau:'TENIS',nom:'Tenis',detail:'Sessió dissabte matí'},
         {clau:'BICI',nom:'Gravel 60–90 min',detail:'Z2 estricta FC 115–135 · Ruta plana · Bidon 500ml',biciKey:'gravel-60'},
       ]},
     {date:'2026-03-22',dia:'Dg',tipus:'DESCANS',nom:'Descans actiu + Mobilitat',detail:'Passeig 20–30 min + 15 min mobilitat cadena posterior'},
   ]},
   {label:'S2 · Consolidació',days:[
     {date:'2026-03-23',dia:'Dl',tipus:'PUSH',nom:'Torso A — PUSH +càrrega',detail:'Igual S1 +2.5 kg on puguis · 4 sèries màquina press pit'},
-    {date:'2026-03-24',dia:'Dm',tipus:'RUN',nom:'Run 2-A — [2+1]',detail:'[2 min trot + 1 min caminar] × 6–7 · FC ≤148 · 25 min'},
-    {date:'2026-03-25',dia:'Dc',tipus:'CAMES',nom:'Cames B (+Split squat)',detail:'Sentadilla · Hip thrust · Split squat búlgar 3×8 · Premsa · Curl isquio · Bessons · Abductor'},
-    {date:'2026-03-26',dia:'Dj',tipus:'BICI',nom:'Spinning Z2+Z3 · 45 min',detail:'20 min Z2 + 2 blocs Z3 4 min (149–163) + rec Z2',biciKey:'Z2-Z3-45'},
-    {date:'2026-03-27',dia:'Dv',tipus:'RUN',nom:'Run 2-B — [2+1]',detail:'[2 min trot + 1 min caminar] · FC ≤148 · 25 min'},
-    {date:'2026-03-28',dia:'Ds',tipus:'MULTI',nom:'Run + Tenis + Gravel 90 min',detail:'Matí: 20 min suau FC <145 + Tenis · Tarda: Gravel 90 min Z2',
+    {date:'2026-03-24',dia:'Dm',tipus:'CAMES',nom:'Cames B (+Split squat)',detail:'Sentadilla · Hip thrust · Split squat búlgar 3×8 · Premsa · Curl isquio · Bessons · Abductor'},
+    {date:'2026-03-25',dia:'Dc',tipus:'BICI',nom:'Spinning Z2+Z3 · 45 min',detail:'20 min Z2 + 2 blocs Z3 4 min (149–163)',biciKey:'Z2-Z3-45'},
+    {date:'2026-03-26',dia:'Dj',tipus:'MULTI',nom:'Run 2-A + PULL',detail:'Run 25 min [2+1] FC ≤148 + Torso B PULL',
+      subActivitats:[
+        {clau:'RUN',nom:'Run 2-A — [2+1] · 25 min',detail:'[2 min trot + 1 min caminar] × 6–7 · FC ≤148 · Si passa FC → [1:30+1:30]'},
+        {clau:'PULL',nom:'Torso B — PULL',detail:'Lat Pulldown · Rem V · Rem T · Pullover · Obertura posterior · Planxa · Dead bug · Pallof press'},
+      ]},
+    {date:'2026-03-27',dia:'Dv',tipus:'RUN',nom:'Run 2-B — [2+1] · 25 min',detail:'[2 min trot + 1 min caminar] · FC ≤148 · Compara ritme amb Run 2-A'},
+    {date:'2026-03-28',dia:'Ds',tipus:'MULTI',nom:'Run + Tenis + Gravel 90 min',detail:'Matí: Run 20 min suau + Tenis · Tarda: Gravel 90 min Z2',
       subActivitats:[
         {clau:'RUN',nom:'Run lleuger 20 min',detail:'Trot suau FC <145'},
         {clau:'TENIS',nom:'Tenis',detail:'Sessió dissabte'},
@@ -482,48 +486,64 @@ const WEEK_DATA=[
     {date:'2026-03-29',dia:'Dg',tipus:'DESCANS',nom:'Descans actiu + Mobilitat',detail:'15 min mobilitat · Pes dimecres al matí en dejú'},
   ]},
   {label:'S3 · Càrrega progressiva',days:[
-    {date:'2026-03-30',dia:'Dl',tipus:'PUSH',nom:'Torso A — PUSH 4 sèries',detail:'4 sèries als principals'},
-    {date:'2026-03-31',dia:'Dm',tipus:'RUN',nom:'Run 3-A — TEST MAF PACE',detail:'[3+1] o [5+1] · FC ≤148 · 30 min · ★ TEST: tram pla 1km a FC 145–148'},
-    {date:'2026-04-01',dia:'Dc',tipus:'CAMES',nom:'Cames C (màxim volum)',detail:'4 sèries sentadilla · 4 sèries hip thrust · Split squat · Premsa · Curl'},
-    {date:'2026-04-02',dia:'Dj',tipus:'BICI',nom:'Spinning Z2+Z3 · 50 min',detail:'20 min Z2 + 3 blocs Z3 5 min (149–163)',biciKey:'Z2-Z3-50'},
-    {date:'2026-04-03',dia:'Dv',tipus:'RUN',nom:'Run 3-B — 30 min',detail:'[3+1] o [5+1] · FC ≤148 · Compara ritme amb 3-A'},
+    {date:'2026-03-30',dia:'Dl',tipus:'PUSH',nom:'Torso A — PUSH 4 sèries',detail:'4 sèries als principals · Press inclinat · Press pit · Tancaments · Press militar · Elevació lateral'},
+    {date:'2026-03-31',dia:'Dm',tipus:'CAMES',nom:'Cames C (màxim volum)',detail:'4 sèries sentadilla · 4 sèries hip thrust · Split squat · Premsa · Curl · Bessons'},
+    {date:'2026-04-01',dia:'Dc',tipus:'BICI',nom:'Spinning Z2+Z3 · 50 min',detail:'20 min Z2 + 3 blocs Z3 5 min (149–163)',biciKey:'Z2-Z3-50'},
+    {date:'2026-04-02',dia:'Dj',tipus:'MULTI',nom:'Run 3-A + PULL',detail:'Run 30 min TEST MAF PACE + Torso B PULL 4 sèries',
+      subActivitats:[
+        {clau:'RUN',nom:'Run 3-A — ★ TEST MAF PACE',detail:'[3+1] o [5+1] · FC ≤148 · 30 min · ★ TEST: tram pla 1km a FC 145–148 → anota ritme exacte'},
+        {clau:'PULL',nom:'Torso B — PULL S3 (4 sèries)',detail:'4 sèries Lat Pulldown · Rem V · Rem T · Planxa 4×45 seg'},
+      ]},
+    {date:'2026-04-03',dia:'Dv',tipus:'RUN',nom:'Run 3-B — 30 min',detail:'[3+1] o [5+1] · FC ≤148 · Compara ritme amb Run 3-A · Anota km i % temps corrent'},
     {date:'2026-04-04',dia:'Ds',tipus:'MULTI',nom:'Tenis + Gravel 2h',detail:'Tenis + Gravel 2h Z2',
       subActivitats:[
         {clau:'TENIS',nom:'Tenis',detail:'Sessió dissabte'},
         {clau:'BICI',nom:'Gravel 2h',detail:'70 min Z2 + 30 min Z2+ + 20 min Z1 · Gel 45 i 90 min',biciKey:'gravel-120'},
       ]},
-    {date:'2026-04-05',dia:'Dg',tipus:'PULL',nom:'Torso B — PULL S3 (4 sèries)',detail:'4 sèries Lat Pulldown · Rem V · Rem T · Planxa 4×45 seg'},
+    {date:'2026-04-05',dia:'Dg',tipus:'DESCANS',nom:'Descans actiu + Mobilitat',detail:'Repòs · 15–20 min mobilitat completa'},
   ]},
   {label:'S4 · DELOAD',days:[
-    {date:'2026-04-06',dia:'Dl',tipus:'PUSH',nom:'Torso A DELOAD (–30% vol)',detail:'2 sèries tot · Pesos iguals · Fàcil'},
-    {date:'2026-04-07',dia:'Dm',tipus:'RUN',nom:'Run Deload A · 25 min suau',detail:'FC 120–138 · Ritme 9–10 min/km · Gaudir'},
-    {date:'2026-04-08',dia:'Dc',tipus:'PULL',nom:'Torso B DELOAD',detail:'2 sèries tot · Fàcil'},
+    {date:'2026-04-06',dia:'Dl',tipus:'PUSH',nom:'Torso A DELOAD (–30% vol)',detail:'2 sèries tot · Pesos iguals · Fàcil · 15 min mobilitat'},
+    {date:'2026-04-07',dia:'Dm',tipus:'CAMES',nom:'Cames Deload',detail:'2 sèries sentadilla · 2 sèries hip thrust · 2 sèries premsa · Fàcil · 15 min mobilitat'},
+    {date:'2026-04-08',dia:'Dc',tipus:'MULTI',nom:'Run Deload A + PULL Deload',detail:'Run 25 min suau + Torso B Deload',
+      subActivitats:[
+        {clau:'RUN',nom:'Run Deload A · 25 min suau',detail:'FC 120–138 · Ritme 9–10 min/km · Gaudir · Cap pressió'},
+        {clau:'PULL',nom:'Torso B DELOAD',detail:'2 sèries tot · Lat Pulldown · Rem V · Rem T · Planxa 3×40 seg'},
+      ]},
     {date:'2026-04-09',dia:'Dj',tipus:'BICI',nom:'Spinning Z1-Z2 suau · 35 min',detail:'FC ≤128 · Cadència alta 90–95 rpm',biciKey:'Z1-Z2-35'},
-    {date:'2026-04-10',dia:'Dv',tipus:'RUN',nom:'Run Deload B · 25 min suau',detail:'FC 120–138 · Ritme 9–10 min/km'},
+    {date:'2026-04-10',dia:'Dv',tipus:'RUN',nom:'Run Deload B · 25 min suau',detail:'FC 120–138 · Ritme 9–10 min/km · Relax total'},
     {date:'2026-04-11',dia:'Ds',tipus:'MULTI',nom:'Tenis + Gravel tranquil',detail:'Tenis + Gravel FC ≤130',
       subActivitats:[
         {clau:'TENIS',nom:'Tenis',detail:'Sessió dissabte'},
         {clau:'BICI',nom:'Gravel tranquil 90 min',detail:'FC ≤130 tot el temps · Ruta còmoda',biciKey:'gravel-90'},
       ]},
-    {date:'2026-04-12',dia:'Dg',tipus:'DESCANS',nom:'Descans total + mesures',detail:'Repòs · Pes + plecs i perímetres'},
+    {date:'2026-04-12',dia:'Dg',tipus:'DESCANS',nom:'Descans total + mesures',detail:'Repòs · ★ Pes + plecs i perímetres (cada 4 setmanes)'},
   ]},
   {label:'S5 · Pic',days:[
-    {date:'2026-04-13',dia:'Dl',tipus:'PUSH',nom:'Torso A PUSH — Pic',detail:'4 sèries · Intenta marques personals'},
-    {date:'2026-04-14',dia:'Dm',tipus:'RUN',nom:'Run 5-A — TEST 5 km',detail:'FC ≤152 · Corre els 5 km · Compara MAF pace S3'},
-    {date:'2026-04-15',dia:'Dc',tipus:'CAMES',nom:'Cames D — Pic',detail:'4×8 sentadilla · 4×12 hip thrust · Split squat'},
-    {date:'2026-04-16',dia:'Dj',tipus:'BICI',nom:'Spinning Z2-Z4 · 55 min',detail:'Simulació: 3 blocs Z3 + 1 bloc Z4',biciKey:'Z2-Z4-55'},
-    {date:'2026-04-17',dia:'Dv',tipus:'RUN',nom:'Run 5-B — 35 min continu',detail:'FC ≤148 · Intent 5km continu'},
-    {date:'2026-04-18',dia:'Ds',tipus:'MULTI',nom:'Tenis + Gravel 2h30',detail:'Tenis + Gravel simulació',
+    {date:'2026-04-13',dia:'Dl',tipus:'PUSH',nom:'Torso A PUSH — Pic',detail:'4 sèries · Intenta marques personals · Últim gym fort'},
+    {date:'2026-04-14',dia:'Dm',tipus:'CAMES',nom:'Cames D — Pic',detail:'4×8 sentadilla pes fort · 4×12 hip thrust · Split squat · Premsa · Curl · Bessons'},
+    {date:'2026-04-15',dia:'Dc',tipus:'BICI',nom:'Spinning Z2-Z4 · 55 min',detail:'Simulació: 3 blocs Z3 + 1 bloc Z4',biciKey:'Z2-Z4-55'},
+    {date:'2026-04-16',dia:'Dj',tipus:'MULTI',nom:'Run 5-A + PULL Pic',detail:'Run TEST 5km + PULL Pic S5',
       subActivitats:[
-        {clau:'TENIS',nom:'Tenis',detail:'Sessió dissabte'},
-        {clau:'BICI',nom:'Gravel 2h30 — simulació',detail:'1a hora Z2 ESTRICTA · Prova nutrició cursa',biciKey:'gravel-150'},
+        {clau:'RUN',nom:'Run 5-A — ★ TEST 5 km',detail:'FC ≤152 · Corre els 5 km · ★ Registra: temps total, km corrent, FC mig · Compara MAF pace!'},
+        {clau:'PULL',nom:'Torso B PULL — Pic S5',detail:'4 sèries tot · Planxa 4×50 seg · Màxim volum PULL'},
+      ]},
+    {date:'2026-04-17',dia:'Dv',tipus:'RUN',nom:'Run 5-B — 35 min continu',detail:'FC ≤148 · Intent 5km continu · Compara amb MAF pace'},
+    {date:'2026-04-18',dia:'Ds',tipus:'MULTI',nom:'Tenis + Gravel 2h30',detail:'Tenis + Gravel simulació cursa',
+      subActivitats:[
+        {clau:'TENIS',nom:'Tenis',detail:'Sessió dissabte · suau avui'},
+        {clau:'BICI',nom:'Gravel 2h30 — simulació',detail:'1a hora Z2 ESTRICTA (120–135) · Prova nutrició cursa · Gel cada 45 min',biciKey:'gravel-150'},
       ]},
     {date:'2026-04-19',dia:'Dg',tipus:'DESCANS',nom:'Descans + Revisió',detail:'Repòs · 15 min mobilitat'},
   ]},
   {label:'S6 · Tapering',days:[
-    {date:'2026-04-20',dia:'Dl',tipus:'PUSH',nom:'Gym molt lleuger',detail:'2 sèries fàcils · Activar, no entrenar'},
-    {date:'2026-04-21',dia:'Dm',tipus:'RUN',nom:'Run suau 20 min',detail:'Trot molt lent · FC <135'},
-    {date:'2026-04-22',dia:'Dc',tipus:'DESCANS',nom:'Descans o passeig',detail:'Repòs · Mobilitat 15 min'},
+    {date:'2026-04-20',dia:'Dl',tipus:'PUSH',nom:'Gym molt lleuger — PUSH',detail:'2 sèries fàcils · Activar, no entrenar'},
+    {date:'2026-04-21',dia:'Dm',tipus:'MULTI',nom:'Run suau + PULL lleuger',detail:'Run 20 min suau + PULL lleuger tapering',
+      subActivitats:[
+        {clau:'RUN',nom:'Run suau 20 min',detail:'Trot molt lent · FC <135 · Cames fresques'},
+        {clau:'PULL',nom:'PULL Tapering — molt lleuger',detail:'2 sèries fàcils · Activar, no entrenar'},
+      ]},
+    {date:'2026-04-22',dia:'Dc',tipus:'CAMES',nom:'Cames Tapering — molt lleuger',detail:'2 sèries fàcils · Sentadilla i hip thrust · Activar'},
     {date:'2026-04-23',dia:'Dj',tipus:'BICI',nom:'Spinning 25 min activació',detail:'FC ≤128 · Activació suau',biciKey:'Z1-Z2-35'},
     {date:'2026-04-24',dia:'Dv',tipus:'DESCANS',nom:'Descans pre-gran dia',detail:'Repòs total · Prepara material · Menja bé · Dorm prou'},
     {date:'2026-04-25',dia:'Ds',tipus:'DESCANS',nom:'Descans',detail:'Descansa · Material a punt'},
@@ -549,6 +569,8 @@ function seedData(){
   done['2026-03-15_PUSH']=true;
   done['2026-03-16_RUN']=true;
   done['2026-03-17_CAMES']=true;
+  done['2026-03-20_PULL']=true;
+  done['2026-03-22_DESCANS']=true;
   S.set('done',done);
   // Run data
   const runs=[{date:'2026-03-16',tipus:'RUN',km:'2.46',temps:'25',kmrun:'0.72',kmwalk:'1.74',fcmig:'117',fcmax:'152',ritme:'7:03',maf:'7:45',pct:'24',rpe:'3',notes:'',savedAt:'2026-03-16T00:00:00.000Z'}];
@@ -1230,7 +1252,7 @@ function savePes(){
   const idx=pesos.findIndex(p=>p.date===entry.date);
   if(idx>=0) pesos[idx]=entry; else pesos.push(entry);
   pesos.sort((a,b)=>a.date.localeCompare(b.date));
-  S.set('pesos',pesos);
+  S.set('pesos',[{date:'2026-03-21',pes:96.4,grasa:27.2,musc:37.9,savedAt:'2026-03-21T00:00:00.000Z'}]);
   showToast('Mesura guardada!');
   renderPes();
 }
