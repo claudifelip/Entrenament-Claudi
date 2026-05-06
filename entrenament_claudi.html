@@ -6,14 +6,14 @@
 <meta name="apple-mobile-web-app-capable" content="yes">
 <meta name="apple-mobile-web-app-status-bar-style" content="black-translucent">
 <meta name="theme-color" content="#0a1a14">
-<title>Claudi · Entrenament</title>
+<title>Claudi · Gym</title>
 <link href="https://fonts.googleapis.com/css2?family=DM+Sans:opsz,wght@9..40,300;9..40,400;9..40,500;9..40,600&family=DM+Mono:wght@400;500&display=swap" rel="stylesheet">
 <style>
 :root{
   --g:#1D9E75;--gd:#0d6e50;--gl:rgba(29,158,117,0.15);
-  --b:#378ADD;--bl:rgba(55,138,221,0.15);
   --a:#EF9F27;--al:rgba(239,159,39,0.15);
   --r:#E24B4A;--rl:rgba(226,75,74,0.15);
+  --b:#378ADD;
   --bg:#0a1a14;--bg2:#0f2219;--bg3:#142d20;--bg4:#1a3828;
   --card:#1e3d2e;--card2:#243f32;
   --bdr:rgba(255,255,255,0.07);--bdr2:rgba(255,255,255,0.12);
@@ -23,119 +23,127 @@
 *{box-sizing:border-box;margin:0;padding:0;-webkit-tap-highlight-color:transparent}
 html,body{height:100%;overflow:hidden}
 body{font-family:'DM Sans',sans-serif;background:var(--bg);color:var(--t);max-width:430px;margin:0 auto;display:flex;flex-direction:column}
-.mono{font-family:'DM Mono',monospace}
+
+/* HEADER */
 .hdr{background:var(--bg2);padding:50px 18px 12px;border-bottom:1px solid var(--bdr);flex-shrink:0}
 .hdr-row{display:flex;justify-content:space-between;align-items:flex-start}
 .hdr-name{font-size:11px;color:var(--t3);letter-spacing:.5px;text-transform:uppercase}
 .hdr-title{font-size:20px;font-weight:600;color:var(--t);letter-spacing:-.3px;margin-top:1px}
-.hdr-right{text-align:right}
-.hdr-sub{font-size:11px;color:var(--t3);margin-top:2px}
+.hdr-date{font-size:11px;color:var(--t3);margin-top:2px}
+
+/* TABS */
 .tabs{display:flex;background:var(--bg2);border-bottom:1px solid var(--bdr);flex-shrink:0}
-.tab{flex:1;padding:10px 4px;font-size:11px;font-weight:500;color:var(--t3);text-align:center;cursor:pointer;border-bottom:2px solid transparent;transition:all .15s;letter-spacing:.3px}
+.tab{flex:1;padding:10px 2px;font-size:11px;font-weight:600;color:var(--t3);text-align:center;cursor:pointer;border-bottom:2px solid transparent;transition:all .15s;letter-spacing:.5px;text-transform:uppercase}
 .tab.on{color:var(--g);border-bottom-color:var(--g)}
+
+/* PAGES */
 .pages{flex:1;overflow-y:auto;overflow-x:hidden;-webkit-overflow-scrolling:touch}
-.page{display:none;padding:14px 16px 24px}
+.page{display:none;padding:14px 16px 100px}
 .page.on{display:block}
-.card{background:var(--card);border-radius:var(--rad);border:1px solid var(--bdr);padding:13px 15px;margin-bottom:9px}
-.card-row{display:flex;justify-content:space-between;align-items:flex-start}
-.card-title{font-size:14px;font-weight:500;color:var(--t)}
-.card-sub{font-size:11px;color:var(--t2);margin-top:2px;line-height:1.5}
-.bdg{font-size:9px;padding:3px 8px;border-radius:99px;font-weight:600;letter-spacing:.4px;display:inline-block}
-.bdg-push{background:rgba(29,158,117,.2);color:#5dcaa5}
-.bdg-pull{background:rgba(29,158,117,.12);color:#9fe1cb}
-.bdg-cames{background:rgba(239,159,39,.2);color:#fac775}
-.bdg-run{background:rgba(55,138,221,.2);color:#85b7eb}
-.bdg-bici{background:rgba(239,159,39,.2);color:#ef9f27}
-.bdg-rest{background:rgba(255,255,255,.06);color:var(--t2)}
-.bdg-mob{background:rgba(180,100,220,.2);color:#d4a0f0}
-.chk{width:30px;height:30px;border-radius:50%;border:1.5px solid var(--bdr2);background:none;cursor:pointer;color:var(--t2);font-size:14px;display:flex;align-items:center;justify-content:center;transition:all .2s;flex-shrink:0}
-.chk.on{background:var(--g);border-color:var(--g);color:#fff}.chk-skip{background:var(--r)!important;border-color:var(--r)!important;color:#fff!important}.chk-rep{background:rgba(239,159,39,.15)!important;border-color:var(--a)!important;color:var(--a)!important;font-size:18px!important;font-weight:700!important}.chk-skip{background:var(--r);border-color:var(--r);color:#fff}.chk-rep{background:rgba(239,159,39,.15);border-color:var(--a);color:var(--a);font-size:18px;font-weight:700}
+
+/* SECTION TITLE */
+.st{font-size:10px;font-weight:600;color:var(--t3);text-transform:uppercase;letter-spacing:.8px;margin:16px 0 8px}
+
+/* FORM */
+.fl{font-size:11px;color:var(--t2);margin-bottom:4px;display:block;font-weight:500}
+.fi{width:100%;background:var(--bg3);border:1px solid var(--bdr2);border-radius:var(--radsm);padding:9px 11px;font-size:14px;color:var(--t);font-family:'DM Sans',sans-serif;outline:none;transition:border-color .15s;-webkit-appearance:none}
+.fi:focus{border-color:var(--g)}
+.fi::placeholder{color:var(--t3)}
+.fg2{display:grid;grid-template-columns:1fr 1fr;gap:9px;margin-bottom:11px}
+.fg3{display:grid;grid-template-columns:1fr 1fr 1fr;gap:7px;margin-bottom:11px}
+
+/* BUTTONS */
+.btn{width:100%;padding:12px;background:var(--g);color:#fff;border:none;border-radius:var(--radsm);font-size:14px;font-weight:600;cursor:pointer;font-family:'DM Sans',sans-serif;transition:background .15s;margin-top:4px}
+.btn:active{background:var(--gd)}
+.btn-sec{background:none;color:var(--t2);border:1px solid var(--bdr2);margin-top:7px}
+
+/* SESSION HEADER */
+.sess-hdr{background:linear-gradient(135deg,#0d4a35 0%,#0f5c3f 100%);border-radius:var(--rad);border:1px solid rgba(29,220,140,0.25);padding:12px 14px;margin-bottom:12px;display:flex;justify-content:space-between;align-items:center;box-shadow:0 2px 12px rgba(29,200,120,0.12)}
+.sess-label{font-size:14px;font-weight:600;color:#b8f5da;letter-spacing:-.1px}
+.sess-sub{font-size:10px;color:#5dcaa5;margin-top:2px}
+
+/* EXERCISE CARD */
+.ex-card{background:var(--bg3);border-radius:var(--radsm);border:1px solid var(--bdr);margin-bottom:8px;overflow:hidden}
+.ex-hdr{padding:11px 13px;display:flex;justify-content:space-between;align-items:center;cursor:pointer;user-select:none}
+.ex-name{font-size:13px;font-weight:500;color:var(--t)}
+.ex-meta{font-size:10px;color:var(--t3);margin-top:2px;display:flex;gap:8px;flex-wrap:wrap;align-items:center}
+.ex-arrow{color:var(--t3);font-size:13px;transition:transform .2s;flex-shrink:0;margin-left:8px}
+.ex-card.open .ex-arrow{transform:rotate(180deg)}
+.ex-body{padding:0 13px 12px;border-top:1px solid var(--bdr);display:none}
+.ex-card.open .ex-body{display:block}
+
+/* BADGE pujar pes */
+.badge-up{background:rgba(239,159,39,.18);border:1px solid rgba(239,159,39,.35);color:#fac775;font-size:9px;font-weight:600;padding:2px 7px;border-radius:99px;letter-spacing:.3px}
+.badge-ok{background:rgba(29,158,117,.12);border:1px solid rgba(29,158,117,.25);color:#5dcaa5;font-size:9px;font-weight:600;padding:2px 7px;border-radius:99px;letter-spacing:.3px}
+
+/* CONSELL dins exercici */
+.ex-tip{background:rgba(55,138,221,0.07);border:1px solid rgba(55,138,221,0.15);border-radius:7px;padding:7px 10px;margin:9px 0 7px;font-size:10px;color:#85b7eb;line-height:1.6}
+
+/* REFERÈNCIA última sessió */
+.ex-ref{background:rgba(29,158,117,.07);border:1px solid rgba(29,158,117,.15);border-radius:7px;padding:7px 10px;margin-bottom:9px}
+.ex-ref-title{font-size:9px;font-weight:600;text-transform:uppercase;letter-spacing:.5px;color:#5dcaa5;margin-bottom:4px}
+.ex-ref-row{display:grid;grid-template-columns:repeat(auto-fit,minmax(60px,1fr));gap:5px}
+.ex-ref-serie{background:rgba(0,0,0,.2);border-radius:5px;padding:4px 7px;text-align:center}
+.ex-ref-s{font-size:9px;color:var(--t3)}
+.ex-ref-v{font-size:12px;font-weight:600;color:var(--t);font-family:'DM Mono',monospace;margin-top:1px}
+.ex-ref-flag{font-size:9px;color:#fac775;margin-top:1px}
+
+/* SERIES TABLE */
+.series-hdr{display:grid;grid-template-columns:22px 1fr 1fr 80px;gap:6px;padding:4px 0;align-items:center}
+.series-hdr span{font-size:9px;color:var(--t3);text-align:center;text-transform:uppercase;letter-spacing:.4px}
+.serie-row{display:grid;grid-template-columns:22px 1fr 1fr 80px;gap:6px;align-items:center;margin-bottom:6px}
+.serie-n{font-size:11px;color:var(--t3);text-align:center;font-family:'DM Mono',monospace}
+.serie-in{background:var(--card2);border:1px solid var(--bdr);border-radius:6px;padding:7px 4px;font-size:13px;color:var(--t);text-align:center;font-family:'DM Mono',monospace;width:100%;outline:none;-webkit-appearance:none}
+.serie-in:focus{border-color:var(--g)}
+
+/* PUJAR PES toggle */
+.puja-btn{display:flex;align-items:center;justify-content:center;gap:4px;padding:5px 7px;border-radius:6px;border:1px solid var(--bdr);background:none;color:var(--t3);font-size:10px;font-weight:600;cursor:pointer;transition:all .2s;white-space:nowrap;width:100%}
+.puja-btn.on{background:rgba(239,159,39,.15);border-color:rgba(239,159,39,.4);color:#fac775}
+
+/* STATS GRID */
 .sgrid{display:grid;grid-template-columns:1fr 1fr;gap:8px;margin-bottom:10px}
 .sgrid3{display:grid;grid-template-columns:1fr 1fr 1fr;gap:8px;margin-bottom:10px}
 .sc{background:var(--bg3);border-radius:var(--radsm);padding:11px 12px}
 .sc-n{font-size:21px;font-weight:600;color:var(--t);font-family:'DM Mono',monospace}
 .sc-l{font-size:10px;color:var(--t2);margin-top:2px}
-.sc-d{font-size:10px;margin-top:2px}
-.cg{color:#5dcaa5}.ca{color:#fac775}.cr{color:#f09595}.cb{color:#85b7eb}
-.pb-wrap{background:var(--bg3);border-radius:99px;height:4px;overflow:hidden;margin:5px 0 12px}
-.pb{height:4px;border-radius:99px;background:var(--g);transition:width .4s}
-.st{font-size:10px;font-weight:600;color:var(--t3);text-transform:uppercase;letter-spacing:.8px;margin:14px 0 7px}
-.fg{margin-bottom:11px}
-.fl{font-size:11px;color:var(--t2);margin-bottom:4px;display:block;font-weight:500}
-.fi{width:100%;background:var(--bg3);border:1px solid var(--bdr2);border-radius:var(--radsm);padding:9px 11px;font-size:14px;color:var(--t);font-family:'DM Sans',sans-serif;outline:none;transition:border-color .15s;-webkit-appearance:none}
-.fi:focus{border-color:var(--g)}
-.fi::placeholder{color:var(--t3)}
-.fg2{display:grid;grid-template-columns:1fr 1fr;gap:9px}
-.fg3{display:grid;grid-template-columns:1fr 1fr 1fr;gap:7px}
-.btn{width:100%;padding:12px;background:var(--g);color:#fff;border:none;border-radius:var(--radsm);font-size:14px;font-weight:600;cursor:pointer;font-family:'DM Sans',sans-serif;transition:background .15s;margin-top:4px}
-.btn:active{background:var(--gd)}
-.btn-sec{background:none;color:var(--t2);border:1px solid var(--bdr2);margin-top:7px}
-.btn-warn{background:none;color:var(--a);border:1px solid rgba(239,159,39,.3);margin-top:7px}
-.ex-card{background:var(--bg3);border-radius:var(--radsm);border:1px solid var(--bdr);margin-bottom:7px;overflow:hidden}
-.ex-hdr{padding:10px 13px;display:flex;justify-content:space-between;align-items:center;cursor:pointer}
-.ex-name{font-size:13px;font-weight:500;color:var(--t)}
-.ex-prev{font-size:10px;color:var(--t3);margin-top:1px}
-.ex-body{padding:0 13px 11px;border-top:1px solid var(--bdr);display:none}
-.ex-body.op{display:block}
-.series-hdr{display:grid;grid-template-columns:28px 1fr 1fr;gap:7px;padding:7px 0 4px}
-.series-hdr span{font-size:9px;color:var(--t3);text-align:center;text-transform:uppercase;letter-spacing:.4px}
-.serie-row{display:grid;grid-template-columns:28px 1fr 1fr;gap:7px;align-items:center;margin-bottom:5px}
-.serie-n{font-size:11px;color:var(--t3);text-align:center;font-family:'DM Mono',monospace}
-.serie-in{background:var(--card2);border:1px solid var(--bdr);border-radius:6px;padding:7px;font-size:13px;color:var(--t);text-align:center;font-family:'DM Mono',monospace;width:100%;outline:none;-webkit-appearance:none}
-.serie-in:focus{border-color:var(--g)}
-.modal-bg{position:fixed;inset:0;background:rgba(0,0,0,.7);z-index:200;display:flex;align-items:flex-end;justify-content:center;max-width:430px;margin:0 auto}
-.modal{background:var(--bg2);border-radius:20px 20px 0 0;padding:20px 18px 36px;width:100%;max-height:90vh;overflow-y:auto}
-.modal-title{font-size:17px;font-weight:600;color:var(--t);margin-bottom:3px}
-.modal-sub{font-size:12px;color:var(--t2);margin-bottom:14px}
-.modal-close{float:right;background:var(--bg3);border:none;color:var(--t2);width:28px;height:28px;border-radius:50%;cursor:pointer;font-size:16px;display:flex;align-items:center;justify-content:center}
-.toast{position:fixed;bottom:20px;left:50%;transform:translateX(-50%);background:var(--g);color:#fff;padding:9px 20px;border-radius:99px;font-size:13px;font-weight:500;opacity:0;transition:opacity .3s;pointer-events:none;white-space:nowrap;z-index:300}
-.toast.on{opacity:1}
-.chart-wrap{position:relative;width:100%;margin:8px 0 4px}
-.tgl-row{display:flex;gap:6px;margin-bottom:11px}
-.tgl{flex:1;padding:7px;background:var(--bg3);border:1px solid var(--bdr);border-radius:var(--radsm);font-size:11px;font-weight:500;color:var(--t2);cursor:pointer;text-align:center;transition:all .15s}
-.tgl.on{background:var(--gl);border-color:var(--g);color:var(--g)}
-.hi{display:flex;justify-content:space-between;align-items:center;padding:9px 0;border-bottom:1px solid var(--bdr)}
+
+/* GOAL BAR */
+.goal-bar-wrap{margin:10px 0 14px}
+.goal-bar-labels{display:flex;justify-content:space-between;font-size:10px;color:var(--t3);margin-bottom:5px}
+.goal-bar-track{background:var(--bg3);border-radius:99px;height:7px;overflow:hidden}
+.goal-bar-fill{height:7px;border-radius:99px;background:linear-gradient(90deg,var(--r),var(--a),var(--g));transition:width .6s ease}
+
+/* CHART */
+.chart-wrap{position:relative;width:100%;margin:4px 0 12px}
+
+/* HISTORY */
+.hi{display:flex;justify-content:space-between;align-items:flex-start;padding:10px 0;border-bottom:1px solid var(--bdr)}
 .hi:last-child{border-bottom:none}
-.hi-left{flex:1}
 .hi-date{font-size:11px;color:var(--t3)}
-.hi-right{font-size:15px;font-weight:600;color:var(--t);font-family:'DM Mono',monospace;text-align:right}
-.hi-delta{font-size:10px;margin-top:1px;text-align:right}
-.mafbox{background:rgba(55,138,221,.1);border:1px solid rgba(55,138,221,.2);border-radius:var(--radsm);padding:9px 12px;margin-bottom:12px;font-size:11px;color:#85b7eb;line-height:1.6}
-.info-box{background:var(--bg3);border-radius:var(--radsm);padding:10px 13px;margin-bottom:9px}
-.info-box-title{font-size:10px;color:var(--t3);text-transform:uppercase;letter-spacing:.6px;margin-bottom:5px;font-weight:600}
-.info-box-body{font-size:12px;color:var(--t2);line-height:1.7;white-space:pre-line}
-.info-box-green{background:rgba(29,158,117,.1);border:1px solid rgba(29,158,117,.2)}
-.info-box-green .info-box-title{color:#5dcaa5}
-.info-box-blue{background:rgba(55,138,221,.08);border:1px solid rgba(55,138,221,.15)}
-.info-box-blue .info-box-title{color:#85b7eb}
-.info-box-amber{background:rgba(239,159,39,.08);border:1px solid rgba(239,159,39,.15)}
-.info-box-amber .info-box-title{color:#fac775}
-.week-nav{display:flex;align-items:center;justify-content:space-between;margin-bottom:12px;background:var(--bg3);border-radius:var(--radsm);padding:8px 12px}
-.week-nav-btn{background:none;border:none;color:var(--t2);font-size:18px;cursor:pointer;padding:0 6px;line-height:1}
-.week-nav-label{font-size:13px;font-weight:500;color:var(--t)}
-.cal-day{background:var(--card);border-radius:var(--rad);border:1px solid var(--bdr);margin-bottom:8px;overflow:hidden}
-.cal-day.today{border-color:rgba(29,158,117,.5);background:rgba(29,158,117,.06)}.cal-day.today .cal-day-date{color:#5dcaa5}
-.cal-day-hdr{padding:11px 14px;display:flex;justify-content:space-between;align-items:center;cursor:pointer}
-.cal-day-date{font-size:11px;color:var(--t3)}
-.cal-day-name{font-size:14px;font-weight:500;color:var(--t);margin-top:1px}
-.cal-day-body{padding:0 14px 12px;border-top:1px solid var(--bdr)}
-.cal-day-detail{font-size:11px;color:var(--t2);line-height:1.7;padding-top:9px}
-.cal-day-meta{display:flex;gap:6px;flex-wrap:wrap;padding-top:7px}
-.cal-metric{background:var(--bg3);border-radius:6px;padding:4px 8px;font-size:10px;color:var(--t2)}
-.cal-metric span{color:var(--t);font-weight:500;font-family:'DM Mono',monospace}
-.sub-activity{background:var(--bg3);border-radius:var(--radsm);border:1px solid var(--bdr);padding:10px 13px;margin-bottom:8px}
-.sub-activity-hdr{display:flex;justify-content:space-between;align-items:center;margin-bottom:6px}
-.sub-activity-title{font-size:13px;font-weight:500;color:var(--t)}
-.run-card{background:var(--bg3);border-radius:var(--radsm);border:1px solid var(--bdr);padding:11px 13px;margin-bottom:8px}
-.run-card-hdr{display:flex;justify-content:space-between;align-items:center;margin-bottom:9px}
-.run-card-title{font-size:13px;font-weight:500;color:var(--t)}
-.run-metrics{display:grid;grid-template-columns:repeat(4,1fr);gap:6px}
-.rm{text-align:center}
-.rm-v{font-size:13px;font-weight:500;color:var(--t);font-family:'DM Mono',monospace}
-.rm-l{font-size:9px;color:var(--t3);text-transform:uppercase;letter-spacing:.4px;margin-top:1px}
-.reprogram-btn{font-size:11px;color:var(--a);background:none;border:1px solid rgba(239,159,39,.25);border-radius:6px;padding:4px 10px;cursor:pointer;margin-top:6px}
-.reprogram-tag{font-size:9px;background:rgba(239,159,39,.15);color:#fac775;border-radius:99px;padding:2px 7px;margin-left:6px}
-select.fi{appearance:none}
+.hi-detail{font-size:11px;color:var(--t2);margin-top:2px;line-height:1.5}
+.hi-right{text-align:right;flex-shrink:0;margin-left:10px}
+.hi-val{font-size:15px;font-weight:600;color:var(--t);font-family:'DM Mono',monospace}
+.hi-delta{font-size:10px;margin-top:1px}
+.del-btn{background:none;border:none;color:var(--t3);font-size:14px;cursor:pointer;padding:2px 4px;line-height:1;margin-top:3px;display:block;margin-left:auto}
+
+/* GYM HIST */
+.gym-hist-card{background:var(--bg3);border-radius:var(--radsm);border:1px solid var(--bdr);margin-bottom:7px;overflow:hidden}
+.gym-hist-hdr{padding:10px 13px;display:flex;justify-content:space-between;align-items:center;cursor:pointer}
+.gym-hist-body{padding:8px 13px 12px;border-top:1px solid var(--bdr);display:none;font-size:10px;color:var(--t2);font-family:'DM Mono',monospace;line-height:1.9}
+.gym-hist-card.open .gym-hist-body{display:block}
+
+/* COLOR UTILS */
+.cg{color:#5dcaa5}.ca{color:#fac775}.cr{color:#f09595}
+
+/* SUBTABS (dins gym) */
+.subtab{flex:1;padding:8px 4px;background:var(--bg3);border:1px solid var(--bdr);border-radius:var(--radsm);font-size:11px;font-weight:700;color:var(--t3);cursor:pointer;text-align:center;transition:all .15s;letter-spacing:.6px;text-transform:uppercase}
+.subtab.on{background:var(--gl);border-color:var(--g);color:var(--g)}
+.gympage{display:none}
+.gympage.on{display:block}
+
+/* TOAST */
+.toast{position:fixed;bottom:24px;left:50%;transform:translateX(-50%);background:var(--g);color:#fff;padding:9px 20px;border-radius:99px;font-size:13px;font-weight:500;opacity:0;transition:opacity .3s;pointer-events:none;white-space:nowrap;z-index:300}
+.toast.on{opacity:1}
 </style>
 </head>
 <body>
@@ -144,1260 +152,513 @@ select.fi{appearance:none}
   <div class="hdr-row">
     <div>
       <div class="hdr-name">Claudi Felip</div>
-      <div class="hdr-title" id="hdr-title">Calendari</div>
+      <div class="hdr-title" id="hdr-title">Push</div>
     </div>
-    <div class="hdr-right">
-      <div class="hdr-sub" id="hdr-date"></div>
-    </div>
+    <div><div class="hdr-date" id="hdr-date"></div></div>
   </div>
 </div>
 
 <div class="tabs">
-  <div class="tab on" onclick="goTab(0)">Calendari</div>
-  <div class="tab" onclick="goTab(1)">Gym</div>
-  <div class="tab" onclick="goTab(2)">Run</div>
-  <div class="tab" onclick="goTab(3)">Pes</div>
-  <div class="tab" onclick="goTab(4)">Resum</div>
+  <div class="tab on" onclick="goMainTab(0)">💪 GYM</div>
+  <div class="tab"    onclick="goMainTab(1)">⚖️ PES</div>
 </div>
 
 <div class="pages">
 
-<!-- TAB 0: CALENDARI -->
+<!-- TAB 0: GYM -->
 <div class="page on" id="tab-0">
-  <div class="week-nav">
-    <button class="week-nav-btn" onclick="changeWeek(-1)">‹</button>
-    <div class="week-nav-label" id="week-nav-label">Setmana 1</div>
-    <button class="week-nav-btn" onclick="changeWeek(1)">›</button>
+
+  <!-- Subtabs Push / Pull / Cames -->
+  <div style="display:flex;gap:6px;margin-bottom:14px">
+    <div class="subtab on" id="subtab-PUSH"  onclick="goGymTab('PUSH')">PUSH</div>
+    <div class="subtab"    id="subtab-PULL"  onclick="goGymTab('PULL')">PULL</div>
+    <div class="subtab"    id="subtab-CAMES" onclick="goGymTab('CAMES')">CAMES</div>
   </div>
-  <div id="cal-list"></div>
+
+  <!-- PUSH -->
+  <div class="gympage on" id="gympage-PUSH">
+    <div class="sess-hdr">
+      <div><div class="sess-label">Pit & Espatlla</div><div class="sess-sub" id="push-last-date">Sense sessions anteriors</div></div>
+      <input type="date" class="fi" id="push-date" style="width:auto;font-size:12px;padding:6px 9px">
+    </div>
+    <div id="push-exercises"></div>
+    <button class="btn" onclick="saveSession('PUSH')">💾 Desar sessió</button>
+    <button class="btn btn-sec" onclick="clearForm('PUSH')">↺ Buidar</button>
+    <div class="st">Historial PUSH</div>
+    <div id="push-hist"></div>
+  </div>
+
+  <!-- PULL -->
+  <div class="gympage" id="gympage-PULL">
+    <div class="sess-hdr">
+      <div><div class="sess-label">Esquena & Core</div><div class="sess-sub" id="pull-last-date">Sense sessions anteriors</div></div>
+      <input type="date" class="fi" id="pull-date" style="width:auto;font-size:12px;padding:6px 9px">
+    </div>
+    <div id="pull-exercises"></div>
+    <button class="btn" onclick="saveSession('PULL')">💾 Desar sessió</button>
+    <button class="btn btn-sec" onclick="clearForm('PULL')">↺ Buidar</button>
+    <div class="st">Historial PULL</div>
+    <div id="pull-hist"></div>
+  </div>
+
+  <!-- CAMES -->
+  <div class="gympage" id="gympage-CAMES">
+    <div class="sess-hdr">
+      <div><div class="sess-label">Gluti & Quàdriceps</div><div class="sess-sub" id="cames-last-date">Sense sessions anteriors</div></div>
+      <input type="date" class="fi" id="cames-date" style="width:auto;font-size:12px;padding:6px 9px">
+    </div>
+    <div id="cames-exercises"></div>
+    <button class="btn" onclick="saveSession('CAMES')">💾 Desar sessió</button>
+    <button class="btn btn-sec" onclick="clearForm('CAMES')">↺ Buidar</button>
+    <div class="st">Historial CAMES</div>
+    <div id="cames-hist"></div>
+  </div>
+
 </div>
 
-<!-- TAB 1: GYM -->
+<!-- TAB 1: PES -->
 <div class="page" id="tab-1">
-  <div class="tgl-row">
-    <div class="tgl on" onclick="gymTab('push')">PUSH</div>
-    <div class="tgl" onclick="gymTab('pull')">PULL</div>
-    <div class="tgl" onclick="gymTab('cames')">CAMES</div>
-  </div>
-  <div id="gym-content"></div>
-</div>
-
-<!-- TAB 2: RUN -->
-<div class="page" id="tab-2">
-  <div class="mafbox">Maffetone Claudi: FC ≤148 ppm (FCmàx 190) · Si passes → camina fins a 138 · MAF pace = ritme a FC 148 constant</div>
   <div class="sgrid">
-    <div class="sc"><div class="sc-n cb" id="run-count">0</div><div class="sc-l">Runs registrats</div></div>
-    <div class="sc"><div class="sc-n cg" id="run-maf">—</div><div class="sc-l">Millor MAF pace</div></div>
+    <div class="sc"><div class="sc-n" id="p-actual">97.8</div><div class="sc-l">Pes actual (kg)</div></div>
+    <div class="sc"><div class="sc-n ca" id="p-queda">7.8</div><div class="sc-l">Fins objectiu 90 kg</div></div>
   </div>
-  <div class="sgrid">
-    <div class="sc"><div class="sc-n" id="run-km">0.0</div><div class="sc-l">km totals acum.</div></div>
-    <div class="sc"><div class="sc-n ca" id="run-fc">—</div><div class="sc-l">FC mig general</div></div>
+  <div class="sgrid3">
+    <div class="sc"><div class="sc-n cg" id="p-perdut">1.4</div><div class="sc-l">kg perduts</div></div>
+    <div class="sc"><div class="sc-n" id="p-grasa-act">28.1</div><div class="sc-l">% Grasa</div></div>
+    <div class="sc"><div class="sc-n" id="p-musc-act">38.2</div><div class="sc-l">kg muscular</div></div>
   </div>
-  <div class="st">Evolució MAF pace (min/km) — com més baix millor</div>
-  <div class="chart-wrap" style="height:100px"><canvas id="chart-maf"></canvas></div>
-  <div class="st">Historial de runs</div>
-  <div id="run-hist-list"></div>
-</div>
-
-<!-- TAB 3: PES -->
-<div class="page" id="tab-3">
-  <div class="sgrid">
-    <div class="sc"><div class="sc-n" id="p-actual">99.2</div><div class="sc-l">Pes actual (kg)</div></div>
-    <div class="sc"><div class="sc-n ca" id="p-queda">9.2</div><div class="sc-l">Queda fins 90 kg</div></div>
-  </div>
-  <div class="sgrid">
-    <div class="sc"><div class="sc-n cg" id="p-perdut">0.0</div><div class="sc-l">kg perduts</div></div>
-    <div class="sc"><div class="sc-n" id="p-pct">0%</div><div class="sc-l">% objectiu assolit</div></div>
+  <div class="goal-bar-wrap">
+    <div class="goal-bar-labels">
+      <span>Inici 99.2 kg</span>
+      <span id="goal-pct-label">16% assolit</span>
+      <span>Obj. 90 kg</span>
+    </div>
+    <div class="goal-bar-track"><div class="goal-bar-fill" id="goal-bar" style="width:16%"></div></div>
   </div>
   <div class="st">Evolució del pes</div>
-  <div class="chart-wrap" style="height:100px"><canvas id="chart-pes"></canvas></div>
-  <div class="st">Evolució % grasa</div>
+  <div class="chart-wrap" style="height:120px"><canvas id="chart-pes"></canvas></div>
+  <div class="st">% Grasa corporal</div>
   <div class="chart-wrap" style="height:80px"><canvas id="chart-grasa"></canvas></div>
   <div class="st">Nova mesura</div>
-  <div class="card">
+  <div style="background:var(--card);border-radius:var(--rad);border:1px solid var(--bdr);padding:13px 15px;margin-bottom:9px">
     <div class="fg2">
-      <div class="fg"><label class="fl">Data</label><input class="fi" type="date" id="p-data"></div>
-      <div class="fg"><label class="fl">Pes (kg)</label><input class="fi" type="number" step="0.1" placeholder="99.2" id="p-pes"></div>
+      <div><label class="fl">Data</label><input class="fi" type="date" id="p-data"></div>
+      <div><label class="fl">Pes (kg)</label><input class="fi" type="number" step="0.1" inputmode="decimal" placeholder="97.8" id="p-pes"></div>
     </div>
     <div class="fg3">
-      <div class="fg"><label class="fl">% Grasa</label><input class="fi" type="number" step="0.1" placeholder="27.9" id="p-grasa"></div>
-      <div class="fg"><label class="fl">Muscular (kg)</label><input class="fi" type="number" step="0.1" placeholder="38.6" id="p-musc"></div>
-      <div class="fg"><label class="fl">Agua (%)</label><input class="fi" type="number" step="0.1" placeholder="52.7" id="p-aigua"></div>
+      <div><label class="fl">% Grasa</label><input class="fi" type="number" step="0.1" inputmode="decimal" placeholder="28.1" id="p-grasa"></div>
+      <div><label class="fl">Muscular (kg)</label><input class="fi" type="number" step="0.1" inputmode="decimal" placeholder="38.2" id="p-musc"></div>
+      <div><label class="fl">Massa òssia</label><input class="fi" type="number" step="0.1" inputmode="decimal" placeholder="6.0" id="p-ossia"></div>
     </div>
-    <details style="margin-bottom:10px">
-      <summary style="font-size:11px;color:var(--t2);cursor:pointer;padding:4px 0">Perímetres (cada 4 setmanes)</summary>
-      <div style="margin-top:10px">
-        <div class="fg3">
-          <div class="fg"><label class="fl">Cintura</label><input class="fi" type="number" step="0.1" placeholder="98" id="p-cin"></div>
-          <div class="fg"><label class="fl">Abdomen</label><input class="fi" type="number" step="0.1" placeholder="94" id="p-abd"></div>
-          <div class="fg"><label class="fl">Maluc</label><input class="fi" type="number" step="0.1" placeholder="110" id="p-mal"></div>
-        </div>
-        <div class="fg3">
-          <div class="fg"><label class="fl">Cuixa (cm)</label><input class="fi" type="number" step="0.1" placeholder="65.5" id="p-cui"></div>
-          <div class="fg"><label class="fl">Pit (cm)</label><input class="fi" type="number" step="0.1" placeholder="103.5" id="p-pit"></div>
-          <div class="fg"><label class="fl">Braç (cm)</label><input class="fi" type="number" step="0.1" placeholder="36.5" id="p-brac"></div>
-        </div>
-      </div>
-    </details>
-    <div class="fg"><label class="fl">Notes</label><input class="fi" placeholder="Observacions..." id="p-notes"></div>
+    <div style="margin-bottom:11px"><label class="fl">Notes</label><input class="fi" placeholder="Observacions..." id="p-notes-pes"></div>
     <button class="btn" onclick="savePes()">Guardar mesura</button>
   </div>
   <div class="st">Historial de mesures</div>
-  <div class="card" id="pes-hist-list"><div style="color:var(--t3);font-size:12px">Sense dades</div></div>
+  <div style="background:var(--card);border-radius:var(--rad);border:1px solid var(--bdr);padding:0 15px" id="pes-hist"></div>
 </div>
 
-<!-- TAB 4: RESUM -->
-<div class="page" id="tab-4">
-  <div class="sgrid">
-    <div class="sc"><div class="sc-n cg" id="rs-fetes">0</div><div class="sc-l">Sessions fetes</div><div class="sc-d" id="rs-pct" style="font-size:10px;color:var(--t2)">de 0 previstes</div></div>
-    <div class="sc"><div class="sc-n ca" id="rs-adherencia">0%</div><div class="sc-l">Adherència</div><div class="sc-d" style="font-size:10px;color:var(--t2)">objectiu >80%</div></div>
-  </div>
-  <div class="sgrid">
-    <div class="sc"><div class="sc-n" id="rs-pes">—</div><div class="sc-l">Pes actual (kg)</div><div class="sc-d cg" id="rs-perdut" style="font-size:10px">—</div></div>
-    <div class="sc"><div class="sc-n cb" id="rs-maf">—</div><div class="sc-l">MAF pace actual</div><div class="sc-d" style="font-size:10px;color:var(--t2)">min/km a FC 148</div></div>
-  </div>
-  <div class="st">Progrés objectiu pes (99.2 → 90 kg)</div>
-  <div class="pb-wrap" style="height:8px"><div class="pb" id="rs-pb-pes" style="height:8px;width:0%"></div></div>
-  <div class="st">Adherència al pla</div>
-  <div class="pb-wrap" style="height:8px"><div class="pb" id="rs-pb-pla" style="height:8px;width:0%"></div></div>
-  <div class="st">Per setmana</div>
-  <div id="rs-setmanes"></div>
-  <div class="st">Exportar dades per a Claude</div>
-  <div class="card">
-    <div class="card-title" style="margin-bottom:6px">Genera el resum per analitzar</div>
-    <div class="card-sub" style="margin-bottom:12px">Copia el JSON i envia'l a Claude per analitzar el progrés i programar les properes setmanes.</div>
-    <button class="btn" onclick="exportData()">Generar resum per a Claude</button>
-    <div id="export-box" style="display:none;margin-top:12px">
-      <textarea id="export-text" class="fi" style="height:140px;font-size:10px;font-family:monospace;resize:none" readonly></textarea>
-      <button class="btn btn-sec" onclick="copyExport()">Copiar al portapapers</button>
-    </div>
-  </div>
-</div>
-
-</div><!-- end pages -->
-
-<div class="modal-bg" id="modal" style="display:none" onclick="closeModalBg(event)">
-  <div class="modal" id="modal-inner">
-    <div id="modal-content"></div>
-  </div>
-</div>
+</div><!-- /pages -->
 
 <div class="toast" id="toast"></div>
 
 <script src="https://cdnjs.cloudflare.com/ajax/libs/Chart.js/4.4.1/chart.umd.js"></script>
 <script>
-// ══════════════════════════════════════════
-// GYM DATA
-// ══════════════════════════════════════════
-const GYM_PUSH=[
-  {name:'Press mancuernes inclinat',mat:'Banc inclinat + mancuernes',series:3},
-  {name:'Màquina press pit assegut',mat:'Màquina press pit',series:3},
-  {name:'Tancaments politja',mat:'Politja multifuncions',series:3},
-  {name:'Obertura màquina pit',mat:'Pec deck',series:3},
-  {name:'Press militar màquina',mat:'Màquina press militar',series:3},
-  {name:'Elevació lateral politja',mat:'Politja baixa unilateral',series:3},
-  {name:'Elevació frontal mancuernes',mat:'Mancuernes',series:3},
-];
-const GYM_PULL=[
-  {name:'Lat Pulldown barra ampla',mat:'Politja barra ampla',series:3},
-  {name:'Rem politja agafador V',mat:'Politja agafador V',series:3},
-  {name:'Rem màquina T',mat:'Màquina rem T',series:3},
-  {name:'Pullover politja',mat:'Politja alta',series:3},
-  {name:'Obertura posterior màquina',mat:'Màquina trapezi posterior',series:3},
-  {name:'Planxa abdominal',mat:'Sòl / estora',series:4},
-  {name:'Dead bug',mat:'Sòl',series:3},
-  {name:'Pallof press antirotació',mat:'Politja lateral',series:3},
-];
-const GYM_CAMES=[
-  {name:'Sentadilla multipower',mat:'Multipower / barra lliure',series:3},
-  {name:'Màquina hip thrust',mat:'Màquina hip thrust',series:3},
-  {name:'Premsa de cames',mat:'Màquina prensa',series:3},
-  {name:'Extensió quàdriceps',mat:'Màquina extensió quàd.',series:3},
-  {name:'Curl isquiotibials',mat:'Màquina isquio',series:3},
-  {name:'Elevació bessons',mat:'Màquina bessons',series:3},
-  {name:'Abductor gluti mig',mat:'Màquina abductor (obrir)',series:2},
-];
-
-const MOB_ROUTINE = `1. Gat-vaca: 4×10 reps lentes · Mobilitza tota la columna
-2. Isquiotibials en decúbit: 30 seg/cama · Corda o tovallola al peu
-3. Hip hinge amb pal: 3×10 · Pal a l'esquena, bisagra de maluc
-4. Pigeon pose: 45 seg/costat · Obre piriformi i cadena posterior
-5. Rotació toràcica en quadrupèdia: 3×8/costat · Gir màxim al sostre
-6. Child's pose amb extensió lateral: 30 seg centre + 20 seg/costat
-7. Prone cobra: 3×10 seg · Enforteix extensors lumbars`;
-
-// ══════════════════════════════════════════
-// GYM DETAIL
-// ══════════════════════════════════════════
-const GYM_DETAIL = {
-  PUSH: {
-    objectiu: 'Sessió de pit i espatlla. Focus en contracció muscular, no en pes. Escalfa les articulacions bé.',
-    escalfament: '5 min cinta suau o 10 min mobilitat espatlles: rotacions de braç, creu al pit, obertures.',
-    notes: 'Descans 90 seg entre sèries als compostos (press). 60 seg als aïllaments (elevacions).\nNo arribes al fracàs muscular: les últimes 2 reps han de costar però ser possibles.\nAcabar sempre amb 10 min mobilitat cadena posterior.',
-    consells: ['Si notes dolor a l\'espatlla → redueix el rang de moviment o baixa el pes','Les elevacions laterals: pes lleuger i forma perfecta valen més que pes alt','Press inclinat: omòplats enrere i avall durant tot el moviment'],
-    mob: MOB_ROUTINE
-  },
-  PULL: {
-    objectiu: 'Sessió d\'esquena i core. L\'esquena forta protegeix la columna. El core és fonamental per la protusió.',
-    escalfament: '5 min mobilitat: rotacions espatlles, gat-vaca 10 reps, estirament toràcic.',
-    notes: 'Al rem: tira amb els colzes, no amb les mans. Imagina que els teus braços són ganxos.\nLat Pulldown: omòplats avall i junts quan tires. No encongeixis les espatlles.\nPlanxa i dead bug: respiració activa, no aguantis la respiració.\nAcabar amb 10 min mobilitat.',
-    consells: ['Pallof press: els braços estesos i NO giris el tronc → és antirotació, no rotació','Dead bug: l\'esquena PLANA al sòl tot el temps, si s\'aixeca → redueix el rang','Si notes molèstia lumbar en algun exercici → atura i fem mobilitat'],
-    mob: MOB_ROUTINE
-  },
-  CAMES: {
-    objectiu: 'Sessió de gluti, quàdriceps i isquiotibials. Gluti fort = columna protegida = corres millor.',
-    escalfament: '5 min: sentadilles sense pes 2×15, ponts de gluti 2×15, mobilitat malucs.',
-    notes: 'Sentadilla: genolls cap als peus (no cap endins), pit amunt, profunditat paral·lela mínima.\nHip thrust: extensió COMPLETA del maluc a dalt, apreta el gluti 1 seg.\nAbductor = obrir les cames (coixinets per fora dels genolls).\nAcabar amb 15 min mobilitat (especialment important per la protusió).',
-    consells: ['Hip thrust: és normal notar tensió lumbar, però si hi ha dolor → atura','Sentadilla: pes lleuger i forma perfecta al principi, puja lentament','Curl isquiotibials: baixa molt lent (3 seg), és on es treballa de veritat'],
-    mob: MOB_ROUTINE
-  }
-};
-
-// ══════════════════════════════════════════
-// BICI DETAIL
-// ══════════════════════════════════════════
-const BICI_DETAIL = {
-  'Z2-40': {
-    objectiu: 'Base aeròbica. Sessió de fons en zona 2. L\'objectiu NO és suar molt, és acumular temps a FC baixa cremant grasa.',
-    escalfament: '5 min a Z1 (FC <114). Cadència lliure, resistència mínima. El cos s\'ha d\'activar progressivament.',
-    bloc: 'BASE Z2 (30 min):\n→ FC objectiu: 120–135 ppm\n→ Cadència: 85–95 rpm\n→ Resistència: baixa-moderada\n→ Test: pots parlar en frases completes? Perfecte.\n→ Si FC puja de 140 → baixa resistència immediatament',
-    cooldown: '5 min a Z1 progressivament. No paris de cop.',
-    consells: ['La sensació de "poc esforç" és l\'objectiu: el sistema aeròbic treballa eficientment','Cadència alta (>90 rpm) millora la tècnica de pedaleig i protegeix els genolls','Hidratació: 1 glop cada 10-15 min encara que no tinguis set'],
-    zones: 'Z1: <114 · Z2: 114–148 · Objectiu sessió: 120–135'
-  },
-  'Z2-Z3-45': {
-    objectiu: 'Primera sessió amb blocs de qualitat. La Z2 és la base, els blocs Z3 són l\'estímul que fa millorar el sistema cardiovascular.',
-    escalfament: '5 min Z1. Progressió suau fins Z2.',
-    bloc: 'BASE Z2 (20 min): FC 120–135\n\nBLOC Z3 #1 (4 min): FC 149–163\n→ Augmenta resistència moderadament\n→ Cadència 85 rpm\n→ Sensació: pots parlar però amb frases molt curtes\n\nRECUPERACIÓ Z2 (4 min): FC torna a 120–135\n\nBLOC Z3 #2 (4 min): FC 149–163\n\nRECUPERACIÓ Z2 (3 min)',
-    cooldown: '5 min Z1 progressiu.',
-    consells: ['Als blocs Z3: no passis de 163 ppm (FCmàx 190 × 86%)','Si la FC no baixa durant la recuperació → la resistència és massa alta','Anota la FC mig dels blocs Z3 per comparar setmanes futures'],
-    zones: 'Z2: 114–148 · Z3: 149–163 · No superar 163'
-  },
-  'Z2-Z3-50': {
-    objectiu: 'Tres blocs Z3. Sessió de qualitat progressiva. Si la setmana anterior ha anat bé, pots pujar lleugerament la intensitat.',
-    escalfament: '10 min Z1→Z2 progressiu.',
-    bloc: 'BASE Z2 (20 min): FC 120–135\n\nBLOC Z3 #1 (5 min): FC 149–163\nRECUPERACIÓ Z2 (3 min)\nBLOC Z3 #2 (5 min): FC 149–163\nRECUPERACIÓ Z2 (3 min)\nBLOC Z3 #3 (5 min): FC 149–163',
-    cooldown: '4 min Z1.',
-    consells: ['Tres blocs és la càrrega màxima d\'aquesta fase','Si el 3r bloc et costa molt → és normal, és el que fa millorar','Cadència 82–88 rpm als blocs Z3'],
-    zones: 'Z2: 120–135 · Z3: 149–163'
-  },
-  'Z1-Z2-35': {
-    objectiu: 'Sessió de deload. Cames fresques. NO és per suar, és per activar sense acumular fatiga.',
-    escalfament: '5 min Z1.',
-    bloc: 'Z1-Z2 MÉS SUAU QUE MAI (25 min):\n→ FC ≤128 ppm TOT el temps\n→ Cadència alta: 90–95 rpm\n→ Resistència mínima\n→ Conversa còmoda durant tota la sessió',
-    cooldown: '5 min Z1.',
-    consells: ['Si puges de 128 ppm → baixa resistència','La sensació ha de ser quasi de no fer res','Setmana deload: el cos es recupera i millora'],
-    zones: 'Z1-Z2 suau: ≤128 ppm'
-  },
-  'Z2-Z4-55': {
-    objectiu: 'Sessió de pic pre-cursa. Simula la variabilitat d\'intensitat d\'un recorregut real de gravel.',
-    escalfament: '10 min Z1→Z2.',
-    bloc: 'BASE Z2 (15 min): FC 120–135\n\nBLOC Z3 #1 (5 min): FC 149–163\nRECUPERACIÓ Z2 (3 min)\nBLOC Z3/Z4 #2 (5 min): FC 164–176\nRECUPERACIÓ Z2 (3 min)\nBLOC Z3 #3 (5 min): FC 149–163\nBASE Z2 (4 min)',
-    cooldown: '5 min Z1.',
-    consells: ['El bloc Z4 és intens: és normal que costi molt','Si FC > 176 → baixa resistència immediatament','Si en algun moment et sents malament → Z2 i descansa'],
-    zones: 'Z2: 120–135 · Z3: 149–163 · Z4: 164–176'
-  },
-  'gravel-60': {
-    objectiu: 'Primera sortida llarga de gravel. Z2 estricta tot el recorregut. L\'objectiu és acumular temps en Z2, no fer km ràpids.',
-    escalfament: '10 min al pla a ritme molt suau abans d\'atacar qualsevol pujada.',
-    bloc: 'TOTA LA SORTIDA EN Z2 (FC 120–135):\n→ A les pujades: canvia a plats petits per mantenir FC\n→ A les baixades: aprofita per recuperar\n→ No atacar mai: si la FC puja de 140 → baixa cadència o para\n→ Porta bidon mínim 500ml',
-    cooldown: 'Últims 10 min al pla suau.',
-    consells: ['Primera hora és clau: si surts massa fort, patiràs la 2a hora','Nutrició: gel o barreta si superes 60 min','Anota: km, desnivell, FC mig al Garmin'],
-    zones: 'Z2 estricta: 120–135 · Màxim esporàdic: 145'
-  },
-  'gravel-90': {
-    objectiu: 'Sortida llarga amb primer bloc de Z2+. Progressió respecte la setmana anterior.',
-    escalfament: '10 min suau.',
-    bloc: '0–60 min: Z2 (FC 120–135)\n60–75 min: Z2+ (FC 135–148) — pujades o lleuger increment\n75–90 min: Z1 tornada tranquil·la',
-    cooldown: 'Últims 10 min molt suau.',
-    consells: ['Nutrició: gel als 45 min, no esperes a tenir gana','Hidratació: 1 glop cada 10-15 min','Si et sents bé a la Z2+ → signe que la base aeròbica millora'],
-    zones: 'Z2: 120–135 · Z2+: 135–148'
-  },
-  'gravel-120': {
-    objectiu: 'Primera sortida de 2h. Mantenir Z2 tot el temps. Test real de la resistència aeròbica.',
-    escalfament: '10 min suau.',
-    bloc: '0–70 min: Z2 (FC 120–135)\n70–100 min: Z2+ (FC 135–148) si et trobes bé\nÚltims 20 min: Z1 tornada',
-    cooldown: '10 min molt suau.',
-    consells: ['Gel als 45 i 90 min: obligatori','2 bidons (1L total) o repostatge si pots','Si a la 2a hora notes que la FC puja sola → has anat massa fort a la 1a'],
-    zones: 'Z2: 120–135 · Z2+: 135–148'
-  },
-  'gravel-150': {
-    objectiu: 'Simulació de la cursa. Prova la nutrició i l\'estratègia de ritme que faràs el dia gran.',
-    escalfament: '10 min suau.',
-    bloc: '0–60 min: Z2 ESTRICTA (120–135) — 1a hora MÉS LENTA DEL QUE CREUS\n60–120 min: Z2+ (135–148)\n120–150 min: Z3 (149–163) si et sents\n\nNUTRICIÓ (PROVA AVUI LO QUE FARÀS A LA CURSA):\n→ Gel cada 45 min (min 45, 90, 135)\n→ Barreta als 60 min\n→ 2 bidons: 1 aigua + 1 isotònic',
-    cooldown: '10 min Z1.',
-    consells: ['1a hora lenta = clau per arribar bé a la 2a hora i mitja','Si surts massa fort els primers 30 min patiràs molt al final','Anota com t\'ha anat la nutrició per ajustar el dia de la cursa'],
-    zones: 'Z2: 120–135 · Z2+: 135–148 · Z3: 149–163'
-  }
-};
-
-// ══════════════════════════════════════════
-// RUN DETAIL
-// ══════════════════════════════════════════
-const RUN_DETAIL = {
-  '2026-03-16':{titol:'Run 1-A — [1+2]',objectiu:'Primer contacte Maffetone. L\'objectiu NO és córrer ràpid, és aprendre a controlar la FC.',escalfament:'5 min caminant ràpid (5:30–6:30 min/km). Activació suau.',bloc:'[1 min TROT + 2 min CAMINAR] × 5 cicles\n→ FC ≤148 ppm MÀXIM\n→ Ritme trot esperat: 8:30–10:00 min/km\n→ Si FC puja de 148 → camina IMMEDIATAMENT\n→ Ritme caminar: 6:30–7:30 min/km',cooldown:'5 min caminant suau.',consells:['Activa alerta FC > 148 al Garmin ABANS de sortir','Si camines el 80% del temps → perfecte, és diagnòstic normal','Post: 10 min mobilitat cadena posterior obligatòria'],garmin:'Zona 2 · Alerta FC 148 · Interval timer: 1min/2min'},
-  '2026-03-19':{titol:'Run 1-B — [1+2]',objectiu:'Igual que 1-A. Compara si la FC s\'aguanta millor al mateix ritme.',escalfament:'5 min caminant ràpid.',bloc:'[1 min TROT + 2 min CAMINAR] × 5 cicles\n→ FC ≤148 ppm SEMPRE\n→ Compara ritme amb Run 1-A\n→ La FC s\'aguanta més temps per sota de 148?',cooldown:'5 min caminant.',consells:['Anota el ritme mig del trot per comparar','Si el ritme ha millorat 5-10 seg/km → sistema aeròbic responent'],garmin:'Zona 2 · Alerta FC 148 · Interval timer: 1min/2min'},
-  '2026-03-24':{titol:'Run 2-A — [2+1]',objectiu:'Progressió S1: doblem el temps de trot. Si la FC no aguanta, tornem a [1+2] sense patir.',escalfament:'5 min caminant ràpid.',bloc:'[2 min TROT + 1 min CAMINAR] × 6–7 cicles\n→ FC ≤148 ppm SEMPRE\n→ Ritme trot: 8:00–9:30 min/km\n→ Si FC > 148 durant el trot → canvia a [1:30+1:30]',cooldown:'5 min caminant.',consells:['L\'adaptació aeròbica triga 3-4 setmanes, sigues pacient','Si has de tornar a [1+2] NO és un fracàs'],garmin:'Zona 2 · Alerta FC 148 · Interval timer: 2min/1min'},
-  '2026-03-27':{titol:'Run 2-B — [2+1]',objectiu:'Consolidar el [2+1]. Si va bé, prova 1 cicle de 3 min al final.',escalfament:'5 min caminant.',bloc:'[2 min TROT + 1 min CAMINAR] × 6–7 cicles\n→ FC ≤148 ppm\n→ Si FC aguanta bé (<145) → prova 1 cicle de 3 min al final',cooldown:'5 min caminant.',consells:['Compara ritme mig amb Run 2-A','Si pots fer el cicle de 3 min → molt bona senyal'],garmin:'Zona 2 · Alerta FC 148'},
-  '2026-03-31':{titol:'Run 3-A — TEST MAF PACE',objectiu:'Primer test MAF pace real. Busca un tram pla d\'1 km i anota el ritme exacte a FC 145–148.',escalfament:'8 min caminant ràpid (escalfament llarg, és sessió de test).',bloc:'Opció A (S2 normal): [3+1]\nOpció B (S2 molt bé): [5+1]\n→ FC ≤148 ppm\n\n★ TEST MAF PACE (obligatori):\n→ Tram pla d\'1 km sense vent\n→ FC entre 145–148 constant\n→ Anota el ritme exacte (min/km) → MAF pace S3',cooldown:'5 min caminant. 12 min mobilitat.',consells:['MAF pace = l\'indicador més important del progrés aeròbic','En 4-8 setmanes hauria de millorar 20-40 seg/km','Anota-ho al camp MAF pace del formulari'],garmin:'Zona 2 · Alerta FC 148 · Marca km de test'},
-  '2026-04-03':{titol:'Run 3-B — 30 min continu',objectiu:'Consolidar els intervals llargs. Objectiu: que el trot es vagi fent natural.',escalfament:'8 min caminant.',bloc:'[3+1] o [5+1] segons com et trobis\n→ FC ≤148 ppm\n→ Compara ritme amb 3-A\n→ Anota % temps corrent vs caminant',cooldown:'5 min caminant.',consells:['Si ritme ha millorat 10-20 seg vs 3-A → excel·lent','Objectiu proper: 30 min continus a FC <148'],garmin:'Zona 2 · Alerta FC 148'},
-  '2026-04-07':{titol:'Run Deload A — Recuperació',objectiu:'DELOAD: menys intensitat. El cos consolida adaptacions.',escalfament:'5 min caminant.',bloc:'Trot suau 20 min\n→ FC 120–138 ppm (per sota Maffetone)\n→ Ritme: 9:00–10:30 min/km\n→ Cap pressió, cap interval',cooldown:'5 min caminant.',consells:['La sensació de "poc esforç" és l\'objectiu','El cos millora durant la recuperació, no durant l\'esforç'],garmin:'Z1-Z2 suau · FC objectiu 120–138'},
-  '2026-04-10':{titol:'Run Deload B — Recuperació',objectiu:'Igual que Deload A. Relax total. Cames fresques.',escalfament:'5 min caminant.',bloc:'Trot suau 20 min\n→ FC 120–138 ppm\n→ Ritme 9–10:30 min/km',cooldown:'5 min caminant.',consells:['Últim run abans del pic de S5','Cames fresques = millor rendiment'],garmin:'Z1-Z2 · FC objectiu 120–138'},
-  '2026-04-14':{titol:'Run 5-A — TEST 5 km',objectiu:'TEST DE PROGRÉS. Completa 5 km com sigui (corrent + caminant). Compara amb MAF pace S3.',escalfament:'8 min caminant ràpid.',bloc:'TEST 5 km:\n→ FC ≤152 ppm (pots pujar a Z3)\n→ Ritme: 7:30–8:30 min/km\n→ Si FC > 152 → camina 1 min i reprèn\n\n★ REGISTRE:\n→ Temps total 5 km\n→ Km corrent vs caminant\n→ FC mig i màx\n→ Compara MAF pace amb S3!',cooldown:'5 min caminant. 12 min mobilitat.',consells:['Si corres TOT → estàs molt per sobre del previst','Si camines 30-40% → perfecte, és el progrés esperat'],garmin:'Z2-Z3 · Alerta FC 152 · Objectiu 5km'},
-  '2026-04-17':{titol:'Run 5-B — 35 min continu',objectiu:'Consolidar progrés 5-A. Intent primer 5km continu si 5-A ha anat molt bé.',escalfament:'8 min caminant.',bloc:'Trot continu 35 min\n→ FC ≤148 ppm\n→ Si 5-A molt bé → intent 5km continu!\n→ Anota % temps corrent',cooldown:'5 min caminant.',consells:['Possible primer 5km continu!','Anota el % temps corrent: objectiu apropar-se al 100%'],garmin:'Zona 2 · Alerta FC 148'},
-  '2026-04-21':{titol:'Run Tapering — 20 min suau',objectiu:'TAPERING: cames fresques. No entrenar, activar.',escalfament:'5 min caminant.',bloc:'Trot molt lent 15 min\n→ FC <135 ppm\n→ Tan lent com calgui\n→ Sense pressió',cooldown:'5 min caminant suau.',consells:['El descans millora el rendiment','No facis res extra avui'],garmin:'Z1 · FC <135'},
-};
-
-// ══════════════════════════════════════════
-// WEEK DATA
-// ══════════════════════════════════════════
-const WEEK_DATA=[
-  {label:'S1 · Activació i base',days:[
-    {date:'2026-03-15',dia:'Dg',tipus:'PUSH',nom:'Torso A — PUSH',detail:'Press inclinat · Press pit · Tancaments politja · Obertura pit · Press militar · Elevació lateral · Elevació frontal'},
-    {date:'2026-03-16',dia:'Dl',tipus:'RUN',nom:'Run 1-A — [1+2]',detail:'[1 min trot + 2 min caminar] × 5 · FC ≤148 · 20 min · Alerta Garmin > 148'},
-    {date:'2026-03-17',dia:'Dm',tipus:'CAMES',nom:'Cames A',detail:'Sentadilla · Hip thrust · Premsa · Extensió quàd · Curl isquio · Bessons · Abductor'},
-    {date:'2026-03-18',dia:'Dc',tipus:'BICI',nom:'Spinning Z2 · 40 min',detail:'FC 120–135 · Cadència 85–95 rpm · Zona 2 estricta',biciKey:'Z2-40'},
-    {date:'2026-03-19',dia:'Dj',tipus:'RUN',nom:'Run 1-B — [1+2]',detail:'[1 min trot + 2 min caminar] × 5 · FC ≤148 · 20 min'},
-    {date:'2026-03-20',dia:'Dv',tipus:'PULL',nom:'Torso B — PULL',detail:'Lat Pulldown · Rem V · Rem T · Pullover · Obertura posterior · Planxa · Dead bug · Pallof press'},
-    {date:'2026-03-21',dia:'Ds',tipus:'MULTI',nom:'Run + Tenis + Gravel',detail:'Matí: Run 15 min suau + Tenis · Tarda: Gravel 60–90 min Z2',
-      subActivitats:[
-        {clau:'RUN',nom:'Run lleuger 15 min',detail:'Trot suau FC <140 · Escalfament per al tenis'},
-        {clau:'TENIS',nom:'Tenis',detail:'Sessió dissabte matí'},
-        {clau:'BICI',nom:'Gravel 60–90 min',detail:'Z2 estricta FC 115–135 · Ruta plana · Bidon 500ml',biciKey:'gravel-60'},
-      ]},
-    {date:'2026-03-22',dia:'Dg',tipus:'DESCANS',nom:'Descans actiu + Mobilitat',detail:'Passeig 20–30 min + 15 min mobilitat cadena posterior'},
-  ]},
-  {label:'S2 · Consolidació',days:[
-    {date:'2026-03-23',dia:'Dl',tipus:'PUSH',nom:'Torso A — PUSH +càrrega',detail:'Igual S1 +2.5 kg on puguis · 4 sèries màquina press pit'},
-    {date:'2026-03-24',dia:'Dm',tipus:'CAMES',nom:'Cames B (+Split squat)',detail:'Sentadilla · Hip thrust · Split squat búlgar 3×8 · Premsa · Curl isquio · Bessons · Abductor'},
-    {date:'2026-03-25',dia:'Dc',tipus:'BICI',nom:'Spinning Z2+Z3 · 45 min',detail:'20 min Z2 + 2 blocs Z3 4 min (149–163)',biciKey:'Z2-Z3-45'},
-    {date:'2026-03-26',dia:'Dj',tipus:'MULTI',nom:'Run 2-A + PULL',detail:'Run 25 min [2+1] FC ≤148 + Torso B PULL',
-      subActivitats:[
-        {clau:'RUN',nom:'Run 2-A — [2+1] · 25 min',detail:'[2 min trot + 1 min caminar] × 6–7 · FC ≤148 · Si passa FC → [1:30+1:30]'},
-        {clau:'PULL',nom:'Torso B — PULL',detail:'Lat Pulldown · Rem V · Rem T · Pullover · Obertura posterior · Planxa · Dead bug · Pallof press'},
-      ]},
-    {date:'2026-03-27',dia:'Dv',tipus:'RUN',nom:'Run 2-B — [2+1] · 25 min',detail:'[2 min trot + 1 min caminar] · FC ≤148 · Compara ritme amb Run 2-A'},
-    {date:'2026-03-28',dia:'Ds',tipus:'MULTI',nom:'Run + Tenis + Gravel 90 min',detail:'Matí: Run 20 min suau + Tenis · Tarda: Gravel 90 min Z2',
-      subActivitats:[
-        {clau:'RUN',nom:'Run lleuger 20 min',detail:'Trot suau FC <145'},
-        {clau:'TENIS',nom:'Tenis',detail:'Sessió dissabte'},
-        {clau:'BICI',nom:'Gravel 90 min',detail:'Z2 (120–135) → Z2+ (135–148) · Gel 45 min',biciKey:'gravel-90'},
-      ]},
-    {date:'2026-03-29',dia:'Dg',tipus:'DESCANS',nom:'Descans actiu + Mobilitat',detail:'15 min mobilitat · Pes dimecres al matí en dejú'},
-  ]},
-  {label:'S3 · Càrrega progressiva',days:[
-    {date:'2026-03-30',dia:'Dl',tipus:'PUSH',nom:'Torso A — PUSH 4 sèries',detail:'4 sèries als principals · Press inclinat · Press pit · Tancaments · Press militar · Elevació lateral'},
-    {date:'2026-03-31',dia:'Dm',tipus:'CAMES',nom:'Cames C (màxim volum)',detail:'4 sèries sentadilla · 4 sèries hip thrust · Split squat · Premsa · Curl · Bessons'},
-    {date:'2026-04-01',dia:'Dc',tipus:'BICI',nom:'Spinning Z2+Z3 · 50 min',detail:'20 min Z2 + 3 blocs Z3 5 min (149–163)',biciKey:'Z2-Z3-50'},
-    {date:'2026-04-02',dia:'Dj',tipus:'MULTI',nom:'Run 3-A + PULL',detail:'Run 30 min TEST MAF PACE + Torso B PULL 4 sèries',
-      subActivitats:[
-        {clau:'RUN',nom:'Run 3-A — ★ TEST MAF PACE',detail:'[3+1] o [5+1] · FC ≤148 · 30 min · ★ TEST: tram pla 1km a FC 145–148 → anota ritme exacte'},
-        {clau:'PULL',nom:'Torso B — PULL S3 (4 sèries)',detail:'4 sèries Lat Pulldown · Rem V · Rem T · Planxa 4×45 seg'},
-      ]},
-    {date:'2026-04-03',dia:'Dv',tipus:'RUN',nom:'Run 3-B — 30 min',detail:'[3+1] o [5+1] · FC ≤148 · Compara ritme amb Run 3-A · Anota km i % temps corrent'},
-    {date:'2026-04-04',dia:'Ds',tipus:'MULTI',nom:'Tenis + Gravel 2h',detail:'Tenis + Gravel 2h Z2',
-      subActivitats:[
-        {clau:'TENIS',nom:'Tenis',detail:'Sessió dissabte'},
-        {clau:'BICI',nom:'Gravel 2h',detail:'70 min Z2 + 30 min Z2+ + 20 min Z1 · Gel 45 i 90 min',biciKey:'gravel-120'},
-      ]},
-    {date:'2026-04-05',dia:'Dg',tipus:'DESCANS',nom:'Descans actiu + Mobilitat',detail:'Repòs · 15–20 min mobilitat completa'},
-  ]},
-  {label:'S4 · DELOAD',days:[
-    {date:'2026-04-06',dia:'Dl',tipus:'PUSH',nom:'Torso A DELOAD (–30% vol)',detail:'2 sèries tot · Pesos iguals · Fàcil · 15 min mobilitat'},
-    {date:'2026-04-07',dia:'Dm',tipus:'CAMES',nom:'Cames Deload',detail:'2 sèries sentadilla · 2 sèries hip thrust · 2 sèries premsa · Fàcil · 15 min mobilitat'},
-    {date:'2026-04-08',dia:'Dc',tipus:'MULTI',nom:'Run Deload A + PULL Deload',detail:'Run 25 min suau + Torso B Deload',
-      subActivitats:[
-        {clau:'RUN',nom:'Run Deload A · 25 min suau',detail:'FC 120–138 · Ritme 9–10 min/km · Gaudir · Cap pressió'},
-        {clau:'PULL',nom:'Torso B DELOAD',detail:'2 sèries tot · Lat Pulldown · Rem V · Rem T · Planxa 3×40 seg'},
-      ]},
-    {date:'2026-04-09',dia:'Dj',tipus:'BICI',nom:'Spinning Z1-Z2 suau · 35 min',detail:'FC ≤128 · Cadència alta 90–95 rpm',biciKey:'Z1-Z2-35'},
-    {date:'2026-04-10',dia:'Dv',tipus:'RUN',nom:'Run Deload B · 25 min suau',detail:'FC 120–138 · Ritme 9–10 min/km · Relax total'},
-    {date:'2026-04-11',dia:'Ds',tipus:'MULTI',nom:'Tenis + Gravel tranquil',detail:'Tenis + Gravel FC ≤130',
-      subActivitats:[
-        {clau:'TENIS',nom:'Tenis',detail:'Sessió dissabte'},
-        {clau:'BICI',nom:'Gravel tranquil 90 min',detail:'FC ≤130 tot el temps · Ruta còmoda',biciKey:'gravel-90'},
-      ]},
-    {date:'2026-04-12',dia:'Dg',tipus:'DESCANS',nom:'Descans total + mesures',detail:'Repòs · ★ Pes + plecs i perímetres (cada 4 setmanes)'},
-  ]},
-  {label:'S5 · Pic',days:[
-    {date:'2026-04-13',dia:'Dl',tipus:'PUSH',nom:'Torso A PUSH — Pic',detail:'4 sèries · Intenta marques personals · Últim gym fort'},
-    {date:'2026-04-14',dia:'Dm',tipus:'CAMES',nom:'Cames D — Pic',detail:'4×8 sentadilla pes fort · 4×12 hip thrust · Split squat · Premsa · Curl · Bessons'},
-    {date:'2026-04-15',dia:'Dc',tipus:'BICI',nom:'Spinning Z2-Z4 · 55 min',detail:'Simulació: 3 blocs Z3 + 1 bloc Z4',biciKey:'Z2-Z4-55'},
-    {date:'2026-04-16',dia:'Dj',tipus:'MULTI',nom:'Run 5-A + PULL Pic',detail:'Run TEST 5km + PULL Pic S5',
-      subActivitats:[
-        {clau:'RUN',nom:'Run 5-A — ★ TEST 5 km',detail:'FC ≤152 · Corre els 5 km · ★ Registra: temps total, km corrent, FC mig · Compara MAF pace!'},
-        {clau:'PULL',nom:'Torso B PULL — Pic S5',detail:'4 sèries tot · Planxa 4×50 seg · Màxim volum PULL'},
-      ]},
-    {date:'2026-04-17',dia:'Dv',tipus:'RUN',nom:'Run 5-B — 35 min continu',detail:'FC ≤148 · Intent 5km continu · Compara amb MAF pace'},
-    {date:'2026-04-18',dia:'Ds',tipus:'MULTI',nom:'Tenis + Gravel 2h30',detail:'Tenis + Gravel simulació cursa',
-      subActivitats:[
-        {clau:'TENIS',nom:'Tenis',detail:'Sessió dissabte · suau avui'},
-        {clau:'BICI',nom:'Gravel 2h30 — simulació',detail:'1a hora Z2 ESTRICTA (120–135) · Prova nutrició cursa · Gel cada 45 min',biciKey:'gravel-150'},
-      ]},
-    {date:'2026-04-19',dia:'Dg',tipus:'DESCANS',nom:'Descans + Revisió',detail:'Repòs · 15 min mobilitat'},
-  ]},
-  {label:'S6 · Tapering',days:[
-    {date:'2026-04-20',dia:'Dl',tipus:'PUSH',nom:'Gym molt lleuger — PUSH',detail:'2 sèries fàcils · Activar, no entrenar'},
-    {date:'2026-04-21',dia:'Dm',tipus:'MULTI',nom:'Run suau + PULL lleuger',detail:'Run 20 min suau + PULL lleuger tapering',
-      subActivitats:[
-        {clau:'RUN',nom:'Run suau 20 min',detail:'Trot molt lent · FC <135 · Cames fresques'},
-        {clau:'PULL',nom:'PULL Tapering — molt lleuger',detail:'2 sèries fàcils · Activar, no entrenar'},
-      ]},
-    {date:'2026-04-22',dia:'Dc',tipus:'CAMES',nom:'Cames Tapering — molt lleuger',detail:'2 sèries fàcils · Sentadilla i hip thrust · Activar'},
-    {date:'2026-04-23',dia:'Dj',tipus:'BICI',nom:'Spinning 25 min activació',detail:'FC ≤128 · Activació suau',biciKey:'Z1-Z2-35'},
-    {date:'2026-04-24',dia:'Dv',tipus:'DESCANS',nom:'Descans pre-gran dia',detail:'Repòs total · Prepara material · Menja bé · Dorm prou'},
-    {date:'2026-04-25',dia:'Ds',tipus:'DESCANS',nom:'Descans',detail:'Descansa · Material a punt'},
-    {date:'2026-04-26',dia:'Dg',tipus:'BICI',nom:'Gravel 80 km',detail:'Z2/Z3 · 1a hora molt conservadora · Gel cada 45 min · Gaudeix',biciKey:'gravel-150'},
-  ]},
-];
-
-// ══════════════════════════════════════════
+// ═══════════════════════════════════════════
 // STORAGE
-// ══════════════════════════════════════════
+// ═══════════════════════════════════════════
 const S={
-  get(k){try{const v=localStorage.getItem(k);return v?JSON.parse(v):null}catch{return null}},
-  set(k,v){try{localStorage.setItem(k,JSON.stringify(v))}catch{}},
-  getArr(k){return this.get(k)||[]},
+  get(k){try{const v=localStorage.getItem(k);return v?JSON.parse(v):null;}catch{return null;}},
+  set(k,v){try{localStorage.setItem(k,JSON.stringify(v));}catch{}},
+  arr(k){return this.get(k)||[]},
+  push(k,v){const a=this.arr(k);a.push(v);this.set(k,a);}
 };
 
-// ══════════════════════════════════════════
-// SEED INITIAL DATA
-// ══════════════════════════════════════════
-function seedData(){
-  if(S.get('seeded_v2')) return;
-  const done=S.get('done')||{};
-  done['2026-03-15_PUSH']=true;
-  done['2026-03-16_RUN']=true;
-  done['2026-03-17_CAMES']=true;
-  done['2026-03-20_PULL']=true;
-  done['2026-03-22_DESCANS']=true;
-  S.set('done',done);
-  // Run data
-  const runs=[{date:'2026-03-16',tipus:'RUN',km:'2.46',temps:'25',kmrun:'0.72',kmwalk:'1.74',fcmig:'117',fcmax:'152',ritme:'7:03',maf:'7:45',pct:'24',rpe:'3',notes:'',savedAt:'2026-03-16T00:00:00.000Z'}];
-  S.set('run_sessions',runs);
-  // Gym data
-  const gym=[
-    {date:'2026-03-15',tipus:'PUSH',rpe:'4',notes:'',exercicis:[
-      {name:'Press mancuernes inclinat',series:[{kg:'20',reps:''},{kg:'',reps:''},{kg:'',reps:''}]},
-      {name:'Màquina press pit assegut',series:[{kg:'20',reps:''},{kg:'',reps:''},{kg:'',reps:''}]},
-      {name:'Tancaments politja',series:[{kg:'',reps:''},{kg:'',reps:''},{kg:'',reps:''}]},
-      {name:'Obertura màquina pit',series:[{kg:'35',reps:''},{kg:'',reps:''},{kg:'',reps:''}]},
-      {name:'Press militar màquina',series:[{kg:'20',reps:''},{kg:'',reps:''},{kg:'',reps:''}]},
-      {name:'Elevació lateral politja',series:[{kg:'11',reps:''},{kg:'',reps:''},{kg:'',reps:''}]},
-      {name:'Elevació frontal mancuernes',series:[{kg:'10',reps:''},{kg:'',reps:''},{kg:'',reps:''}]},
-    ],savedAt:'2026-03-15T00:00:00.000Z'},
-    {date:'2026-03-17',tipus:'CAMES',rpe:'5',notes:'',exercicis:[
-      {name:'Sentadilla multipower',series:[{kg:'15',reps:'12'},{kg:'15',reps:'10'},{kg:'15',reps:'9'}]},
-      {name:'Màquina hip thrust',series:[{kg:'20',reps:'13'},{kg:'20',reps:'12'},{kg:'20',reps:'12'}]},
-      {name:'Premsa de cames',series:[{kg:'58',reps:'13'},{kg:'58',reps:'13'},{kg:'58',reps:'13'}]},
-      {name:'Extensió quàdriceps',series:[{kg:'52',reps:'12'},{kg:'52',reps:'10'},{kg:'52',reps:'8'}]},
-      {name:'Curl isquiotibials',series:[{kg:'45',reps:'12'},{kg:'45',reps:'12'},{kg:'45',reps:'12'}]},
-      {name:'Elevació bessons',series:[{kg:'20',reps:'12'},{kg:'20',reps:'12'},{kg:'20',reps:'12'}]},
-      {name:'Abductor gluti mig',series:[{kg:'52',reps:'15'},{kg:'52',reps:'13'}]},
-    ],savedAt:'2026-03-17T00:00:00.000Z'},
-  ];
-  S.set('gym_sessions',gym);
-  S.set('seeded_v2',true);
-}
+// ═══════════════════════════════════════════
+// GYM DATA
+// ═══════════════════════════════════════════
+const GYM={
+  PUSH:{
+    label:'Push · Pit & Espatlla',
+    exercicis:[
+      {id:'push_0',name:'Press mancuernes inclinat',    mat:'Banc inclinat + mancuernes',series:3, tip:'Omòplats enrere i avall durant tot el moviment. Baixa controlat 2 seg.'},
+      {id:'push_1',name:'Màquina press pit assegut',    mat:'Màquina press pit',           series:3, tip:null},
+      {id:'push_2',name:'Tancaments politja',           mat:'Politja multifuncions',        series:3, tip:'Contracció màxima al centre. Pes lleuger i forma perfecta.'},
+      {id:'push_3',name:'Obertura màquina pit',         mat:'Pec deck',                    series:3, tip:null},
+      {id:'push_4',name:'Press militar màquina',        mat:'Màquina press militar',        series:3, tip:null},
+      {id:'push_5',name:'Elevació lateral politja',     mat:'Politja baixa unilateral',    series:3, tip:'Pes lleuger, forma perfecta. Colze lleugerament doblegat, no arribar al fracàs.'},
+      {id:'push_6',name:'Elevació frontal mancuernes',  mat:'Mancuernes',                  series:3, tip:null},
+    ]
+  },
+  PULL:{
+    label:'Pull · Esquena & Core',
+    exercicis:[
+      {id:'pull_0',name:'Lat Pulldown barra ampla',     mat:'Politja barra ampla',         series:3, tip:'Omòplats avall i junts quan tires. No encongeixis les espatlles.'},
+      {id:'pull_1',name:'Rem politja agafador V',       mat:'Politja agafador V',           series:3, tip:'Tira amb els colzes, no amb les mans. Braços = ganxos.'},
+      {id:'pull_2',name:'Rem màquina T',                mat:'Màquina rem T',               series:3, tip:null},
+      {id:'pull_3',name:'Pullover politja',             mat:'Politja alta',                series:3, tip:null},
+      {id:'pull_4',name:'Obertura posterior màquina',   mat:'Màquina trapezi posterior',   series:3, tip:null},
+      {id:'pull_5',name:'Planxa abdominal',             mat:'Sòl / estora',                series:4, tip:'Respiració activa, no aguantis la respiració. Cos en línia recta.'},
+      {id:'pull_6',name:'Dead bug',                     mat:'Sòl',                         series:3, tip:'Esquena PLANA al sòl tot el temps. Si s\'aixeca → redueix el rang.'},
+      {id:'pull_7',name:'Pallof press antirotació',     mat:'Politja lateral',             series:3, tip:'Braços estesos i NO giris el tronc. És ANTIrotació.'},
+    ]
+  },
+  CAMES:{
+    label:'Cames · Gluti & Quàdriceps',
+    exercicis:[
+      {id:'cam_0',name:'Sentadilla multipower',         mat:'Multipower / barra lliure',   series:3, tip:'Genolls cap als peus (no cap endins), pit amunt, profunditat paral·lela mínima.'},
+      {id:'cam_1',name:'Màquina hip thrust',            mat:'Màquina hip thrust',           series:3, tip:'Extensió COMPLETA del maluc a dalt, apreta el gluti 1 seg. Normal notar tensió lumbar; si és dolor → atura.'},
+      {id:'cam_2',name:'Premsa de cames',               mat:'Màquina prensa',              series:3, tip:null},
+      {id:'cam_3',name:'Extensió quàdriceps',           mat:'Màquina extensió quàd.',      series:3, tip:null},
+      {id:'cam_4',name:'Curl isquiotibials',            mat:'Màquina isquio',              series:3, tip:'Baixa molt lent (3 seg). Aquí és on es treballa de veritat.'},
+      {id:'cam_5',name:'Elevació bessons',              mat:'Màquina bessons',             series:3, tip:null},
+      {id:'cam_6',name:'Abductor gluti mig',            mat:'Màquina abductor (obrir)',    series:2, tip:'Coixinets per fora dels genolls. OBRIR les cames.'},
+    ]
+  }
+};
 
-// ══════════════════════════════════════════
+// ═══════════════════════════════════════════
 // STATE
-// ══════════════════════════════════════════
-let currentTab=0,currentWeek=0,currentGymTab='push',charts={};
+// ═══════════════════════════════════════════
+let pesChart=null, grasaChart=null;
 
-// ══════════════════════════════════════════
+// ═══════════════════════════════════════════
 // UTILS
-// ══════════════════════════════════════════
-function fmtDate(d){const days=['Dg','Dl','Dm','Dc','Dj','Dv','Ds'];const dt=new Date(d+'T12:00:00');return `${days[dt.getDay()]} ${dt.getDate()}/${dt.getMonth()+1}`;}
-function today(){return new Date().toISOString().slice(0,10)}
-function daysTo(date){return Math.ceil((new Date(date)-new Date())/86400000)}
+// ═══════════════════════════════════════════
+function today(){return new Date().toISOString().slice(0,10);}
+function fmtDate(d){if(!d)return '';const p=d.split('-');return `${p[2]}/${p[1]}/${p[0]}`;}
 function showToast(msg){const t=document.getElementById('toast');t.textContent=msg;t.classList.add('on');setTimeout(()=>t.classList.remove('on'),2200);}
-function badgeClass(t){const m={PUSH:'bdg-push',PULL:'bdg-pull',CAMES:'bdg-cames',RUN:'bdg-run',BICI:'bdg-bici',MULTI:'bdg-run',DESCANS:'bdg-rest',TENIS:'bdg-rest',MOB:'bdg-mob'};return m[t]||'bdg-rest';}
-function v(id){const el=document.getElementById(id);return el?el.value:'';}
 
-// ══════════════════════════════════════════
-// HEADER
-// ══════════════════════════════════════════
-function updateHeader(){
-  const now=new Date();
-  const dd=['Diumenge','Dilluns','Dimarts','Dimecres','Dijous','Divendres','Dissabte'];
-  document.getElementById('hdr-date').textContent=`${dd[now.getDay()]} ${now.getDate()}/${now.getMonth()+1}`;
+// ═══════════════════════════════════════════
+// NAVIGATION
+// ═══════════════════════════════════════════
+const MAIN_TITLES=['Gym','Pes'];
+function goMainTab(i){
+  document.querySelectorAll('.tab').forEach((t,j)=>t.classList.toggle('on',i===j));
+  document.querySelectorAll('.page').forEach((p,j)=>p.classList.toggle('on',i===j));
+  document.getElementById('hdr-title').textContent=MAIN_TITLES[i];
+  if(i===1) renderPesTab();
 }
 
-// ══════════════════════════════════════════
-// TABS
-// ══════════════════════════════════════════
-function goTab(i){
-  document.querySelectorAll('.tab').forEach((t,j)=>t.classList.toggle('on',j===i));
-  document.querySelectorAll('.page').forEach((p,j)=>p.classList.toggle('on',j===i));
-  const titles=['Calendari','Gym','Run','Pes & Mides','Resum'];
-  document.getElementById('hdr-title').textContent=titles[i];
-  currentTab=i;
-  if(i===1)renderGym();
-  if(i===2)renderRun();
-  if(i===3)renderPes();
-  if(i===4)renderResum();
-}
-
-// ══════════════════════════════════════════
-// CALENDARI
-// ══════════════════════════════════════════
-function changeWeek(dir){currentWeek=Math.max(0,Math.min(WEEK_DATA.length-1,currentWeek+dir));renderCal();}
-
-function renderCal(){
-  const wk=WEEK_DATA[currentWeek];
-  document.getElementById('week-nav-label').textContent=wk.label;
-  const done=S.get('done')||{};
-  const sk=S.get('sk')||{};
-  const reprogram=S.get('reprogram')||{};
-  const inj=S.getArr('inj');
-  const td=today();
-  const list=document.getElementById('cal-list');
-
-  // Build activities per date: planned + injected
-  const dateActs={};
-  wk.days.forEach(day=>{
-    if(!dateActs[day.date]) dateActs[day.date]=[];
-    if(day.tipus==='MULTI'){
-      day.subActivitats.forEach(sa=>{
-        dateActs[day.date].push({clau:sa.clau,nom:sa.nom,detail:sa.detail,biciKey:sa.biciKey||null,isInj:false,origDate:null});
-      });
-    } else {
-      dateActs[day.date].push({clau:day.tipus,nom:day.nom,detail:day.detail,biciKey:day.biciKey||null,isInj:false,origDate:null});
-    }
+let currentGymTab='PUSH';
+function goGymTab(tipus){
+  currentGymTab=tipus;
+  ['PUSH','PULL','CAMES'].forEach(t=>{
+    document.getElementById('subtab-'+t).classList.toggle('on',t===tipus);
+    document.getElementById('gympage-'+t).classList.toggle('on',t===tipus);
   });
-
-  // Add injected (reprogrammed) sessions to target dates
-  inj.forEach(function(s){
-    const t=s.targetDate;
-    // Show on target date if it falls in this week
-    if(wk.days.some(function(d){return d.date===t;})){
-      if(!dateActs[t]) dateActs[t]=[];
-      dateActs[t].push({clau:s.tipus,nom:s.nom,detail:s.detail||s.nom,isInj:true,origDate:s.origDate});
-    }
-    // Also mark original date: if origDate is in this week, show orange dash
-    // (handled by reprogram[date+'_'+tipus] check in the single-activity rendering)
-  });
-
-  const cards=wk.days.map(function(day){
-    const isToday=day.date===td;
-    const acts=dateActs[day.date]||[];
-    if(!acts.length) return '';
-
-    function actKey(a){ return day.date+'_'+a.clau+(a.isInj&&a.origDate?'_'+a.origDate:''); }
-
-    if(acts.length>1){
-      // MULTI day
-      const doneCnt=acts.filter(function(a){return done[actKey(a)];}).length;
-      const subCards=acts.map(function(a){
-        const key=actKey(a);
-        const isDone=done[key]||false;
-        const isSkip=sk[key]||false;
-        const isRepSub=!a.isInj && reprogram[day.date+'_'+a.clau] && typeof reprogram[day.date+'_'+a.clau]==='string';
-        const cls=isDone?'chk on':isSkip?'chk chk-skip':isRepSub?'chk chk-rep':'chk';
-        const txt=isDone?'&#10003;':isSkip?'&#10007;':isRepSub?'&ndash;':'';
-        const origDateStr=(function(){
-          if(!a.isInj||!a.origDate) return 'null';
-          window._injDates=window._injDates||[];
-          var idx=window._injDates.indexOf(a.origDate);
-          if(idx===-1){idx=window._injDates.length;window._injDates.push(a.origDate);}
-          return idx;
-        })();
-        const injBadge=a.isInj?'<span style="font-size:9px;background:rgba(239,159,39,.2);color:#fac775;border-radius:99px;padding:2px 6px;margin-left:5px">de '+fmtDate(a.origDate)+'</span>'
-          :isRepSub?'<span style="font-size:9px;background:rgba(239,159,39,.15);color:#fac775;border-radius:99px;padding:2px 6px;margin-left:5px">&rarr; '+fmtDate(reprogram[day.date+'_'+a.clau])+'</span>':'';
-        return '<div style="display:flex;justify-content:space-between;align-items:center;background:var(--bg3);border-radius:8px;padding:8px 11px;border:1px solid '+(a.isInj?'rgba(239,159,39,.3)':'var(--bdr)')+';">'
-          +'<div style="flex:1;cursor:pointer" onclick="openAct(\''+day.date+'\',\''+a.clau+'\','+origDateStr+')">'
-          +'<div style="font-size:12px;font-weight:500;color:var(--t)">'+a.nom+injBadge+'</div>'
-          +'<div style="font-size:10px;color:var(--t3);margin-top:1px">'+a.detail+'</div>'
-          +'</div>'
-          +'<button class="'+cls+'" onclick="event.stopPropagation();toggleAct(\''+day.date+'\',\''+a.clau+'\','+origDateStr+',this)">'+txt+'</button>'
-          +'</div>';
-      }).join('<div style="height:5px"></div>');
-
-      return '<div class="cal-day'+(isToday?' today':'')+'"><div class="cal-day-hdr"><div>'
-        +'<div class="cal-day-date">'+fmtDate(day.date)+(isToday?' &middot; Avui':'')+'</div>'
-        +'<div class="cal-day-name">Sessió m&uacute;ltiple</div>'
-        +'</div><span class="bdg bdg-run">MULTI '+doneCnt+'/'+acts.length+'</span></div>'
-        +'<div class="cal-day-body"><div style="padding-top:9px">'+subCards+'</div></div></div>';
-    }
-
-    // Single activity
-    const act=acts[0];
-    const key=actKey(act);
-    const isDone=done[key]||false;
-    const isSkip=sk[key]||false;
-    const isRep=!act.isInj && reprogram[day.date+'_'+act.clau] && typeof reprogram[day.date+'_'+act.clau]==='string';
-    const cls=isDone?'chk on':isSkip?'chk chk-skip':isRep?'chk chk-rep':'chk';
-    const txt=isDone?'&#10003;':isSkip?'&#10007;':isRep?'&ndash;':'';
-    const repLabel=isRep?'<span style="font-size:9px;background:rgba(239,159,39,.15);color:#fac775;border-radius:99px;padding:2px 6px;margin-left:6px">&rarr; '+fmtDate(reprogram[day.date+'_'+act.clau])+'</span>':'';
-    const metrics=S.get('metrics_'+day.date+'_'+act.clau)||{};
-    let metaHtml='';
-    if(isDone&&Object.keys(metrics).length){
-      var items=[];
-      if(metrics.km) items.push('<div class="cal-metric">km <span>'+metrics.km+'</span></div>');
-      if(metrics.fcmig) items.push('<div class="cal-metric">FC <span>'+metrics.fcmig+'</span></div>');
-      if(metrics.ritme) items.push('<div class="cal-metric">ritme <span>'+metrics.ritme+'</span></div>');
-      if(metrics.rpe) items.push('<div class="cal-metric">RPE <span>'+metrics.rpe+'</span></div>');
-      if(items.length) metaHtml='<div class="cal-day-meta">'+items.join('')+'</div>';
-    }
-    return '<div class="cal-day'+(isToday?' today':'')+'"><div class="cal-day-hdr" onclick="openAct(\''+day.date+'\',\''+act.clau+'\',null)"><div>'
-      +'<div class="cal-day-date">'+fmtDate(day.date)+(isToday?' &middot; Avui':'')+repLabel+'</div>'
-      +'<div class="cal-day-name">'+act.nom+'</div>'
-      +'</div><div style="display:flex;align-items:center;gap:6px">'
-      +'<span class="bdg '+badgeClass(act.clau)+'">'+act.clau+'</span>'
-      +'<button class="'+cls+'" onclick="event.stopPropagation();toggleAct(\''+day.date+'\',\''+act.clau+'\',null,this)">'+txt+'</button>'
-      +'</div></div>'
-      +'<div class="cal-day-body"><div class="cal-day-detail">'+act.detail+'</div>'+metaHtml+'</div></div>';
-  }).join('');
-
-  list.innerHTML=cards;
+  document.getElementById('hdr-title').textContent='Gym · '+tipus.charAt(0)+tipus.slice(1).toLowerCase();
 }
 
-
-function getMetricsSummary(date,tipus_arr){
-  let items=[];
-  tipus_arr.forEach(t=>{
-    const m=S.get('metrics_'+date+'_'+t)||{};
-    if(m.km) items.push(`<div class="cal-metric">${t} km <span>${m.km}</span></div>`);
-    if(m.fcmig) items.push(`<div class="cal-metric">${t} FC <span>${m.fcmig}</span></div>`);
-  });
-  return items.join('');
+// ═══════════════════════════════════════════
+// RENDER GYM EXERCISES
+// ═══════════════════════════════════════════
+function getLastSession(tipus){
+  const sessions=S.arr('gym_sessions').filter(s=>s.tipus===tipus);
+  return sessions.length ? sessions[sessions.length-1] : null;
 }
 
+function renderExercises(tipus){
+  const g=GYM[tipus];
+  const last=getLastSession(tipus);
+  const id=tipus.toLowerCase();
+  const container=document.getElementById(id+'-exercises');
 
+  // Actualitza capçalera data última sessió
+  const dateEl=document.getElementById(id+'-last-date');
+  if(last) dateEl.textContent=`Última sessió: ${fmtDate(last.data)}`;
+  else dateEl.textContent='Sense sessions anteriors';
 
-function buildModalFooter(date,subTipus,nom,origDate){
-  if(origDate&&origDate!=='null'){
-    return '<div style="margin-top:14px;border-top:1px solid var(--bdr);padding-top:12px">'
-      +'<div style="font-size:11px;color:var(--t3);margin-bottom:8px">Sessio reprogramada:</div>'
-      +'<button class="btn btn-warn" onclick="desreprogram(\''+(date)+'\',\''+subTipus+'\',\''+origDate+'\')">Desreprogramar (torna al dia original)</button>'
-      +'<button class="btn btn-sec" style="margin-top:6px;color:var(--r);border-color:rgba(226,75,74,.3)" onclick="markNotDoneInj(\''+(date)+'\',\''+subTipus+'\',\''+origDate+'\')">No fare (elimina del dia)</button>'
-      +'</div>';
-  }
-  return '<div style="margin-top:14px;border-top:1px solid var(--bdr);padding-top:12px">'
-    +'<div style="font-size:11px;color:var(--t3);margin-bottom:8px">No has pogut fer la sessio?</div>'
-    +'<button class="btn btn-warn" onclick="openReprogramModal(\''+(date)+'\',\''+subTipus+'\',\''+encodeURIComponent(nom)+'\')">Reprogramar a un altre dia</button>'
-    +'<button class="btn btn-sec" style="margin-top:6px;color:var(--r);border-color:rgba(226,75,74,.3)" onclick="markNotDone(\''+(date)+'\',\''+subTipus+'\')">No fare aquesta sessio</button>'
-    +'</div>';
-}
-
-function desreprogram(targetDate,tipus,origDate){
-  if(!origDate||origDate==='null'){closeModal();return;}
-  var inj=S.getArr('inj');
-  inj=inj.filter(function(s){return !(s.origDate===origDate&&s.tipus===tipus);});
-  S.set('inj',inj);
-  var reprogram=S.get('reprogram')||{};
-  delete reprogram[origDate+'_'+tipus];
-  S.set('reprogram',reprogram);
-  // Navigate to the week containing the original date
-  for(var i=0;i<WEEK_DATA.length;i++){
-    if(WEEK_DATA[i].days.some(function(d){return d.date===origDate;})){
-      currentWeek=i; break;
-    }
-  }
-  closeModal();
-  showToast('Sessio retornada al dia original');
-  renderCal();
-}
-
-function markNotDoneInj(targetDate,tipus,origDate){
-  if(!origDate||origDate==='null'){closeModal();return;}
-  var inj=S.getArr('inj');
-  inj=inj.filter(function(s){return !(s.origDate===origDate&&s.tipus===tipus);});
-  S.set('inj',inj);
-  var reprogram=S.get('reprogram')||{};
-  delete reprogram[origDate+'_'+tipus];
-  S.set('reprogram',reprogram);
-  var sk=S.get('sk')||{};
-  var done=S.get('done')||{};
-  sk[origDate+'_'+tipus]=true;
-  delete done[origDate+'_'+tipus];
-  S.set('sk',sk);
-  S.set('done',done);
-  // Navigate to the week containing the original date so user sees the red X
-  for(var i=0;i<WEEK_DATA.length;i++){
-    if(WEEK_DATA[i].days.some(function(d){return d.date===origDate;})){
-      currentWeek=i; break;
-    }
-  }
-  closeModal();
-  showToast('Sessio marcada com a no feta');
-  renderCal();
-}
-
-function markNotDone(date,tipus){
-  var sk=S.get('sk')||{};
-  var done=S.get('done')||{};
-  sk[date+'_'+tipus]=true;
-  delete done[date+'_'+tipus];
-  S.set('sk',sk);
-  S.set('done',done);
-  closeModal();
-  showToast('Sessio marcada com a no feta');
-  renderCal();
-}
-
-
-function getOrigDate(idx){
-  if(idx===null||idx===undefined||idx==='null') return null;
-  if(window._injDates&&window._injDates[idx]!==undefined) return window._injDates[idx];
-  return null;
-}
-
-function openAct(date,tipus,origDateOrKey){
-  var origDate=getOrigDate(origDateOrKey);
-  openRegisterModal(date,tipus,tipus,origDate);
-}
-
-function toggleAct(date,tipus,origDateOrKey,btn){
-  var origDate=getOrigDate(origDateOrKey);
-  var key=date+'_'+tipus+(origDate&&origDate!=='null'?'_'+origDate:'');
-  var done=S.get('done')||{};
-  var sk=S.get('sk')||{};
-  if(done[key]){
-    done[key]=false; S.set('done',done); renderCal();
-  } else if(sk[key]){
-    delete sk[key]; S.set('sk',sk); renderCal();
-  } else {
-    openAct(date,tipus,origDate);
-  }
-}
-
-function toggleDone(date,tipus,btn){
-  toggleAct(date,tipus,null,btn);
-}
-
-function toggleSubDone(date,tipus,idx,btn){
-  const key=date+'_'+tipus;
-  const done=S.get('done')||{};
-  if(!done[key]){
-    done[key]=true; S.set('done',done);
-    btn.classList.add('on'); btn.textContent='✓';
-    openRegisterModal(date,tipus,tipus);
-  } else {
-    done[key]=false; S.set('done',done);
-    btn.classList.remove('on'); btn.textContent='';
-    showToast('Activitat desmarcada');
-    renderCal();
-  }
-}
-
-function openMultiDay(date,wi,di){
-  // just re-render, clicking individual sub-activities handles the rest
-}
-
-function openDay(date,tipus){openRegisterModal(date,tipus,tipus);}
-
-// ══════════════════════════════════════════
-// REPROGRAM MODAL
-// ══════════════════════════════════════════
-function openReprogramModal(date,tipus,nomEnc){
-  var nom=decodeURIComponent(nomEnc);
-  var reprogram=S.get('reprogram')||{};
-  var existing=reprogram[date+'_'+tipus]||'';
-  document.getElementById('modal-content').innerHTML=
-    '<button class="modal-close" onclick="closeModal()">&#10005;</button>'
-    +'<div class="modal-title">Gestionar sessio</div>'
-    +'<div class="modal-sub">'+nom+' &middot; '+fmtDate(date)+'</div>'
-    +'<div class="fg"><label class="fl">Reprogramar a nova data</label>'
-    +'<input class="fi" type="date" id="reprogram-date" value="'+existing+'"></div>'
-    +'<div style="font-size:11px;color:var(--t3);margin-bottom:14px;line-height:1.6">La sessio es moura a la nova data i s\'afegira com a activitat addicional aquell dia.</div>'
-    +'<button class="btn" onclick="saveReprogram(\''+date+'\',\''+tipus+'\',\''+encodeURIComponent(nom)+'\')">Confirmar reprogramacio</button>'
-    +'<button class="btn btn-sec" style="margin-top:8px;color:var(--r);border-color:rgba(226,75,74,.3)" onclick="markNotDone(\''+date+'\',\''+tipus+'\')">No fare aquesta sessio</button>'
-    +'<button class="btn btn-sec" style="margin-top:6px" onclick="closeModal()">Cancel&middot;lar</button>';
-  document.getElementById('modal').style.display='flex';
-}
-
-
-function saveReprogram(date,tipus,nomEnc){
-  var novaData=v('reprogram-date');
-  if(!novaData){showToast('Tria una data');return;}
-  var nom=decodeURIComponent(nomEnc);
-  // Mark original with orange dash + new date
-  var reprogram=S.get('reprogram')||{};
-  reprogram[date+'_'+tipus]=novaData;
-  S.set('reprogram',reprogram);
-  // Add to injected list so it appears on target date
-  var inj=S.getArr('inj');
-  var idx=-1;
-  for(var i=0;i<inj.length;i++){if(inj[i].origDate===date&&inj[i].tipus===tipus){idx=i;break;}}
-  // Get detail from WEEK_DATA
-  var detail=nom;
-  var allDays=WEEK_DATA.reduce(function(a,w){return a.concat(w.days);},[]);
-  var wkDay=null;
-  for(var i=0;i<allDays.length;i++){if(allDays[i].date===date){wkDay=allDays[i];break;}}
-  if(wkDay){
-    if(wkDay.tipus==='MULTI'&&wkDay.subActivitats){
-      for(var i=0;i<wkDay.subActivitats.length;i++){if(wkDay.subActivitats[i].clau===tipus){detail=wkDay.subActivitats[i].detail||nom;break;}}
-    } else {
-      detail=wkDay.detail||nom;
-    }
-  }
-  var entry={origDate:date,tipus:tipus,nom:nom,detail:detail,targetDate:novaData};
-  if(idx>=0) inj[idx]=entry; else inj.push(entry);
-  S.set('inj',inj);
-  closeModal();
-  showToast('Sessio moguda al '+fmtDate(novaData));
-  renderCal();
-}
-
-
-function openRegisterModal(date,tipus,subTipus,origDate){
-  origDate=(origDate&&origDate!=='null')?origDate:null;
-  const wkDay=WEEK_DATA.flatMap(w=>w.days).find(d=>d.date===date&&(d.tipus===tipus||d.tipus==='MULTI'));
-  const saved=S.get('metrics_'+date+'_'+subTipus)||{};
-  let nom='';
-  if(wkDay){
-    if(wkDay.tipus==='MULTI'){
-      const sa=wkDay.subActivitats.find(s=>s.clau===subTipus);
-      nom=sa?sa.nom:tipus;
-    } else nom=wkDay.nom;
-  } else nom=tipus;
-
+  // Construeix HTML dels exercicis
   let html='';
+  g.exercicis.forEach((ex,ei)=>{
+    // Referència última sessió per aquest exercici
+    let lastEx=null;
+    if(last) lastEx=last.exercicis.find(e=>e.id===ex.id);
 
-  if(subTipus==='RUN'){
-    const rd=RUN_DETAIL[date]||{};
-    const consellsHtml=rd.consells?rd.consells.map(c=>`<div style="display:flex;gap:6px;margin-bottom:4px"><span style="color:var(--g);flex-shrink:0">→</span><span>${c}</span></div>`).join(''):'';
-    html=`
-    <button class="modal-close" onclick="closeModal()">✕</button>
-    <div class="modal-title">${rd.titol||nom}</div>
-    <div class="modal-sub">${fmtDate(date)}</div>
-    ${rd.objectiu?`<div class="info-box info-box-green"><div class="info-box-title">Objectiu</div><div class="info-box-body">${rd.objectiu}</div></div>`:''}
-    ${rd.escalfament?`<div class="info-box"><div class="info-box-title">Escalfament</div><div class="info-box-body">${rd.escalfament}</div></div>`:''}
-    ${rd.bloc?`<div class="info-box info-box-blue"><div class="info-box-title">Bloc principal</div><div class="info-box-body">${rd.bloc}</div></div>`:`<div class="mafbox">FC ≤148 ppm · Si passes → camines · MAF pace = ritme a FC 148</div>`}
-    ${rd.cooldown?`<div class="info-box"><div class="info-box-title">Cooldown</div><div class="info-box-body">${rd.cooldown}</div></div>`:''}
-    ${rd.consells?`<div class="info-box"><div class="info-box-title">Consells Maffetone</div><div class="info-box-body">${consellsHtml}</div></div>`:''}
-    ${rd.garmin?`<div style="font-size:10px;color:var(--t3);margin-bottom:12px;padding:6px 10px;background:var(--bg3);border-radius:6px">Garmin: ${rd.garmin}</div>`:''}
-    <div class="st">Registra les dades</div>
-    <div class="fg2">
-      <div class="fg"><label class="fl">km totals</label><input class="fi" id="m-km" type="number" step="0.1" placeholder="2.4" value="${saved.km||''}"></div>
-      <div class="fg"><label class="fl">Temps (min)</label><input class="fi" id="m-temps" type="number" placeholder="25" value="${saved.temps||''}"></div>
-    </div>
-    <div class="fg2">
-      <div class="fg"><label class="fl">Km corrent</label><input class="fi" id="m-kmrun" type="number" step="0.1" placeholder="0.8" value="${saved.kmrun||''}"></div>
-      <div class="fg"><label class="fl">Km caminant</label><input class="fi" id="m-kmwalk" type="number" step="0.1" placeholder="1.6" value="${saved.kmwalk||''}"></div>
-    </div>
-    <div class="fg2">
-      <div class="fg"><label class="fl">FC mig (ppm)</label><input class="fi" id="m-fcmig" type="number" placeholder="143" value="${saved.fcmig||''}"></div>
-      <div class="fg"><label class="fl">FC màx (ppm)</label><input class="fi" id="m-fcmax" type="number" placeholder="152" value="${saved.fcmax||''}"></div>
-    </div>
-    <div class="fg2">
-      <div class="fg"><label class="fl">Ritme mig trot</label><input class="fi" id="m-ritme" placeholder="9:20" value="${saved.ritme||''}"></div>
-      <div class="fg"><label class="fl">MAF pace (min/km)</label><input class="fi" id="m-maf" placeholder="9:45" value="${saved.maf||''}"></div>
-    </div>
-    <div class="fg2">
-      <div class="fg"><label class="fl">% temps corrent</label><input class="fi" id="m-pct" type="number" placeholder="33" value="${saved.pct||''}"></div>
-      <div class="fg"><label class="fl">RPE (1–10)</label><input class="fi" id="m-rpe" type="number" min="1" max="10" placeholder="5" value="${saved.rpe||''}"></div>
-    </div>
-    <div class="fg"><label class="fl">Notes</label><input class="fi" id="m-notes" placeholder="Sensacions, FC s'ha disparat?" value="${saved.notes||''}"></div>
-    <button class="btn" onclick="saveRun('${date}','${subTipus}')">Guardar run</button>
-    ${buildModalFooter(date,subTipus,nom,origDate)}`;
+    // Calcula si hi havia flag "vull pujar" en alguna sèrie
+    const anyUpFlag = lastEx && lastEx.series.some(s=>s.puja);
 
-  } else if(subTipus==='PUSH'||subTipus==='PULL'||subTipus==='CAMES'){
-    const exList=subTipus==='PUSH'?GYM_PUSH:subTipus==='PULL'?GYM_PULL:GYM_CAMES;
-    const gd=GYM_DETAIL[subTipus];
-    const gymHist=S.getArr('gym_sessions');
-    const prevSession=gymHist.filter(s=>s.tipus===subTipus&&s.date!==date).slice(-1)[0];
-    const consHtml=gd.consells.map(c=>`<div style="display:flex;gap:6px;margin-bottom:4px"><span style="color:var(--g);flex-shrink:0">→</span><span>${c}</span></div>`).join('');
-    html=`
-    <button class="modal-close" onclick="closeModal()">✕</button>
-    <div class="modal-title">${nom}</div>
-    <div class="modal-sub">${fmtDate(date)}</div>
-    <div class="info-box info-box-green"><div class="info-box-title">Objectiu</div><div class="info-box-body">${gd.objectiu}</div></div>
-    <div class="info-box"><div class="info-box-title">Escalfament</div><div class="info-box-body">${gd.escalfament}</div></div>
-    <div class="info-box info-box-blue"><div class="info-box-title">Notes d'execució</div><div class="info-box-body">${gd.notes}</div></div>
-    <div class="info-box"><div class="info-box-title">Consells</div><div class="info-box-body">${consHtml}</div></div>
-    <div class="st">Registra els pesos</div>
-    ${exList.map((ex,ei)=>{
-      const prevData=prevSession&&prevSession.exercicis&&prevSession.exercicis[ei];
-      const prevText=prevData?'Ant: '+prevData.series.filter(s=>s.kg).map((s,i)=>`S${i+1}:${s.kg}kg×${s.reps||'—'}`).join(' '):'Primera vegada';
-      const curData=saved.exercicis&&saved.exercicis[ei];
-      return `<div class="ex-card">
-        <div class="ex-hdr" onclick="toggleEx(${ei})">
-          <div><div class="ex-name">${ex.name}</div><div class="ex-prev">${prevText}</div></div>
-          <span style="color:var(--t3);font-size:16px" id="ex-arrow-${ei}">›</span>
+    // Badge estat
+    const badge = lastEx
+      ? (anyUpFlag
+          ? '<span class="badge-up">↑ Puja pes</span>'
+          : '<span class="badge-ok">✓ Mantén</span>')
+      : '';
+
+    html+=`<div class="ex-card" id="ex-${tipus}-${ei}">
+      <div class="ex-hdr" onclick="toggleEx('${tipus}',${ei})">
+        <div style="flex:1;min-width:0">
+          <div class="ex-name">${ex.name}</div>
+          <div class="ex-meta"><span>${ex.mat}</span>${badge}</div>
         </div>
-        <div class="ex-body" id="ex-body-${ei}">
-          <div class="series-hdr"><span>Sèrie</span><span>Pes (kg)</span><span>Reps</span></div>
-          ${Array.from({length:ex.series},(_,si)=>{
-            const sv=curData&&curData.series&&curData.series[si];
-            return `<div class="serie-row">
-              <span class="serie-n">S${si+1}</span>
-              <input class="serie-in" type="number" step="0.5" placeholder="—" id="kg-${ei}-${si}" value="${sv&&sv.kg?sv.kg:''}">
-              <input class="serie-in" type="number" placeholder="10" id="reps-${ei}-${si}" value="${sv&&sv.reps?sv.reps:''}">
-            </div>`;
-          }).join('')}
-        </div>
-      </div>`;
-    }).join('')}
-    <div class="fg" style="margin-top:10px"><label class="fl">RPE general (1–10)</label><input class="fi" id="m-rpe" type="number" min="1" max="10" placeholder="6" value="${saved.rpe||''}"></div>
-    <div class="fg"><label class="fl">Notes</label><input class="fi" id="m-notes" placeholder="Sensacions, progressions..." value="${saved.notes||''}"></div>
-    <button class="btn" onclick="saveGym('${date}','${subTipus}',${exList.length})">Guardar sessió gym</button>
-    ${buildModalFooter(date,subTipus,nom,origDate)}`;
+        <div class="ex-arrow">▾</div>
+      </div>
+      <div class="ex-body">`;
 
-  } else if(subTipus==='BICI'){
-    const wkDayFull=WEEK_DATA.flatMap(w=>w.days).find(d=>d.date===date&&(d.tipus==='BICI'||d.tipus==='MULTI'));
-    let biciKey='Z2-40';
-    if(wkDayFull){
-      if(wkDayFull.biciKey) biciKey=wkDayFull.biciKey;
-      else if(wkDayFull.tipus==='MULTI'){
-        const sa=wkDayFull.subActivitats.find(s=>s.clau==='BICI');
-        if(sa&&sa.biciKey) biciKey=sa.biciKey;
+    // Consell específic
+    if(ex.tip){
+      html+=`<div class="ex-tip">💡 ${ex.tip}</div>`;
+    }
+
+    // Referència última sessió
+    if(lastEx){
+      const seriesRef=lastEx.series.filter(s=>s.kg||s.reps);
+      if(seriesRef.length){
+        html+=`<div class="ex-ref"><div class="ex-ref-title">📋 Última sessió · ${fmtDate(last.data)}</div><div class="ex-ref-row">`;
+        seriesRef.forEach((s,si)=>{
+          html+=`<div class="ex-ref-serie">
+            <div class="ex-ref-s">S${si+1}</div>
+            <div class="ex-ref-v">${s.kg||'—'}×${s.reps||'—'}</div>
+            ${s.puja?'<div class="ex-ref-flag">↑ pujar</div>':''}
+          </div>`;
+        });
+        html+=`</div></div>`;
       }
     }
-    const bd=BICI_DETAIL[biciKey]||BICI_DETAIL['Z2-40'];
-    const isGravel=biciKey.startsWith('gravel');
-    const consHtml=bd.consells.map(c=>`<div style="display:flex;gap:6px;margin-bottom:4px"><span style="color:var(--a);flex-shrink:0">→</span><span>${c}</span></div>`).join('');
-    html=`
-    <button class="modal-close" onclick="closeModal()">✕</button>
-    <div class="modal-title">${nom}</div>
-    <div class="modal-sub">${fmtDate(date)} · ${isGravel?'Gravel':'Spinning'}</div>
-    <div class="info-box info-box-green"><div class="info-box-title">Objectiu</div><div class="info-box-body">${bd.objectiu}</div></div>
-    <div class="info-box"><div class="info-box-title">Escalfament</div><div class="info-box-body">${bd.escalfament}</div></div>
-    <div class="info-box info-box-amber"><div class="info-box-title">Sessió</div><div class="info-box-body">${bd.bloc}</div></div>
-    <div class="info-box"><div class="info-box-title">Cooldown</div><div class="info-box-body">${bd.cooldown}</div></div>
-    <div class="info-box"><div class="info-box-title">Consells</div><div class="info-box-body">${consHtml}</div></div>
-    <div style="font-size:10px;color:var(--t3);margin-bottom:12px;padding:6px 10px;background:var(--bg3);border-radius:6px">Zones: ${bd.zones}</div>
-    <div class="st">Registra les dades</div>
-    <div class="fg2">
-      <div class="fg"><label class="fl">Durada (min)</label><input class="fi" id="m-dur" type="number" placeholder="40" value="${saved.dur||''}"></div>
-      <div class="fg"><label class="fl">FC mig (ppm)</label><input class="fi" id="m-fcmig" type="number" placeholder="128" value="${saved.fcmig||''}"></div>
-    </div>
-    <div class="fg2">
-      <div class="fg"><label class="fl">FC màx (ppm)</label><input class="fi" id="m-fcmax" type="number" placeholder="148" value="${saved.fcmax||''}"></div>
-      <div class="fg"><label class="fl">Cadència mig (rpm)</label><input class="fi" id="m-cad" type="number" placeholder="90" value="${saved.cad||''}"></div>
-    </div>
-    ${isGravel?`<div class="fg2">
-      <div class="fg"><label class="fl">Km recorreguts</label><input class="fi" id="m-km" type="number" step="0.1" placeholder="32.5" value="${saved.km||''}"></div>
-      <div class="fg"><label class="fl">Desnivell (m)</label><input class="fi" id="m-desn" type="number" placeholder="350" value="${saved.desn||''}"></div>
-    </div>`:''}
-    <div class="fg2">
-      <div class="fg"><label class="fl">Zona principal</label>
-        <select class="fi" id="m-zona"><option value="">—</option><option value="Z1">Z1</option><option value="Z2">Z2</option><option value="Z2-Z3">Z2-Z3</option><option value="Z3">Z3</option></select>
-      </div>
-      <div class="fg"><label class="fl">RPE (1–10)</label><input class="fi" id="m-rpe" type="number" min="1" max="10" placeholder="4" value="${saved.rpe||''}"></div>
-    </div>
-    <div class="fg"><label class="fl">Notes</label><input class="fi" id="m-notes" placeholder="Sensacions, meteorologia..." value="${saved.notes||''}"></div>
-    <button class="btn" onclick="saveBici('${date}','${subTipus}')">Guardar sessió bici</button>
-    ${buildModalFooter(date,subTipus,nom,origDate)}`;
 
-  } else if(subTipus==='DESCANS'||subTipus==='MOB'){
-    html=`
-    <button class="modal-close" onclick="closeModal()">✕</button>
-    <div class="modal-title">${nom}</div>
-    <div class="modal-sub">${fmtDate(date)}</div>
-    <div class="info-box info-box-green"><div class="info-box-title">Rutina de mobilitat (10–15 min)</div><div class="info-box-body">${MOB_ROUTINE}</div></div>
-    <div style="font-size:11px;color:var(--t2);margin-bottom:12px;line-height:1.6">Fes-la sempre al final de l'entrenament o al matí. Especialment important per la protusió discal.</div>
-    <div class="fg"><label class="fl">Notes</label><input class="fi" id="m-notes" placeholder="Com et trobes avui?" value="${saved.notes||''}"></div>
-    <button class="btn" onclick="saveGeneric('${date}','${subTipus}')">Marcar com a fet</button>
-    ${buildModalFooter(date,subTipus,nom,origDate)}`;
-
-  } else {
-    html=`
-    <button class="modal-close" onclick="closeModal()">✕</button>
-    <div class="modal-title">${nom}</div>
-    <div class="modal-sub">${fmtDate(date)}</div>
-    ${wkDay?`<div class="info-box"><div class="info-box-title">Detall</div><div class="info-box-body">${wkDay.detail||''}</div></div>`:''}
-    <div class="fg"><label class="fl">Notes</label><input class="fi" id="m-notes" placeholder="Notes..." value="${saved.notes||''}"></div>
-    <button class="btn" onclick="saveGeneric('${date}','${subTipus}')">Marcar com a fet</button>
-    ${buildModalFooter(date,subTipus,nom,origDate)}`;
-  }
-
-  document.getElementById('modal-content').innerHTML=html;
-  document.getElementById('modal').style.display='flex';
-}
-
-function toggleEx(i){
-  const body=document.getElementById('ex-body-'+i);
-  const arrow=document.getElementById('ex-arrow-'+i);
-  const isOpen=body.style.display==='block';
-  body.style.display=isOpen?'none':'block';
-  if(arrow) arrow.textContent=isOpen?'›':'‹';
-}
-
-function closeModal(){document.getElementById('modal').style.display='none';renderCal();}
-function closeModalBg(e){if(e.target===document.getElementById('modal'))closeModal();}
-
-// ══════════════════════════════════════════
-// SAVE
-// ══════════════════════════════════════════
-function saveRun(date,tipus){
-  const data={date,tipus,km:v('m-km'),temps:v('m-temps'),kmrun:v('m-kmrun'),kmwalk:v('m-kmwalk'),fcmig:v('m-fcmig'),fcmax:v('m-fcmax'),ritme:v('m-ritme'),maf:v('m-maf'),pct:v('m-pct'),rpe:v('m-rpe'),notes:v('m-notes'),savedAt:new Date().toISOString()};
-  S.set('metrics_'+date+'_'+tipus,data);
-  const runs=S.getArr('run_sessions');
-  const idx=runs.findIndex(r=>r.date===date&&r.tipus===tipus);
-  if(idx>=0) runs[idx]=data; else runs.push(data);
-  S.set('run_sessions',runs);
-  markDone(date,tipus);
-  closeModal(); showToast('Run guardat!');
-}
-
-function saveGym(date,tipus,numEx){
-  const exList=tipus==='PUSH'?GYM_PUSH:tipus==='PULL'?GYM_PULL:GYM_CAMES;
-  const exercicis=Array.from({length:numEx},(_,ei)=>({
-    name:exList[ei].name,
-    series:Array.from({length:exList[ei].series},(_,si)=>({
-      kg:document.getElementById('kg-'+ei+'-'+si)?.value||'',
-      reps:document.getElementById('reps-'+ei+'-'+si)?.value||''
-    }))
-  }));
-  const data={date,tipus,exercicis,rpe:v('m-rpe'),notes:v('m-notes'),savedAt:new Date().toISOString()};
-  S.set('metrics_'+date+'_'+tipus,data);
-  const gym=S.getArr('gym_sessions');
-  const idx=gym.findIndex(g=>g.date===date&&g.tipus===tipus);
-  if(idx>=0) gym[idx]=data; else gym.push(data);
-  S.set('gym_sessions',gym);
-  markDone(date,tipus);
-  closeModal(); showToast('Gym guardat!');
-}
-
-function saveBici(date,tipus){
-  const data={date,tipus,dur:v('m-dur'),fcmig:v('m-fcmig'),fcmax:v('m-fcmax'),cad:v('m-cad'),km:v('m-km'),desn:v('m-desn'),zona:v('m-zona'),rpe:v('m-rpe'),notes:v('m-notes'),savedAt:new Date().toISOString()};
-  S.set('metrics_'+date+'_'+tipus,data);
-  const bicis=S.getArr('bici_sessions');
-  const idx=bicis.findIndex(b=>b.date===date&&b.tipus===tipus);
-  if(idx>=0) bicis[idx]=data; else bicis.push(data);
-  S.set('bici_sessions',bicis);
-  markDone(date,tipus);
-  closeModal(); showToast('Bici guardada!');
-}
-
-function saveGeneric(date,tipus){
-  const data={date,tipus,notes:v('m-notes'),savedAt:new Date().toISOString()};
-  S.set('metrics_'+date+'_'+tipus,data);
-  markDone(date,tipus);
-  closeModal(); showToast('Sessió marcada!');
-}
-
-function markDone(date,tipus){const done=S.get('done')||{};done[date+'_'+tipus]=true;S.set('done',done);}
-
-// ══════════════════════════════════════════
-// GYM TAB
-// ══════════════════════════════════════════
-function gymTab(t){
-  currentGymTab=t;
-  document.querySelectorAll('.tgl').forEach((el,i)=>el.classList.toggle('on',['push','pull','cames'][i]===t));
-  renderGym();
-}
-
-function renderGym(){
-  const exList=currentGymTab==='push'?GYM_PUSH:currentGymTab==='pull'?GYM_PULL:GYM_CAMES;
-  const tipus=currentGymTab.toUpperCase();
-  const gymSessions=S.getArr('gym_sessions').filter(s=>s.tipus===tipus);
-  const content=document.getElementById('gym-content');
-  content.innerHTML=exList.map((ex,ei)=>{
-    const allData=gymSessions.map(sess=>({date:sess.date,series:sess.exercicis&&sess.exercicis[ei]?sess.exercicis[ei].series:[]})).filter(d=>d.series.length);
-    const last=allData.slice(-1)[0];
-    const lastText=last?last.series.filter(s=>s.kg).map((s,i)=>`S${i+1}: ${s.kg}kg×${s.reps||'—'}`).join(' · '):'Sense dades';
-    const lastDate=last?fmtDate(last.date):'—';
-    const maxKg=allData.length?Math.max(...allData.flatMap(d=>d.series.map(s=>parseFloat(s.kg)||0))):0;
-    return `<div class="card" style="margin-bottom:9px">
-      <div class="card-row" style="margin-bottom:8px">
-        <div><div class="card-title">${ex.name}</div><div class="card-sub">${ex.mat}</div></div>
-        ${maxKg>0?`<div style="text-align:right"><div style="font-size:16px;font-weight:600;color:var(--g);font-family:'DM Mono',monospace">${maxKg}kg</div><div style="font-size:10px;color:var(--t3)">màx registrat</div></div>`:''}
-      </div>
-      <div style="font-size:11px;color:var(--t2);margin-bottom:6px">Última: ${lastDate}</div>
-      <div style="font-size:11px;color:var(--t3);background:var(--bg3);border-radius:6px;padding:7px 9px">${lastText}</div>
-      ${allData.length>1?`<div class="st" style="margin-top:10px">Historial</div>${allData.slice(-5).map(d=>{const mS=d.series.reduce((a,s)=>Math.max(a,parseFloat(s.kg)||0),0);return `<div class="hi"><div class="hi-left"><div class="hi-date">${fmtDate(d.date)}</div></div><div class="hi-right">${mS>0?mS+'kg':'—'}</div></div>`;}).join('')}`:''}
-    </div>`;
-  }).join('');
-}
-
-// ══════════════════════════════════════════
-// RUN TAB
-// ══════════════════════════════════════════
-function renderRun(){
-  const runs=S.getArr('run_sessions');
-  document.getElementById('run-count').textContent=runs.length;
-  const totalKm=runs.reduce((a,r)=>a+(parseFloat(r.km)||0),0);
-  document.getElementById('run-km').textContent=totalKm.toFixed(1);
-  const fcVals=runs.filter(r=>r.fcmig).map(r=>parseFloat(r.fcmig));
-  document.getElementById('run-fc').textContent=fcVals.length?Math.round(fcVals.reduce((a,b)=>a+b,0)/fcVals.length)+'ppm':'—';
-  function mafToSec(s){if(!s||!s.includes(':'))return null;const p=s.split(':');return parseInt(p[0])*60+parseInt(p[1]||0);}
-  const mafRuns=runs.filter(r=>r.maf&&r.maf.includes(':'));
-  if(mafRuns.length){const best=mafRuns.reduce((a,b)=>mafToSec(a.maf)<mafToSec(b.maf)?a:b);document.getElementById('run-maf').textContent=best.maf;}
-  else document.getElementById('run-maf').textContent='—';
-  if(mafRuns.length>1){
-    const labels=mafRuns.map(r=>r.date.slice(5));
-    const vals=mafRuns.map(r=>mafToSec(r.maf)/60);
-    if(charts['maf']) charts['maf'].destroy();
-    charts['maf']=new Chart(document.getElementById('chart-maf'),{type:'line',data:{labels,datasets:[{data:vals,borderColor:'#85b7eb',backgroundColor:'rgba(55,138,221,0.1)',tension:0.3,fill:true,pointRadius:4,pointBackgroundColor:'#85b7eb'}]},options:{responsive:true,maintainAspectRatio:false,plugins:{legend:{display:false}},scales:{y:{reverse:true,ticks:{callback:v=>Math.floor(v)+':'+(Math.round((v%1)*60)).toString().padStart(2,'0')}}}}});
-  }
-  const hist=document.getElementById('run-hist-list');
-  if(!runs.length){hist.innerHTML='<div style="color:var(--t3);font-size:12px">Sense runs registrats</div>';return;}
-  hist.innerHTML=runs.slice().reverse().map(r=>`
-    <div class="run-card">
-      <div class="run-card-hdr">
-        <span class="run-card-title">${r.tipus} · ${fmtDate(r.date)}</span>
-        ${r.rpe?`<span class="bdg bdg-run">RPE ${r.rpe}</span>`:''}
-      </div>
-      <div class="run-metrics">
-        <div class="rm"><div class="rm-v">${r.km||'—'}</div><div class="rm-l">km</div></div>
-        <div class="rm"><div class="rm-v">${r.fcmig||'—'}</div><div class="rm-l">FC mig</div></div>
-        <div class="rm"><div class="rm-v">${r.ritme||'—'}</div><div class="rm-l">ritme</div></div>
-        <div class="rm"><div class="rm-v">${r.maf||'—'}</div><div class="rm-l">MAF pace</div></div>
-      </div>
-      ${r.notes?`<div style="font-size:10px;color:var(--t3);margin-top:7px;padding-top:7px;border-top:1px solid var(--bdr)">${r.notes}</div>`:''}
-    </div>`).join('');
-}
-
-// ══════════════════════════════════════════
-// PES TAB
-// ══════════════════════════════════════════
-function savePes(){
-  const entry={date:v('p-data')||today(),pes:parseFloat(v('p-pes'))||null,grasa:parseFloat(v('p-grasa'))||null,musc:parseFloat(v('p-musc'))||null,aigua:parseFloat(v('p-aigua'))||null,cin:parseFloat(v('p-cin'))||null,abd:parseFloat(v('p-abd'))||null,mal:parseFloat(v('p-mal'))||null,cui:parseFloat(v('p-cui'))||null,pit:parseFloat(v('p-pit'))||null,brac:parseFloat(v('p-brac'))||null,notes:v('p-notes'),savedAt:new Date().toISOString()};
-  if(!entry.pes){showToast('Introdueix el pes');return;}
-  const pesos=S.getArr('pesos');
-  const idx=pesos.findIndex(p=>p.date===entry.date);
-  if(idx>=0) pesos[idx]=entry; else pesos.push(entry);
-  pesos.sort((a,b)=>a.date.localeCompare(b.date));
-  S.set('pesos',[{date:'2026-03-21',pes:96.4,grasa:27.2,musc:37.9,savedAt:'2026-03-21T00:00:00.000Z'}]);
-  showToast('Mesura guardada!');
-  renderPes();
-}
-
-function renderPes(){
-  const pesos=S.getArr('pesos');
-  const partida=99.2,obj=90;
-  const last=pesos.length?pesos[pesos.length-1]:null;
-  const pesActual=last?last.pes:partida;
-  const perdut=parseFloat((partida-pesActual).toFixed(1));
-  const queda=parseFloat((pesActual-obj).toFixed(1));
-  const pct=perdut>0?Math.min(100,Math.round(perdut/(partida-obj)*100)):0;
-  document.getElementById('p-actual').textContent=pesActual.toFixed(1);
-  document.getElementById('p-queda').textContent=Math.max(0,queda).toFixed(1);
-  document.getElementById('p-perdut').textContent=perdut>0?perdut.toFixed(1):'0.0';
-  document.getElementById('p-pct').textContent=pct+'%';
-  const pesData=[{date:'2026-03-15',pes:99.2},...pesos];
-  const uniquePes=[...new Map(pesData.map(p=>[p.date,p])).values()].sort((a,b)=>a.date.localeCompare(b.date));
-  if(uniquePes.length>1){
-    if(charts['pes']) charts['pes'].destroy();
-    charts['pes']=new Chart(document.getElementById('chart-pes'),{type:'line',data:{labels:uniquePes.map(p=>p.date.slice(5)),datasets:[{data:uniquePes.map(p=>p.pes),borderColor:'#5dcaa5',backgroundColor:'rgba(29,158,117,0.1)',tension:0.3,fill:true,pointRadius:4,pointBackgroundColor:'#5dcaa5'},{data:uniquePes.map(()=>obj),borderColor:'rgba(239,159,39,0.4)',borderDash:[4,4],pointRadius:0}]},options:{responsive:true,maintainAspectRatio:false,plugins:{legend:{display:false}},scales:{y:{min:obj-2,max:partida+1}}}});
-  }
-  const grasaData=uniquePes.filter(p=>p.grasa);
-  if(grasaData.length>1){
-    if(charts['grasa']) charts['grasa'].destroy();
-    charts['grasa']=new Chart(document.getElementById('chart-grasa'),{type:'line',data:{labels:grasaData.map(p=>p.date.slice(5)),datasets:[{data:grasaData.map(p=>p.grasa),borderColor:'#fac775',backgroundColor:'rgba(239,159,39,0.1)',tension:0.3,fill:true,pointRadius:4,pointBackgroundColor:'#fac775'}]},options:{responsive:true,maintainAspectRatio:false,plugins:{legend:{display:false}}}});
-  }
-  const hist=document.getElementById('pes-hist-list');
-  if(!pesos.length){hist.innerHTML='<div style="color:var(--t3);font-size:12px">Afegeix la primera mesura!</div>';return;}
-  hist.innerHTML=pesos.slice().reverse().map((p,i,arr)=>{
-    const prev=arr[i+1];
-    const delta=prev?parseFloat((p.pes-prev.pes).toFixed(1)):null;
-    return `<div class="hi">
-      <div class="hi-left">
-        <div class="hi-date">${fmtDate(p.date)}</div>
-        ${p.grasa?`<div style="font-size:10px;color:var(--t3);margin-top:1px">grasa:${p.grasa}%${p.musc?' musc:'+p.musc+'kg':''}</div>`:''}
-        ${p.cin?`<div style="font-size:10px;color:var(--t3);margin-top:1px">cin:${p.cin} abd:${p.abd} mal:${p.mal}</div>`:''}
-      </div>
-      <div><div class="hi-right">${p.pes} kg</div>${delta!==null?`<div class="hi-delta ${delta<0?'cg':'cr'}">${delta>0?'+':''}${delta} kg</div>`:''}</div>
-    </div>`;
-  }).join('');
-}
-
-// ══════════════════════════════════════════
-// RESUM TAB
-// ══════════════════════════════════════════
-function renderResum(){
-  const done=S.get('done')||{};
-  const pesos=S.getArr('pesos');
-  const runs=S.getArr('run_sessions');
-  let totalPrev=0,totalFetes=0;
-  WEEK_DATA.forEach(wk=>wk.days.forEach(d=>{
-    if(d.tipus==='MULTI'){
-      d.subActivitats.forEach(sa=>{if(sa.clau!=='TENIS'){totalPrev++;if(done[d.date+'_'+sa.clau])totalFetes++;}});
-    } else if(d.tipus!=='DESCANS'){
-      totalPrev++;if(done[d.date+'_'+d.tipus])totalFetes++;
+    // Taula de sèries
+    html+=`<div class="series-hdr"><span>#</span><span>Pes (kg)</span><span>Reps</span><span>Pujar?</span></div>`;
+    for(let s=0;s<ex.series;s++){
+      // Placeholder = últims valors
+      const ref=lastEx?lastEx.series[s]:null;
+      const phKg=ref&&ref.kg?ref.kg:'kg';
+      const phReps=ref&&ref.reps?ref.reps:'reps';
+      html+=`<div class="serie-row">
+        <div class="serie-n">${s+1}</div>
+        <input class="serie-in" type="number" inputmode="decimal" step="0.5" placeholder="${phKg}" id="kg-${tipus}-${ei}-${s}">
+        <input class="serie-in" type="number" inputmode="numeric" placeholder="${phReps}" id="reps-${tipus}-${ei}-${s}">
+        <button class="puja-btn" id="puja-${tipus}-${ei}-${s}" onclick="togglePuja('${tipus}',${ei},${s})">↑ Pujar</button>
+      </div>`;
     }
-  }));
-  document.getElementById('rs-fetes').textContent=totalFetes;
-  document.getElementById('rs-pct').textContent='de '+totalPrev+' previstes';
-  const adh=totalPrev>0?Math.round(totalFetes/totalPrev*100):0;
-  document.getElementById('rs-adherencia').textContent=adh+'%';
-  const partida=99.2,obj=90;
-  const last=pesos.length?pesos[pesos.length-1]:null;
-  const pesActual=last?last.pes:partida;
-  const perdut=parseFloat((partida-pesActual).toFixed(1));
-  const pct=perdut>0?Math.min(100,Math.round(perdut/(partida-obj)*100)):0;
-  document.getElementById('rs-pes').textContent=pesActual.toFixed(1);
-  document.getElementById('rs-perdut').textContent=perdut>0?'-'+perdut+' kg perduts':'Sense canvis';
-  document.getElementById('rs-pb-pes').style.width=pct+'%';
-  document.getElementById('rs-pb-pla').style.width=adh+'%';
-  function mafToSec(s){if(!s||!s.includes(':'))return null;const p=s.split(':');return parseInt(p[0])*60+parseInt(p[1]||0);}
-  const mafRuns=runs.filter(r=>r.maf&&r.maf.includes(':'));
-  if(mafRuns.length){const best=mafRuns.reduce((a,b)=>mafToSec(a.maf)<mafToSec(b.maf)?a:b);document.getElementById('rs-maf').textContent=best.maf;}
-  const setEl=document.getElementById('rs-setmanes');
-  setEl.innerHTML=WEEK_DATA.map((wk,wi)=>{
-    let wkPrev=0,wkFetes=0;
-    wk.days.forEach(d=>{
-      if(d.tipus==='MULTI') d.subActivitats.forEach(sa=>{if(sa.clau!=='TENIS'){wkPrev++;if(done[d.date+'_'+sa.clau])wkFetes++;}});
-      else if(d.tipus!=='DESCANS'){wkPrev++;if(done[d.date+'_'+d.tipus])wkFetes++;}
-    });
-    const wkPct=wkPrev>0?Math.round(wkFetes/wkPrev*100):0;
-    const isActive=wi===currentWeek;
-    return `<div class="card" style="padding:11px 14px;margin-bottom:7px${isActive?';border-color:rgba(29,158,117,.4)':''}">
-      <div style="display:flex;justify-content:space-between;align-items:center;margin-bottom:7px">
+
+    html+=`</div></div>`;
+  });
+
+  container.innerHTML=html;
+}
+
+function toggleEx(tipus,i){
+  document.getElementById(`ex-${tipus}-${i}`).classList.toggle('open');
+}
+
+function togglePuja(tipus,ei,si){
+  const btn=document.getElementById(`puja-${tipus}-${ei}-${si}`);
+  btn.classList.toggle('on');
+  btn.textContent=btn.classList.contains('on')?'↑ Pujar ✓':'↑ Pujar';
+}
+
+// ═══════════════════════════════════════════
+// SAVE SESSION
+// ═══════════════════════════════════════════
+function saveSession(tipus){
+  const g=GYM[tipus];
+  const id=tipus.toLowerCase();
+  const data=document.getElementById(id+'-date').value||today();
+
+  const exercicis=g.exercicis.map((ex,ei)=>{
+    const series=[];
+    for(let s=0;s<ex.series;s++){
+      const kg=document.getElementById(`kg-${tipus}-${ei}-${s}`)?.value||'';
+      const reps=document.getElementById(`reps-${tipus}-${ei}-${s}`)?.value||'';
+      const puja=document.getElementById(`puja-${tipus}-${ei}-${s}`)?.classList.contains('on')||false;
+      series.push({kg,reps,puja});
+    }
+    return {id:ex.id,name:ex.name,series};
+  });
+
+  const hasDades=exercicis.some(ex=>ex.series.some(s=>s.kg||s.reps));
+  if(!hasDades){showToast('⚠ Afegeix alguna dada primer');return;}
+
+  S.push('gym_sessions',{tipus,data,exercicis,ts:Date.now()});
+  showToast('✅ Sessió guardada!');
+  renderExercises(tipus);
+  renderGymHist(tipus);
+}
+
+// ═══════════════════════════════════════════
+// CLEAR FORM
+// ═══════════════════════════════════════════
+function clearForm(tipus){
+  const g=GYM[tipus];
+  g.exercicis.forEach((ex,ei)=>{
+    for(let s=0;s<ex.series;s++){
+      const kg=document.getElementById(`kg-${tipus}-${ei}-${s}`);
+      const reps=document.getElementById(`reps-${tipus}-${ei}-${s}`);
+      const puja=document.getElementById(`puja-${tipus}-${ei}-${s}`);
+      if(kg) kg.value='';
+      if(reps) reps.value='';
+      if(puja){puja.classList.remove('on');puja.textContent='↑ Pujar';}
+    }
+  });
+  showToast('Formulari buidat');
+}
+
+// ═══════════════════════════════════════════
+// GYM HISTORY
+// ═══════════════════════════════════════════
+function renderGymHist(tipus){
+  const sessions=S.arr('gym_sessions').filter(s=>s.tipus===tipus).reverse();
+  const container=document.getElementById(tipus.toLowerCase()+'-hist');
+  if(!sessions.length){container.innerHTML='<div style="color:var(--t3);font-size:12px;padding:6px 0">Sense sessions guardades</div>';return;}
+
+  container.innerHTML=sessions.map((s,idx)=>{
+    const realIdx=S.arr('gym_sessions').findIndex(ss=>ss.ts===s.ts);
+    const exLines=s.exercicis.map(ex=>{
+      const sr=ex.series.filter(s=>s.kg||s.reps).map((s,i)=>`S${i+1}:${s.kg||'?'}×${s.reps||'?'}${s.puja?' ↑':''}`).join(' ');
+      return sr?`${ex.name}: ${sr}`:null;
+    }).filter(Boolean).join('\n');
+
+    return `<div class="gym-hist-card" id="ghc-${s.ts}">
+      <div class="gym-hist-hdr" onclick="document.getElementById('ghc-${s.ts}').classList.toggle('open')">
         <div>
-          <div style="font-size:13px;font-weight:500;color:var(--t)">${wk.label}</div>
-          <div style="font-size:11px;color:var(--t3);margin-top:1px">${wkFetes}/${wkPrev} sessions${isActive?' · Setmana actual':''}</div>
+          <div style="font-size:13px;font-weight:500;color:var(--t)">${fmtDate(s.data)}</div>
+          <div style="font-size:10px;color:var(--t3);margin-top:2px">${s.exercicis.filter(ex=>ex.series.some(sr=>sr.kg)).length} exercicis registrats</div>
         </div>
-        <div style="font-size:17px;font-weight:600;font-family:'DM Mono',monospace;color:${wkPct>=80?'#5dcaa5':wkPct>=50?'#fac775':'#f09595'}">${wkPct}%</div>
+        <div style="display:flex;align-items:center;gap:8px">
+          <button onclick="event.stopPropagation();deleteSession(${realIdx},'${tipus}')" style="background:none;border:none;color:var(--t3);font-size:14px;cursor:pointer;padding:2px 6px">🗑</button>
+          <span style="color:var(--t3);font-size:13px">▾</span>
+        </div>
       </div>
-      <div class="pb-wrap" style="margin:0"><div class="pb" style="width:${wkPct}%;background:${wkPct>=80?'var(--g)':wkPct>=50?'var(--a)':'var(--r)'}"></div></div>
+      <div class="gym-hist-body" style="white-space:pre-line">${exLines||'Sense dades'}</div>
     </div>`;
   }).join('');
 }
 
-// ══════════════════════════════════════════
-// EXPORT
-// ══════════════════════════════════════════
-function exportData(){
-  const done=S.get('done')||{};
-  const runs=S.getArr('run_sessions');
-  const gym=S.getArr('gym_sessions');
-  const bici=S.getArr('bici_sessions');
-  const pesos=S.getArr('pesos');
-  let totalPrev=0,totalFetes=0;
-  WEEK_DATA.forEach(wk=>wk.days.forEach(d=>{
-    if(d.tipus==='MULTI') d.subActivitats.forEach(sa=>{if(sa.clau!=='TENIS'){totalPrev++;if(done[d.date+'_'+sa.clau])totalFetes++;}});
-    else if(d.tipus!=='DESCANS'){totalPrev++;if(done[d.date+'_'+d.tipus])totalFetes++;}
-  }));
-  const partida=99.2;
-  const lastPes=pesos.length?pesos[pesos.length-1].pes:partida;
-  const exportObj={
-    exportat:new Date().toISOString().slice(0,10),
-    resum:{sessions_fetes:totalFetes,sessions_previstes:totalPrev,adherencia_pct:totalPrev>0?Math.round(totalFetes/totalPrev*100):0,pes_partida_kg:partida,pes_actual_kg:lastPes,pes_perdut_kg:parseFloat((partida-lastPes).toFixed(1))},
-    runs:runs.map(r=>({data:r.date,sessio:r.tipus,km:r.km,km_corrent:r.kmrun,km_caminant:r.kmwalk,fc_mig:r.fcmig,fc_max:r.fcmax,ritme_trot:r.ritme,maf_pace:r.maf,pct_corrent:r.pct,rpe:r.rpe,notes:r.notes})),
-    gym:gym.map(g=>({data:g.date,tipus:g.tipus,rpe:g.rpe,exercicis:g.exercicis?g.exercicis.map(e=>({nom:e.name,series:e.series.filter(s=>s.kg).map((s,i)=>`S${i+1}: ${s.kg}kg×${s.reps}`)})):[]})),
-    bici:bici.map(b=>({data:b.date,tipus:b.biciType||'spinning',dur_min:b.dur,fc_mig:b.fcmig,fc_max:b.fcmax,cadencia:b.cad,km:b.km,desnivell:b.desn,zona:b.zona,rpe:b.rpe})),
-    pes_mesures:pesos.map(p=>({data:p.date,pes:p.pes,grasa:p.grasa,muscular:p.musc,cintura:p.cin,abdomen:p.abd,maluc:p.mal,cuixa:p.cui})),
-    reprogramades:S.getArr('inj'),
-    dies_fet:Object.keys(done).filter(k=>done[k])
-  };
-  document.getElementById('export-text').value=JSON.stringify(exportObj,null,2);
-  document.getElementById('export-box').style.display='block';
+function deleteSession(i,tipus){
+  if(!confirm('Eliminar aquesta sessió?')) return;
+  const all=S.arr('gym_sessions');
+  all.splice(i,1);
+  S.set('gym_sessions',all);
+  renderExercises(tipus);
+  renderGymHist(tipus);
+  showToast('Sessió eliminada');
 }
 
-function copyExport(){
-  const t=document.getElementById('export-text');
-  t.select();
-  try{navigator.clipboard.writeText(t.value).then(()=>showToast('Copiat!'));}
-  catch{document.execCommand('copy');showToast('Copiat!');}
+// ═══════════════════════════════════════════
+// PES TAB
+// ═══════════════════════════════════════════
+const PARTIDA=99.2, OBJECTIU=90.0;
+
+function renderPesTab(){
+  const pesos=S.arr('pesos');
+  const last=pesos.length?pesos[pesos.length-1]:null;
+  const pesActual=last?parseFloat(last.pes):PARTIDA;
+  const perdut=parseFloat((PARTIDA-pesActual).toFixed(1));
+  const resta=parseFloat((pesActual-OBJECTIU).toFixed(1));
+  const pct=perdut>0?Math.min(100,Math.round(perdut/(PARTIDA-OBJECTIU)*100)):0;
+
+  document.getElementById('p-actual').textContent=pesActual.toFixed(1);
+  document.getElementById('p-queda').textContent=Math.max(0,resta).toFixed(1);
+  document.getElementById('p-perdut').textContent=perdut>0?perdut.toFixed(1):'0.0';
+  document.getElementById('p-perdut').className='sc-n '+(perdut>0?'cg':'');
+  if(last&&last.grasa) document.getElementById('p-grasa-act').textContent=last.grasa;
+  if(last&&last.musc) document.getElementById('p-musc-act').textContent=last.musc;
+  document.getElementById('goal-bar').style.width=pct+'%';
+  document.getElementById('goal-pct-label').textContent=pct+'% assolit';
+
+  renderPesCharts(pesos);
+  renderPesHist(pesos);
 }
 
-// ══════════════════════════════════════════
-// INIT
-// ══════════════════════════════════════════
-function init(){
-  seedData();
-  updateHeader();
-  document.getElementById('p-data').value=today();
-  const td=today();
-  for(let i=0;i<WEEK_DATA.length;i++){
-    if(WEEK_DATA[i].days.some(d=>d.date>=td)){currentWeek=i;break;}
+function renderPesCharts(pesos){
+  const sorted=[...pesos].sort((a,b)=>a.date<b.date?-1:1);
+  const labels=sorted.map(p=>fmtDate(p.date));
+  const vals=sorted.map(p=>parseFloat(p.pes));
+  const opts={responsive:true,maintainAspectRatio:false,plugins:{legend:{display:false}},
+    scales:{x:{ticks:{color:'#3d6b55',font:{size:9}},grid:{color:'rgba(255,255,255,0.04)'}},
+            y:{ticks:{color:'#3d6b55',font:{size:9}},grid:{color:'rgba(255,255,255,0.04)'}}}};
+
+  if(pesChart) pesChart.destroy();
+  const ctx1=document.getElementById('chart-pes').getContext('2d');
+  pesChart=new Chart(ctx1,{type:'line',data:{labels,datasets:[
+    {data:vals,borderColor:'#1D9E75',borderWidth:2,fill:true,
+     backgroundColor:(c)=>{const gr=c.chart.ctx.createLinearGradient(0,0,0,120);gr.addColorStop(0,'rgba(29,158,117,0.3)');gr.addColorStop(1,'rgba(29,158,117,0)');return gr;},
+     tension:.3,pointRadius:4,pointBackgroundColor:'#1D9E75',pointBorderColor:'#0a1a14',pointBorderWidth:2},
+    {data:vals.map(()=>OBJECTIU),borderColor:'rgba(239,159,39,0.5)',borderWidth:1.5,
+     borderDash:[5,5],pointRadius:0,fill:false,tension:0}
+  ]},options:opts});
+
+  if(grasaChart) grasaChart.destroy();
+  const ctx2=document.getElementById('chart-grasa').getContext('2d');
+  const gf=sorted.filter(p=>p.grasa);
+  grasaChart=new Chart(ctx2,{type:'line',data:{
+    labels:gf.map(p=>fmtDate(p.date)),
+    datasets:[{data:gf.map(p=>parseFloat(p.grasa)),borderColor:'#EF9F27',borderWidth:2,fill:true,
+      backgroundColor:'rgba(239,159,39,0.1)',tension:.3,pointRadius:3,
+      pointBackgroundColor:'#EF9F27',pointBorderColor:'#0a1a14',pointBorderWidth:1.5}]
+  },options:{...opts,scales:{x:{ticks:{color:'#3d6b55',font:{size:9}},grid:{color:'rgba(255,255,255,0.04)'}},
+    y:{ticks:{color:'#3d6b55',font:{size:9},callback:v=>v+'%'},grid:{color:'rgba(255,255,255,0.04)'}}}}});
+}
+
+function renderPesHist(pesos){
+  const sorted=[...pesos].sort((a,b)=>a.date<b.date?1:-1);
+  const container=document.getElementById('pes-hist');
+  if(!sorted.length){container.innerHTML='<div style="color:var(--t3);font-size:12px;padding:10px 0">Sense mesures guardades</div>';return;}
+  container.innerHTML=sorted.map((p,i)=>{
+    const prev=sorted[i+1];
+    const delta=prev?parseFloat((parseFloat(p.pes)-parseFloat(prev.pes)).toFixed(1)):null;
+    const dc=delta!==null?(delta<0?'cg':'cr'):'';
+    const dt=delta!==null?`${delta>0?'+':''}${delta} kg`:'';
+    const origIdx=pesos.indexOf(p);
+    return `<div class="hi">
+      <div>
+        <div class="hi-date">${fmtDate(p.date)}</div>
+        <div class="hi-detail">${p.grasa?`Grasa ${p.grasa}%`:''} ${p.musc?`· Musc ${p.musc} kg`:''} ${p.ossia?`· Ossi ${p.ossia} kg`:''}${p.notes?`<br>${p.notes}`:''}</div>
+      </div>
+      <div class="hi-right">
+        <div class="hi-val">${parseFloat(p.pes).toFixed(1)} kg</div>
+        ${dt?`<div class="hi-delta ${dc}">${dt}</div>`:''}
+        <button class="del-btn" onclick="deletePes(${origIdx})">🗑</button>
+      </div>
+    </div>`;
+  }).join('');
+}
+
+function savePes(){
+  const pes=document.getElementById('p-pes').value;
+  if(!pes){showToast('⚠ Introdueix el pes');return;}
+  S.push('pesos',{date:document.getElementById('p-data').value||today(),pes:parseFloat(pes),
+    grasa:document.getElementById('p-grasa').value||null,musc:document.getElementById('p-musc').value||null,
+    ossia:document.getElementById('p-ossia').value||null,notes:document.getElementById('p-notes-pes').value.trim()||null,ts:Date.now()});
+  ['p-pes','p-grasa','p-musc','p-ossia','p-notes-pes'].forEach(id=>document.getElementById(id).value='');
+  renderPesTab();
+  showToast('✅ Mesura guardada!');
+}
+
+function deletePes(i){
+  if(!confirm('Eliminar aquesta mesura?')) return;
+  const pesos=S.arr('pesos');
+  pesos.splice(i,1);
+  S.set('pesos',pesos);
+  renderPesTab();
+  showToast('Mesura eliminada');
+}
+
+// ═══════════════════════════════════════════
+// SEED PES INICIAL
+// ═══════════════════════════════════════════
+function seedInitialWeight(){
+  if(!S.arr('pesos').length){
+    S.push('pesos',{date:'2026-05-06',pes:97.8,grasa:28.1,musc:38.2,ossia:6.0,notes:'Mesura inicial Garmin',ts:Date.now()});
   }
-  renderCal();
+}
+
+// ═══════════════════════════════════════════
+// INIT
+// ═══════════════════════════════════════════
+function init(){
+  seedInitialWeight();
+
+  const now=new Date();
+  const dies=['Diumenge','Dilluns','Dimarts','Dimecres','Dijous','Divendres','Dissabte'];
+  const mes=['gen','feb','mar','abr','mai','jun','jul','ago','set','oct','nov','des'];
+  document.getElementById('hdr-date').textContent=`${dies[now.getDay()]} ${now.getDate()} ${mes[now.getMonth()]}`;
+
+  ['PUSH','PULL','CAMES'].forEach(t=>{
+    document.getElementById(t.toLowerCase()+'-date').value=today();
+    renderExercises(t);
+    renderGymHist(t);
+  });
 }
 
 init();
