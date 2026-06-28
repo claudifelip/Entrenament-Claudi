@@ -24,27 +24,22 @@
 html,body{height:100%;overflow:hidden}
 body{font-family:'DM Sans',sans-serif;background:var(--bg);color:var(--t);max-width:430px;margin:0 auto;display:flex;flex-direction:column}
 
-/* HEADER */
 .hdr{background:var(--bg2);padding:50px 18px 12px;border-bottom:1px solid var(--bdr);flex-shrink:0}
 .hdr-row{display:flex;justify-content:space-between;align-items:flex-start}
 .hdr-name{font-size:11px;color:var(--t3);letter-spacing:.5px;text-transform:uppercase}
 .hdr-title{font-size:20px;font-weight:600;color:var(--t);letter-spacing:-.3px;margin-top:1px}
 .hdr-date{font-size:11px;color:var(--t3);margin-top:2px}
 
-/* TABS */
 .tabs{display:flex;background:var(--bg2);border-bottom:1px solid var(--bdr);flex-shrink:0}
 .tab{flex:1;padding:10px 2px;font-size:11px;font-weight:600;color:var(--t3);text-align:center;cursor:pointer;border-bottom:2px solid transparent;transition:all .15s;letter-spacing:.5px;text-transform:uppercase}
 .tab.on{color:var(--g);border-bottom-color:var(--g)}
 
-/* PAGES */
 .pages{flex:1;overflow-y:auto;overflow-x:hidden;-webkit-overflow-scrolling:touch}
 .page{display:none;padding:14px 16px 100px}
 .page.on{display:block}
 
-/* SECTION TITLE */
 .st{font-size:10px;font-weight:600;color:var(--t3);text-transform:uppercase;letter-spacing:.8px;margin:16px 0 8px}
 
-/* FORM */
 .fl{font-size:11px;color:var(--t2);margin-bottom:4px;display:block;font-weight:500}
 .fi{width:100%;background:var(--bg3);border:1px solid var(--bdr2);border-radius:var(--radsm);padding:9px 11px;font-size:14px;color:var(--t);font-family:'DM Sans',sans-serif;outline:none;transition:border-color .15s;-webkit-appearance:none}
 .fi:focus{border-color:var(--g)}
@@ -52,17 +47,23 @@ body{font-family:'DM Sans',sans-serif;background:var(--bg);color:var(--t);max-wi
 .fg2{display:grid;grid-template-columns:1fr 1fr;gap:9px;margin-bottom:11px}
 .fg3{display:grid;grid-template-columns:1fr 1fr 1fr;gap:7px;margin-bottom:11px}
 
-/* BUTTONS */
 .btn{width:100%;padding:12px;background:var(--g);color:#fff;border:none;border-radius:var(--radsm);font-size:14px;font-weight:600;cursor:pointer;font-family:'DM Sans',sans-serif;transition:background .15s;margin-top:4px}
 .btn:active{background:var(--gd)}
 .btn-sec{background:none;color:var(--t2);border:1px solid var(--bdr2);margin-top:7px}
 
-/* SESSION HEADER */
 .sess-hdr{background:linear-gradient(135deg,#0d4a35 0%,#0f5c3f 100%);border-radius:var(--rad);border:1px solid rgba(29,220,140,0.25);padding:12px 14px;margin-bottom:12px;display:flex;justify-content:space-between;align-items:center;box-shadow:0 2px 12px rgba(29,200,120,0.12)}
 .sess-label{font-size:14px;font-weight:600;color:#b8f5da;letter-spacing:-.1px}
 .sess-sub{font-size:10px;color:#5dcaa5;margin-top:2px}
 
-/* EXERCISE CARD */
+/* BLOC LABEL */
+.bloc-label{font-size:9px;font-weight:700;text-transform:uppercase;letter-spacing:.8px;padding:3px 8px;border-radius:99px;display:inline-block;margin-bottom:5px;margin-top:10px}
+.bloc-pit{background:rgba(226,75,74,.15);color:#f09595}
+.bloc-hombro{background:rgba(55,138,221,.15);color:#85b7eb}
+.bloc-esquena{background:rgba(239,159,39,.15);color:#fac775}
+.bloc-cames{background:rgba(29,158,117,.15);color:#5dcaa5}
+.bloc-accessori{background:rgba(255,255,255,.07);color:var(--t3)}
+.bloc-abs{background:rgba(180,100,220,.15);color:#c8a0e8}
+
 .ex-card{background:var(--bg3);border-radius:var(--radsm);border:1px solid var(--bdr);margin-bottom:8px;overflow:hidden}
 .ex-hdr{padding:11px 13px;display:flex;justify-content:space-between;align-items:center;cursor:pointer;user-select:none}
 .ex-name{font-size:13px;font-weight:500;color:var(--t)}
@@ -72,14 +73,13 @@ body{font-family:'DM Sans',sans-serif;background:var(--bg);color:var(--t);max-wi
 .ex-body{padding:0 13px 12px;border-top:1px solid var(--bdr);display:none}
 .ex-card.open .ex-body{display:block}
 
-/* BADGE pujar pes */
+/* Opcional badge */
+.badge-opt{background:rgba(61,107,85,.2);border:1px solid rgba(61,107,85,.35);color:var(--t3);font-size:9px;font-weight:600;padding:2px 7px;border-radius:99px;letter-spacing:.3px}
 .badge-up{background:rgba(239,159,39,.18);border:1px solid rgba(239,159,39,.35);color:#fac775;font-size:9px;font-weight:600;padding:2px 7px;border-radius:99px;letter-spacing:.3px}
 .badge-ok{background:rgba(29,158,117,.12);border:1px solid rgba(29,158,117,.25);color:#5dcaa5;font-size:9px;font-weight:600;padding:2px 7px;border-radius:99px;letter-spacing:.3px}
 
-/* CONSELL dins exercici */
 .ex-tip{background:rgba(55,138,221,0.07);border:1px solid rgba(55,138,221,0.15);border-radius:7px;padding:7px 10px;margin:9px 0 7px;font-size:10px;color:#85b7eb;line-height:1.6}
 
-/* REFERÈNCIA última sessió */
 .ex-ref{background:rgba(29,158,117,.07);border:1px solid rgba(29,158,117,.15);border-radius:7px;padding:7px 10px;margin-bottom:9px}
 .ex-ref-title{font-size:9px;font-weight:600;text-transform:uppercase;letter-spacing:.5px;color:#5dcaa5;margin-bottom:4px}
 .ex-ref-row{display:grid;grid-template-columns:repeat(auto-fit,minmax(60px,1fr));gap:5px}
@@ -88,7 +88,6 @@ body{font-family:'DM Sans',sans-serif;background:var(--bg);color:var(--t);max-wi
 .ex-ref-v{font-size:12px;font-weight:600;color:var(--t);font-family:'DM Mono',monospace;margin-top:1px}
 .ex-ref-flag{font-size:9px;color:#fac775;margin-top:1px}
 
-/* SERIES TABLE */
 .series-hdr{display:grid;grid-template-columns:22px 1fr 1fr 80px;gap:6px;padding:4px 0;align-items:center}
 .series-hdr span{font-size:9px;color:var(--t3);text-align:center;text-transform:uppercase;letter-spacing:.4px}
 .serie-row{display:grid;grid-template-columns:22px 1fr 1fr 80px;gap:6px;align-items:center;margin-bottom:6px}
@@ -96,27 +95,33 @@ body{font-family:'DM Sans',sans-serif;background:var(--bg);color:var(--t);max-wi
 .serie-in{background:var(--card2);border:1px solid var(--bdr);border-radius:6px;padding:7px 4px;font-size:13px;color:var(--t);text-align:center;font-family:'DM Mono',monospace;width:100%;outline:none;-webkit-appearance:none}
 .serie-in:focus{border-color:var(--g)}
 
-/* PUJAR PES toggle */
 .puja-btn{display:flex;align-items:center;justify-content:center;gap:4px;padding:5px 7px;border-radius:6px;border:1px solid var(--bdr);background:none;color:var(--t3);font-size:10px;font-weight:600;cursor:pointer;transition:all .2s;white-space:nowrap;width:100%}
 .puja-btn.on{background:rgba(239,159,39,.15);border-color:rgba(239,159,39,.4);color:#fac775}
 
-/* STATS GRID */
+/* ABS block */
+.abs-block{background:rgba(180,100,220,.06);border:1px solid rgba(180,100,220,.15);border-radius:var(--radsm);padding:12px 13px;margin-bottom:8px}
+.abs-block-title{font-size:11px;font-weight:600;color:#c8a0e8;margin-bottom:10px;display:flex;justify-content:space-between;align-items:center}
+.abs-ex-row{display:flex;justify-content:space-between;align-items:center;padding:7px 0;border-bottom:1px solid rgba(180,100,220,.1)}
+.abs-ex-row:last-child{border-bottom:none}
+.abs-ex-name{font-size:12px;color:var(--t)}
+.abs-ex-meta{font-size:10px;color:var(--t3);margin-top:2px}
+.abs-check{width:22px;height:22px;border-radius:6px;border:1px solid rgba(180,100,220,.3);background:none;cursor:pointer;display:flex;align-items:center;justify-content:center;font-size:13px;transition:all .2s;flex-shrink:0}
+.abs-check.done{background:rgba(180,100,220,.2);border-color:rgba(180,100,220,.5)}
+
+/* STATS */
 .sgrid{display:grid;grid-template-columns:1fr 1fr;gap:8px;margin-bottom:10px}
 .sgrid3{display:grid;grid-template-columns:1fr 1fr 1fr;gap:8px;margin-bottom:10px}
 .sc{background:var(--bg3);border-radius:var(--radsm);padding:11px 12px}
 .sc-n{font-size:21px;font-weight:600;color:var(--t);font-family:'DM Mono',monospace}
 .sc-l{font-size:10px;color:var(--t2);margin-top:2px}
 
-/* GOAL BAR */
 .goal-bar-wrap{margin:10px 0 14px}
 .goal-bar-labels{display:flex;justify-content:space-between;font-size:10px;color:var(--t3);margin-bottom:5px}
 .goal-bar-track{background:var(--bg3);border-radius:99px;height:7px;overflow:hidden}
 .goal-bar-fill{height:7px;border-radius:99px;background:linear-gradient(90deg,var(--r),var(--a),var(--g));transition:width .6s ease}
 
-/* CHART */
 .chart-wrap{position:relative;width:100%;margin:4px 0 12px}
 
-/* HISTORY */
 .hi{display:flex;justify-content:space-between;align-items:flex-start;padding:10px 0;border-bottom:1px solid var(--bdr)}
 .hi:last-child{border-bottom:none}
 .hi-date{font-size:11px;color:var(--t3)}
@@ -126,22 +131,18 @@ body{font-family:'DM Sans',sans-serif;background:var(--bg);color:var(--t);max-wi
 .hi-delta{font-size:10px;margin-top:1px}
 .del-btn{background:none;border:none;color:var(--t3);font-size:14px;cursor:pointer;padding:2px 4px;line-height:1;margin-top:3px;display:block;margin-left:auto}
 
-/* GYM HIST */
 .gym-hist-card{background:var(--bg3);border-radius:var(--radsm);border:1px solid var(--bdr);margin-bottom:7px;overflow:hidden}
 .gym-hist-hdr{padding:10px 13px;display:flex;justify-content:space-between;align-items:center;cursor:pointer}
 .gym-hist-body{padding:8px 13px 12px;border-top:1px solid var(--bdr);display:none;font-size:10px;color:var(--t2);font-family:'DM Mono',monospace;line-height:1.9}
 .gym-hist-card.open .gym-hist-body{display:block}
 
-/* COLOR UTILS */
 .cg{color:#5dcaa5}.ca{color:#fac775}.cr{color:#f09595}
 
-/* SUBTABS (dins gym) */
-.subtab{flex:1;padding:8px 4px;background:var(--bg3);border:1px solid var(--bdr);border-radius:var(--radsm);font-size:11px;font-weight:700;color:var(--t3);cursor:pointer;text-align:center;transition:all .15s;letter-spacing:.6px;text-transform:uppercase}
+.subtab{flex:1;padding:8px 4px;background:var(--bg3);border:1px solid var(--bdr);border-radius:var(--radsm);font-size:11px;font-weight:700;color:var(--t3);cursor:pointer;text-align:center;transition:all .15s;letter-spacing:.4px;text-transform:uppercase}
 .subtab.on{background:var(--gl);border-color:var(--g);color:var(--g)}
 .gympage{display:none}
 .gympage.on{display:block}
 
-/* TOAST */
 .toast{position:fixed;bottom:24px;left:50%;transform:translateX(-50%);background:var(--g);color:#fff;padding:9px 20px;border-radius:99px;font-size:13px;font-weight:500;opacity:0;transition:opacity .3s;pointer-events:none;white-space:nowrap;z-index:300}
 .toast.on{opacity:1}
 </style>
@@ -152,7 +153,7 @@ body{font-family:'DM Sans',sans-serif;background:var(--bg);color:var(--t);max-wi
   <div class="hdr-row">
     <div>
       <div class="hdr-name">Claudi Felip</div>
-      <div class="hdr-title" id="hdr-title">Push</div>
+      <div class="hdr-title" id="hdr-title">Gym</div>
     </div>
     <div><div class="hdr-date" id="hdr-date"></div></div>
   </div>
@@ -168,50 +169,49 @@ body{font-family:'DM Sans',sans-serif;background:var(--bg);color:var(--t);max-wi
 <!-- TAB 0: GYM -->
 <div class="page on" id="tab-0">
 
-  <!-- Subtabs Push / Pull / Cames -->
   <div style="display:flex;gap:6px;margin-bottom:14px">
-    <div class="subtab on" id="subtab-PUSH"  onclick="goGymTab('PUSH')">PUSH</div>
-    <div class="subtab"    id="subtab-PULL"  onclick="goGymTab('PULL')">PULL</div>
-    <div class="subtab"    id="subtab-CAMES" onclick="goGymTab('CAMES')">CAMES</div>
+    <div class="subtab on" id="subtab-A" onclick="goGymTab('A')">DIA A</div>
+    <div class="subtab"    id="subtab-B" onclick="goGymTab('B')">DIA B</div>
+    <div class="subtab"    id="subtab-C" onclick="goGymTab('C')">DIA C</div>
   </div>
 
-  <!-- PUSH -->
-  <div class="gympage on" id="gympage-PUSH">
+  <!-- DIA A -->
+  <div class="gympage on" id="gympage-A">
     <div class="sess-hdr">
-      <div><div class="sess-label">Pit & Espatlla</div><div class="sess-sub" id="push-last-date">Sense sessions anteriors</div></div>
-      <input type="date" class="fi" id="push-date" style="width:auto;font-size:12px;padding:6px 9px">
+      <div><div class="sess-label">🔵 Dia A · Full Body</div><div class="sess-sub" id="a-last-date">Sense sessions anteriors</div></div>
+      <input type="date" class="fi" id="a-date" style="width:auto;font-size:12px;padding:6px 9px">
     </div>
-    <div id="push-exercises"></div>
-    <button class="btn" onclick="saveSession('PUSH')">💾 Desar sessió</button>
-    <button class="btn btn-sec" onclick="clearForm('PUSH')">↺ Buidar</button>
-    <div class="st">Historial PUSH</div>
-    <div id="push-hist"></div>
+    <div id="a-exercises"></div>
+    <button class="btn" onclick="saveSession('A')">💾 Desar sessió</button>
+    <button class="btn btn-sec" onclick="clearForm('A')">↺ Buidar</button>
+    <div class="st">Historial Dia A</div>
+    <div id="a-hist"></div>
   </div>
 
-  <!-- PULL -->
-  <div class="gympage" id="gympage-PULL">
+  <!-- DIA B -->
+  <div class="gympage" id="gympage-B">
     <div class="sess-hdr">
-      <div><div class="sess-label">Esquena & Core</div><div class="sess-sub" id="pull-last-date">Sense sessions anteriors</div></div>
-      <input type="date" class="fi" id="pull-date" style="width:auto;font-size:12px;padding:6px 9px">
+      <div><div class="sess-label">🟢 Dia B · Full Body</div><div class="sess-sub" id="b-last-date">Sense sessions anteriors</div></div>
+      <input type="date" class="fi" id="b-date" style="width:auto;font-size:12px;padding:6px 9px">
     </div>
-    <div id="pull-exercises"></div>
-    <button class="btn" onclick="saveSession('PULL')">💾 Desar sessió</button>
-    <button class="btn btn-sec" onclick="clearForm('PULL')">↺ Buidar</button>
-    <div class="st">Historial PULL</div>
-    <div id="pull-hist"></div>
+    <div id="b-exercises"></div>
+    <button class="btn" onclick="saveSession('B')">💾 Desar sessió</button>
+    <button class="btn btn-sec" onclick="clearForm('B')">↺ Buidar</button>
+    <div class="st">Historial Dia B</div>
+    <div id="b-hist"></div>
   </div>
 
-  <!-- CAMES -->
-  <div class="gympage" id="gympage-CAMES">
+  <!-- DIA C -->
+  <div class="gympage" id="gympage-C">
     <div class="sess-hdr">
-      <div><div class="sess-label">Tren Inferior Complet</div><div class="sess-sub" id="cames-last-date">Sense sessions anteriors</div></div>
-      <input type="date" class="fi" id="cames-date" style="width:auto;font-size:12px;padding:6px 9px">
+      <div><div class="sess-label">🔴 Dia C · Full Body</div><div class="sess-sub" id="c-last-date">Sense sessions anteriors</div></div>
+      <input type="date" class="fi" id="c-date" style="width:auto;font-size:12px;padding:6px 9px">
     </div>
-    <div id="cames-exercises"></div>
-    <button class="btn" onclick="saveSession('CAMES')">💾 Desar sessió</button>
-    <button class="btn btn-sec" onclick="clearForm('CAMES')">↺ Buidar</button>
-    <div class="st">Historial CAMES</div>
-    <div id="cames-hist"></div>
+    <div id="c-exercises"></div>
+    <button class="btn" onclick="saveSession('C')">💾 Desar sessió</button>
+    <button class="btn btn-sec" onclick="clearForm('C')">↺ Buidar</button>
+    <div class="st">Historial Dia C</div>
+    <div id="c-hist"></div>
   </div>
 
 </div>
@@ -257,15 +257,12 @@ body{font-family:'DM Sans',sans-serif;background:var(--bg);color:var(--t);max-wi
   <div style="background:var(--card);border-radius:var(--rad);border:1px solid var(--bdr);padding:0 15px" id="pes-hist"></div>
 </div>
 
-</div><!-- /pages -->
+</div>
 
 <div class="toast" id="toast"></div>
 
 <script src="https://cdnjs.cloudflare.com/ajax/libs/Chart.js/4.4.1/chart.umd.js"></script>
 <script>
-// ═══════════════════════════════════════════
-// STORAGE
-// ═══════════════════════════════════════════
 const S={
   get(k){try{const v=localStorage.getItem(k);return v?JSON.parse(v):null;}catch{return null;}},
   set(k,v){try{localStorage.setItem(k,JSON.stringify(v));}catch{}},
@@ -277,43 +274,52 @@ const S={
 // GYM DATA
 // ═══════════════════════════════════════════
 const GYM={
-  PUSH:{
-    label:'Push · Pit & Espatlla',
+  A:{
+    label:'Dia A · Full Body',
     exercicis:[
-      {id:'push_0',name:'Press mancuernes inclinat',    mat:'Banc inclinat + mancuernes',series:3, tip:'Omòplats enrere i avall durant tot el moviment. Baixa controlat 2 seg.'},
-      {id:'push_1',name:'Màquina press pit assegut',    mat:'Màquina press pit',           series:3, tip:null},
-      {id:'push_3',name:'Obertura màquina pit',         mat:'Pec deck',                    series:3, tip:null},
-      {id:'push_2',name:'Politja inferior',             mat:'Politja baixa',               series:3, tip:'Contracció màxima al centre. Pes lleuger i forma perfecta.'},
-      {id:'push_4',name:'Press militar màquina',        mat:'Màquina press militar',        series:3, tip:null},
-      {id:'push_5',name:'Elevació lateral politja',     mat:'Politja baixa unilateral',    series:3, tip:'Pes lleuger, forma perfecta. Colze lleugerament doblegat, no arribar al fracàs.'},
-      {id:'push_6',name:'Elevació frontal mancuernes',  mat:'Mancuernes',                  series:3, tip:null},
+      {id:'a_0', name:'Press mancuernes inclinat',   mat:'Banc inclinat + mancuernes', bloc:'pit',      series:3, optional:false, tip:'Omòplats enrere i avall durant tot el moviment. Baixa controlat 2 seg.'},
+      {id:'a_1', name:'Obertura màquina pit',         mat:'Pec deck',                   bloc:'pit',      series:3, optional:false, tip:null},
+      {id:'a_2', name:'Press militar màquina',        mat:'Màquina press militar',       bloc:'hombro',   series:3, optional:false, tip:null},
+      {id:'a_3', name:'Lat Pulldown barra ampla',     mat:'Politja barra ampla',         bloc:'esquena',  series:3, optional:false, tip:'Omòplats avall i junts quan tires. No encongeixis les espatlles.'},
+      {id:'a_4', name:'Sentadilla multipower',        mat:'Multipower / barra lliure',   bloc:'cames',    series:3, optional:false, tip:'Genolls cap als peus (no cap endins), pit amunt, profunditat paral·lela mínima.'},
+      {id:'a_5', name:'Extensió quàdriceps màquina',  mat:'Màquina extensió quàd.',      bloc:'cames',    series:3, optional:false, tip:null},
+      {id:'a_6', name:'Curl isquiotibials màquina',   mat:'Màquina isquio',              bloc:'cames',    series:3, optional:false, tip:'Baixa molt lent (3 seg). Aquí és on es treballa de veritat.'},
+      {id:'a_7', name:'Superset bíceps + tríceps politja', mat:'Politja',               bloc:'accessori', series:3, optional:true,  tip:'Superset: fes les reps de bíceps, descansa 30 seg, tríceps, descansa 60 seg. Repeteix.'},
     ]
   },
-  PULL:{
-    label:'Pull · Esquena & Core',
+  B:{
+    label:'Dia B · Full Body',
     exercicis:[
-      {id:'pull_0',name:'Lat Pulldown barra ampla',     mat:'Politja barra ampla',         series:3, tip:'Omòplats avall i junts quan tires. No encongeixis les espatlles.'},
-      {id:'pull_1',name:'Rem politja agafador V',       mat:'Politja agafador V',           series:3, tip:'Tira amb els colzes, no amb les mans. Braços = ganxos.'},
-      {id:'pull_2',name:'Rem màquina T',                mat:'Màquina rem T',               series:3, tip:null},
-      {id:'pull_3',name:'Pullover politja',             mat:'Politja alta',                series:3, tip:null},
-      {id:'pull_5',name:'Planxa abdominal',             mat:'Sòl / estora',                series:4, tip:'Respiració activa, no aguantis la respiració. Cos en línia recta.'},
-      {id:'pull_6',name:'Dead bug',                     mat:'Sòl',                         series:3, tip:'Esquena PLANA al sòl tot el temps. Si s\'aixeca → redueix el rang.'},
-      {id:'pull_7',name:'Pallof press antirotació',     mat:'Politja lateral',             series:3, tip:'Braços estesos i NO giris el tronc. És ANTIrotació.'},
+      {id:'b_0', name:'Màquina press pit assegut',    mat:'Màquina press pit',           bloc:'pit',      series:3, optional:false, tip:null},
+      {id:'b_1', name:'Elevació lateral politja',     mat:'Politja baixa unilateral',    bloc:'hombro',   series:3, optional:false, tip:'Pes lleuger, forma perfecta. Colze lleugerament doblegat, no arribar al fracàs.'},
+      {id:'b_2', name:'Rem politja agafador V',       mat:'Politja agafador V',           bloc:'esquena',  series:3, optional:false, tip:'Tira amb els colzes, no amb les mans. Braços = ganxos.'},
+      {id:'b_3', name:'Pullover politja',             mat:'Politja alta',                bloc:'esquena',  series:3, optional:false, tip:null},
+      {id:'b_4', name:'Premsa de cames',              mat:'Màquina prensa',              bloc:'cames',    series:3, optional:false, tip:null},
+      {id:'b_5', name:'Abductor gluti mig (obrir)',   mat:'Màquina abductor',            bloc:'cames',    series:3, optional:false, tip:'Coixinets per fora dels genolls. OBRIR les cames. Contracció màxima a dalt.'},
+      // ABS bloc especial
+      {id:'b_abs', name:'Bloc Abdominals',            mat:'Sòl / estora',                bloc:'abs',      series:3, optional:true,  isAbs:true, tip:null},
     ]
   },
-  CAMES:{
-    label:'Cames · Tren Inferior Complet',
+  C:{
+    label:'Dia C · Full Body',
     exercicis:[
-      {id:'cam_0',name:'Sentadilla multipower',         mat:'Multipower / barra lliure',   series:3, tip:'Genolls cap als peus (no cap endins), pit amunt, profunditat paral·lela mínima.'},
-      {id:'cam_1',name:'Màquina hip thrust',            mat:'Màquina hip thrust',           series:3, tip:'Extensió COMPLETA del maluc a dalt, apreta el gluti 1 seg. Normal notar tensió lumbar; si és dolor → atura.'},
-      {id:'cam_2',name:'Premsa de cames',               mat:'Màquina prensa',              series:3, tip:null},
-      {id:'cam_3',name:'Extensió quàdriceps',           mat:'Màquina extensió quàd.',      series:3, tip:null},
-      {id:'cam_4',name:'Curl isquiotibials',            mat:'Màquina isquio',              series:3, tip:'Baixa molt lent (3 seg). Aquí és on es treballa de veritat.'},
-      {id:'cam_5',name:'Elevació bessons',              mat:'Màquina bessons',             series:3, tip:null},
-      {id:'cam_6',name:'Abductor gluti mig',            mat:'Màquina abductor (obrir)',    series:2, tip:'Coixinets per fora dels genolls. OBRIR les cames.'},
+      {id:'c_0', name:'Press banca multipower',       mat:'Multipower / banc pla',       bloc:'pit',      series:3, optional:false, tip:'Escàpules ben juntes i apretades al banc. Baixa la barra a la línia dels mugrons.'},
+      {id:'c_1', name:'Politja inferior',             mat:'Politja baixa',               bloc:'pit',      series:3, optional:false, tip:'Contracció màxima al centre. Pes lleuger i forma perfecta.'},
+      {id:'c_2', name:'Elevació frontal mancuernes',  mat:'Mancuernes',                  bloc:'hombro',   series:3, optional:false, tip:null},
+      {id:'c_3', name:'Rem màquina T',                mat:'Màquina rem T',               bloc:'esquena',  series:3, optional:false, tip:null},
+      {id:'c_4', name:'Sentadilla multipower',        mat:'Multipower / barra lliure',   bloc:'cames',    series:3, optional:false, tip:'Genolls cap als peus (no cap endins), pit amunt, profunditat paral·lela mínima.'},
+      {id:'c_5', name:'Elevació bessons màquina',     mat:'Màquina bessons',             bloc:'cames',    series:3, optional:false, tip:'Baixa fins al final, puja lent i aguanta 1 seg a dalt.'},
+      {id:'c_6', name:'Tríceps politja',              mat:'Politja alta',                bloc:'accessori', series:3, optional:true,  tip:null},
     ]
   }
 };
+
+const ABS_EXERCICIS=[
+  {id:'abs_0', name:'Crunch bàsic',    reps:'3×20',       tip:'Mentó al pit, puja lent i baixa controlat.'},
+  {id:'abs_1', name:'Crunch creuat',   reps:'3×20',       tip:'Colze cap al genoll contrari, rotació real del tronc.'},
+  {id:'abs_2', name:'Planxa',          reps:'3×30-45 seg',tip:'Cos en línia recta. Respiració activa.'},
+  {id:'abs_3', name:'Abdominals baixos', reps:'3×20',     tip:'Genolls lleugerament doblegats, peus a terra. Porta les mans cap als peus aplanant l\'esquena contra el sòl. Contracció a la part baixa de l\'abdomen.'},
+];
 
 // ═══════════════════════════════════════════
 // STATE
@@ -327,6 +333,15 @@ function today(){return new Date().toISOString().slice(0,10);}
 function fmtDate(d){if(!d)return '';const p=d.split('-');return `${p[2]}/${p[1]}/${p[0]}`;}
 function showToast(msg){const t=document.getElementById('toast');t.textContent=msg;t.classList.add('on');setTimeout(()=>t.classList.remove('on'),2200);}
 
+const BLOC_META={
+  pit:     {label:'Pit',     cls:'bloc-pit'},
+  hombro:  {label:'Hombro',  cls:'bloc-hombro'},
+  esquena: {label:'Esquena', cls:'bloc-esquena'},
+  cames:   {label:'Cames',   cls:'bloc-cames'},
+  accessori:{label:'Accessori · Opcional', cls:'bloc-accessori'},
+  abs:     {label:'Abdominals · Opcional', cls:'bloc-abs'},
+};
+
 // ═══════════════════════════════════════════
 // NAVIGATION
 // ═══════════════════════════════════════════
@@ -338,21 +353,22 @@ function goMainTab(i){
   if(i===1) renderPesTab();
 }
 
-let currentGymTab='PUSH';
+let currentGymTab='A';
 function goGymTab(tipus){
   currentGymTab=tipus;
-  ['PUSH','PULL','CAMES'].forEach(t=>{
+  ['A','B','C'].forEach(t=>{
     document.getElementById('subtab-'+t).classList.toggle('on',t===tipus);
     document.getElementById('gympage-'+t).classList.toggle('on',t===tipus);
   });
-  document.getElementById('hdr-title').textContent='Gym · '+tipus.charAt(0)+tipus.slice(1).toLowerCase();
+  const labels={A:'Gym · Dia A',B:'Gym · Dia B',C:'Gym · Dia C'};
+  document.getElementById('hdr-title').textContent=labels[tipus];
 }
 
 // ═══════════════════════════════════════════
 // RENDER GYM EXERCISES
 // ═══════════════════════════════════════════
 function getLastSession(tipus){
-  const sessions=S.arr('gym_sessions').filter(s=>s.tipus===tipus);
+  const sessions=S.arr('gym_sessions_v2').filter(s=>s.tipus===tipus);
   return sessions.length ? sessions[sessions.length-1] : null;
 }
 
@@ -362,44 +378,47 @@ function renderExercises(tipus){
   const id=tipus.toLowerCase();
   const container=document.getElementById(id+'-exercises');
 
-  // Actualitza capçalera data última sessió
   const dateEl=document.getElementById(id+'-last-date');
   if(last) dateEl.textContent=`Última sessió: ${fmtDate(last.data)}`;
   else dateEl.textContent='Sense sessions anteriors';
 
-  // Construeix HTML dels exercicis
   let html='';
+  let lastBloc='';
+
   g.exercicis.forEach((ex,ei)=>{
-    // Referència última sessió per aquest exercici
+    // Bloc label
+    if(ex.bloc!==lastBloc){
+      const bm=BLOC_META[ex.bloc]||{label:ex.bloc,cls:'bloc-accessori'};
+      html+=`<span class="bloc-label ${bm.cls}">${bm.label}</span>`;
+      lastBloc=ex.bloc;
+    }
+
+    // Abs especial
+    if(ex.isAbs){
+      html+=renderAbsBlock(last);
+      return;
+    }
+
     let lastEx=null;
     if(last) lastEx=last.exercicis.find(e=>e.id===ex.id);
-
-    // Calcula si hi havia flag "vull pujar" en alguna sèrie
     const anyUpFlag = lastEx && lastEx.series.some(s=>s.puja);
-
-    // Badge estat
+    const optBadge = ex.optional ? '<span class="badge-opt">Opcional</span>' : '';
     const badge = lastEx
-      ? (anyUpFlag
-          ? '<span class="badge-up">↑ Puja pes</span>'
-          : '<span class="badge-ok">✓ Mantén</span>')
+      ? (anyUpFlag ? '<span class="badge-up">↑ Puja pes</span>' : '<span class="badge-ok">✓ Mantén</span>')
       : '';
 
     html+=`<div class="ex-card" id="ex-${tipus}-${ei}">
       <div class="ex-hdr" onclick="toggleEx('${tipus}',${ei})">
         <div style="flex:1;min-width:0">
           <div class="ex-name">${ex.name}</div>
-          <div class="ex-meta"><span>${ex.mat}</span>${badge}</div>
+          <div class="ex-meta"><span>${ex.mat}</span>${optBadge}${badge}</div>
         </div>
         <div class="ex-arrow">▾</div>
       </div>
       <div class="ex-body">`;
 
-    // Consell específic
-    if(ex.tip){
-      html+=`<div class="ex-tip">💡 ${ex.tip}</div>`;
-    }
+    if(ex.tip) html+=`<div class="ex-tip">💡 ${ex.tip}</div>`;
 
-    // Referència última sessió
     if(lastEx){
       const seriesRef=lastEx.series.filter(s=>s.kg||s.reps);
       if(seriesRef.length){
@@ -415,10 +434,8 @@ function renderExercises(tipus){
       }
     }
 
-    // Taula de sèries
     html+=`<div class="series-hdr"><span>#</span><span>Pes (kg)</span><span>Reps</span><span>Pujar?</span></div>`;
     for(let s=0;s<ex.series;s++){
-      // Placeholder = últims valors
       const ref=lastEx?lastEx.series[s]:null;
       const phKg=ref&&ref.kg?ref.kg:'kg';
       const phReps=ref&&ref.reps?ref.reps:'reps';
@@ -429,11 +446,42 @@ function renderExercises(tipus){
         <button class="puja-btn" id="puja-${tipus}-${ei}-${s}" onclick="togglePuja('${tipus}',${ei},${s})">↑ Pujar</button>
       </div>`;
     }
-
     html+=`</div></div>`;
   });
 
   container.innerHTML=html;
+}
+
+function renderAbsBlock(lastSession){
+  let lastAbs=null;
+  if(lastSession) lastAbs=lastSession.exercicis.find(e=>e.id==='b_abs');
+  const done=(lastAbs&&lastAbs.absDone)||[];
+
+  let html=`<div class="abs-block">
+    <div class="abs-block-title">
+      <span>Abdominals · 3 sèries × ~20 reps</span>
+      <span style="font-size:9px;color:var(--t3)">${lastSession?'Última: '+fmtDate(lastSession.data):''}</span>
+    </div>`;
+
+  ABS_EXERCICIS.forEach((ab,ai)=>{
+    const wasDone=done.includes(ab.id);
+    html+=`<div class="abs-ex-row">
+      <div style="flex:1">
+        <div class="abs-ex-name">${ab.name}</div>
+        <div class="abs-ex-meta">${ab.reps}${ab.tip?' · '+ab.tip:''}</div>
+      </div>
+      <button class="abs-check${wasDone?' done':''}" id="abs-check-${ai}" onclick="toggleAbs(${ai})">${wasDone?'✓':''}</button>
+    </div>`;
+  });
+
+  html+=`</div>`;
+  return html;
+}
+
+function toggleAbs(ai){
+  const btn=document.getElementById('abs-check-'+ai);
+  btn.classList.toggle('done');
+  btn.textContent=btn.classList.contains('done')?'✓':'';
 }
 
 function toggleEx(tipus,i){
@@ -455,6 +503,13 @@ function saveSession(tipus){
   const data=document.getElementById(id+'-date').value||today();
 
   const exercicis=g.exercicis.map((ex,ei)=>{
+    if(ex.isAbs){
+      const absDone=ABS_EXERCICIS.map((ab,ai)=>{
+        const btn=document.getElementById('abs-check-'+ai);
+        return (btn&&btn.classList.contains('done'))?ab.id:null;
+      }).filter(Boolean);
+      return {id:ex.id,name:ex.name,isAbs:true,absDone};
+    }
     const series=[];
     for(let s=0;s<ex.series;s++){
       const kg=document.getElementById(`kg-${tipus}-${ei}-${s}`)?.value||'';
@@ -465,10 +520,13 @@ function saveSession(tipus){
     return {id:ex.id,name:ex.name,series};
   });
 
-  const hasDades=exercicis.some(ex=>ex.series.some(s=>s.kg||s.reps));
+  const hasDades=exercicis.some(ex=>{
+    if(ex.isAbs) return ex.absDone&&ex.absDone.length>0;
+    return ex.series&&ex.series.some(s=>s.kg||s.reps);
+  });
   if(!hasDades){showToast('⚠ Afegeix alguna dada primer');return;}
 
-  S.push('gym_sessions',{tipus,data,exercicis,ts:Date.now()});
+  S.push('gym_sessions_v2',{tipus,data,exercicis,ts:Date.now()});
   showToast('✅ Sessió guardada!');
   renderExercises(tipus);
   renderGymHist(tipus);
@@ -480,6 +538,13 @@ function saveSession(tipus){
 function clearForm(tipus){
   const g=GYM[tipus];
   g.exercicis.forEach((ex,ei)=>{
+    if(ex.isAbs){
+      ABS_EXERCICIS.forEach((_,ai)=>{
+        const btn=document.getElementById('abs-check-'+ai);
+        if(btn){btn.classList.remove('done');btn.textContent='';}
+      });
+      return;
+    }
     for(let s=0;s<ex.series;s++){
       const kg=document.getElementById(`kg-${tipus}-${ei}-${s}`);
       const reps=document.getElementById(`reps-${tipus}-${ei}-${s}`);
@@ -496,13 +561,18 @@ function clearForm(tipus){
 // GYM HISTORY
 // ═══════════════════════════════════════════
 function renderGymHist(tipus){
-  const sessions=S.arr('gym_sessions').filter(s=>s.tipus===tipus).reverse();
+  const sessions=S.arr('gym_sessions_v2').filter(s=>s.tipus===tipus).reverse();
   const container=document.getElementById(tipus.toLowerCase()+'-hist');
   if(!sessions.length){container.innerHTML='<div style="color:var(--t3);font-size:12px;padding:6px 0">Sense sessions guardades</div>';return;}
 
-  container.innerHTML=sessions.map((s,idx)=>{
-    const realIdx=S.arr('gym_sessions').findIndex(ss=>ss.ts===s.ts);
+  container.innerHTML=sessions.map((s)=>{
+    const allSessions=S.arr('gym_sessions_v2');
+    const realIdx=allSessions.findIndex(ss=>ss.ts===s.ts);
     const exLines=s.exercicis.map(ex=>{
+      if(ex.isAbs){
+        if(ex.absDone&&ex.absDone.length) return `Abs: ${ex.absDone.map(id=>ABS_EXERCICIS.find(a=>a.id===id)?.name||id).join(', ')}`;
+        return null;
+      }
       const sr=ex.series.filter(s=>s.kg||s.reps).map((s,i)=>`S${i+1}:${s.kg||'?'}×${s.reps||'?'}${s.puja?' ↑':''}`).join(' ');
       return sr?`${ex.name}: ${sr}`:null;
     }).filter(Boolean).join('\n');
@@ -511,7 +581,7 @@ function renderGymHist(tipus){
       <div class="gym-hist-hdr" onclick="document.getElementById('ghc-${s.ts}').classList.toggle('open')">
         <div>
           <div style="font-size:13px;font-weight:500;color:var(--t)">${fmtDate(s.data)}</div>
-          <div style="font-size:10px;color:var(--t3);margin-top:2px">${s.exercicis.filter(ex=>ex.series.some(sr=>sr.kg)).length} exercicis registrats</div>
+          <div style="font-size:10px;color:var(--t3);margin-top:2px">${s.exercicis.filter(ex=>!ex.isAbs&&ex.series&&ex.series.some(sr=>sr.kg)).length} exercicis registrats</div>
         </div>
         <div style="display:flex;align-items:center;gap:8px">
           <button onclick="event.stopPropagation();deleteSession(${realIdx},'${tipus}')" style="background:none;border:none;color:var(--t3);font-size:14px;cursor:pointer;padding:2px 6px">🗑</button>
@@ -525,9 +595,9 @@ function renderGymHist(tipus){
 
 function deleteSession(i,tipus){
   if(!confirm('Eliminar aquesta sessió?')) return;
-  const all=S.arr('gym_sessions');
+  const all=S.arr('gym_sessions_v2');
   all.splice(i,1);
-  S.set('gym_sessions',all);
+  S.set('gym_sessions_v2',all);
   renderExercises(tipus);
   renderGymHist(tipus);
   showToast('Sessió eliminada');
@@ -634,7 +704,7 @@ function deletePes(i){
 }
 
 // ═══════════════════════════════════════════
-// SEED PES INICIAL
+// SEED
 // ═══════════════════════════════════════════
 function seedInitialWeight(){
   if(!S.arr('pesos').length){
@@ -653,7 +723,7 @@ function init(){
   const mes=['gen','feb','mar','abr','mai','jun','jul','ago','set','oct','nov','des'];
   document.getElementById('hdr-date').textContent=`${dies[now.getDay()]} ${now.getDate()} ${mes[now.getMonth()]}`;
 
-  ['PUSH','PULL','CAMES'].forEach(t=>{
+  ['A','B','C'].forEach(t=>{
     document.getElementById(t.toLowerCase()+'-date').value=today();
     renderExercises(t);
     renderGymHist(t);
