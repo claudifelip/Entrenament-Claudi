@@ -284,7 +284,7 @@ const GYM={
       {id:'a_4', name:'Sentadilla multipower',        mat:'Multipower / barra lliure',   bloc:'cames',    series:3, optional:false, tip:'Genolls cap als peus (no cap endins), pit amunt, profunditat paral·lela mínima.'},
       {id:'a_5', name:'Extensió quàdriceps màquina',  mat:'Màquina extensió quàd.',      bloc:'cames',    series:3, optional:false, tip:null},
       {id:'a_6', name:'Curl isquiotibials màquina',   mat:'Màquina isquio',              bloc:'cames',    series:3, optional:false, tip:'Baixa molt lent (3 seg). Aquí és on es treballa de veritat.'},
-      {id:'a_7', name:'Superset bíceps + tríceps politja', mat:'Politja',               bloc:'accessori', series:3, optional:true,  tip:'Superset: fes les reps de bíceps, descansa 30 seg, tríceps, descansa 60 seg. Repeteix.'},
+      {id:'a_7', name:'Superset bíceps + tríceps', mat:'Politja', bloc:'accessori', series:3, optional:true, isSuperset:true, exA:'Bíceps politja', exB:'Tríceps politja', tip:'Bíceps → descansa 30 seg → Tríceps → descansa 60 seg. Repeteix 3 vegades.'},
     ]
   },
   B:{
@@ -434,17 +434,43 @@ function renderExercises(tipus){
       }
     }
 
-    html+=`<div class="series-hdr"><span>#</span><span>Pes (kg)</span><span>Reps</span><span>Pujar?</span></div>`;
-    for(let s=0;s<ex.series;s++){
-      const ref=lastEx?lastEx.series[s]:null;
-      const phKg=ref&&ref.kg?ref.kg:'kg';
-      const phReps=ref&&ref.reps?ref.reps:'reps';
-      html+=`<div class="serie-row">
-        <div class="serie-n">${s+1}</div>
-        <input class="serie-in" type="number" inputmode="decimal" step="0.5" placeholder="${phKg}" id="kg-${tipus}-${ei}-${s}">
-        <input class="serie-in" type="number" inputmode="numeric" placeholder="${phReps}" id="reps-${tipus}-${ei}-${s}">
-        <button class="puja-btn" id="puja-${tipus}-${ei}-${s}" onclick="togglePuja('${tipus}',${ei},${s})">↑ Pujar</button>
-      </div>`;
+    if(ex.isSuperset){
+      for(let s=0;s<ex.series;s++){
+        const refA=lastEx?lastEx.series[s]:null;
+        const refB=lastEx?lastEx.seriesB[s]:null;
+        html+=`<div style="background:var(--card2);border-radius:7px;padding:8px 10px;margin-bottom:7px">
+          <div style="font-size:9px;font-weight:700;color:var(--t3);text-transform:uppercase;letter-spacing:.5px;margin-bottom:6px">Sèrie ${s+1}</div>
+          <div style="font-size:10px;color:#85b7eb;margin-bottom:4px;font-weight:600">${ex.exA}</div>
+          <div class="series-hdr"><span></span><span>Pes (kg)</span><span>Reps</span><span>Pujar?</span></div>
+          <div class="serie-row">
+            <div class="serie-n">A</div>
+            <input class="serie-in" type="number" inputmode="decimal" step="0.5" placeholder="${refA&&refA.kg?refA.kg:'kg'}" id="kg-${tipus}-${ei}-${s}-A">
+            <input class="serie-in" type="number" inputmode="numeric" placeholder="${refA&&refA.reps?refA.reps:'reps'}" id="reps-${tipus}-${ei}-${s}-A">
+            <button class="puja-btn${refA&&refA.puja?' on':''}" id="puja-${tipus}-${ei}-${s}-A" onclick="togglePuja('${tipus}',${ei},${s},'-A')">${refA&&refA.puja?'↑ Pujar ✓':'↑ Pujar'}</button>
+          </div>
+          <div style="font-size:10px;color:#85b7eb;margin-bottom:4px;font-weight:600;margin-top:6px">${ex.exB}</div>
+          <div class="series-hdr"><span></span><span>Pes (kg)</span><span>Reps</span><span>Pujar?</span></div>
+          <div class="serie-row">
+            <div class="serie-n">B</div>
+            <input class="serie-in" type="number" inputmode="decimal" step="0.5" placeholder="${refB&&refB.kg?refB.kg:'kg'}" id="kg-${tipus}-${ei}-${s}-B">
+            <input class="serie-in" type="number" inputmode="numeric" placeholder="${refB&&refB.reps?refB.reps:'reps'}" id="reps-${tipus}-${ei}-${s}-B">
+            <button class="puja-btn${refB&&refB.puja?' on':''}" id="puja-${tipus}-${ei}-${s}-B" onclick="togglePuja('${tipus}',${ei},${s},'-B')">${refB&&refB.puja?'↑ Pujar ✓':'↑ Pujar'}</button>
+          </div>
+        </div>`;
+      }
+    } else {
+      html+=`<div class="series-hdr"><span>#</span><span>Pes (kg)</span><span>Reps</span><span>Pujar?</span></div>`;
+      for(let s=0;s<ex.series;s++){
+        const ref=lastEx?lastEx.series[s]:null;
+        const phKg=ref&&ref.kg?ref.kg:'kg';
+        const phReps=ref&&ref.reps?ref.reps:'reps';
+        html+=`<div class="serie-row">
+          <div class="serie-n">${s+1}</div>
+          <input class="serie-in" type="number" inputmode="decimal" step="0.5" placeholder="${phKg}" id="kg-${tipus}-${ei}-${s}">
+          <input class="serie-in" type="number" inputmode="numeric" placeholder="${phReps}" id="reps-${tipus}-${ei}-${s}">
+          <button class="puja-btn" id="puja-${tipus}-${ei}-${s}" onclick="togglePuja('${tipus}',${ei},${s})">↑ Pujar</button>
+        </div>`;
+      }
     }
     html+=`</div></div>`;
   });
@@ -488,8 +514,8 @@ function toggleEx(tipus,i){
   document.getElementById(`ex-${tipus}-${i}`).classList.toggle('open');
 }
 
-function togglePuja(tipus,ei,si){
-  const btn=document.getElementById(`puja-${tipus}-${ei}-${si}`);
+function togglePuja(tipus,ei,si,suffix=''){
+  const btn=document.getElementById(`puja-${tipus}-${ei}-${si}${suffix}`);
   btn.classList.toggle('on');
   btn.textContent=btn.classList.contains('on')?'↑ Pujar ✓':'↑ Pujar';
 }
@@ -510,6 +536,20 @@ function saveSession(tipus){
       }).filter(Boolean);
       return {id:ex.id,name:ex.name,isAbs:true,absDone};
     }
+    if(ex.isSuperset){
+      const series=[],seriesB=[];
+      for(let s=0;s<ex.series;s++){
+        const kgA=document.getElementById(`kg-${tipus}-${ei}-${s}-A`)?.value||'';
+        const repsA=document.getElementById(`reps-${tipus}-${ei}-${s}-A`)?.value||'';
+        const pujaA=document.getElementById(`puja-${tipus}-${ei}-${s}-A`)?.classList.contains('on')||false;
+        const kgB=document.getElementById(`kg-${tipus}-${ei}-${s}-B`)?.value||'';
+        const repsB=document.getElementById(`reps-${tipus}-${ei}-${s}-B`)?.value||'';
+        const pujaB=document.getElementById(`puja-${tipus}-${ei}-${s}-B`)?.classList.contains('on')||false;
+        series.push({kg:kgA,reps:repsA,puja:pujaA});
+        seriesB.push({kg:kgB,reps:repsB,puja:pujaB});
+      }
+      return {id:ex.id,name:ex.name,isSuperset:true,exA:ex.exA,exB:ex.exB,series,seriesB};
+    }
     const series=[];
     for(let s=0;s<ex.series;s++){
       const kg=document.getElementById(`kg-${tipus}-${ei}-${s}`)?.value||'';
@@ -522,6 +562,7 @@ function saveSession(tipus){
 
   const hasDades=exercicis.some(ex=>{
     if(ex.isAbs) return ex.absDone&&ex.absDone.length>0;
+    if(ex.isSuperset) return ex.series.some(s=>s.kg||s.reps)||ex.seriesB.some(s=>s.kg||s.reps);
     return ex.series&&ex.series.some(s=>s.kg||s.reps);
   });
   if(!hasDades){showToast('⚠ Afegeix alguna dada primer');return;}
@@ -543,6 +584,19 @@ function clearForm(tipus){
         const btn=document.getElementById('abs-check-'+ai);
         if(btn){btn.classList.remove('done');btn.textContent='';}
       });
+      return;
+    }
+    if(ex.isSuperset){
+      for(let s=0;s<ex.series;s++){
+        ['A','B'].forEach(suf=>{
+          const kg=document.getElementById(`kg-${tipus}-${ei}-${s}-${suf}`);
+          const reps=document.getElementById(`reps-${tipus}-${ei}-${s}-${suf}`);
+          const puja=document.getElementById(`puja-${tipus}-${ei}-${s}-${suf}`);
+          if(kg) kg.value='';
+          if(reps) reps.value='';
+          if(puja){puja.classList.remove('on');puja.textContent='↑ Pujar';}
+        });
+      }
       return;
     }
     for(let s=0;s<ex.series;s++){
@@ -572,6 +626,14 @@ function renderGymHist(tipus){
       if(ex.isAbs){
         if(ex.absDone&&ex.absDone.length) return `Abs: ${ex.absDone.map(id=>ABS_EXERCICIS.find(a=>a.id===id)?.name||id).join(', ')}`;
         return null;
+      }
+      if(ex.isSuperset){
+        const srA=ex.series.filter(s=>s.kg||s.reps).map((s,i)=>`S${i+1}:${s.kg||'?'}×${s.reps||'?'}${s.puja?' ↑':''}`).join(' ');
+        const srB=ex.seriesB.filter(s=>s.kg||s.reps).map((s,i)=>`S${i+1}:${s.kg||'?'}×${s.reps||'?'}${s.puja?' ↑':''}`).join(' ');
+        const lines=[];
+        if(srA) lines.push(`${ex.exA}: ${srA}`);
+        if(srB) lines.push(`${ex.exB}: ${srB}`);
+        return lines.length?lines.join('\n'):null;
       }
       const sr=ex.series.filter(s=>s.kg||s.reps).map((s,i)=>`S${i+1}:${s.kg||'?'}×${s.reps||'?'}${s.puja?' ↑':''}`).join(' ');
       return sr?`${ex.name}: ${sr}`:null;
