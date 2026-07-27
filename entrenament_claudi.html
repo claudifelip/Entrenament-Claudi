@@ -261,21 +261,21 @@ body{font-family:'DM Sans',sans-serif;background:var(--bg);color:var(--t);max-wi
 <!-- TAB 1: PES -->
 <div class="page" id="tab-1">
   <div class="sgrid">
-    <div class="sc"><div class="sc-n" id="p-actual">97.8</div><div class="sc-l">Pes actual (kg)</div></div>
-    <div class="sc"><div class="sc-n ca" id="p-queda">7.8</div><div class="sc-l">Fins objectiu 90 kg</div></div>
+    <div class="sc"><div class="sc-n" id="p-actual">—</div><div class="sc-l">Pes actual (kg)</div></div>
+    <div class="sc"><div class="sc-n ca" id="p-queda">—</div><div class="sc-l">Fins objectiu 90 kg</div></div>
   </div>
   <div class="sgrid3">
-    <div class="sc"><div class="sc-n cg" id="p-perdut">1.4</div><div class="sc-l">kg perduts</div></div>
-    <div class="sc"><div class="sc-n" id="p-grasa-act">28.1</div><div class="sc-l">% Grasa</div></div>
-    <div class="sc"><div class="sc-n" id="p-musc-act">38.2</div><div class="sc-l">kg muscular</div></div>
+    <div class="sc"><div class="sc-n cg" id="p-perdut">0.0</div><div class="sc-l">kg perduts</div></div>
+    <div class="sc"><div class="sc-n" id="p-grasa-act">—</div><div class="sc-l">% Grasa</div></div>
+    <div class="sc"><div class="sc-n" id="p-musc-act">—</div><div class="sc-l">kg muscular</div></div>
   </div>
   <div class="goal-bar-wrap">
     <div class="goal-bar-labels">
-      <span>Inici 99.2 kg</span>
-      <span id="goal-pct-label">16% assolit</span>
+      <span id="goal-ini-label">Inici —</span>
+      <span id="goal-pct-label">0% assolit</span>
       <span>Obj. 90 kg</span>
     </div>
-    <div class="goal-bar-track"><div class="goal-bar-fill" id="goal-bar" style="width:16%"></div></div>
+    <div class="goal-bar-track"><div class="goal-bar-fill" id="goal-bar" style="width:0%"></div></div>
   </div>
   <div class="st">Evolució del pes</div>
   <div class="chart-wrap" style="height:120px"><canvas id="chart-pes"></canvas></div>
@@ -322,7 +322,7 @@ body{font-family:'DM Sans',sans-serif;background:var(--bg);color:var(--t);max-wi
   </div>
   <div class="sgrid">
     <div class="sc"><div class="sc-n" id="r-total">0</div><div class="sc-l">Sessions totals</div></div>
-    <div class="sc"><div class="sc-n cg" id="r-perdut">0.0 kg</div><div class="sc-l">Des de l'inici (99.2 kg)</div></div>
+    <div class="sc"><div class="sc-n cg" id="r-perdut">—</div><div class="sc-l">Des de la 1a pesada</div></div>
   </div>
   <div class="st">Sessions i pes · últimes setmanes</div>
   <div class="chart-wrap" style="height:150px"><canvas id="chart-resum"></canvas></div>
@@ -787,27 +787,32 @@ function deleteSession(i,tipus){
 // ═══════════════════════════════════════════
 // PES TAB
 // ═══════════════════════════════════════════
-const PARTIDA=99.2, OBJECTIU=90.0;
+const OBJECTIU=90.0;
 
 function renderPesTab(){
-  const pesos=S.arr('pesos');
-  const last=pesos.length?pesos[pesos.length-1]:null;
-  const pesActual=last?parseFloat(last.pes):PARTIDA;
-  const perdut=parseFloat((PARTIDA-pesActual).toFixed(1));
-  const resta=parseFloat((pesActual-OBJECTIU).toFixed(1));
-  const pct=perdut>0?Math.min(100,Math.round(perdut/(PARTIDA-OBJECTIU)*100)):0;
+  const raw=S.arr('pesos');
+  const sorted=[...raw].sort((a,b)=>a.date<b.date?-1:1);
+  const first=sorted.length?sorted[0]:null;
+  const last=sorted.length?sorted[sorted.length-1]:null;
+  const inici=first?parseFloat(first.pes):null;
+  const pesActual=last?parseFloat(last.pes):null;
+  const perdut=(inici!=null&&pesActual!=null)?parseFloat((inici-pesActual).toFixed(1)):0;
+  const resta=(pesActual!=null)?parseFloat((pesActual-OBJECTIU).toFixed(1)):null;
+  const denom=(inici!=null)?(inici-OBJECTIU):0;
+  const pct=(inici!=null&&pesActual!=null&&denom>0)?Math.min(100,Math.max(0,Math.round((inici-pesActual)/denom*100))):0;
 
-  document.getElementById('p-actual').textContent=pesActual.toFixed(1);
-  document.getElementById('p-queda').textContent=Math.max(0,resta).toFixed(1);
+  document.getElementById('p-actual').textContent=pesActual!=null?pesActual.toFixed(1):'—';
+  document.getElementById('p-queda').textContent=resta!=null?Math.max(0,resta).toFixed(1):'—';
   document.getElementById('p-perdut').textContent=perdut>0?perdut.toFixed(1):'0.0';
   document.getElementById('p-perdut').className='sc-n '+(perdut>0?'cg':'');
-  if(last&&last.grasa) document.getElementById('p-grasa-act').textContent=last.grasa;
-  if(last&&last.musc) document.getElementById('p-musc-act').textContent=last.musc;
+  document.getElementById('p-grasa-act').textContent=(last&&last.grasa)?last.grasa:'—';
+  document.getElementById('p-musc-act').textContent=(last&&last.musc)?last.musc:'—';
   document.getElementById('goal-bar').style.width=pct+'%';
   document.getElementById('goal-pct-label').textContent=pct+'% assolit';
+  document.getElementById('goal-ini-label').textContent='Inici '+(inici!=null?inici.toFixed(1)+' kg':'—');
 
-  renderPesCharts(pesos);
-  renderPesHist(pesos);
+  renderPesCharts(raw);
+  renderPesHist(raw);
 }
 
 function renderPesCharts(pesos){
@@ -1021,16 +1026,19 @@ function allWeeksAsc(){
 function renderResumTab(){
   const summaries=allWeeksAsc().map(weekSummary);
   const cur=summaries[summaries.length-1];
-  const pesos=S.arr('pesos');
-  const pesActual=pesos.length?parseFloat(pesos[pesos.length-1].pes):PARTIDA;
+  const sortedPes=[...S.arr('pesos')].sort((a,b)=>a.date<b.date?-1:1);
+  const inici=sortedPes.length?parseFloat(sortedPes[0].pes):null;
+  const pesActual=sortedPes.length?parseFloat(sortedPes[sortedPes.length-1].pes):null;
   document.getElementById('r-sess').textContent=cur?cur.sessions:0;
-  document.getElementById('r-pes').textContent=pesActual.toFixed(1);
+  document.getElementById('r-pes').textContent=pesActual!=null?pesActual.toFixed(1):'—';
   document.getElementById('r-dieta').textContent=(cur?cur.dietPct:0)+'%';
   document.getElementById('r-total').textContent=S.arr('gym_sessions_v2').length;
-  const perdut=PARTIDA-pesActual;
   const rp=document.getElementById('r-perdut');
-  rp.textContent=(perdut>=0?'-':'+')+Math.abs(perdut).toFixed(1)+' kg';
-  rp.className='sc-n '+(perdut>0?'cg':perdut<0?'cr':'');
+  if(inici!=null&&pesActual!=null){
+    const perdut=inici-pesActual;
+    rp.textContent=(perdut>=0?'-':'+')+Math.abs(perdut).toFixed(1)+' kg';
+    rp.className='sc-n '+(perdut>0?'cg':perdut<0?'cr':'');
+  }else{rp.textContent='—';rp.className='sc-n';}
   renderResumChart(summaries.slice(-8));
   renderResumList(summaries.slice().reverse());
 }
