@@ -88,9 +88,9 @@ body{font-family:'DM Sans',sans-serif;background:var(--bg);color:var(--t);max-wi
 .ex-ref-v{font-size:12px;font-weight:600;color:var(--t);font-family:'DM Mono',monospace;margin-top:1px}
 .ex-ref-flag{font-size:9px;color:#fac775;margin-top:1px}
 
-.series-hdr{display:grid;grid-template-columns:22px 1fr 1fr 80px;gap:6px;padding:4px 0;align-items:center}
+.series-hdr{display:grid;grid-template-columns:22px 1fr 1fr;gap:6px;padding:4px 0;align-items:center}
 .series-hdr span{font-size:9px;color:var(--t3);text-align:center;text-transform:uppercase;letter-spacing:.4px}
-.serie-row{display:grid;grid-template-columns:22px 1fr 1fr 80px;gap:6px;align-items:center;margin-bottom:6px}
+.serie-row{display:grid;grid-template-columns:22px 1fr 1fr;gap:6px;align-items:center;margin-bottom:6px}
 .serie-n{font-size:11px;color:var(--t3);text-align:center;font-family:'DM Mono',monospace}
 .serie-in{background:var(--card2);border:1px solid var(--bdr);border-radius:6px;padding:7px 4px;font-size:13px;color:var(--t);text-align:center;font-family:'DM Mono',monospace;width:100%;outline:none;-webkit-appearance:none}
 .serie-in:focus{border-color:var(--g)}
@@ -145,6 +145,43 @@ body{font-family:'DM Sans',sans-serif;background:var(--bg);color:var(--t);max-wi
 
 .toast{position:fixed;bottom:24px;left:50%;transform:translateX(-50%);background:var(--g);color:#fff;padding:9px 20px;border-radius:99px;font-size:13px;font-weight:500;opacity:0;transition:opacity .3s;pointer-events:none;white-space:nowrap;z-index:300}
 .toast.on{opacity:1}
+
+/* Puja pes per exercici */
+.puja-btn.big{margin-top:8px}
+
+/* Text ajuda desat */
+.save-help{font-size:10px;color:var(--t3);line-height:1.6;margin:8px 2px 0;text-align:center}
+
+/* DIETA */
+.diet-day{display:flex;gap:5px;margin-bottom:14px}
+.diet-daybtn{flex:1;min-width:0;padding:9px 2px;background:var(--bg3);border:1px solid var(--bdr);border-radius:var(--radsm);font-size:11px;font-weight:700;color:var(--t3);cursor:pointer;text-align:center;transition:all .15s;letter-spacing:.3px}
+.diet-daybtn.on{background:var(--gl);border-color:var(--g);color:var(--g)}
+.diet-daybtn.today{box-shadow:inset 0 -3px 0 var(--a)}
+.meal{background:var(--bg3);border-radius:var(--radsm);border:1px solid var(--bdr);border-left:4px solid var(--g);padding:12px 13px;margin-bottom:8px;display:flex;gap:11px;align-items:flex-start}
+.meal.amber{border-left-color:var(--a)}
+.meal.violet{border-left-color:#b464dc}
+.meal.clay{border-left-color:#d97a5e}
+.meal.free{border-left-color:var(--t3);opacity:.7}
+.meal-body{flex:1;min-width:0}
+.meal-t{font-size:10px;font-weight:700;text-transform:uppercase;letter-spacing:.6px;color:var(--t2);margin-bottom:4px}
+.meal-x{font-size:13px;color:var(--t);line-height:1.5}
+.meal-note{font-size:10px;color:var(--t3);font-style:italic;margin-top:5px;line-height:1.5}
+.meal-check{width:27px;height:27px;border-radius:7px;border:1px solid var(--bdr2);background:none;cursor:pointer;display:flex;align-items:center;justify-content:center;font-size:15px;flex-shrink:0;transition:all .2s;color:var(--g)}
+.meal-check.done{background:var(--gl);border-color:var(--g)}
+.diet-note{background:var(--bg3);border:1px solid var(--bdr);border-radius:var(--radsm);padding:12px 13px;font-size:11px;color:var(--t2);line-height:1.7}
+.diet-note b{color:var(--t)}
+
+/* RESUM */
+.wk{background:var(--bg3);border:1px solid var(--bdr);border-radius:var(--radsm);padding:11px 13px;margin-bottom:8px}
+.wk-top{display:flex;justify-content:space-between;align-items:center;margin-bottom:9px}
+.wk-range{font-size:13px;font-weight:600;color:var(--t)}
+.wk-cur{font-size:9px;font-weight:700;text-transform:uppercase;letter-spacing:.5px;color:var(--g);background:var(--gl);padding:3px 8px;border-radius:99px}
+.wk-metrics{display:grid;grid-template-columns:1fr 1fr 1fr;gap:8px}
+.wk-m{text-align:center;background:rgba(0,0,0,.18);border-radius:7px;padding:8px 4px}
+.wk-m-v{font-size:15px;font-weight:600;font-family:'DM Mono',monospace;color:var(--t)}
+.wk-m-l{font-size:9px;color:var(--t3);margin-top:2px;text-transform:uppercase;letter-spacing:.3px}
+.wk-sub{font-size:10px;color:var(--t3);margin-top:7px;font-family:'DM Mono',monospace}
+.chart-legend{font-size:10px;text-align:center;margin:-2px 0 10px}
 </style>
 </head>
 <body>
@@ -162,6 +199,8 @@ body{font-family:'DM Sans',sans-serif;background:var(--bg);color:var(--t);max-wi
 <div class="tabs">
   <div class="tab on" onclick="goMainTab(0)">💪 GYM</div>
   <div class="tab"    onclick="goMainTab(1)">⚖️ PES</div>
+  <div class="tab"    onclick="goMainTab(2)">🥗 DIETA</div>
+  <div class="tab"    onclick="goMainTab(3)">📊 RESUM</div>
 </div>
 
 <div class="pages">
@@ -179,11 +218,12 @@ body{font-family:'DM Sans',sans-serif;background:var(--bg);color:var(--t);max-wi
   <div class="gympage on" id="gympage-A">
     <div class="sess-hdr">
       <div><div class="sess-label">🔵 Dia A · Full Body</div><div class="sess-sub" id="a-last-date">Sense sessions anteriors</div></div>
-      <input type="date" class="fi" id="a-date" style="width:auto;font-size:12px;padding:6px 9px">
+      <input type="date" class="fi" id="a-date" style="width:auto;font-size:12px;padding:6px 9px" onchange="autosave('A')">
     </div>
     <div id="a-exercises"></div>
-    <button class="btn" onclick="saveSession('A')">💾 Desar sessió</button>
-    <button class="btn btn-sec" onclick="clearForm('A')">↺ Buidar</button>
+    <button class="btn" onclick="saveSession('A')">💾 Desar / actualitzar sessió</button>
+    <button class="btn btn-sec" onclick="clearForm('A')">↺ Buidar (nova sessió)</button>
+    <div class="save-help">El que escrius es desa sol mentre entrenes. «Desar» la registra a l'historial i la pots seguir editant.</div>
     <div class="st">Historial Dia A</div>
     <div id="a-hist"></div>
   </div>
@@ -192,11 +232,12 @@ body{font-family:'DM Sans',sans-serif;background:var(--bg);color:var(--t);max-wi
   <div class="gympage" id="gympage-B">
     <div class="sess-hdr">
       <div><div class="sess-label">🟢 Dia B · Full Body</div><div class="sess-sub" id="b-last-date">Sense sessions anteriors</div></div>
-      <input type="date" class="fi" id="b-date" style="width:auto;font-size:12px;padding:6px 9px">
+      <input type="date" class="fi" id="b-date" style="width:auto;font-size:12px;padding:6px 9px" onchange="autosave('B')">
     </div>
     <div id="b-exercises"></div>
-    <button class="btn" onclick="saveSession('B')">💾 Desar sessió</button>
-    <button class="btn btn-sec" onclick="clearForm('B')">↺ Buidar</button>
+    <button class="btn" onclick="saveSession('B')">💾 Desar / actualitzar sessió</button>
+    <button class="btn btn-sec" onclick="clearForm('B')">↺ Buidar (nova sessió)</button>
+    <div class="save-help">El que escrius es desa sol mentre entrenes. «Desar» la registra a l'historial i la pots seguir editant.</div>
     <div class="st">Historial Dia B</div>
     <div id="b-hist"></div>
   </div>
@@ -205,11 +246,12 @@ body{font-family:'DM Sans',sans-serif;background:var(--bg);color:var(--t);max-wi
   <div class="gympage" id="gympage-C">
     <div class="sess-hdr">
       <div><div class="sess-label">🔴 Dia C · Full Body</div><div class="sess-sub" id="c-last-date">Sense sessions anteriors</div></div>
-      <input type="date" class="fi" id="c-date" style="width:auto;font-size:12px;padding:6px 9px">
+      <input type="date" class="fi" id="c-date" style="width:auto;font-size:12px;padding:6px 9px" onchange="autosave('C')">
     </div>
     <div id="c-exercises"></div>
-    <button class="btn" onclick="saveSession('C')">💾 Desar sessió</button>
-    <button class="btn btn-sec" onclick="clearForm('C')">↺ Buidar</button>
+    <button class="btn" onclick="saveSession('C')">💾 Desar / actualitzar sessió</button>
+    <button class="btn btn-sec" onclick="clearForm('C')">↺ Buidar (nova sessió)</button>
+    <div class="save-help">El que escrius es desa sol mentre entrenes. «Desar» la registra a l'historial i la pots seguir editant.</div>
     <div class="st">Historial Dia C</div>
     <div id="c-hist"></div>
   </div>
@@ -257,6 +299,46 @@ body{font-family:'DM Sans',sans-serif;background:var(--bg);color:var(--t);max-wi
   <div style="background:var(--card);border-radius:var(--rad);border:1px solid var(--bdr);padding:0 15px" id="pes-hist"></div>
 </div>
 
+<!-- TAB 2: DIETA -->
+<div class="page" id="tab-2">
+  <div class="diet-day" id="diet-day-sel"></div>
+  <div class="sgrid">
+    <div class="sc"><div class="sc-n" id="diet-today-n">0/5</div><div class="sc-l">Àpats fets avui</div></div>
+    <div class="sc"><div class="sc-n cg" id="diet-week-n">0%</div><div class="sc-l">Compliment setmana</div></div>
+  </div>
+  <div id="diet-meals"></div>
+  <div class="st">Referència</div>
+  <div class="diet-note">
+    Pesos de cereals, pasta i llegums <b>en cuit</b> (excepte la proteïna, en cru). Objectiu <b>~2.100–2.400 kcal/dia</b> · proteïna <b>~160–180 g</b> · oli <b>1,5 cull.</b> per dinar i sopar. Base orientativa; ajustos fins, amb la dietista.
+  </div>
+</div>
+
+<!-- TAB 3: RESUM -->
+<div class="page" id="tab-3">
+  <div class="sgrid3">
+    <div class="sc"><div class="sc-n" id="r-sess">0</div><div class="sc-l">Sessions aquesta setmana</div></div>
+    <div class="sc"><div class="sc-n" id="r-pes">—</div><div class="sc-l">Pes actual (kg)</div></div>
+    <div class="sc"><div class="sc-n cg" id="r-dieta">0%</div><div class="sc-l">Dieta setmana</div></div>
+  </div>
+  <div class="sgrid">
+    <div class="sc"><div class="sc-n" id="r-total">0</div><div class="sc-l">Sessions totals</div></div>
+    <div class="sc"><div class="sc-n cg" id="r-perdut">0.0 kg</div><div class="sc-l">Des de l'inici (99.2 kg)</div></div>
+  </div>
+  <div class="st">Sessions i pes · últimes setmanes</div>
+  <div class="chart-wrap" style="height:150px"><canvas id="chart-resum"></canvas></div>
+  <div class="chart-legend"><span class="cg">■ Sessions</span> &nbsp;&nbsp; <span class="ca">■ Pes</span></div>
+  <div class="st">Resum setmanal</div>
+  <div id="resum-list"></div>
+
+  <div class="st">Còpia de seguretat i dades</div>
+  <button class="btn btn-sec" onclick="downloadBackup()">⬇️ Exportar / descarregar còpia</button>
+  <button class="btn btn-sec" onclick="copyBackup()">📋 Copiar dades (per enviar-les)</button>
+  <button class="btn btn-sec" onclick="document.getElementById('import-file').click()">⬆️ Importar còpia</button>
+  <input type="file" id="import-file" accept="application/json,.json" style="display:none" onchange="importData(event)">
+  <button class="btn btn-sec" style="color:#f09595;border-color:rgba(226,75,74,.4);margin-top:16px" onclick="resetAllData()">🗑 Esborrar totes les dades (gym, pes i dieta)</button>
+  <div class="save-help">Exporta una còpia abans de netejar el mòbil, i importa-la després per recuperar-ho tot. Per analitzar-les, descarrega o copia i passa-me el fitxer.</div>
+</div>
+
 </div>
 
 <div class="toast" id="toast"></div>
@@ -266,9 +348,11 @@ body{font-family:'DM Sans',sans-serif;background:var(--bg);color:var(--t);max-wi
 const S={
   get(k){try{const v=localStorage.getItem(k);return v?JSON.parse(v):null;}catch{return null;}},
   set(k,v){try{localStorage.setItem(k,JSON.stringify(v));}catch{}},
+  del(k){try{localStorage.removeItem(k);}catch{}},
   arr(k){return this.get(k)||[]},
   push(k,v){const a=this.arr(k);a.push(v);this.set(k,a);}
 };
+let ready=false;
 
 // ═══════════════════════════════════════════
 // GYM DATA
@@ -345,12 +429,14 @@ const BLOC_META={
 // ═══════════════════════════════════════════
 // NAVIGATION
 // ═══════════════════════════════════════════
-const MAIN_TITLES=['Gym','Pes'];
+const MAIN_TITLES=['Gym','Pes','Dieta','Resum'];
 function goMainTab(i){
   document.querySelectorAll('.tab').forEach((t,j)=>t.classList.toggle('on',i===j));
   document.querySelectorAll('.page').forEach((p,j)=>p.classList.toggle('on',i===j));
   document.getElementById('hdr-title').textContent=MAIN_TITLES[i];
   if(i===1) renderPesTab();
+  if(i===2) renderDietaTab();
+  if(i===3) renderResumTab();
 }
 
 let currentGymTab='A';
@@ -401,7 +487,7 @@ function renderExercises(tipus){
 
     let lastEx=null;
     if(last) lastEx=last.exercicis.find(e=>e.id===ex.id);
-    const anyUpFlag = lastEx && lastEx.series.some(s=>s.puja);
+    const anyUpFlag = exWasUp(lastEx);
     const optBadge = ex.optional ? '<span class="badge-opt">Opcional</span>' : '';
     const badge = lastEx
       ? (anyUpFlag ? '<span class="badge-up">↑ Puja pes</span>' : '<span class="badge-ok">✓ Mantén</span>')
@@ -422,12 +508,11 @@ function renderExercises(tipus){
     if(lastEx){
       const seriesRef=lastEx.series.filter(s=>s.kg||s.reps);
       if(seriesRef.length){
-        html+=`<div class="ex-ref"><div class="ex-ref-title">📋 Última sessió · ${fmtDate(last.data)}</div><div class="ex-ref-row">`;
+        html+=`<div class="ex-ref"><div class="ex-ref-title">📋 Última sessió · ${fmtDate(last.data)}${exWasUp(lastEx)?' · ↑ tocava pujar':''}</div><div class="ex-ref-row">`;
         seriesRef.forEach((s,si)=>{
           html+=`<div class="ex-ref-serie">
             <div class="ex-ref-s">S${si+1}</div>
             <div class="ex-ref-v">${s.kg||'—'}×${s.reps||'—'}</div>
-            ${s.puja?'<div class="ex-ref-flag">↑ pujar</div>':''}
           </div>`;
         });
         html+=`</div></div>`;
@@ -435,31 +520,31 @@ function renderExercises(tipus){
     }
 
     if(ex.isSuperset){
+      const seA=lastEx?lastEx.series:null, seB=lastEx?lastEx.seriesB:null;
+      html+=`<div style="font-size:11px;color:#85b7eb;margin-bottom:5px;font-weight:600">${ex.exA}</div>`;
+      html+=`<div class="series-hdr"><span>#</span><span>Pes (kg)</span><span>Reps</span></div>`;
       for(let s=0;s<ex.series;s++){
-        const refA=lastEx?lastEx.series[s]:null;
-        const refB=lastEx?lastEx.seriesB[s]:null;
-        html+=`<div style="background:var(--card2);border-radius:7px;padding:8px 10px;margin-bottom:7px">
-          <div style="font-size:9px;font-weight:700;color:var(--t3);text-transform:uppercase;letter-spacing:.5px;margin-bottom:6px">Sèrie ${s+1}</div>
-          <div style="font-size:10px;color:#85b7eb;margin-bottom:4px;font-weight:600">${ex.exA}</div>
-          <div class="series-hdr"><span></span><span>Pes (kg)</span><span>Reps</span><span>Pujar?</span></div>
-          <div class="serie-row">
-            <div class="serie-n">A</div>
-            <input class="serie-in" type="number" inputmode="decimal" step="0.5" placeholder="${refA&&refA.kg?refA.kg:'kg'}" id="kg-${tipus}-${ei}-${s}-A">
-            <input class="serie-in" type="number" inputmode="numeric" placeholder="${refA&&refA.reps?refA.reps:'reps'}" id="reps-${tipus}-${ei}-${s}-A">
-            <button class="puja-btn${refA&&refA.puja?' on':''}" id="puja-${tipus}-${ei}-${s}-A" onclick="togglePuja('${tipus}',${ei},${s},'-A')">${refA&&refA.puja?'↑ Pujar ✓':'↑ Pujar'}</button>
-          </div>
-          <div style="font-size:10px;color:#85b7eb;margin-bottom:4px;font-weight:600;margin-top:6px">${ex.exB}</div>
-          <div class="series-hdr"><span></span><span>Pes (kg)</span><span>Reps</span><span>Pujar?</span></div>
-          <div class="serie-row">
-            <div class="serie-n">B</div>
-            <input class="serie-in" type="number" inputmode="decimal" step="0.5" placeholder="${refB&&refB.kg?refB.kg:'kg'}" id="kg-${tipus}-${ei}-${s}-B">
-            <input class="serie-in" type="number" inputmode="numeric" placeholder="${refB&&refB.reps?refB.reps:'reps'}" id="reps-${tipus}-${ei}-${s}-B">
-            <button class="puja-btn${refB&&refB.puja?' on':''}" id="puja-${tipus}-${ei}-${s}-B" onclick="togglePuja('${tipus}',${ei},${s},'-B')">${refB&&refB.puja?'↑ Pujar ✓':'↑ Pujar'}</button>
-          </div>
+        const r=seA?seA[s]:null;
+        html+=`<div class="serie-row">
+          <div class="serie-n">${s+1}</div>
+          <input class="serie-in" type="number" inputmode="decimal" step="0.5" placeholder="${r&&r.kg?r.kg:'kg'}" id="kg-${tipus}-${ei}-${s}-A">
+          <input class="serie-in" type="number" inputmode="numeric" placeholder="${r&&r.reps?r.reps:'reps'}" id="reps-${tipus}-${ei}-${s}-A">
         </div>`;
       }
+      html+=`<button class="puja-btn" style="margin:2px 0 12px" id="puja-${tipus}-${ei}-A" onclick="togglePuja('${tipus}',${ei},'-A')">↑ Puja pes (${ex.exA})</button>`;
+      html+=`<div style="font-size:11px;color:#85b7eb;margin-bottom:5px;font-weight:600">${ex.exB}</div>`;
+      html+=`<div class="series-hdr"><span>#</span><span>Pes (kg)</span><span>Reps</span></div>`;
+      for(let s=0;s<ex.series;s++){
+        const r=seB?seB[s]:null;
+        html+=`<div class="serie-row">
+          <div class="serie-n">${s+1}</div>
+          <input class="serie-in" type="number" inputmode="decimal" step="0.5" placeholder="${r&&r.kg?r.kg:'kg'}" id="kg-${tipus}-${ei}-${s}-B">
+          <input class="serie-in" type="number" inputmode="numeric" placeholder="${r&&r.reps?r.reps:'reps'}" id="reps-${tipus}-${ei}-${s}-B">
+        </div>`;
+      }
+      html+=`<button class="puja-btn" style="margin-top:2px" id="puja-${tipus}-${ei}-B" onclick="togglePuja('${tipus}',${ei},'-B')">↑ Puja pes (${ex.exB})</button>`;
     } else {
-      html+=`<div class="series-hdr"><span>#</span><span>Pes (kg)</span><span>Reps</span><span>Pujar?</span></div>`;
+      html+=`<div class="series-hdr"><span>#</span><span>Pes (kg)</span><span>Reps</span></div>`;
       for(let s=0;s<ex.series;s++){
         const ref=lastEx?lastEx.series[s]:null;
         const phKg=ref&&ref.kg?ref.kg:'kg';
@@ -468,14 +553,16 @@ function renderExercises(tipus){
           <div class="serie-n">${s+1}</div>
           <input class="serie-in" type="number" inputmode="decimal" step="0.5" placeholder="${phKg}" id="kg-${tipus}-${ei}-${s}">
           <input class="serie-in" type="number" inputmode="numeric" placeholder="${phReps}" id="reps-${tipus}-${ei}-${s}">
-          <button class="puja-btn" id="puja-${tipus}-${ei}-${s}" onclick="togglePuja('${tipus}',${ei},${s})">↑ Pujar</button>
         </div>`;
       }
+      html+=`<button class="puja-btn big" id="puja-${tipus}-${ei}" onclick="togglePuja('${tipus}',${ei})">↑ Puja pes el pròxim dia</button>`;
     }
     html+=`</div></div>`;
   });
 
   container.innerHTML=html;
+  restoreDraft(tipus);
+  container.oninput=function(){autosave(tipus);};
 }
 
 function renderAbsBlock(lastSession){
@@ -496,7 +583,7 @@ function renderAbsBlock(lastSession){
         <div class="abs-ex-name">${ab.name}</div>
         <div class="abs-ex-meta">${ab.reps}${ab.tip?' · '+ab.tip:''}</div>
       </div>
-      <button class="abs-check${wasDone?' done':''}" id="abs-check-${ai}" onclick="toggleAbs(${ai})">${wasDone?'✓':''}</button>
+      <button class="abs-check${wasDone?' done':''}" id="abs-check-${ai}" onclick="toggleAbs(${ai},'B')">${wasDone?'✓':''}</button>
     </div>`;
   });
 
@@ -504,30 +591,49 @@ function renderAbsBlock(lastSession){
   return html;
 }
 
-function toggleAbs(ai){
+function toggleAbs(ai,tipus){
   const btn=document.getElementById('abs-check-'+ai);
   btn.classList.toggle('done');
   btn.textContent=btn.classList.contains('done')?'✓':'';
+  autosave(tipus||'B');
 }
 
 function toggleEx(tipus,i){
   document.getElementById(`ex-${tipus}-${i}`).classList.toggle('open');
 }
 
-function togglePuja(tipus,ei,si,suffix=''){
-  const btn=document.getElementById(`puja-${tipus}-${ei}-${si}${suffix}`);
+function togglePuja(tipus,ei,suffix=''){
+  const btn=document.getElementById(`puja-${tipus}-${ei}${suffix}`);
+  if(!btn) return;
   btn.classList.toggle('on');
-  btn.textContent=btn.classList.contains('on')?'↑ Pujar ✓':'↑ Pujar';
+  const on=btn.classList.contains('on');
+  btn.textContent=btn.textContent.replace(/ ✓$/,'')+(on?' ✓':'');
+  autosave(tipus);
 }
 
 // ═══════════════════════════════════════════
 // SAVE SESSION
 // ═══════════════════════════════════════════
-function saveSession(tipus){
+// Va indica si en una sessió (última o guardada) tocava pujar pes, compatible amb dades antigues
+function exWasUp(le){
+  if(!le) return false;
+  if(le.isSuperset){
+    if(le.pujaA!==undefined||le.pujaB!==undefined) return !!(le.pujaA||le.pujaB);
+    return (le.series&&le.series.some(s=>s.puja))||(le.seriesB&&le.seriesB.some(s=>s.puja));
+  }
+  if(le.puja!==undefined) return !!le.puja;
+  return !!(le.series&&le.series.some(s=>s.puja));
+}
+
+function val(id){return document.getElementById(id)?.value||'';}
+function setVal(id,v){const e=document.getElementById(id);if(e&&v!=null&&v!=='')e.value=v;}
+function setPuja(id){const b=document.getElementById(id);if(b){b.classList.add('on');b.textContent=b.textContent.replace(/ ✓$/,'')+' ✓';}}
+
+// Recull l'estat actual del formulari d'un dia
+function collectForm(tipus){
   const g=GYM[tipus];
   const id=tipus.toLowerCase();
   const data=document.getElementById(id+'-date').value||today();
-
   const exercicis=g.exercicis.map((ex,ei)=>{
     if(ex.isAbs){
       const absDone=ABS_EXERCICIS.map((ab,ai)=>{
@@ -539,37 +645,76 @@ function saveSession(tipus){
     if(ex.isSuperset){
       const series=[],seriesB=[];
       for(let s=0;s<ex.series;s++){
-        const kgA=document.getElementById(`kg-${tipus}-${ei}-${s}-A`)?.value||'';
-        const repsA=document.getElementById(`reps-${tipus}-${ei}-${s}-A`)?.value||'';
-        const pujaA=document.getElementById(`puja-${tipus}-${ei}-${s}-A`)?.classList.contains('on')||false;
-        const kgB=document.getElementById(`kg-${tipus}-${ei}-${s}-B`)?.value||'';
-        const repsB=document.getElementById(`reps-${tipus}-${ei}-${s}-B`)?.value||'';
-        const pujaB=document.getElementById(`puja-${tipus}-${ei}-${s}-B`)?.classList.contains('on')||false;
-        series.push({kg:kgA,reps:repsA,puja:pujaA});
-        seriesB.push({kg:kgB,reps:repsB,puja:pujaB});
+        series.push({kg:val(`kg-${tipus}-${ei}-${s}-A`),reps:val(`reps-${tipus}-${ei}-${s}-A`)});
+        seriesB.push({kg:val(`kg-${tipus}-${ei}-${s}-B`),reps:val(`reps-${tipus}-${ei}-${s}-B`)});
       }
-      return {id:ex.id,name:ex.name,isSuperset:true,exA:ex.exA,exB:ex.exB,series,seriesB};
+      const pujaA=document.getElementById(`puja-${tipus}-${ei}-A`)?.classList.contains('on')||false;
+      const pujaB=document.getElementById(`puja-${tipus}-${ei}-B`)?.classList.contains('on')||false;
+      return {id:ex.id,name:ex.name,isSuperset:true,exA:ex.exA,exB:ex.exB,series,seriesB,pujaA,pujaB};
     }
     const series=[];
     for(let s=0;s<ex.series;s++){
-      const kg=document.getElementById(`kg-${tipus}-${ei}-${s}`)?.value||'';
-      const reps=document.getElementById(`reps-${tipus}-${ei}-${s}`)?.value||'';
-      const puja=document.getElementById(`puja-${tipus}-${ei}-${s}`)?.classList.contains('on')||false;
-      series.push({kg,reps,puja});
+      series.push({kg:val(`kg-${tipus}-${ei}-${s}`),reps:val(`reps-${tipus}-${ei}-${s}`)});
     }
-    return {id:ex.id,name:ex.name,series};
+    const puja=document.getElementById(`puja-${tipus}-${ei}`)?.classList.contains('on')||false;
+    return {id:ex.id,name:ex.name,series,puja};
   });
+  return {tipus,data,exercicis};
+}
 
-  const hasDades=exercicis.some(ex=>{
+function hasAnyData(form){
+  return form.exercicis.some(ex=>{
     if(ex.isAbs) return ex.absDone&&ex.absDone.length>0;
     if(ex.isSuperset) return ex.series.some(s=>s.kg||s.reps)||ex.seriesB.some(s=>s.kg||s.reps);
     return ex.series&&ex.series.some(s=>s.kg||s.reps);
   });
-  if(!hasDades){showToast('⚠ Afegeix alguna dada primer');return;}
+}
 
-  S.push('gym_sessions_v2',{tipus,data,exercicis,ts:Date.now()});
-  showToast('✅ Sessió guardada!');
-  renderExercises(tipus);
+// Autosave: es guarda sol mentre entrenes, sense tancar res
+function autosave(tipus){
+  if(!ready) return;
+  S.set('gym_draft_'+tipus, collectForm(tipus));
+}
+
+// Restaura l'esborrany a la pantalla (el que estaves omplint)
+function restoreDraft(tipus){
+  const d=S.get('gym_draft_'+tipus);
+  if(!d||!d.exercicis) return;
+  const id=tipus.toLowerCase();
+  if(d.data){const de=document.getElementById(id+'-date');if(de)de.value=d.data;}
+  d.exercicis.forEach((ex,ei)=>{
+    if(ex.isAbs){
+      (ex.absDone||[]).forEach(did=>{
+        const ai=ABS_EXERCICIS.findIndex(a=>a.id===did);
+        if(ai>=0){const b=document.getElementById('abs-check-'+ai);if(b){b.classList.add('done');b.textContent='✓';}}
+      });
+      return;
+    }
+    if(ex.isSuperset){
+      (ex.series||[]).forEach((s,si)=>{setVal(`kg-${tipus}-${ei}-${si}-A`,s.kg);setVal(`reps-${tipus}-${ei}-${si}-A`,s.reps);});
+      (ex.seriesB||[]).forEach((s,si)=>{setVal(`kg-${tipus}-${ei}-${si}-B`,s.kg);setVal(`reps-${tipus}-${ei}-${si}-B`,s.reps);});
+      if(ex.pujaA) setPuja(`puja-${tipus}-${ei}-A`);
+      if(ex.pujaB) setPuja(`puja-${tipus}-${ei}-B`);
+      return;
+    }
+    (ex.series||[]).forEach((s,si)=>{setVal(`kg-${tipus}-${ei}-${si}`,s.kg);setVal(`reps-${tipus}-${ei}-${si}`,s.reps);});
+    if(ex.puja) setPuja(`puja-${tipus}-${ei}`);
+  });
+}
+
+// Desar = registrar/actualitzar la sessió del dia a l'historial (i seguir editant)
+function saveSession(tipus){
+  const form=collectForm(tipus);
+  if(!hasAnyData(form)){showToast('⚠ Afegeix alguna dada primer');return;}
+  const all=S.arr('gym_sessions_v2');
+  const idx=all.findIndex(s=>s.tipus===tipus && s.data===form.data);
+  const record={tipus:form.tipus,data:form.data,exercicis:form.exercicis,ts:(idx>=0?all[idx].ts:Date.now())};
+  if(idx>=0){all[idx]=record;showToast('✅ Sessió actualitzada');}
+  else{all.push(record);showToast('✅ Sessió guardada!');}
+  S.set('gym_sessions_v2',all);
+  S.set('gym_draft_'+tipus, form);
+  const sub=document.getElementById(tipus.toLowerCase()+'-last-date');
+  if(sub) sub.textContent='Sessió desada ✓ · pots seguir editant';
   renderGymHist(tipus);
 }
 
@@ -577,38 +722,10 @@ function saveSession(tipus){
 // CLEAR FORM
 // ═══════════════════════════════════════════
 function clearForm(tipus){
-  const g=GYM[tipus];
-  g.exercicis.forEach((ex,ei)=>{
-    if(ex.isAbs){
-      ABS_EXERCICIS.forEach((_,ai)=>{
-        const btn=document.getElementById('abs-check-'+ai);
-        if(btn){btn.classList.remove('done');btn.textContent='';}
-      });
-      return;
-    }
-    if(ex.isSuperset){
-      for(let s=0;s<ex.series;s++){
-        ['A','B'].forEach(suf=>{
-          const kg=document.getElementById(`kg-${tipus}-${ei}-${s}-${suf}`);
-          const reps=document.getElementById(`reps-${tipus}-${ei}-${s}-${suf}`);
-          const puja=document.getElementById(`puja-${tipus}-${ei}-${s}-${suf}`);
-          if(kg) kg.value='';
-          if(reps) reps.value='';
-          if(puja){puja.classList.remove('on');puja.textContent='↑ Pujar';}
-        });
-      }
-      return;
-    }
-    for(let s=0;s<ex.series;s++){
-      const kg=document.getElementById(`kg-${tipus}-${ei}-${s}`);
-      const reps=document.getElementById(`reps-${tipus}-${ei}-${s}`);
-      const puja=document.getElementById(`puja-${tipus}-${ei}-${s}`);
-      if(kg) kg.value='';
-      if(reps) reps.value='';
-      if(puja){puja.classList.remove('on');puja.textContent='↑ Pujar';}
-    }
-  });
-  showToast('Formulari buidat');
+  if(!confirm('Buidar el formulari i començar una sessió nova?\n(Les sessions ja desades a l\'historial no es toquen.)')) return;
+  S.del('gym_draft_'+tipus);
+  renderExercises(tipus);
+  showToast('Formulari buidat · sessió nova');
 }
 
 // ═══════════════════════════════════════════
@@ -628,15 +745,17 @@ function renderGymHist(tipus){
         return null;
       }
       if(ex.isSuperset){
-        const srA=ex.series.filter(s=>s.kg||s.reps).map((s,i)=>`S${i+1}:${s.kg||'?'}×${s.reps||'?'}${s.puja?' ↑':''}`).join(' ');
-        const srB=ex.seriesB.filter(s=>s.kg||s.reps).map((s,i)=>`S${i+1}:${s.kg||'?'}×${s.reps||'?'}${s.puja?' ↑':''}`).join(' ');
+        const upA=(ex.pujaA!==undefined?ex.pujaA:(ex.series&&ex.series.some(x=>x.puja)));
+        const upB=(ex.pujaB!==undefined?ex.pujaB:(ex.seriesB&&ex.seriesB.some(x=>x.puja)));
+        const srA=ex.series.filter(x=>x.kg||x.reps).map((x,i)=>`S${i+1}:${x.kg||'?'}×${x.reps||'?'}`).join(' ');
+        const srB=ex.seriesB.filter(x=>x.kg||x.reps).map((x,i)=>`S${i+1}:${x.kg||'?'}×${x.reps||'?'}`).join(' ');
         const lines=[];
-        if(srA) lines.push(`${ex.exA}: ${srA}`);
-        if(srB) lines.push(`${ex.exB}: ${srB}`);
+        if(srA) lines.push(`${ex.exA}: ${srA}${upA?' ↑':''}`);
+        if(srB) lines.push(`${ex.exB}: ${srB}${upB?' ↑':''}`);
         return lines.length?lines.join('\n'):null;
       }
-      const sr=ex.series.filter(s=>s.kg||s.reps).map((s,i)=>`S${i+1}:${s.kg||'?'}×${s.reps||'?'}${s.puja?' ↑':''}`).join(' ');
-      return sr?`${ex.name}: ${sr}`:null;
+      const sr=ex.series.filter(x=>x.kg||x.reps).map((x,i)=>`S${i+1}:${x.kg||'?'}×${x.reps||'?'}`).join(' ');
+      return sr?`${ex.name}: ${sr}${exWasUp(ex)?' ↑':''}`:null;
     }).filter(Boolean).join('\n');
 
     return `<div class="gym-hist-card" id="ghc-${s.ts}">
@@ -766,12 +885,267 @@ function deletePes(i){
 }
 
 // ═══════════════════════════════════════════
+// DIETA
+// ═══════════════════════════════════════════
+const DIET_MEALS=['esmorzar','migmati','dinar','berenar','sopar'];
+const DIET_T={esmorzar:'Esmorzar',migmati:'Mig matí',dinar:'Dinar',berenar:'Berenar',sopar:'Sopar'};
+const DIET_CLS={esmorzar:'amber',migmati:'',dinar:'',berenar:'violet',sopar:'clay'};
+const DIET_FIX={
+  esmorzar:{x:'Cafè sol + 8 g creatina + 1 peça de fruita + 30 g fruits secs (no fregits)'},
+  migmati:{x:'Entrepà: 80 g pa integral + 80 g proteïna magra (gall d\'indi, pernil dolç, tonyina, formatge fresc o ou) + tomàquet opcional'},
+  berenar:{x:'1 peça de fruita + batut de proteïna (1 scoop amb aigua)',note:'Aquest és el batut post-entreno. Si entrenes de nit, mou-lo després de sopar.'}
+};
+// clau = getDay(): 0=Diumenge ... 6=Dissabte
+const DIET_DAY={
+  1:{dinar:{x:'200 g arròs integral + verdura saltejada (sense oli) + 150 g pollastre + 1,5 cull. oli'},
+     sopar:{x:'Amanida verda + 150 g patata + remenat de 2-3 ous (o 150 g proteïna) + 1,5 cull. oli + iogurt sense sucre'}},
+  2:{dinar:{x:'200 g quinoa o cuscús + amanida (canonges, tomàquet, alvocat) + 180 g sèpia o calamar + 1,5 cull. oli'},
+     sopar:{x:'Verdura saltejada (carbassó, xerris) + 150 g pollastre + 1,5 cull. oli + iogurt sense sucre'}},
+  3:{dinar:{x:'200 g pasta de llenties o cigrons + verdura + 180 g vedella magra + 1,5 cull. oli'},
+     sopar:{x:'Espàrrecs a la planxa + 150 g pollastre + carb opcional petit + 1,5 cull. oli + iogurt sense sucre'}},
+  4:{dinar:{x:'200 g pasta integral + amanida (enciam, tomàquet, blat de moro) + 150 g pollastre + 1,5 cull. oli'},
+     sopar:{x:'Gaspatxo o puré de verdures + 150 g salmó o tonyina + 150 g patata + 1,5 cull. oli + iogurt sense sucre'}},
+  5:{dinar:{x:'250 g patata + bròquil + 180 g peix blanc + 1,5 cull. oli'},
+     sopar:{x:'2 fajitas (tortilla integral) amb pebrot i ceba + 150 g pollastre + 1,5 cull. oli + iogurt sense sucre'}},
+  6:{dinar:{x:'200 g cigrons cuits + amanida verda + 2 ous durs (o 150 g proteïna) + 1,5 cull. oli'},
+     sopar:{x:'Lliure',free:true}},
+  0:{dinar:{x:'Lliure (mantenint la línia)',free:true},
+     sopar:{x:'Mongeta verda + 200 g patata + 150 g vedella magra o llom + 1,5 cull. oli + iogurt sense sucre'}},
+};
+const DIET_ORDER=[1,2,3,4,5,6,0];
+const DIET_LABELS=['DL','DM','DC','DJ','DV','DS','DG'];
+let dietSel=null;
+
+// Dates ISO de dilluns..diumenge de la setmana actual, per dia (getDay)
+function weekDates(){
+  const now=new Date();
+  const dow=now.getDay();
+  const mon=new Date(now); mon.setDate(now.getDate()+(dow===0?-6:1-dow));
+  const map={};
+  DIET_ORDER.forEach((gd,i)=>{const d=new Date(mon); d.setDate(mon.getDate()+i); map[gd]=d.toISOString().slice(0,10);});
+  return map;
+}
+function dietMealText(gd,mk){
+  if(mk==='dinar') return DIET_DAY[gd].dinar;
+  if(mk==='sopar') return DIET_DAY[gd].sopar;
+  return DIET_FIX[mk];
+}
+function isFree(gd,mk){const m=dietMealText(gd,mk);return !!(m&&m.free);}
+function trackableCount(gd){return DIET_MEALS.filter(mk=>!isFree(gd,mk)).length;}
+
+function renderDietaTab(){
+  if(dietSel===null) dietSel=new Date().getDay();
+  const todayGd=new Date().getDay();
+  document.getElementById('diet-day-sel').innerHTML=DIET_ORDER.map((gd,i)=>
+    `<div class="diet-daybtn${gd===dietSel?' on':''}${gd===todayGd?' today':''}" onclick="setDietDay(${gd})">${DIET_LABELS[i]}</div>`).join('');
+  renderDietMeals();
+  renderDietStats();
+}
+function setDietDay(gd){dietSel=gd; renderDietaTab();}
+
+function renderDietMeals(){
+  const wd=weekDates();
+  const date=wd[dietSel];
+  const done=(S.get('diet_done')||{})[date]||{};
+  let html='';
+  DIET_MEALS.forEach(mk=>{
+    const m=dietMealText(dietSel,mk);
+    const free=!!(m&&m.free);
+    const cls=free?'free':(DIET_CLS[mk]||'');
+    const isDone=!!done[mk];
+    html+=`<div class="meal ${cls}">
+      <div class="meal-body">
+        <div class="meal-t">${DIET_T[mk]}</div>
+        <div class="meal-x">${m.x}</div>
+        ${m.note?`<div class="meal-note">💡 ${m.note}</div>`:''}
+      </div>
+      ${free?'':`<button class="meal-check${isDone?' done':''}" onclick="toggleMeal('${date}','${mk}')">${isDone?'✓':''}</button>`}
+    </div>`;
+  });
+  document.getElementById('diet-meals').innerHTML=html;
+}
+function toggleMeal(date,mk){
+  const all=S.get('diet_done')||{};
+  if(!all[date]) all[date]={};
+  if(all[date][mk]) delete all[date][mk]; else all[date][mk]=true;
+  if(!Object.keys(all[date]).length) delete all[date];
+  S.set('diet_done',all);
+  renderDietMeals();
+  renderDietStats();
+}
+function renderDietStats(){
+  const wd=weekDates();
+  const all=S.get('diet_done')||{};
+  const todayGd=new Date().getDay();
+  const td=all[wd[todayGd]]||{};
+  const tdone=DIET_MEALS.filter(mk=>td[mk]).length;
+  document.getElementById('diet-today-n').textContent=`${tdone}/${trackableCount(todayGd)}`;
+  let wdone=0, wtot=0;
+  DIET_ORDER.forEach(gd=>{wtot+=trackableCount(gd); const dd=all[wd[gd]]||{}; wdone+=DIET_MEALS.filter(mk=>dd[mk]).length;});
+  document.getElementById('diet-week-n').textContent=(wtot?Math.round(wdone/wtot*100):0)+'%';
+}
+
+// ═══════════════════════════════════════════
+// RESUM (agrega GYM + PES + DIETA per setmana)
+// ═══════════════════════════════════════════
+let resumChart=null;
+const MESOS_R=['gen','feb','mar','abr','mai','jun','jul','ago','set','oct','nov','des'];
+function pad2(n){return n<10?'0'+n:''+n;}
+function parseISO(s){const p=String(s).split('-');return new Date(+p[0],+p[1]-1,+p[2],12,0,0);}
+function fmtISO(d){return d.getFullYear()+'-'+pad2(d.getMonth()+1)+'-'+pad2(d.getDate());}
+function weekMondayISO(iso){const d=parseISO(iso);const dow=d.getDay();d.setDate(d.getDate()+(dow===0?-6:1-dow));return fmtISO(d);}
+function weekRangeLabel(wkMon){const s=parseISO(wkMon);const e=new Date(s);e.setDate(s.getDate()+6);return `${s.getDate()} ${MESOS_R[s.getMonth()]} – ${e.getDate()} ${MESOS_R[e.getMonth()]}`;}
+
+function weekSummary(wkMon){
+  const monday=parseISO(wkMon);
+  const dates=[];for(let i=0;i<7;i++){const d=new Date(monday);d.setDate(monday.getDate()+i);dates.push(fmtISO(d));}
+  const sess=S.arr('gym_sessions_v2').filter(s=>weekMondayISO(s.data)===wkMon);
+  const byType={A:0,B:0,C:0};sess.forEach(s=>{if(byType[s.tipus]!=null)byType[s.tipus]++;});
+  const done=S.get('diet_done')||{};
+  let dDone=0,dTot=0;
+  dates.forEach(dt=>{const gd=parseISO(dt).getDay();dTot+=trackableCount(gd);const dd=done[dt]||{};dDone+=DIET_MEALS.filter(mk=>dd[mk]).length;});
+  const wpes=S.arr('pesos').filter(p=>weekMondayISO(p.date)===wkMon).sort((a,b)=>a.date<b.date?-1:1);
+  const pes=wpes.length?parseFloat(wpes[wpes.length-1].pes):null;
+  return {wkMon,sessions:sess.length,byType,dietPct:dTot?Math.round(dDone/dTot*100):0,pes};
+}
+
+function allWeeksAsc(){
+  const set=new Set();
+  S.arr('gym_sessions_v2').forEach(s=>set.add(weekMondayISO(s.data)));
+  S.arr('pesos').forEach(p=>set.add(weekMondayISO(p.date)));
+  Object.keys(S.get('diet_done')||{}).forEach(d=>set.add(weekMondayISO(d)));
+  set.add(weekMondayISO(today()));
+  return [...set].sort();
+}
+
+function renderResumTab(){
+  const summaries=allWeeksAsc().map(weekSummary);
+  const cur=summaries[summaries.length-1];
+  const pesos=S.arr('pesos');
+  const pesActual=pesos.length?parseFloat(pesos[pesos.length-1].pes):PARTIDA;
+  document.getElementById('r-sess').textContent=cur?cur.sessions:0;
+  document.getElementById('r-pes').textContent=pesActual.toFixed(1);
+  document.getElementById('r-dieta').textContent=(cur?cur.dietPct:0)+'%';
+  document.getElementById('r-total').textContent=S.arr('gym_sessions_v2').length;
+  const perdut=PARTIDA-pesActual;
+  const rp=document.getElementById('r-perdut');
+  rp.textContent=(perdut>=0?'-':'+')+Math.abs(perdut).toFixed(1)+' kg';
+  rp.className='sc-n '+(perdut>0?'cg':perdut<0?'cr':'');
+  renderResumChart(summaries.slice(-8));
+  renderResumList(summaries.slice().reverse());
+}
+
+function renderResumChart(sums){
+  const cv=document.getElementById('chart-resum');if(!cv)return;
+  const ctx=cv.getContext('2d');
+  if(resumChart) resumChart.destroy();
+  let lastW=null;const wvals=sums.map(s=>{if(s.pes!=null)lastW=s.pes;return lastW;});
+  resumChart=new Chart(ctx,{data:{
+    labels:sums.map(s=>weekRangeLabel(s.wkMon).split(' – ')[0]),
+    datasets:[
+      {type:'bar',data:sums.map(s=>s.sessions),backgroundColor:'rgba(29,158,117,0.55)',borderRadius:5,yAxisID:'y',order:2},
+      {type:'line',data:wvals,borderColor:'#EF9F27',borderWidth:2,tension:.3,pointRadius:3,pointBackgroundColor:'#EF9F27',pointBorderColor:'#0a1a14',pointBorderWidth:1.5,yAxisID:'y1',order:1,spanGaps:true}
+    ]},options:{responsive:true,maintainAspectRatio:false,plugins:{legend:{display:false}},
+      scales:{x:{ticks:{color:'#3d6b55',font:{size:9}},grid:{display:false}},
+        y:{position:'left',beginAtZero:true,ticks:{stepSize:1,color:'#5dcaa5',font:{size:9}},grid:{color:'rgba(255,255,255,0.04)'}},
+        y1:{position:'right',ticks:{color:'#fac775',font:{size:9}},grid:{display:false}}}}});
+}
+
+function renderResumList(sums){
+  const c=document.getElementById('resum-list');
+  if(!sums.length){c.innerHTML='<div style="color:var(--t3);font-size:12px;padding:6px 0">Encara no hi ha dades</div>';return;}
+  const curWk=weekMondayISO(today());
+  c.innerHTML=sums.map((s,i)=>{
+    const prev=sums[i+1];
+    let delta='';
+    if(s.pes!=null&&prev&&prev.pes!=null){const d=+(s.pes-prev.pes).toFixed(1);if(d!==0)delta=` <span class="${d<0?'cg':'cr'}">${d>0?'+':''}${d}</span>`;}
+    const bt=s.byType;
+    const dies=(bt.A?'A×'+bt.A+' ':'')+(bt.B?'B×'+bt.B+' ':'')+(bt.C?'C×'+bt.C:'');
+    return `<div class="wk">
+      <div class="wk-top">
+        <div class="wk-range">${weekRangeLabel(s.wkMon)}</div>
+        ${s.wkMon===curWk?'<span class="wk-cur">Aquesta setmana</span>':''}
+      </div>
+      <div class="wk-metrics">
+        <div class="wk-m"><div class="wk-m-v">${s.sessions}</div><div class="wk-m-l">Sessions</div></div>
+        <div class="wk-m"><div class="wk-m-v">${s.pes!=null?s.pes.toFixed(1):'—'}${delta}</div><div class="wk-m-l">Pes (kg)</div></div>
+        <div class="wk-m"><div class="wk-m-v">${s.dietPct}%</div><div class="wk-m-l">Dieta</div></div>
+      </div>
+      ${s.sessions?`<div class="wk-sub">Dies: ${dies}</div>`:''}
+    </div>`;
+  }).join('');
+}
+
+// ═══════════════════════════════════════════
 // SEED
 // ═══════════════════════════════════════════
+// ═══════════════════════════════════════════
+// CÒPIA DE SEGURETAT
+// ═══════════════════════════════════════════
+const BACKUP_KEYS=['gym_sessions_v2','pesos','diet_done','gym_draft_A','gym_draft_B','gym_draft_C','app_inited'];
+function collectBackup(){
+  const data={};
+  BACKUP_KEYS.forEach(k=>{const v=localStorage.getItem(k);if(v!==null)data[k]=v;});
+  return {app:'entrenament_claudi',version:1,exportedAt:new Date().toISOString(),data};
+}
+function backupJSON(){return JSON.stringify(collectBackup(),null,2);}
+
+function downloadBackup(){
+  try{
+    const blob=new Blob([backupJSON()],{type:'application/json'});
+    const url=URL.createObjectURL(blob);
+    const a=document.createElement('a');
+    a.href=url;a.download='entrenament_claudi_backup_'+today()+'.json';
+    document.body.appendChild(a);a.click();
+    setTimeout(()=>{URL.revokeObjectURL(url);a.remove();},1000);
+    showToast('📥 Còpia descarregada');
+  }catch(e){showToast('⚠ No s\'ha pogut descarregar');}
+}
+async function copyBackup(){
+  const txt=backupJSON();
+  try{await navigator.clipboard.writeText(txt);showToast('📋 Dades copiades');}
+  catch(e){window.prompt('Copia aquestes dades manualment:',txt);}
+}
+function applyBackupData(data){
+  BACKUP_KEYS.forEach(k=>{
+    if(data[k]!==undefined){
+      const v=typeof data[k]==='string'?data[k]:JSON.stringify(data[k]);
+      localStorage.setItem(k,v);
+    }
+  });
+}
+function importData(ev){
+  const f=ev.target.files&&ev.target.files[0];
+  if(!f){return;}
+  const rd=new FileReader();
+  rd.onload=()=>{
+    try{
+      const obj=JSON.parse(rd.result);
+      const data=(obj&&obj.data)?obj.data:obj;
+      if(!data||typeof data!=='object') throw new Error('bad');
+      if(!confirm('Importar aquesta còpia? Substituirà les dades actuals d\'aquest dispositiu.')){ev.target.value='';return;}
+      applyBackupData(data);
+      location.reload();
+    }catch(e){showToast('⚠ Fitxer no vàlid');}
+  };
+  rd.readAsText(f);
+  ev.target.value='';
+}
+
+function resetAllData(){
+  if(!confirm('Esborrar TOTES les dades (entrenaments, pesos i dieta)?\nNo es pot desfer.')) return;
+  if(!confirm('Segur del tot? Començaràs de zero.')) return;
+  ['gym_sessions_v2','gym_draft_A','gym_draft_B','gym_draft_C','pesos','diet_done'].forEach(k=>S.del(k));
+  S.set('app_inited',true); // evita que es torni a sembrar la mesura inicial
+  location.reload();
+}
+
 function seedInitialWeight(){
+  if(S.get('app_inited')) return;
   if(!S.arr('pesos').length){
     S.push('pesos',{date:'2026-05-06',pes:97.8,grasa:28.1,musc:38.2,ossia:6.0,notes:'Mesura inicial Garmin',ts:Date.now()});
   }
+  S.set('app_inited',true);
 }
 
 // ═══════════════════════════════════════════
@@ -790,6 +1164,8 @@ function init(){
     renderExercises(t);
     renderGymHist(t);
   });
+
+  ready=true;
 }
 
 init();
