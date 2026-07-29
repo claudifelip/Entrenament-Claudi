@@ -893,6 +893,8 @@ function deletePes(i){
 // DIETA
 // ═══════════════════════════════════════════
 const DIET_MEALS=['esmorzar','migmati','dinar','berenar','sopar'];
+// Pes calòric aprox. de cada àpat (per ponderar el % de compliment)
+const MEAL_KCAL={esmorzar:290,migmati:320,dinar:650,berenar:210,sopar:520};
 const DIET_T={esmorzar:'Esmorzar',migmati:'Mig matí',dinar:'Dinar',berenar:'Berenar',sopar:'Sopar'};
 const DIET_CLS={esmorzar:'amber',migmati:'',dinar:'',berenar:'violet',sopar:'clay'};
 const DIET_FIX={
@@ -907,7 +909,7 @@ const DIET_DAY={
   2:{dinar:{x:'200 g quinoa o cuscús + amanida (canonges, tomàquet, alvocat) + 180 g sèpia o calamar + 1,5 cull. oli'},
      sopar:{x:'Verdura saltejada (carbassó, xerris) + 150 g pollastre + 1,5 cull. oli + iogurt sense sucre'}},
   3:{dinar:{x:'200 g pasta de llenties o cigrons + verdura + 180 g vedella magra + 1,5 cull. oli'},
-     sopar:{x:'Espàrrecs a la planxa + 150 g pollastre + carb opcional petit + 1,5 cull. oli + iogurt sense sucre'}},
+     sopar:{x:'Espàrrecs a la planxa + 150 g pollastre + 120 g patata + 1,5 cull. oli + iogurt sense sucre'}},
   4:{dinar:{x:'200 g pasta integral + amanida (enciam, tomàquet, blat de moro) + 150 g pollastre + 1,5 cull. oli'},
      sopar:{x:'Gaspatxo o puré de verdures + 150 g salmó o tonyina + 150 g patata + 1,5 cull. oli + iogurt sense sucre'}},
   5:{dinar:{x:'250 g patata + bròquil + 180 g peix blanc + 1,5 cull. oli'},
@@ -937,6 +939,15 @@ function dietMealText(gd,mk){
 }
 function isFree(gd,mk){const m=dietMealText(gd,mk);return !!(m&&m.free);}
 function trackableCount(gd){return DIET_MEALS.filter(mk=>!isFree(gd,mk)).length;}
+// % de compliment ponderat per calories: dinar i sopar pesen més que esmorzar/berenar
+function dietWeightedPct(dates,done){
+  let tot=0,got=0;
+  dates.forEach(dt=>{
+    const gd=parseISO(dt).getDay(); const dd=done[dt]||{};
+    DIET_MEALS.forEach(mk=>{ if(isFree(gd,mk))return; tot+=MEAL_KCAL[mk]; if(dd[mk])got+=MEAL_KCAL[mk]; });
+  });
+  return tot?Math.round(got/tot*100):0;
+}
 
 function renderDietaTab(){
   if(dietSel===null) dietSel=new Date().getDay();
@@ -985,9 +996,8 @@ function renderDietStats(){
   const td=all[wd[todayGd]]||{};
   const tdone=DIET_MEALS.filter(mk=>td[mk]).length;
   document.getElementById('diet-today-n').textContent=`${tdone}/${trackableCount(todayGd)}`;
-  let wdone=0, wtot=0;
-  DIET_ORDER.forEach(gd=>{wtot+=trackableCount(gd); const dd=all[wd[gd]]||{}; wdone+=DIET_MEALS.filter(mk=>dd[mk]).length;});
-  document.getElementById('diet-week-n').textContent=(wtot?Math.round(wdone/wtot*100):0)+'%';
+  const weekDatesArr=DIET_ORDER.map(gd=>wd[gd]);
+  document.getElementById('diet-week-n').textContent=dietWeightedPct(weekDatesArr,all)+'%';
 }
 
 // ═══════════════════════════════════════════
@@ -1007,11 +1017,10 @@ function weekSummary(wkMon){
   const sess=S.arr('gym_sessions_v2').filter(s=>weekMondayISO(s.data)===wkMon);
   const byType={A:0,B:0,C:0};sess.forEach(s=>{if(byType[s.tipus]!=null)byType[s.tipus]++;});
   const done=S.get('diet_done')||{};
-  let dDone=0,dTot=0;
-  dates.forEach(dt=>{const gd=parseISO(dt).getDay();dTot+=trackableCount(gd);const dd=done[dt]||{};dDone+=DIET_MEALS.filter(mk=>dd[mk]).length;});
+  const dietPct=dietWeightedPct(dates,done);
   const wpes=S.arr('pesos').filter(p=>weekMondayISO(p.date)===wkMon).sort((a,b)=>a.date<b.date?-1:1);
   const pes=wpes.length?parseFloat(wpes[wpes.length-1].pes):null;
-  return {wkMon,sessions:sess.length,byType,dietPct:dTot?Math.round(dDone/dTot*100):0,pes};
+  return {wkMon,sessions:sess.length,byType,dietPct,pes};
 }
 
 function allWeeksAsc(){
