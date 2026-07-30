@@ -5,19 +5,19 @@
 <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=no">
 <meta name="apple-mobile-web-app-capable" content="yes">
 <meta name="apple-mobile-web-app-status-bar-style" content="black-translucent">
-<meta name="theme-color" content="#0a1a14">
+<meta name="theme-color" content="#080d16">
 <title>Claudi · Gym</title>
 <link href="https://fonts.googleapis.com/css2?family=DM+Sans:opsz,wght@9..40,300;9..40,400;9..40,500;9..40,600&family=DM+Mono:wght@400;500&display=swap" rel="stylesheet">
 <style>
 :root{
-  --g:#1D9E75;--gd:#0d6e50;--gl:rgba(29,158,117,0.15);
+  --g:#378add;--gd:#1e5a96;--gl:rgba(55,138,221,0.15);
   --a:#EF9F27;--al:rgba(239,159,39,0.15);
   --r:#E24B4A;--rl:rgba(226,75,74,0.15);
   --b:#378ADD;
-  --bg:#0a1a14;--bg2:#0f2219;--bg3:#142d20;--bg4:#1a3828;
-  --card:#1e3d2e;--card2:#243f32;
+  --bg:#080d16;--bg2:#0e1420;--bg3:#141c2c;--bg4:#182338;
+  --card:#141c2c;--card2:#1c2842;
   --bdr:rgba(255,255,255,0.07);--bdr2:rgba(255,255,255,0.12);
-  --t:#eef7f2;--t2:#7aaa92;--t3:#3d6b55;
+  --t:#eef4fc;--t2:#7a96ba;--t3:#465c80;
   --rad:14px;--radsm:9px;
 }
 *{box-sizing:border-box;margin:0;padding:0;-webkit-tap-highlight-color:transparent}
@@ -51,16 +51,16 @@ body{font-family:'DM Sans',sans-serif;background:var(--bg);color:var(--t);max-wi
 .btn:active{background:var(--gd)}
 .btn-sec{background:none;color:var(--t2);border:1px solid var(--bdr2);margin-top:7px}
 
-.sess-hdr{background:linear-gradient(135deg,#0d4a35 0%,#0f5c3f 100%);border-radius:var(--rad);border:1px solid rgba(29,220,140,0.25);padding:12px 14px;margin-bottom:12px;display:flex;justify-content:space-between;align-items:center;box-shadow:0 2px 12px rgba(29,200,120,0.12)}
-.sess-label{font-size:14px;font-weight:600;color:#b8f5da;letter-spacing:-.1px}
-.sess-sub{font-size:10px;color:#5dcaa5;margin-top:2px}
+.sess-hdr{background:linear-gradient(135deg,#123a60 0%,#12345c 100%);border-radius:var(--rad);border:1px solid rgba(90,170,247,0.25);padding:12px 14px;margin-bottom:12px;display:flex;justify-content:space-between;align-items:center;box-shadow:0 2px 12px rgba(70,150,235,0.12)}
+.sess-label{font-size:14px;font-weight:600;color:#cfe6ff;letter-spacing:-.1px}
+.sess-sub{font-size:10px;color:#7abaf7;margin-top:2px}
 
 /* BLOC LABEL */
 .bloc-label{font-size:9px;font-weight:700;text-transform:uppercase;letter-spacing:.8px;padding:3px 8px;border-radius:99px;display:inline-block;margin-bottom:5px;margin-top:10px}
 .bloc-pit{background:rgba(226,75,74,.15);color:#f09595}
 .bloc-hombro{background:rgba(55,138,221,.15);color:#85b7eb}
 .bloc-esquena{background:rgba(239,159,39,.15);color:#fac775}
-.bloc-cames{background:rgba(29,158,117,.15);color:#5dcaa5}
+.bloc-cames{background:rgba(55,138,221,.15);color:#7abaf7}
 .bloc-accessori{background:rgba(255,255,255,.07);color:var(--t3)}
 .bloc-abs{background:rgba(180,100,220,.15);color:#c8a0e8}
 
@@ -74,14 +74,14 @@ body{font-family:'DM Sans',sans-serif;background:var(--bg);color:var(--t);max-wi
 .ex-card.open .ex-body{display:block}
 
 /* Opcional badge */
-.badge-opt{background:rgba(61,107,85,.2);border:1px solid rgba(61,107,85,.35);color:var(--t3);font-size:9px;font-weight:600;padding:2px 7px;border-radius:99px;letter-spacing:.3px}
+.badge-opt{background:rgba(70,90,128,.2);border:1px solid rgba(70,90,128,.35);color:var(--t3);font-size:9px;font-weight:600;padding:2px 7px;border-radius:99px;letter-spacing:.3px}
 .badge-up{background:rgba(239,159,39,.18);border:1px solid rgba(239,159,39,.35);color:#fac775;font-size:9px;font-weight:600;padding:2px 7px;border-radius:99px;letter-spacing:.3px}
-.badge-ok{background:rgba(29,158,117,.12);border:1px solid rgba(29,158,117,.25);color:#5dcaa5;font-size:9px;font-weight:600;padding:2px 7px;border-radius:99px;letter-spacing:.3px}
+.badge-ok{background:rgba(55,138,221,.12);border:1px solid rgba(55,138,221,.25);color:#7abaf7;font-size:9px;font-weight:600;padding:2px 7px;border-radius:99px;letter-spacing:.3px}
 
 .ex-tip{background:rgba(55,138,221,0.07);border:1px solid rgba(55,138,221,0.15);border-radius:7px;padding:7px 10px;margin:9px 0 7px;font-size:10px;color:#85b7eb;line-height:1.6}
 
-.ex-ref{background:rgba(29,158,117,.07);border:1px solid rgba(29,158,117,.15);border-radius:7px;padding:7px 10px;margin-bottom:9px}
-.ex-ref-title{font-size:9px;font-weight:600;text-transform:uppercase;letter-spacing:.5px;color:#5dcaa5;margin-bottom:4px}
+.ex-ref{background:rgba(55,138,221,.07);border:1px solid rgba(55,138,221,.15);border-radius:7px;padding:7px 10px;margin-bottom:9px}
+.ex-ref-title{font-size:9px;font-weight:600;text-transform:uppercase;letter-spacing:.5px;color:#7abaf7;margin-bottom:4px}
 .ex-ref-row{display:grid;grid-template-columns:repeat(auto-fit,minmax(60px,1fr));gap:5px}
 .ex-ref-serie{background:rgba(0,0,0,.2);border-radius:5px;padding:4px 7px;text-align:center}
 .ex-ref-s{font-size:9px;color:var(--t3)}
@@ -136,7 +136,7 @@ body{font-family:'DM Sans',sans-serif;background:var(--bg);color:var(--t);max-wi
 .gym-hist-body{padding:8px 13px 12px;border-top:1px solid var(--bdr);display:none;font-size:10px;color:var(--t2);font-family:'DM Mono',monospace;line-height:1.9}
 .gym-hist-card.open .gym-hist-body{display:block}
 
-.cg{color:#5dcaa5}.ca{color:#fac775}.cr{color:#f09595}
+.cg{color:#7abaf7}.ca{color:#fac775}.cr{color:#f09595}
 
 .subtab{flex:1;padding:8px 4px;background:var(--bg3);border:1px solid var(--bdr);border-radius:var(--radsm);font-size:11px;font-weight:700;color:var(--t3);cursor:pointer;text-align:center;transition:all .15s;letter-spacing:.4px;text-transform:uppercase}
 .subtab.on{background:var(--gl);border-color:var(--g);color:var(--g)}
@@ -820,15 +820,15 @@ function renderPesCharts(pesos){
   const labels=sorted.map(p=>fmtDate(p.date));
   const vals=sorted.map(p=>parseFloat(p.pes));
   const opts={responsive:true,maintainAspectRatio:false,plugins:{legend:{display:false}},
-    scales:{x:{ticks:{color:'#3d6b55',font:{size:9}},grid:{color:'rgba(255,255,255,0.04)'}},
-            y:{ticks:{color:'#3d6b55',font:{size:9}},grid:{color:'rgba(255,255,255,0.04)'}}}};
+    scales:{x:{ticks:{color:'#465c80',font:{size:9}},grid:{color:'rgba(255,255,255,0.04)'}},
+            y:{ticks:{color:'#465c80',font:{size:9}},grid:{color:'rgba(255,255,255,0.04)'}}}};
 
   if(pesChart) pesChart.destroy();
   const ctx1=document.getElementById('chart-pes').getContext('2d');
   pesChart=new Chart(ctx1,{type:'line',data:{labels,datasets:[
-    {data:vals,borderColor:'#1D9E75',borderWidth:2,fill:true,
-     backgroundColor:(c)=>{const gr=c.chart.ctx.createLinearGradient(0,0,0,120);gr.addColorStop(0,'rgba(29,158,117,0.3)');gr.addColorStop(1,'rgba(29,158,117,0)');return gr;},
-     tension:.3,pointRadius:4,pointBackgroundColor:'#1D9E75',pointBorderColor:'#0a1a14',pointBorderWidth:2},
+    {data:vals,borderColor:'#378add',borderWidth:2,fill:true,
+     backgroundColor:(c)=>{const gr=c.chart.ctx.createLinearGradient(0,0,0,120);gr.addColorStop(0,'rgba(55,138,221,0.3)');gr.addColorStop(1,'rgba(55,138,221,0)');return gr;},
+     tension:.3,pointRadius:4,pointBackgroundColor:'#378add',pointBorderColor:'#080d16',pointBorderWidth:2},
     {data:vals.map(()=>OBJECTIU),borderColor:'rgba(239,159,39,0.5)',borderWidth:1.5,
      borderDash:[5,5],pointRadius:0,fill:false,tension:0}
   ]},options:opts});
@@ -840,9 +840,9 @@ function renderPesCharts(pesos){
     labels:gf.map(p=>fmtDate(p.date)),
     datasets:[{data:gf.map(p=>parseFloat(p.grasa)),borderColor:'#EF9F27',borderWidth:2,fill:true,
       backgroundColor:'rgba(239,159,39,0.1)',tension:.3,pointRadius:3,
-      pointBackgroundColor:'#EF9F27',pointBorderColor:'#0a1a14',pointBorderWidth:1.5}]
-  },options:{...opts,scales:{x:{ticks:{color:'#3d6b55',font:{size:9}},grid:{color:'rgba(255,255,255,0.04)'}},
-    y:{ticks:{color:'#3d6b55',font:{size:9},callback:v=>v+'%'},grid:{color:'rgba(255,255,255,0.04)'}}}}});
+      pointBackgroundColor:'#EF9F27',pointBorderColor:'#080d16',pointBorderWidth:1.5}]
+  },options:{...opts,scales:{x:{ticks:{color:'#465c80',font:{size:9}},grid:{color:'rgba(255,255,255,0.04)'}},
+    y:{ticks:{color:'#465c80',font:{size:9},callback:v=>v+'%'},grid:{color:'rgba(255,255,255,0.04)'}}}}});
 }
 
 function renderPesHist(pesos){
@@ -1060,11 +1060,11 @@ function renderResumChart(sums){
   resumChart=new Chart(ctx,{data:{
     labels:sums.map(s=>weekRangeLabel(s.wkMon).split(' – ')[0]),
     datasets:[
-      {type:'bar',data:sums.map(s=>s.sessions),backgroundColor:'rgba(29,158,117,0.55)',borderRadius:5,yAxisID:'y',order:2},
-      {type:'line',data:wvals,borderColor:'#EF9F27',borderWidth:2,tension:.3,pointRadius:3,pointBackgroundColor:'#EF9F27',pointBorderColor:'#0a1a14',pointBorderWidth:1.5,yAxisID:'y1',order:1,spanGaps:true}
+      {type:'bar',data:sums.map(s=>s.sessions),backgroundColor:'rgba(55,138,221,0.55)',borderRadius:5,yAxisID:'y',order:2},
+      {type:'line',data:wvals,borderColor:'#EF9F27',borderWidth:2,tension:.3,pointRadius:3,pointBackgroundColor:'#EF9F27',pointBorderColor:'#080d16',pointBorderWidth:1.5,yAxisID:'y1',order:1,spanGaps:true}
     ]},options:{responsive:true,maintainAspectRatio:false,plugins:{legend:{display:false}},
-      scales:{x:{ticks:{color:'#3d6b55',font:{size:9}},grid:{display:false}},
-        y:{position:'left',beginAtZero:true,ticks:{stepSize:1,color:'#5dcaa5',font:{size:9}},grid:{color:'rgba(255,255,255,0.04)'}},
+      scales:{x:{ticks:{color:'#465c80',font:{size:9}},grid:{display:false}},
+        y:{position:'left',beginAtZero:true,ticks:{stepSize:1,color:'#7abaf7',font:{size:9}},grid:{color:'rgba(255,255,255,0.04)'}},
         y1:{position:'right',ticks:{color:'#fac775',font:{size:9}},grid:{display:false}}}}});
 }
 
