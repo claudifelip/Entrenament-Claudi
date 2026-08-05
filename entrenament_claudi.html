@@ -143,6 +143,15 @@ body{font-family:'DM Sans',sans-serif;background:var(--bg);color:var(--t);max-wi
 .gympage{display:none}
 .gympage.on{display:block}
 
+/* DIA D · ESPORT */
+.esport-grid{display:grid;grid-template-columns:1fr 1fr 1fr;gap:8px;margin-top:2px}
+.esport-chip{background:var(--bg3);border:1px solid var(--bdr);border-radius:var(--radsm);padding:13px 6px;text-align:center;cursor:pointer;transition:all .15s;user-select:none}
+.esport-chip:active{transform:scale(.97)}
+.esport-chip .ec-ic{font-size:21px;display:block;margin-bottom:5px;line-height:1}
+.esport-chip .ec-nm{font-size:11px;font-weight:600;color:var(--t2)}
+.esport-chip.on{background:var(--al);border-color:var(--a)}
+.esport-chip.on .ec-nm{color:#fac775}
+
 .toast{position:fixed;bottom:24px;left:50%;transform:translateX(-50%);background:var(--g);color:#fff;padding:9px 20px;border-radius:99px;font-size:13px;font-weight:500;opacity:0;transition:opacity .3s;pointer-events:none;white-space:nowrap;z-index:300}
 .toast.on{opacity:1}
 
@@ -212,6 +221,7 @@ body{font-family:'DM Sans',sans-serif;background:var(--bg);color:var(--t);max-wi
     <div class="subtab on" id="subtab-A" onclick="goGymTab('A')">DIA A</div>
     <div class="subtab"    id="subtab-B" onclick="goGymTab('B')">DIA B</div>
     <div class="subtab"    id="subtab-C" onclick="goGymTab('C')">DIA C</div>
+    <div class="subtab"    id="subtab-D" onclick="goGymTab('D')">DIA D</div>
   </div>
 
   <!-- DIA A -->
@@ -254,6 +264,22 @@ body{font-family:'DM Sans',sans-serif;background:var(--bg);color:var(--t);max-wi
     <div class="save-help">El que escrius es desa sol mentre entrenes. «Desar» la registra a l'historial i la pots seguir editant.</div>
     <div class="st">Historial Dia C</div>
     <div id="c-hist"></div>
+  </div>
+
+  <!-- DIA D · ESPORT -->
+  <div class="gympage" id="gympage-D">
+    <div class="sess-hdr" style="background:linear-gradient(135deg,#5a3a12 0%,#5c4712 100%);border-color:rgba(239,159,39,.28);box-shadow:0 2px 12px rgba(239,159,39,.12)">
+      <div><div class="sess-label" style="color:#ffe6bf">🟠 Dia D · Esport</div><div class="sess-sub" id="d-last-date" style="color:#fac775">Sense sessions anteriors</div></div>
+      <input type="date" class="fi" id="d-date" style="width:auto;font-size:12px;padding:6px 9px" onchange="autosaveEsport()">
+    </div>
+    <div class="st" style="margin-top:2px">Quina activitat has fet?</div>
+    <div class="esport-grid" id="esport-chips"></div>
+    <div style="margin-top:14px"><label class="fl">Nota (opcional)</label><input class="fi" id="d-nota" placeholder="Ex: 1 h de tenis, 40 min corrent..." oninput="autosaveEsport()"></div>
+    <button class="btn" onclick="saveEsport()">💾 Desar sessió d'esport</button>
+    <button class="btn btn-sec" onclick="clearEsport()">↺ Buidar</button>
+    <div class="save-help">Marca l'activitat (o més d'una) i desa. No cal registrar sèries ni pesos: només que consti la sessió. Comptarà al resum igual que un Dia A, B o C.</div>
+    <div class="st">Historial d'esport</div>
+    <div id="d-hist"></div>
   </div>
 
 </div>
@@ -442,12 +468,13 @@ function goMainTab(i){
 let currentGymTab='A';
 function goGymTab(tipus){
   currentGymTab=tipus;
-  ['A','B','C'].forEach(t=>{
+  ['A','B','C','D'].forEach(t=>{
     document.getElementById('subtab-'+t).classList.toggle('on',t===tipus);
     document.getElementById('gympage-'+t).classList.toggle('on',t===tipus);
   });
-  const labels={A:'Gym · Dia A',B:'Gym · Dia B',C:'Gym · Dia C'};
+  const labels={A:'Gym · Dia A',B:'Gym · Dia B',C:'Gym · Dia C',D:'Gym · Esport'};
   document.getElementById('hdr-title').textContent=labels[tipus];
+  if(tipus==='D') renderEsportTab();
 }
 
 // ═══════════════════════════════════════════
@@ -729,6 +756,104 @@ function clearForm(tipus){
 }
 
 // ═══════════════════════════════════════════
+// DIA D · ESPORT
+// ═══════════════════════════════════════════
+const ESPORTS=[
+  {id:'tenis',   name:'Tenis',   icon:'🎾'},
+  {id:'padel',   name:'Pàdel',   icon:'🏓'},
+  {id:'run',     name:'Running', icon:'🏃'},
+  {id:'bici',    name:'Bici',    icon:'🚴'},
+  {id:'caminar', name:'Caminar', icon:'🚶'},
+  {id:'altres',  name:'Altres',  icon:'✨'},
+];
+let esportSel=new Set();
+function esportName(id){const e=ESPORTS.find(x=>x.id===id);return e?e.name:id;}
+function esportIcon(id){const e=ESPORTS.find(x=>x.id===id);return e?e.icon:'•';}
+
+function renderEsportChips(){
+  const c=document.getElementById('esport-chips');
+  if(!c) return;
+  c.innerHTML=ESPORTS.map(e=>`<div class="esport-chip${esportSel.has(e.id)?' on':''}" id="echip-${e.id}" onclick="toggleEsport('${e.id}')">
+    <span class="ec-ic">${e.icon}</span><span class="ec-nm">${e.name}</span></div>`).join('');
+}
+function toggleEsport(id){
+  if(esportSel.has(id)) esportSel.delete(id); else esportSel.add(id);
+  renderEsportChips();
+  autosaveEsport();
+}
+
+function autosaveEsport(){
+  if(!ready) return;
+  S.set('gym_draft_D',{data:val('d-date')||today(),activitats:[...esportSel],nota:val('d-nota')});
+}
+function restoreEsportDraft(){
+  const d=S.get('gym_draft_D');
+  esportSel=new Set();
+  if(d){
+    if(d.data) setVal('d-date',d.data);
+    (d.activitats||[]).forEach(a=>esportSel.add(a));
+    if(d.nota){const n=document.getElementById('d-nota');if(n)n.value=d.nota;}
+  }
+  renderEsportChips();
+}
+function renderEsportTab(){
+  const last=getLastSession('D');
+  const el=document.getElementById('d-last-date');
+  if(el) el.textContent=last?('Última sessió: '+fmtDate(last.data)):'Sense sessions anteriors';
+  restoreEsportDraft();
+  renderEsportHist();
+}
+function saveEsport(){
+  const data=val('d-date')||today();
+  const activitats=[...esportSel];
+  if(!activitats.length){showToast('⚠ Marca almenys una activitat');return;}
+  const nota=val('d-nota');
+  const all=S.arr('gym_sessions_v2');
+  const idx=all.findIndex(s=>s.tipus==='D' && s.data===data);
+  const record={tipus:'D',data,activitats,nota,ts:(idx>=0?all[idx].ts:Date.now())};
+  if(idx>=0){all[idx]=record;showToast('✅ Sessió actualitzada');}
+  else{all.push(record);showToast('✅ Sessió guardada!');}
+  S.set('gym_sessions_v2',all);
+  S.set('gym_draft_D',{data,activitats,nota});
+  const el=document.getElementById('d-last-date');
+  if(el) el.textContent='Sessió desada ✓ · pots seguir editant';
+  renderEsportHist();
+}
+function clearEsport(){
+  if(!confirm('Buidar el formulari d\'esport i començar-ne un de nou?\n(Les sessions ja desades a l\'historial no es toquen.)')) return;
+  S.del('gym_draft_D');
+  esportSel=new Set();
+  const n=document.getElementById('d-nota');if(n)n.value='';
+  const dt=document.getElementById('d-date');if(dt)dt.value=today();
+  renderEsportChips();
+  showToast('Formulari buidat · sessió nova');
+}
+function renderEsportHist(){
+  const sessions=S.arr('gym_sessions_v2').filter(s=>s.tipus==='D').reverse();
+  const c=document.getElementById('d-hist');
+  if(!c) return;
+  if(!sessions.length){c.innerHTML='<div style="color:var(--t3);font-size:12px;padding:6px 0">Sense sessions guardades</div>';return;}
+  const all=S.arr('gym_sessions_v2');
+  c.innerHTML=sessions.map(s=>{
+    const realIdx=all.findIndex(ss=>ss.ts===s.ts);
+    const acts=(s.activitats||[]).map(a=>esportIcon(a)+' '+esportName(a)).join(' · ');
+    return `<div class="gym-hist-card" id="ghc-${s.ts}">
+      <div class="gym-hist-hdr" onclick="document.getElementById('ghc-${s.ts}').classList.toggle('open')">
+        <div>
+          <div style="font-size:13px;font-weight:500;color:var(--t)">${fmtDate(s.data)}</div>
+          <div style="font-size:10px;color:var(--t3);margin-top:2px">${acts||'Sense activitat'}</div>
+        </div>
+        <div style="display:flex;align-items:center;gap:8px">
+          <button onclick="event.stopPropagation();deleteSession(${realIdx},'D')" style="background:none;border:none;color:var(--t3);font-size:14px;cursor:pointer;padding:2px 6px">🗑</button>
+          <span style="color:var(--t3);font-size:13px">▾</span>
+        </div>
+      </div>
+      <div class="gym-hist-body" style="white-space:pre-line">${s.nota?('📝 '+s.nota):'Sense nota addicional'}</div>
+    </div>`;
+  }).join('');
+}
+
+// ═══════════════════════════════════════════
 // GYM HISTORY
 // ═══════════════════════════════════════════
 function renderGymHist(tipus){
@@ -779,8 +904,8 @@ function deleteSession(i,tipus){
   const all=S.arr('gym_sessions_v2');
   all.splice(i,1);
   S.set('gym_sessions_v2',all);
-  renderExercises(tipus);
-  renderGymHist(tipus);
+  if(tipus==='D'){ renderEsportTab(); }
+  else { renderExercises(tipus); renderGymHist(tipus); }
   showToast('Sessió eliminada');
 }
 
@@ -1015,7 +1140,7 @@ function weekSummary(wkMon){
   const monday=parseISO(wkMon);
   const dates=[];for(let i=0;i<7;i++){const d=new Date(monday);d.setDate(monday.getDate()+i);dates.push(fmtISO(d));}
   const sess=S.arr('gym_sessions_v2').filter(s=>weekMondayISO(s.data)===wkMon);
-  const byType={A:0,B:0,C:0};sess.forEach(s=>{if(byType[s.tipus]!=null)byType[s.tipus]++;});
+  const byType={A:0,B:0,C:0,D:0};sess.forEach(s=>{if(byType[s.tipus]!=null)byType[s.tipus]++;});
   const done=S.get('diet_done')||{};
   const dietPct=dietWeightedPct(dates,done);
   const wpes=S.arr('pesos').filter(p=>weekMondayISO(p.date)===wkMon).sort((a,b)=>a.date<b.date?-1:1);
@@ -1077,7 +1202,7 @@ function renderResumList(sums){
     let delta='';
     if(s.pes!=null&&prev&&prev.pes!=null){const d=+(s.pes-prev.pes).toFixed(1);if(d!==0)delta=` <span class="${d<0?'cg':'cr'}">${d>0?'+':''}${d}</span>`;}
     const bt=s.byType;
-    const dies=(bt.A?'A×'+bt.A+' ':'')+(bt.B?'B×'+bt.B+' ':'')+(bt.C?'C×'+bt.C:'');
+    const dies=((bt.A?'A×'+bt.A+' ':'')+(bt.B?'B×'+bt.B+' ':'')+(bt.C?'C×'+bt.C+' ':'')+(bt.D?'Esport×'+bt.D:'')).trim();
     return `<div class="wk">
       <div class="wk-top">
         <div class="wk-range">${weekRangeLabel(s.wkMon)}</div>
@@ -1099,7 +1224,7 @@ function renderResumList(sums){
 // ═══════════════════════════════════════════
 // CÒPIA DE SEGURETAT
 // ═══════════════════════════════════════════
-const BACKUP_KEYS=['gym_sessions_v2','pesos','diet_done','gym_draft_A','gym_draft_B','gym_draft_C','app_inited'];
+const BACKUP_KEYS=['gym_sessions_v2','pesos','diet_done','gym_draft_A','gym_draft_B','gym_draft_C','gym_draft_D','app_inited'];
 function collectBackup(){
   const data={};
   BACKUP_KEYS.forEach(k=>{const v=localStorage.getItem(k);if(v!==null)data[k]=v;});
@@ -1152,7 +1277,7 @@ function importData(ev){
 function resetAllData(){
   if(!confirm('Esborrar TOTES les dades (entrenaments, pesos i dieta)?\nNo es pot desfer.')) return;
   if(!confirm('Segur del tot? Començaràs de zero.')) return;
-  ['gym_sessions_v2','gym_draft_A','gym_draft_B','gym_draft_C','pesos','diet_done'].forEach(k=>S.del(k));
+  ['gym_sessions_v2','gym_draft_A','gym_draft_B','gym_draft_C','gym_draft_D','pesos','diet_done'].forEach(k=>S.del(k));
   S.set('app_inited',true); // evita que es torni a sembrar la mesura inicial
   location.reload();
 }
@@ -1181,6 +1306,9 @@ function init(){
     renderExercises(t);
     renderGymHist(t);
   });
+
+  document.getElementById('d-date').value=today();
+  renderEsportTab();
 
   ready=true;
 }
