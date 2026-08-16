@@ -138,10 +138,21 @@ body{font-family:'DM Sans',sans-serif;background:var(--bg);color:var(--t);max-wi
 
 .cg{color:#7abaf7}.ca{color:#fac775}.cr{color:#f09595}
 
-.subtab{flex:1;padding:8px 4px;background:var(--bg3);border:1px solid var(--bdr);border-radius:var(--radsm);font-size:11px;font-weight:700;color:var(--t3);cursor:pointer;text-align:center;transition:all .15s;letter-spacing:.4px;text-transform:uppercase}
+.subtab{flex:1;min-width:0;padding:8px 2px;background:var(--bg3);border:1px solid var(--bdr);border-radius:var(--radsm);font-size:10px;font-weight:700;color:var(--t3);cursor:pointer;text-align:center;transition:all .15s;letter-spacing:.2px;text-transform:uppercase}
 .subtab.on{background:var(--gl);border-color:var(--g);color:var(--g)}
 .gympage{display:none}
 .gympage.on{display:block}
+
+/* RUN */
+.run-card{background:var(--bg3);border:1px solid var(--bdr);border-left:4px solid var(--g);border-radius:var(--radsm);padding:12px 13px;margin-bottom:9px}
+.run-card-top{display:flex;justify-content:space-between;align-items:flex-start;gap:10px}
+.run-card-name{font-size:13px;font-weight:600;color:var(--t)}
+.run-card-sub{font-size:10px;color:var(--t3);margin-top:2px;text-transform:uppercase;letter-spacing:.4px}
+.run-steps{margin-top:9px;font-size:11px;color:var(--t2);line-height:1.65}
+.run-step{display:flex;gap:7px}
+.run-step .rs-b{color:var(--t3)}
+.run-log-btn{width:100%;margin-top:11px;padding:11px;border:none;border-radius:var(--radsm);color:#fff;font-size:13px;font-weight:600;cursor:pointer;transition:filter .15s}
+.run-log-btn:active{filter:brightness(.88)}
 
 /* DIA D · ESPORT */
 .esport-grid{display:grid;grid-template-columns:1fr 1fr 1fr;gap:8px;margin-top:2px}
@@ -199,14 +210,14 @@ body{font-family:'DM Sans',sans-serif;background:var(--bg);color:var(--t);max-wi
   <div class="hdr-row">
     <div>
       <div class="hdr-name">Claudi Felip</div>
-      <div class="hdr-title" id="hdr-title">Gym</div>
+      <div class="hdr-title" id="hdr-title">Gym A</div>
     </div>
     <div><div class="hdr-date" id="hdr-date"></div></div>
   </div>
 </div>
 
 <div class="tabs">
-  <div class="tab on" onclick="goMainTab(0)">💪 GYM</div>
+  <div class="tab on" onclick="goMainTab(0)">🏋️ TRAINING</div>
   <div class="tab"    onclick="goMainTab(1)">⚖️ PES</div>
   <div class="tab"    onclick="goMainTab(2)">🥗 DIETA</div>
   <div class="tab"    onclick="goMainTab(3)">📊 RESUM</div>
@@ -218,10 +229,11 @@ body{font-family:'DM Sans',sans-serif;background:var(--bg);color:var(--t);max-wi
 <div class="page on" id="tab-0">
 
   <div style="display:flex;gap:6px;margin-bottom:14px">
-    <div class="subtab on" id="subtab-A" onclick="goGymTab('A')">DIA A</div>
-    <div class="subtab"    id="subtab-B" onclick="goGymTab('B')">DIA B</div>
-    <div class="subtab"    id="subtab-C" onclick="goGymTab('C')">DIA C</div>
-    <div class="subtab"    id="subtab-D" onclick="goGymTab('D')">DIA D</div>
+    <div class="subtab on" id="subtab-A"   onclick="goGymTab('A')">GYM A</div>
+    <div class="subtab"    id="subtab-B"   onclick="goGymTab('B')">GYM B</div>
+    <div class="subtab"    id="subtab-C"   onclick="goGymTab('C')">GYM C</div>
+    <div class="subtab"    id="subtab-RUN" onclick="goGymTab('RUN')">RUN</div>
+    <div class="subtab"    id="subtab-D"   onclick="goGymTab('D')">ALTRES</div>
   </div>
 
   <!-- DIA A -->
@@ -266,19 +278,32 @@ body{font-family:'DM Sans',sans-serif;background:var(--bg);color:var(--t);max-wi
     <div id="c-hist"></div>
   </div>
 
-  <!-- DIA D · ESPORT -->
+  <!-- RUN -->
+  <div class="gympage" id="gympage-RUN">
+    <div class="sess-hdr" style="background:linear-gradient(135deg,#123a2a 0%,#124a38 100%);border-color:rgba(52,199,130,.28);box-shadow:0 2px 12px rgba(52,199,130,.12)">
+      <div><div class="sess-label" style="color:#c8f5e0">🏃 Run</div><div class="sess-sub" id="run-last-date" style="color:#7fe0b3">Sense sessions anteriors</div></div>
+      <input type="date" class="fi" id="run-date" style="width:auto;font-size:12px;padding:6px 9px" onchange="renderRunTab()">
+    </div>
+    <div class="st" style="margin-top:2px">Tria la sessió del dia i marca-la com feta</div>
+    <div id="run-cards"></div>
+    <div class="save-help">Tria l'entreno que has fet i registra'l. Comptarà al resum igual que una sessió de gym. Per treure'l, esborra'l de l'historial.</div>
+    <div class="st">Historial de running</div>
+    <div id="run-hist"></div>
+  </div>
+
+  <!-- ALTRES -->
   <div class="gympage" id="gympage-D">
     <div class="sess-hdr" style="background:linear-gradient(135deg,#5a3a12 0%,#5c4712 100%);border-color:rgba(239,159,39,.28);box-shadow:0 2px 12px rgba(239,159,39,.12)">
-      <div><div class="sess-label" style="color:#ffe6bf">🟠 Dia D · Esport</div><div class="sess-sub" id="d-last-date" style="color:#fac775">Sense sessions anteriors</div></div>
+      <div><div class="sess-label" style="color:#ffe6bf">🟠 Altres</div><div class="sess-sub" id="d-last-date" style="color:#fac775">Sense sessions anteriors</div></div>
       <input type="date" class="fi" id="d-date" style="width:auto;font-size:12px;padding:6px 9px" onchange="autosaveEsport()">
     </div>
     <div class="st" style="margin-top:2px">Quina activitat has fet?</div>
     <div class="esport-grid" id="esport-chips"></div>
-    <div style="margin-top:14px"><label class="fl">Nota (opcional)</label><input class="fi" id="d-nota" placeholder="Ex: 1 h de tenis, 40 min corrent..." oninput="autosaveEsport()"></div>
-    <button class="btn" onclick="saveEsport()">💾 Desar sessió d'esport</button>
+    <div style="margin-top:14px"><label class="fl">Nota (opcional)</label><input class="fi" id="d-nota" placeholder="Ex: 1 h de tenis, 1 h de bici..." oninput="autosaveEsport()"></div>
+    <button class="btn" onclick="saveEsport()">💾 Desar sessió</button>
     <button class="btn btn-sec" onclick="clearEsport()">↺ Buidar</button>
-    <div class="save-help">Marca l'activitat (o més d'una) i desa. No cal registrar sèries ni pesos: només que consti la sessió. Comptarà al resum igual que un Dia A, B o C.</div>
-    <div class="st">Historial d'esport</div>
+    <div class="save-help">Per esports que no siguin gym ni running (tenis, pàdel, bici...). Marca l'activitat i desa. Comptarà al resum igual que una sessió de gym.</div>
+    <div class="st">Historial d'altres</div>
     <div id="d-hist"></div>
   </div>
 
@@ -455,11 +480,12 @@ const BLOC_META={
 // ═══════════════════════════════════════════
 // NAVIGATION
 // ═══════════════════════════════════════════
-const MAIN_TITLES=['Gym','Pes','Dieta','Resum'];
+const MAIN_TITLES=['Training','Pes','Dieta','Resum'];
 function goMainTab(i){
   document.querySelectorAll('.tab').forEach((t,j)=>t.classList.toggle('on',i===j));
   document.querySelectorAll('.page').forEach((p,j)=>p.classList.toggle('on',i===j));
   document.getElementById('hdr-title').textContent=MAIN_TITLES[i];
+  if(i===0) goGymTab(currentGymTab);
   if(i===1) renderPesTab();
   if(i===2) renderDietaTab();
   if(i===3) renderResumTab();
@@ -468,12 +494,13 @@ function goMainTab(i){
 let currentGymTab='A';
 function goGymTab(tipus){
   currentGymTab=tipus;
-  ['A','B','C','D'].forEach(t=>{
+  ['A','B','C','RUN','D'].forEach(t=>{
     document.getElementById('subtab-'+t).classList.toggle('on',t===tipus);
     document.getElementById('gympage-'+t).classList.toggle('on',t===tipus);
   });
-  const labels={A:'Gym · Dia A',B:'Gym · Dia B',C:'Gym · Dia C',D:'Gym · Esport'};
+  const labels={A:'Gym A',B:'Gym B',C:'Gym C',RUN:'Run',D:'Altres'};
   document.getElementById('hdr-title').textContent=labels[tipus];
+  if(tipus==='RUN') renderRunTab();
   if(tipus==='D') renderEsportTab();
 }
 
@@ -756,14 +783,74 @@ function clearForm(tipus){
 }
 
 // ═══════════════════════════════════════════
-// DIA D · ESPORT
+// RUN
+// ═══════════════════════════════════════════
+const RUN_SESSIONS=[
+  {id:'A', name:'Sessió A · La llarga', sub:'Blocs de 5 min', color:'#378add',
+   steps:['Caminar 5 min (escalfament)','Repeteix 4×: Córrer 5 min + Caminar 3 min','Caminar 5 min (calma)']},
+  {id:'B', name:'Sessió B · La mitjana', sub:'Blocs de 3 min', color:'#EF9F27',
+   steps:['Caminar 5 min (escalfament)','Repeteix 6×: Córrer 3 min + Caminar 1 min 30 s','Caminar 5 min (calma)']},
+  {id:'C', name:'Sessió C · La curta', sub:'Blocs d\'1 min · ideal post-gym', color:'#E24B4A',
+   steps:['Caminar 5 min (escalfament)','Repeteix 10×: Córrer 1 min + Caminar 1 min','Caminar 5 min (calma)']},
+];
+function runName(id){const r=RUN_SESSIONS.find(x=>x.id===id);return r?r.name:('Sessió '+id);}
+
+function renderRunTab(){
+  const dt=document.getElementById('run-date');
+  if(dt&&!dt.value) dt.value=today();
+  const last=getLastSession('RUN');
+  const el=document.getElementById('run-last-date');
+  if(el) el.textContent=last?('Última sessió: '+fmtDate(last.data)):'Sense sessions anteriors';
+  renderRunCards();
+  renderRunHist();
+}
+function renderRunCards(){
+  const c=document.getElementById('run-cards'); if(!c) return;
+  c.innerHTML=RUN_SESSIONS.map(r=>{
+    return `<div class="run-card" style="border-left-color:${r.color}">
+      <div class="run-card-name">${r.name}</div>
+      <div class="run-card-sub">${r.sub}</div>
+      <div class="run-steps">${r.steps.map(s=>`<div class="run-step"><span class="rs-b">•</span><span>${s}</span></div>`).join('')}</div>
+      <button class="run-log-btn" style="background:${r.color}" onclick="logRun('${r.id}')">✓ He fet aquesta sessió</button>
+    </div>`;
+  }).join('');
+}
+function logRun(id){
+  const date=val('run-date')||today();
+  const all=S.arr('gym_sessions_v2');
+  all.push({tipus:'RUN',data:date,runType:id,ts:Date.now()});
+  S.set('gym_sessions_v2',all);
+  showToast('✅ '+runName(id).split(' · ')[0]+' registrada!');
+  renderRunTab();
+}
+function renderRunHist(){
+  const sessions=S.arr('gym_sessions_v2').filter(s=>s.tipus==='RUN').reverse();
+  const c=document.getElementById('run-hist'); if(!c) return;
+  if(!sessions.length){ c.innerHTML='<div style="color:var(--t3);font-size:12px;padding:6px 0">Sense sessions guardades</div>'; return; }
+  const all=S.arr('gym_sessions_v2');
+  c.innerHTML=sessions.map(s=>{
+    const realIdx=all.findIndex(ss=>ss.ts===s.ts);
+    return `<div class="gym-hist-card">
+      <div class="gym-hist-hdr" style="cursor:default">
+        <div>
+          <div style="font-size:13px;font-weight:500;color:var(--t)">${fmtDate(s.data)}</div>
+          <div style="font-size:10px;color:var(--t3);margin-top:2px">🏃 ${runName(s.runType)}</div>
+        </div>
+        <button onclick="deleteSession(${realIdx},'RUN')" style="background:none;border:none;color:var(--t3);font-size:14px;cursor:pointer;padding:2px 6px">🗑</button>
+      </div>
+    </div>`;
+  }).join('');
+}
+
+// ═══════════════════════════════════════════
+// ALTRES
 // ═══════════════════════════════════════════
 const ESPORTS=[
   {id:'tenis',   name:'Tenis',   icon:'🎾'},
-  {id:'padel',   name:'Pàdel',   icon:'🏓'},
-  {id:'run',     name:'Running', icon:'🏃'},
+  {id:'padel',   name:'Pàdel',   icon:'🎾'},
   {id:'bici',    name:'Bici',    icon:'🚴'},
   {id:'caminar', name:'Caminar', icon:'🚶'},
+  {id:'trekking',name:'Trekking',icon:'🥾'},
   {id:'altres',  name:'Altres',  icon:'✨'},
 ];
 let esportSel=new Set();
@@ -905,6 +992,7 @@ function deleteSession(i,tipus){
   all.splice(i,1);
   S.set('gym_sessions_v2',all);
   if(tipus==='D'){ renderEsportTab(); }
+  else if(tipus==='RUN'){ renderRunTab(); }
   else { renderExercises(tipus); renderGymHist(tipus); }
   showToast('Sessió eliminada');
 }
@@ -1140,7 +1228,7 @@ function weekSummary(wkMon){
   const monday=parseISO(wkMon);
   const dates=[];for(let i=0;i<7;i++){const d=new Date(monday);d.setDate(monday.getDate()+i);dates.push(fmtISO(d));}
   const sess=S.arr('gym_sessions_v2').filter(s=>weekMondayISO(s.data)===wkMon);
-  const byType={A:0,B:0,C:0,D:0};sess.forEach(s=>{if(byType[s.tipus]!=null)byType[s.tipus]++;});
+  const byType={A:0,B:0,C:0,RUN:0,D:0};sess.forEach(s=>{if(byType[s.tipus]!=null)byType[s.tipus]++;});
   const done=S.get('diet_done')||{};
   const dietPct=dietWeightedPct(dates,done);
   const wpes=S.arr('pesos').filter(p=>weekMondayISO(p.date)===wkMon).sort((a,b)=>a.date<b.date?-1:1);
@@ -1202,7 +1290,7 @@ function renderResumList(sums){
     let delta='';
     if(s.pes!=null&&prev&&prev.pes!=null){const d=+(s.pes-prev.pes).toFixed(1);if(d!==0)delta=` <span class="${d<0?'cg':'cr'}">${d>0?'+':''}${d}</span>`;}
     const bt=s.byType;
-    const dies=((bt.A?'A×'+bt.A+' ':'')+(bt.B?'B×'+bt.B+' ':'')+(bt.C?'C×'+bt.C+' ':'')+(bt.D?'Esport×'+bt.D:'')).trim();
+    const dies=((bt.A?'Gym A×'+bt.A+' ':'')+(bt.B?'Gym B×'+bt.B+' ':'')+(bt.C?'Gym C×'+bt.C+' ':'')+(bt.RUN?'Run×'+bt.RUN+' ':'')+(bt.D?'Altres×'+bt.D:'')).trim();
     return `<div class="wk">
       <div class="wk-top">
         <div class="wk-range">${weekRangeLabel(s.wkMon)}</div>
@@ -1306,6 +1394,9 @@ function init(){
     renderExercises(t);
     renderGymHist(t);
   });
+
+  document.getElementById('run-date').value=today();
+  renderRunTab();
 
   document.getElementById('d-date').value=today();
   renderEsportTab();
