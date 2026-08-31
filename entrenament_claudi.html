@@ -87,6 +87,7 @@ body{font-family:'DM Sans',sans-serif;background:var(--bg);color:var(--t);max-wi
 .ex-ref-s{font-size:9px;color:var(--t3)}
 .ex-ref-v{font-size:12px;font-weight:600;color:var(--t);font-family:'DM Mono',monospace;margin-top:1px}
 .ex-ref-flag{font-size:9px;color:#fac775;margin-top:1px}
+.ex-ref-sub{font-size:9px;font-weight:700;color:#85b7eb;margin:4px 0 3px;letter-spacing:.3px}
 
 .series-hdr{display:grid;grid-template-columns:22px 1fr 1fr;gap:6px;padding:4px 0;align-items:center}
 .series-hdr span{font-size:9px;color:var(--t3);text-align:center;text-transform:uppercase;letter-spacing:.4px}
@@ -190,6 +191,11 @@ body{font-family:'DM Sans',sans-serif;background:var(--bg);color:var(--t);max-wi
 .meal-check.done{background:var(--gl);border-color:var(--g)}
 .diet-note{background:var(--bg3);border:1px solid var(--bdr);border-radius:var(--radsm);padding:12px 13px;font-size:11px;color:var(--t2);line-height:1.7}
 .diet-note b{color:var(--t)}
+.diet-tbl{width:100%;border-collapse:collapse;margin:0 0 10px}
+.diet-tbl caption{caption-side:top;text-align:left;font-size:10px;font-weight:700;text-transform:uppercase;letter-spacing:.5px;color:var(--a);padding:2px 2px 6px}
+.diet-tbl td{font-size:12px;color:var(--t);padding:7px 11px;background:var(--bg3);border-bottom:1px solid var(--bdr)}
+.diet-tbl tr:first-child td{border-top:1px solid var(--bdr)}
+.diet-tbl td:last-child{text-align:right;font-family:'DM Mono',monospace;color:var(--t2);white-space:nowrap;width:84px}
 
 /* RESUM */
 .wk{background:var(--bg3);border:1px solid var(--bdr);border-radius:var(--radsm);padding:11px 13px;margin-bottom:8px}
@@ -358,9 +364,27 @@ body{font-family:'DM Sans',sans-serif;background:var(--bg);color:var(--t);max-wi
     <div class="sc"><div class="sc-n cg" id="diet-week-n">0%</div><div class="sc-l">Compliment setmana</div></div>
   </div>
   <div id="diet-meals"></div>
-  <div class="st">Referència</div>
+  <div class="st">Referència · tria per dinar i sopar</div>
+  <table class="diet-tbl">
+    <caption>Carbohidrats · 1 ració ≈ 190 kcal (pes en cuit)</caption>
+    <tr><td>Arròs (integral o blanc)</td><td>150 g</td></tr>
+    <tr><td>Pasta (o pasta de llegum)</td><td>120 g</td></tr>
+    <tr><td>Quinoa / cuscús</td><td>160 g</td></tr>
+    <tr><td>Patata / moniato</td><td>220 g</td></tr>
+    <tr><td>Llegums (cigrons, llenties, mongetes)</td><td>150 g</td></tr>
+    <tr><td>Pa integral</td><td>80 g</td></tr>
+  </table>
+  <table class="diet-tbl">
+    <caption>Proteïnes · 1 ració (pes en cru)</caption>
+    <tr><td>Pollastre / gall d'indi</td><td>200 g</td></tr>
+    <tr><td>Vedella magra / llom</td><td>150 g</td></tr>
+    <tr><td>Peix blanc (lluç, bacallà, sèpia, calamar)</td><td>200 g</td></tr>
+    <tr><td>Peix blau (salmó, tonyina)</td><td>150 g</td></tr>
+    <tr><td>Ous</td><td>3 unitats</td></tr>
+    <tr><td>Marisc / gambes</td><td>200 g</td></tr>
+  </table>
   <div class="diet-note">
-    Pesos de cereals, pasta i llegums <b>en cuit</b> (excepte la proteïna, en cru). Objectiu <b>~2.100–2.400 kcal/dia</b> · proteïna <b>~160–180 g</b> · oli <b>1,5 cull.</b> per dinar i sopar. Base orientativa; ajustos fins, amb la dietista.
+    Carbo <b>només al dinar</b>; el sopar és proteïna + verdura + oli (algun dia, patata dins la verdura). Verdura o amanida <b>lliure</b>, sempre. Greix: <b>1,5 cull. oli</b> per àpat. Objectiu <b>~1.550–1.750 kcal/dia</b> · proteïna <b>~120–140 g</b> (més amb un iogurt proteic: skyr o +proteïnes 0%). Àpats lliures: <b>dissabte sopar</b> i <b>diumenge dinar</b>. Base orientativa; ajustos fins, amb la dietista.
   </div>
 </div>
 
@@ -560,16 +584,29 @@ function renderExercises(tipus){
     if(ex.tip) html+=`<div class="ex-tip">💡 ${ex.tip}</div>`;
 
     if(lastEx){
-      const seriesRef=lastEx.series.filter(s=>s.kg||s.reps);
-      if(seriesRef.length){
-        html+=`<div class="ex-ref"><div class="ex-ref-title">📋 Última sessió · ${fmtDate(last.data)}${exWasUp(lastEx)?' · ↑ tocava pujar':''}</div><div class="ex-ref-row">`;
-        seriesRef.forEach((s,si)=>{
-          html+=`<div class="ex-ref-serie">
-            <div class="ex-ref-s">S${si+1}</div>
-            <div class="ex-ref-v">${s.kg||'—'}×${s.reps||'—'}</div>
-          </div>`;
+      if(lastEx.isSuperset){
+        const subs=[[ex.exA,lastEx.series,lastEx.pujaA],[ex.exB,lastEx.seriesB,lastEx.pujaB]];
+        let ref='';
+        subs.forEach(([nm,arr,puja])=>{
+          const sr=(arr||[]).filter(s=>s.kg||s.reps);
+          if(!sr.length) return;
+          ref+=`<div class="ex-ref-sub">${nm}${puja?' · ↑ tocava pujar':''}</div><div class="ex-ref-row">`;
+          sr.forEach((s,si)=>{ ref+=`<div class="ex-ref-serie"><div class="ex-ref-s">S${si+1}</div><div class="ex-ref-v">${s.kg||'—'}×${s.reps||'—'}</div></div>`; });
+          ref+=`</div>`;
         });
-        html+=`</div></div>`;
+        if(ref) html+=`<div class="ex-ref"><div class="ex-ref-title">📋 Última sessió · ${fmtDate(last.data)}</div>${ref}</div>`;
+      } else {
+        const seriesRef=lastEx.series.filter(s=>s.kg||s.reps);
+        if(seriesRef.length){
+          html+=`<div class="ex-ref"><div class="ex-ref-title">📋 Última sessió · ${fmtDate(last.data)}${exWasUp(lastEx)?' · ↑ tocava pujar':''}</div><div class="ex-ref-row">`;
+          seriesRef.forEach((s,si)=>{
+            html+=`<div class="ex-ref-serie">
+              <div class="ex-ref-s">S${si+1}</div>
+              <div class="ex-ref-v">${s.kg||'—'}×${s.reps||'—'}</div>
+            </div>`;
+          });
+          html+=`</div></div>`;
+        }
       }
     }
 
@@ -943,6 +980,23 @@ function renderEsportHist(){
 // ═══════════════════════════════════════════
 // GYM HISTORY
 // ═══════════════════════════════════════════
+// Recompte d'exercicis registrats d'una sessió:
+// - normal: 1 si té alguna sèrie amb pes
+// - superset: 1 per cada meitat (bíceps / tríceps) amb dades → 2 si es fan les dues, 1 si només una
+// - abs: 1 si s'ha marcat algun abdominal
+function countExercises(session){
+  let n=0;
+  (session.exercicis||[]).forEach(ex=>{
+    if(ex.isAbs){ if(ex.absDone&&ex.absDone.length) n++; return; }
+    if(ex.isSuperset){
+      if(ex.series&&ex.series.some(s=>s.kg||s.reps)) n++;
+      if(ex.seriesB&&ex.seriesB.some(s=>s.kg||s.reps)) n++;
+      return;
+    }
+    if(ex.series&&ex.series.some(s=>s.kg)) n++;
+  });
+  return n;
+}
 function renderGymHist(tipus){
   const sessions=S.arr('gym_sessions_v2').filter(s=>s.tipus===tipus).reverse();
   const container=document.getElementById(tipus.toLowerCase()+'-hist');
@@ -974,7 +1028,7 @@ function renderGymHist(tipus){
       <div class="gym-hist-hdr" onclick="document.getElementById('ghc-${s.ts}').classList.toggle('open')">
         <div>
           <div style="font-size:13px;font-weight:500;color:var(--t)">${fmtDate(s.data)}</div>
-          <div style="font-size:10px;color:var(--t3);margin-top:2px">${s.exercicis.filter(ex=>!ex.isAbs&&ex.series&&ex.series.some(sr=>sr.kg)).length} exercicis registrats</div>
+          <div style="font-size:10px;color:var(--t3);margin-top:2px">${countExercises(s)} exercicis registrats</div>
         </div>
         <div style="display:flex;align-items:center;gap:8px">
           <button onclick="event.stopPropagation();deleteSession(${realIdx},'${tipus}')" style="background:none;border:none;color:var(--t3);font-size:14px;cursor:pointer;padding:2px 6px">🗑</button>
@@ -1105,32 +1159,29 @@ function deletePes(i){
 // ═══════════════════════════════════════════
 // DIETA
 // ═══════════════════════════════════════════
-const DIET_MEALS=['esmorzar','migmati','dinar','berenar','sopar'];
-// Pes calòric aprox. de cada àpat (per ponderar el % de compliment)
-const MEAL_KCAL={esmorzar:290,migmati:320,dinar:650,berenar:210,sopar:520};
-const DIET_T={esmorzar:'Esmorzar',migmati:'Mig matí',dinar:'Dinar',berenar:'Berenar',sopar:'Sopar'};
-const DIET_CLS={esmorzar:'amber',migmati:'',dinar:'',berenar:'violet',sopar:'clay'};
+const DIET_MEALS=['esmorzar','dinar','berenar','sopar'];
+// Pes calòric aprox. de cada àpat (per ponderar el % de compliment). El berenar NO compta.
+const MEAL_KCAL={esmorzar:370,dinar:650,sopar:460};
+const DIET_T={esmorzar:'Esmorzar',dinar:'Dinar',berenar:'Berenar',sopar:'Sopar'};
+const DIET_CLS={esmorzar:'amber',dinar:'',berenar:'violet',sopar:'clay'};
+// Plantilla general de dinar i sopar (es tria carbo + proteïna a les taules de Referència)
+const DINAR_TPL={x:'Carbohidrat (1 ració) + 200 g proteïna (en cru) + verdura o amanida lliure + 1,5 cull. oli',note:'Tria el carbo i la proteïna a les taules de la secció Referència.'};
+const SOPAR_TPL={x:'200 g proteïna (en cru) + verdura o amanida lliure + 1,5 cull. oli',note:'Sopar sense carbo, en general. Algun dia hi pots posar patata dins la verdura. Tria la proteïna a la taula de Referència.'};
+const LLIURE={x:'Lliure',free:true};
 const DIET_FIX={
-  esmorzar:{x:'Cafè sol + 8 g creatina + 1 peça de fruita + 30 g fruits secs (no fregits)'},
-  migmati:{x:'Entrepà: 80 g pa integral + 80 g proteïna magra (gall d\'indi, pernil dolç, tonyina, formatge fresc o ou) + tomàquet opcional'},
-  berenar:{x:'1 peça de fruita + batut de proteïna (1 scoop amb aigua)',note:'Aquest és el batut post-entreno. Si entrenes de nit, mou-lo després de sopar.'}
+  esmorzar:{x:'Cafè + entrepà (60–80 g pa integral + proteïna magra: gall d\'indi, tonyina, formatge fresc o ou + tomàquet) + 1 peça de fruita'},
+  berenar:{x:'1 peça de fruita',noCount:true,note:'No compta al %.'}
 };
-// clau = getDay(): 0=Diumenge ... 6=Dissabte
+// clau = getDay(): 0=Diumenge ... 6=Dissabte. Dinar i sopar segueixen la plantilla,
+// excepte els àpats lliures: dissabte sopar i diumenge dinar.
 const DIET_DAY={
-  1:{dinar:{x:'200 g arròs integral + verdura saltejada (sense oli) + 150 g pollastre + 1,5 cull. oli'},
-     sopar:{x:'Amanida verda + 150 g patata + remenat de 2-3 ous (o 150 g proteïna) + 1,5 cull. oli + iogurt sense sucre'}},
-  2:{dinar:{x:'200 g quinoa o cuscús + amanida (canonges, tomàquet, alvocat) + 180 g sèpia o calamar + 1,5 cull. oli'},
-     sopar:{x:'Verdura saltejada (carbassó, xerris) + 150 g pollastre + 1,5 cull. oli + iogurt sense sucre'}},
-  3:{dinar:{x:'200 g pasta de llenties o cigrons + verdura + 180 g vedella magra + 1,5 cull. oli'},
-     sopar:{x:'Espàrrecs a la planxa + 150 g pollastre + 120 g patata + 1,5 cull. oli + iogurt sense sucre'}},
-  4:{dinar:{x:'200 g pasta integral + amanida (enciam, tomàquet, blat de moro) + 150 g pollastre + 1,5 cull. oli'},
-     sopar:{x:'Gaspatxo o puré de verdures + 150 g salmó o tonyina + 150 g patata + 1,5 cull. oli + iogurt sense sucre'}},
-  5:{dinar:{x:'250 g patata + bròquil + 180 g peix blanc + 1,5 cull. oli'},
-     sopar:{x:'2 fajitas (tortilla integral) amb pebrot i ceba + 150 g pollastre + 1,5 cull. oli + iogurt sense sucre'}},
-  6:{dinar:{x:'200 g cigrons cuits + amanida verda + 2 ous durs (o 150 g proteïna) + 1,5 cull. oli'},
-     sopar:{x:'Lliure',free:true}},
-  0:{dinar:{x:'Lliure (mantenint la línia)',free:true},
-     sopar:{x:'Mongeta verda + 200 g patata + 150 g vedella magra o llom + 1,5 cull. oli + iogurt sense sucre'}},
+  1:{dinar:DINAR_TPL, sopar:SOPAR_TPL},
+  2:{dinar:DINAR_TPL, sopar:SOPAR_TPL},
+  3:{dinar:DINAR_TPL, sopar:SOPAR_TPL},
+  4:{dinar:DINAR_TPL, sopar:SOPAR_TPL},
+  5:{dinar:DINAR_TPL, sopar:SOPAR_TPL},
+  6:{dinar:DINAR_TPL, sopar:LLIURE},
+  0:{dinar:LLIURE,    sopar:SOPAR_TPL},
 };
 const DIET_ORDER=[1,2,3,4,5,6,0];
 const DIET_LABELS=['DL','DM','DC','DJ','DV','DS','DG'];
@@ -1151,13 +1202,15 @@ function dietMealText(gd,mk){
   return DIET_FIX[mk];
 }
 function isFree(gd,mk){const m=dietMealText(gd,mk);return !!(m&&m.free);}
-function trackableCount(gd){return DIET_MEALS.filter(mk=>!isFree(gd,mk)).length;}
-// % de compliment ponderat per calories: dinar i sopar pesen més que esmorzar/berenar
+// Un àpat compta al % si no és lliure i no està marcat com a "noCount" (el berenar).
+function mealCounts(gd,mk){const m=dietMealText(gd,mk);return !!(m&&!m.free&&!m.noCount);}
+function trackableCount(gd){return DIET_MEALS.filter(mk=>mealCounts(gd,mk)).length;}
+// % de compliment ponderat per calories: dinar i sopar pesen més que l'esmorzar; el berenar no compta.
 function dietWeightedPct(dates,done){
   let tot=0,got=0;
   dates.forEach(dt=>{
     const gd=parseISO(dt).getDay(); const dd=done[dt]||{};
-    DIET_MEALS.forEach(mk=>{ if(isFree(gd,mk))return; tot+=MEAL_KCAL[mk]; if(dd[mk])got+=MEAL_KCAL[mk]; });
+    DIET_MEALS.forEach(mk=>{ if(!mealCounts(gd,mk))return; const w=MEAL_KCAL[mk]||0; tot+=w; if(dd[mk])got+=w; });
   });
   return tot?Math.round(got/tot*100):0;
 }
@@ -1180,6 +1233,7 @@ function renderDietMeals(){
   DIET_MEALS.forEach(mk=>{
     const m=dietMealText(dietSel,mk);
     const free=!!(m&&m.free);
+    const counted=mealCounts(dietSel,mk);
     const cls=free?'free':(DIET_CLS[mk]||'');
     const isDone=!!done[mk];
     html+=`<div class="meal ${cls}">
@@ -1188,7 +1242,7 @@ function renderDietMeals(){
         <div class="meal-x">${m.x}</div>
         ${m.note?`<div class="meal-note">💡 ${m.note}</div>`:''}
       </div>
-      ${free?'':`<button class="meal-check${isDone?' done':''}" onclick="toggleMeal('${date}','${mk}')">${isDone?'✓':''}</button>`}
+      ${counted?`<button class="meal-check${isDone?' done':''}" onclick="toggleMeal('${date}','${mk}')">${isDone?'✓':''}</button>`:''}
     </div>`;
   });
   document.getElementById('diet-meals').innerHTML=html;
