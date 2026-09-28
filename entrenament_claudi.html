@@ -173,30 +173,6 @@ body{font-family:'DM Sans',sans-serif;background:var(--bg);color:var(--t);max-wi
 /* Text ajuda desat */
 .save-help{font-size:10px;color:var(--t3);line-height:1.6;margin:8px 2px 0;text-align:center}
 
-/* DIETA */
-.diet-day{display:flex;gap:5px;margin-bottom:14px}
-.diet-daybtn{flex:1;min-width:0;padding:9px 2px;background:var(--bg3);border:1px solid var(--bdr);border-radius:var(--radsm);font-size:11px;font-weight:700;color:var(--t3);cursor:pointer;text-align:center;transition:all .15s;letter-spacing:.3px}
-.diet-daybtn.on{background:var(--gl);border-color:var(--g);color:var(--g)}
-.diet-daybtn.today{box-shadow:inset 0 -3px 0 var(--a)}
-.meal{background:var(--bg3);border-radius:var(--radsm);border:1px solid var(--bdr);border-left:4px solid var(--g);padding:12px 13px;margin-bottom:8px;display:flex;gap:11px;align-items:flex-start}
-.meal.amber{border-left-color:var(--a)}
-.meal.violet{border-left-color:#b464dc}
-.meal.clay{border-left-color:#d97a5e}
-.meal.free{border-left-color:var(--t3);opacity:.7}
-.meal-body{flex:1;min-width:0}
-.meal-t{font-size:10px;font-weight:700;text-transform:uppercase;letter-spacing:.6px;color:var(--t2);margin-bottom:4px}
-.meal-x{font-size:13px;color:var(--t);line-height:1.5}
-.meal-note{font-size:10px;color:var(--t3);font-style:italic;margin-top:5px;line-height:1.5}
-.meal-check{width:27px;height:27px;border-radius:7px;border:1px solid var(--bdr2);background:none;cursor:pointer;display:flex;align-items:center;justify-content:center;font-size:15px;flex-shrink:0;transition:all .2s;color:var(--g)}
-.meal-check.done{background:var(--gl);border-color:var(--g)}
-.diet-note{background:var(--bg3);border:1px solid var(--bdr);border-radius:var(--radsm);padding:12px 13px;font-size:11px;color:var(--t2);line-height:1.7}
-.diet-note b{color:var(--t)}
-.diet-tbl{width:100%;border-collapse:collapse;margin:0 0 10px}
-.diet-tbl caption{caption-side:top;text-align:left;font-size:10px;font-weight:700;text-transform:uppercase;letter-spacing:.5px;color:var(--a);padding:2px 2px 6px}
-.diet-tbl td{font-size:12px;color:var(--t);padding:7px 11px;background:var(--bg3);border-bottom:1px solid var(--bdr)}
-.diet-tbl tr:first-child td{border-top:1px solid var(--bdr)}
-.diet-tbl td:last-child{text-align:right;font-family:'DM Mono',monospace;color:var(--t2);white-space:nowrap;width:84px}
-
 /* RESUM */
 .wk{background:var(--bg3);border:1px solid var(--bdr);border-radius:var(--radsm);padding:11px 13px;margin-bottom:8px}
 .wk-top{display:flex;justify-content:space-between;align-items:center;margin-bottom:9px}
@@ -225,8 +201,7 @@ body{font-family:'DM Sans',sans-serif;background:var(--bg);color:var(--t);max-wi
 <div class="tabs">
   <div class="tab on" onclick="goMainTab(0)">🏋️ TRAINING</div>
   <div class="tab"    onclick="goMainTab(1)">⚖️ PES</div>
-  <div class="tab"    onclick="goMainTab(2)">🥗 DIETA</div>
-  <div class="tab"    onclick="goMainTab(3)">📊 RESUM</div>
+  <div class="tab"    onclick="goMainTab(2)">📊 RESUM</div>
 </div>
 
 <div class="pages">
@@ -356,47 +331,18 @@ body{font-family:'DM Sans',sans-serif;background:var(--bg);color:var(--t);max-wi
   <div style="background:var(--card);border-radius:var(--rad);border:1px solid var(--bdr);padding:0 15px" id="pes-hist"></div>
 </div>
 
-<!-- TAB 2: DIETA -->
+<!-- TAB 2: RESUM -->
 <div class="page" id="tab-2">
-  <div class="diet-day" id="diet-day-sel"></div>
-  <div class="sgrid">
-    <div class="sc"><div class="sc-n" id="diet-today-n">0/5</div><div class="sc-l">Àpats fets avui</div></div>
-    <div class="sc"><div class="sc-n cg" id="diet-week-n">0%</div><div class="sc-l">Compliment setmana</div></div>
-  </div>
-  <div id="diet-meals"></div>
-  <div class="st">Referència · tria per dinar i sopar</div>
-  <table class="diet-tbl">
-    <caption>Carbohidrats · 1 ració ≈ 190 kcal (pes en cuit)</caption>
-    <tr><td>Arròs (integral o blanc)</td><td>150 g</td></tr>
-    <tr><td>Pasta (o pasta de llegum)</td><td>120 g</td></tr>
-    <tr><td>Quinoa / cuscús</td><td>160 g</td></tr>
-    <tr><td>Patata / moniato</td><td>220 g</td></tr>
-    <tr><td>Llegums (cigrons, llenties, mongetes)</td><td>150 g</td></tr>
-    <tr><td>Pa integral</td><td>80 g</td></tr>
-  </table>
-  <table class="diet-tbl">
-    <caption>Proteïnes · 1 ració (pes en cru)</caption>
-    <tr><td>Pollastre / gall d'indi</td><td>200 g</td></tr>
-    <tr><td>Vedella magra / llom</td><td>150 g</td></tr>
-    <tr><td>Peix blanc (lluç, bacallà, sèpia, calamar)</td><td>200 g</td></tr>
-    <tr><td>Peix blau (salmó, tonyina)</td><td>150 g</td></tr>
-    <tr><td>Ous</td><td>3 unitats</td></tr>
-    <tr><td>Marisc / gambes</td><td>200 g</td></tr>
-  </table>
-  <div class="diet-note">
-    Carbo <b>només al dinar</b>; el sopar és proteïna + verdura + oli (algun dia, patata dins la verdura). Verdura o amanida <b>lliure</b>, sempre. Greix: <b>1,5 cull. oli</b> per àpat. Objectiu <b>~1.550–1.750 kcal/dia</b> · proteïna <b>~120–140 g</b> (més amb un iogurt proteic: skyr o +proteïnes 0%). Àpats lliures: <b>dissabte sopar</b> i <b>diumenge dinar</b>. Base orientativa; ajustos fins, amb la dietista.
-  </div>
-</div>
-
-<!-- TAB 3: RESUM -->
-<div class="page" id="tab-3">
+  <div class="st" style="margin-top:2px">Aquesta setmana</div>
   <div class="sgrid3">
-    <div class="sc"><div class="sc-n" id="r-sess">0</div><div class="sc-l">Sessions aquesta setmana</div></div>
-    <div class="sc"><div class="sc-n" id="r-pes">—</div><div class="sc-l">Pes actual (kg)</div></div>
-    <div class="sc"><div class="sc-n cg" id="r-dieta">0%</div><div class="sc-l">Dieta setmana</div></div>
+    <div class="sc"><div class="sc-n" id="r-sess">0</div><div class="sc-l">Sessions</div></div>
+    <div class="sc"><div class="sc-n" id="r-gym">0</div><div class="sc-l">Gym</div></div>
+    <div class="sc"><div class="sc-n" id="r-run">0</div><div class="sc-l">Running</div></div>
   </div>
-  <div class="sgrid">
+  <div class="st">Global</div>
+  <div class="sgrid3">
     <div class="sc"><div class="sc-n" id="r-total">0</div><div class="sc-l">Sessions totals</div></div>
+    <div class="sc"><div class="sc-n" id="r-pes">—</div><div class="sc-l">Pes actual (kg)</div></div>
     <div class="sc"><div class="sc-n cg" id="r-perdut">—</div><div class="sc-l">Des de la 1a pesada</div></div>
   </div>
   <div class="st">Sessions i pes · últimes setmanes</div>
@@ -410,7 +356,7 @@ body{font-family:'DM Sans',sans-serif;background:var(--bg);color:var(--t);max-wi
   <button class="btn btn-sec" onclick="copyBackup()">📋 Copiar dades (per enviar-les)</button>
   <button class="btn btn-sec" onclick="document.getElementById('import-file').click()">⬆️ Importar còpia</button>
   <input type="file" id="import-file" accept="application/json,.json" style="display:none" onchange="importData(event)">
-  <button class="btn btn-sec" style="color:#f09595;border-color:rgba(226,75,74,.4);margin-top:16px" onclick="resetAllData()">🗑 Esborrar totes les dades (gym, pes i dieta)</button>
+  <button class="btn btn-sec" style="color:#f09595;border-color:rgba(226,75,74,.4);margin-top:16px" onclick="resetAllData()">🗑 Esborrar totes les dades (entrenaments i pes)</button>
   <div class="save-help">Exporta una còpia abans de netejar el mòbil, i importa-la després per recuperar-ho tot. Per analitzar-les, descarrega o copia i passa-me el fitxer.</div>
 </div>
 
@@ -443,7 +389,8 @@ const GYM={
       {id:'a_4', name:'Sentadilla multipower',        mat:'Multipower / barra lliure',   bloc:'cames',    series:3, optional:false, tip:'Genolls cap als peus (no cap endins), pit amunt, profunditat paral·lela mínima.'},
       {id:'a_5', name:'Extensió quàdriceps màquina',  mat:'Màquina extensió quàd.',      bloc:'cames',    series:3, optional:false, tip:null},
       {id:'a_6', name:'Curl isquiotibials màquina',   mat:'Màquina isquio',              bloc:'cames',    series:3, optional:false, tip:'Baixa molt lent (3 seg). Aquí és on es treballa de veritat.'},
-      {id:'a_7', name:'Superset bíceps + tríceps', mat:'Politja', bloc:'accessori', series:3, optional:true, isSuperset:true, exA:'Bíceps politja', exB:'Tríceps politja', tip:'Bíceps → descansa 30 seg → Tríceps → descansa 60 seg. Repeteix 3 vegades.'},
+      // Abans era el superset bíceps+tríceps (a_7); ara només tríceps. 'legacy' recupera la referència de la meitat de tríceps.
+      {id:'a_8', name:'Tríceps politja',              mat:'Politja alta',                bloc:'accessori', series:3, optional:true,  tip:null, legacy:{tipus:'A',id:'a_7',part:'B'}},
     ]
   },
   B:{
@@ -451,10 +398,12 @@ const GYM={
     exercicis:[
       {id:'b_0', name:'Màquina press pit assegut',    mat:'Màquina press pit',           bloc:'pit',      series:3, optional:false, tip:null},
       {id:'b_1', name:'Elevació lateral politja',     mat:'Politja baixa unilateral',    bloc:'hombro',   series:3, optional:false, tip:'Pes lleuger, forma perfecta. Colze lleugerament doblegat, no arribar al fracàs.'},
-      {id:'b_2', name:'Rem politja agafador V',       mat:'Politja agafador V',           bloc:'esquena',  series:3, optional:false, tip:'Tira amb els colzes, no amb les mans. Braços = ganxos.'},
+      {id:'b_2', name:'Rem politja unilateral',       mat:'Politja · un braç',            bloc:'esquena',  series:3, optional:false, tip:'Tira amb els colzes, no amb les mans. Braços = ganxos.'},
       {id:'b_3', name:'Pullover politja',             mat:'Politja alta',                bloc:'esquena',  series:3, optional:false, tip:null},
       {id:'b_4', name:'Premsa de cames',              mat:'Màquina prensa',              bloc:'cames',    series:3, optional:false, tip:null},
       {id:'b_5', name:'Abductor gluti mig (obrir)',   mat:'Màquina abductor',            bloc:'cames',    series:3, optional:false, tip:'Coixinets per fora dels genolls. OBRIR les cames. Contracció màxima a dalt.'},
+      // Bíceps: abans anava en superset al dia A (a_7, meitat A)
+      {id:'b_6', name:'Bíceps politja o mancuerna',   mat:'Politja / mancuernes',        bloc:'accessori', series:3, optional:true,  tip:null, legacy:{tipus:'A',id:'a_7',part:'A'}},
       // ABS bloc especial
       {id:'b_abs', name:'Bloc Abdominals',            mat:'Sòl / estora',                bloc:'abs',      series:3, optional:true,  isAbs:true, tip:null},
     ]
@@ -504,15 +453,14 @@ const BLOC_META={
 // ═══════════════════════════════════════════
 // NAVIGATION
 // ═══════════════════════════════════════════
-const MAIN_TITLES=['Training','Pes','Dieta','Resum'];
+const MAIN_TITLES=['Training','Pes','Resum'];
 function goMainTab(i){
   document.querySelectorAll('.tab').forEach((t,j)=>t.classList.toggle('on',i===j));
   document.querySelectorAll('.page').forEach((p,j)=>p.classList.toggle('on',i===j));
   document.getElementById('hdr-title').textContent=MAIN_TITLES[i];
   if(i===0) goGymTab(currentGymTab);
   if(i===1) renderPesTab();
-  if(i===2) renderDietaTab();
-  if(i===3) renderResumTab();
+  if(i===2) renderResumTab();
 }
 
 let currentGymTab='A';
@@ -534,6 +482,34 @@ function goGymTab(tipus){
 function getLastSession(tipus){
   const sessions=S.arr('gym_sessions_v2').filter(s=>s.tipus===tipus);
   return sessions.length ? sessions[sessions.length-1] : null;
+}
+
+// Última dada d'un exercici. Si no hi és a l'última sessió del dia i l'exercici ve d'un superset antic
+// (camp legacy), agafa la meitat corresponent de l'última sessió que en tingui dades.
+function findLastEx(ex,last){
+  if(last){
+    const e=(last.exercicis||[]).find(x=>x.id===ex.id);
+    if(e) return {ex:e,data:last.data};
+  }
+  if(ex.legacy){
+    const L=ex.legacy;
+    const ss=S.arr('gym_sessions_v2').filter(s=>s.tipus===L.tipus);
+    for(let i=ss.length-1;i>=0;i--){
+      const e=(ss[i].exercicis||[]).find(x=>x.id===L.id);
+      if(!e||!e.isSuperset) continue;
+      const series=L.part==='B'?e.seriesB:e.series;
+      if(!series||!series.some(s=>s.kg||s.reps)) continue;
+      const puja=L.part==='B'?(e.pujaB!==undefined?e.pujaB:series.some(s=>s.puja)):(e.pujaA!==undefined?e.pujaA:series.some(s=>s.puja));
+      return {ex:{id:ex.id,name:ex.name,series,puja:!!puja},data:ss[i].data};
+    }
+  }
+  return null;
+}
+// Nom actual d'un exercici desat (per si s'ha reanomenat, p. ex. el rem del dia B)
+function exDisplayName(tipus,ex){
+  const g=GYM[tipus];
+  const cur=g&&g.exercicis.find(e=>e.id===ex.id);
+  return cur?cur.name:ex.name;
 }
 
 function renderExercises(tipus){
@@ -563,8 +539,9 @@ function renderExercises(tipus){
       return;
     }
 
-    let lastEx=null;
-    if(last) lastEx=last.exercicis.find(e=>e.id===ex.id);
+    const lr=findLastEx(ex,last);
+    const lastEx=lr?lr.ex:null;
+    const refDate=lr?lr.data:null;
     const anyUpFlag = exWasUp(lastEx);
     const optBadge = ex.optional ? '<span class="badge-opt">Opcional</span>' : '';
     const badge = lastEx
@@ -594,11 +571,11 @@ function renderExercises(tipus){
           sr.forEach((s,si)=>{ ref+=`<div class="ex-ref-serie"><div class="ex-ref-s">S${si+1}</div><div class="ex-ref-v">${s.kg||'—'}×${s.reps||'—'}</div></div>`; });
           ref+=`</div>`;
         });
-        if(ref) html+=`<div class="ex-ref"><div class="ex-ref-title">📋 Última sessió · ${fmtDate(last.data)}</div>${ref}</div>`;
+        if(ref) html+=`<div class="ex-ref"><div class="ex-ref-title">📋 Última sessió · ${fmtDate(refDate)}</div>${ref}</div>`;
       } else {
         const seriesRef=lastEx.series.filter(s=>s.kg||s.reps);
         if(seriesRef.length){
-          html+=`<div class="ex-ref"><div class="ex-ref-title">📋 Última sessió · ${fmtDate(last.data)}${exWasUp(lastEx)?' · ↑ tocava pujar':''}</div><div class="ex-ref-row">`;
+          html+=`<div class="ex-ref"><div class="ex-ref-title">📋 Última sessió · ${fmtDate(refDate)}${exWasUp(lastEx)?' · ↑ tocava pujar':''}</div><div class="ex-ref-row">`;
           seriesRef.forEach((s,si)=>{
             html+=`<div class="ex-ref-serie">
               <div class="ex-ref-s">S${si+1}</div>
@@ -829,8 +806,32 @@ const RUN_SESSIONS=[
    steps:['Caminar 5 min (escalfament)','Repeteix 6×: Córrer 3 min + Caminar 1 min 30 s','Caminar 5 min (calma)']},
   {id:'C', name:'Sessió C · La curta', sub:'Blocs d\'1 min · ideal post-gym', color:'#E24B4A',
    steps:['Caminar 5 min (escalfament)','Repeteix 10×: Córrer 1 min + Caminar 1 min','Caminar 5 min (calma)']},
+  {id:'D', name:'Sessió D · Lliure', sub:'Un altre tipus de sessió · temps i ritme', color:'#34c782', free:true},
 ];
 function runName(id){const r=RUN_SESSIONS.find(x=>x.id===id);return r?r.name:('Sessió '+id);}
+
+// Ritme: accepta "5:30" o "5.5" (min/km) → segons/km
+function paceToSec(p){
+  if(!p) return null;
+  p=String(p).trim().replace(',','.');
+  if(p.includes(':')){const [m,s]=p.split(':');const v=(+m)*60+(+s||0);return isFinite(v)&&v>0?v:null;}
+  const v=parseFloat(p)*60;return isFinite(v)&&v>0?v:null;
+}
+function secToPace(sec){if(!sec||!isFinite(sec))return '';const m=Math.floor(sec/60),s=Math.round(sec-m*60);return s===60?`${m+1}:00`:`${m}:${pad2(s)}`;}
+function calcPace(temps,dist){const t=parseFloat(String(temps).replace(',','.')),d=parseFloat(String(dist).replace(',','.'));return (t>0&&d>0)?secToPace(t*60/d):'';}
+function updatePacePh(){
+  const el=document.getElementById('runD-ritme');if(!el)return;
+  const p=calcPace(val('runD-temps'),val('runD-dist'));
+  el.placeholder=p?p+' (auto)':'5:30';
+}
+function runDetail(s){
+  if(s.runType!=='D') return '';
+  const parts=[];
+  if(s.temps) parts.push(s.temps+' min');
+  if(s.dist) parts.push(s.dist+' km');
+  if(s.ritme) parts.push(s.ritme+' /km');
+  return parts.join(' · ');
+}
 
 function renderRunTab(){
   const dt=document.getElementById('run-date');
@@ -844,6 +845,18 @@ function renderRunTab(){
 function renderRunCards(){
   const c=document.getElementById('run-cards'); if(!c) return;
   c.innerHTML=RUN_SESSIONS.map(r=>{
+    if(r.free) return `<div class="run-card" style="border-left-color:${r.color}">
+      <div class="run-card-name">${r.name}</div>
+      <div class="run-card-sub">${r.sub}</div>
+      <div class="fg3" style="margin:10px 0 8px">
+        <div><label class="fl">Temps (min)</label><input class="fi" id="runD-temps" type="number" inputmode="decimal" step="1" placeholder="35" oninput="updatePacePh()"></div>
+        <div><label class="fl">Distància (km)</label><input class="fi" id="runD-dist" type="number" inputmode="decimal" step="0.1" placeholder="5.0" oninput="updatePacePh()"></div>
+        <div><label class="fl">Ritme (min/km)</label><input class="fi" id="runD-ritme" inputmode="decimal" placeholder="5:30"></div>
+      </div>
+      <div><label class="fl">Tipus / nota (opcional)</label><input class="fi" id="runD-nota" placeholder="Ex: rodatge suau, sèries, cursa..."></div>
+      <div class="save-help" style="text-align:left;margin:6px 2px 0">Si poses temps i distància, el ritme es calcula sol (el pots sobreescriure).</div>
+      <button class="run-log-btn" style="background:${r.color}" onclick="logRun('${r.id}')">✓ Registrar sessió lliure</button>
+    </div>`;
     return `<div class="run-card" style="border-left-color:${r.color}">
       <div class="run-card-name">${r.name}</div>
       <div class="run-card-sub">${r.sub}</div>
@@ -854,8 +867,18 @@ function renderRunCards(){
 }
 function logRun(id){
   const date=val('run-date')||today();
+  const rec={tipus:'RUN',data:date,runType:id,ts:Date.now()};
+  if(id==='D'){
+    const temps=val('runD-temps').trim(), dist=val('runD-dist').trim();
+    let ritme=val('runD-ritme').trim();
+    const nota=val('runD-nota').trim();
+    if(!temps&&!dist&&!ritme){showToast('⚠ Posa almenys el temps o la distància');return;}
+    if(ritme){const sec=paceToSec(ritme); ritme=sec?secToPace(sec):ritme;}
+    else ritme=calcPace(temps,dist);
+    Object.assign(rec,{temps:temps||null,dist:dist||null,ritme:ritme||null,nota:nota||null});
+  }
   const all=S.arr('gym_sessions_v2');
-  all.push({tipus:'RUN',data:date,runType:id,ts:Date.now()});
+  all.push(rec);
   S.set('gym_sessions_v2',all);
   showToast('✅ '+runName(id).split(' · ')[0]+' registrada!');
   renderRunTab();
@@ -872,6 +895,8 @@ function renderRunHist(){
         <div>
           <div style="font-size:13px;font-weight:500;color:var(--t)">${fmtDate(s.data)}</div>
           <div style="font-size:10px;color:var(--t3);margin-top:2px">🏃 ${runName(s.runType)}</div>
+          ${runDetail(s)?`<div style="font-size:11px;color:#7fe0b3;margin-top:3px;font-family:'DM Mono',monospace">${runDetail(s)}</div>`:''}
+          ${s.nota?`<div style="font-size:10px;color:var(--t2);margin-top:2px">📝 ${s.nota}</div>`:''}
         </div>
         <button onclick="deleteSession(${realIdx},'RUN')" style="background:none;border:none;color:var(--t3);font-size:14px;cursor:pointer;padding:2px 6px">🗑</button>
       </div>
@@ -1021,7 +1046,7 @@ function renderGymHist(tipus){
         return lines.length?lines.join('\n'):null;
       }
       const sr=ex.series.filter(x=>x.kg||x.reps).map((x,i)=>`S${i+1}:${x.kg||'?'}×${x.reps||'?'}`).join(' ');
-      return sr?`${ex.name}: ${sr}${exWasUp(ex)?' ↑':''}`:null;
+      return sr?`${exDisplayName(tipus,ex)}: ${sr}${exWasUp(ex)?' ↑':''}`:null;
     }).filter(Boolean).join('\n');
 
     return `<div class="gym-hist-card" id="ghc-${s.ts}">
@@ -1157,118 +1182,7 @@ function deletePes(i){
 }
 
 // ═══════════════════════════════════════════
-// DIETA
-// ═══════════════════════════════════════════
-const DIET_MEALS=['esmorzar','dinar','berenar','sopar'];
-// Pes calòric aprox. de cada àpat (per ponderar el % de compliment). El berenar NO compta.
-const MEAL_KCAL={esmorzar:370,dinar:650,sopar:460};
-const DIET_T={esmorzar:'Esmorzar',dinar:'Dinar',berenar:'Berenar',sopar:'Sopar'};
-const DIET_CLS={esmorzar:'amber',dinar:'',berenar:'violet',sopar:'clay'};
-// Plantilla general de dinar i sopar (es tria carbo + proteïna a les taules de Referència)
-const DINAR_TPL={x:'Carbohidrat (1 ració) + 200 g proteïna (en cru) + verdura o amanida lliure + 1,5 cull. oli',note:'Tria el carbo i la proteïna a les taules de la secció Referència.'};
-const SOPAR_TPL={x:'200 g proteïna (en cru) + verdura o amanida lliure + 1,5 cull. oli',note:'Sopar sense carbo, en general. Algun dia hi pots posar patata dins la verdura. Tria la proteïna a la taula de Referència.'};
-const LLIURE={x:'Lliure',free:true};
-const DIET_FIX={
-  esmorzar:{x:'Cafè + entrepà (60–80 g pa integral + proteïna magra: gall d\'indi, tonyina, formatge fresc o ou + tomàquet) + 1 peça de fruita'},
-  berenar:{x:'1 peça de fruita',noCount:true,note:'No compta al %.'}
-};
-// clau = getDay(): 0=Diumenge ... 6=Dissabte. Dinar i sopar segueixen la plantilla,
-// excepte els àpats lliures: dissabte sopar i diumenge dinar.
-const DIET_DAY={
-  1:{dinar:DINAR_TPL, sopar:SOPAR_TPL},
-  2:{dinar:DINAR_TPL, sopar:SOPAR_TPL},
-  3:{dinar:DINAR_TPL, sopar:SOPAR_TPL},
-  4:{dinar:DINAR_TPL, sopar:SOPAR_TPL},
-  5:{dinar:DINAR_TPL, sopar:SOPAR_TPL},
-  6:{dinar:DINAR_TPL, sopar:LLIURE},
-  0:{dinar:LLIURE,    sopar:SOPAR_TPL},
-};
-const DIET_ORDER=[1,2,3,4,5,6,0];
-const DIET_LABELS=['DL','DM','DC','DJ','DV','DS','DG'];
-let dietSel=null;
-
-// Dates ISO de dilluns..diumenge de la setmana actual, per dia (getDay)
-function weekDates(){
-  const now=new Date();
-  const dow=now.getDay();
-  const mon=new Date(now); mon.setDate(now.getDate()+(dow===0?-6:1-dow));
-  const map={};
-  DIET_ORDER.forEach((gd,i)=>{const d=new Date(mon); d.setDate(mon.getDate()+i); map[gd]=d.toISOString().slice(0,10);});
-  return map;
-}
-function dietMealText(gd,mk){
-  if(mk==='dinar') return DIET_DAY[gd].dinar;
-  if(mk==='sopar') return DIET_DAY[gd].sopar;
-  return DIET_FIX[mk];
-}
-function isFree(gd,mk){const m=dietMealText(gd,mk);return !!(m&&m.free);}
-// Un àpat compta al % si no és lliure i no està marcat com a "noCount" (el berenar).
-function mealCounts(gd,mk){const m=dietMealText(gd,mk);return !!(m&&!m.free&&!m.noCount);}
-function trackableCount(gd){return DIET_MEALS.filter(mk=>mealCounts(gd,mk)).length;}
-// % de compliment ponderat per calories: dinar i sopar pesen més que l'esmorzar; el berenar no compta.
-function dietWeightedPct(dates,done){
-  let tot=0,got=0;
-  dates.forEach(dt=>{
-    const gd=parseISO(dt).getDay(); const dd=done[dt]||{};
-    DIET_MEALS.forEach(mk=>{ if(!mealCounts(gd,mk))return; const w=MEAL_KCAL[mk]||0; tot+=w; if(dd[mk])got+=w; });
-  });
-  return tot?Math.round(got/tot*100):0;
-}
-
-function renderDietaTab(){
-  if(dietSel===null) dietSel=new Date().getDay();
-  const todayGd=new Date().getDay();
-  document.getElementById('diet-day-sel').innerHTML=DIET_ORDER.map((gd,i)=>
-    `<div class="diet-daybtn${gd===dietSel?' on':''}${gd===todayGd?' today':''}" onclick="setDietDay(${gd})">${DIET_LABELS[i]}</div>`).join('');
-  renderDietMeals();
-  renderDietStats();
-}
-function setDietDay(gd){dietSel=gd; renderDietaTab();}
-
-function renderDietMeals(){
-  const wd=weekDates();
-  const date=wd[dietSel];
-  const done=(S.get('diet_done')||{})[date]||{};
-  let html='';
-  DIET_MEALS.forEach(mk=>{
-    const m=dietMealText(dietSel,mk);
-    const free=!!(m&&m.free);
-    const counted=mealCounts(dietSel,mk);
-    const cls=free?'free':(DIET_CLS[mk]||'');
-    const isDone=!!done[mk];
-    html+=`<div class="meal ${cls}">
-      <div class="meal-body">
-        <div class="meal-t">${DIET_T[mk]}</div>
-        <div class="meal-x">${m.x}</div>
-        ${m.note?`<div class="meal-note">💡 ${m.note}</div>`:''}
-      </div>
-      ${counted?`<button class="meal-check${isDone?' done':''}" onclick="toggleMeal('${date}','${mk}')">${isDone?'✓':''}</button>`:''}
-    </div>`;
-  });
-  document.getElementById('diet-meals').innerHTML=html;
-}
-function toggleMeal(date,mk){
-  const all=S.get('diet_done')||{};
-  if(!all[date]) all[date]={};
-  if(all[date][mk]) delete all[date][mk]; else all[date][mk]=true;
-  if(!Object.keys(all[date]).length) delete all[date];
-  S.set('diet_done',all);
-  renderDietMeals();
-  renderDietStats();
-}
-function renderDietStats(){
-  const wd=weekDates();
-  const all=S.get('diet_done')||{};
-  const todayGd=new Date().getDay();
-  const td=all[wd[todayGd]]||{};
-  const tdone=DIET_MEALS.filter(mk=>td[mk]).length;
-  document.getElementById('diet-today-n').textContent=`${tdone}/${trackableCount(todayGd)}`;
-  const weekDatesArr=DIET_ORDER.map(gd=>wd[gd]);
-  document.getElementById('diet-week-n').textContent=dietWeightedPct(weekDatesArr,all)+'%';
-}
-
-// ═══════════════════════════════════════════
-// RESUM (agrega GYM + PES + DIETA per setmana)
+// RESUM (agrega GYM + RUN + ALTRES + PES per setmana)
 // ═══════════════════════════════════════════
 let resumChart=null;
 const MESOS_R=['gen','feb','mar','abr','mai','jun','jul','ago','set','oct','nov','des'];
@@ -1279,22 +1193,25 @@ function weekMondayISO(iso){const d=parseISO(iso);const dow=d.getDay();d.setDate
 function weekRangeLabel(wkMon){const s=parseISO(wkMon);const e=new Date(s);e.setDate(s.getDate()+6);return `${s.getDate()} ${MESOS_R[s.getMonth()]} – ${e.getDate()} ${MESOS_R[e.getMonth()]}`;}
 
 function weekSummary(wkMon){
-  const monday=parseISO(wkMon);
-  const dates=[];for(let i=0;i<7;i++){const d=new Date(monday);d.setDate(monday.getDate()+i);dates.push(fmtISO(d));}
   const sess=S.arr('gym_sessions_v2').filter(s=>weekMondayISO(s.data)===wkMon);
   const byType={A:0,B:0,C:0,RUN:0,D:0};sess.forEach(s=>{if(byType[s.tipus]!=null)byType[s.tipus]++;});
-  const done=S.get('diet_done')||{};
-  const dietPct=dietWeightedPct(dates,done);
+  const gym=byType.A+byType.B+byType.C;
+  // Totals de les sessions de running lliures (Sessió D), si n'hi ha
+  let runMin=0,runKm=0,pMin=0,pKm=0;
+  sess.filter(s=>s.tipus==='RUN'&&s.runType==='D').forEach(s=>{
+    const t=parseFloat(String(s.temps||'').replace(',','.')); if(t>0) runMin+=t;
+    const d=parseFloat(String(s.dist||'').replace(',','.')); if(d>0) runKm+=d;
+    if(t>0&&d>0){pMin+=t;pKm+=d;} // ritme mitjà només amb sessions que tenen temps i distància
+  });
   const wpes=S.arr('pesos').filter(p=>weekMondayISO(p.date)===wkMon).sort((a,b)=>a.date<b.date?-1:1);
   const pes=wpes.length?parseFloat(wpes[wpes.length-1].pes):null;
-  return {wkMon,sessions:sess.length,byType,dietPct,pes};
+  return {wkMon,sessions:sess.length,byType,gym,run:byType.RUN,runMin,runKm,runPace:calcPace(pMin,pKm),pes};
 }
 
 function allWeeksAsc(){
   const set=new Set();
   S.arr('gym_sessions_v2').forEach(s=>set.add(weekMondayISO(s.data)));
   S.arr('pesos').forEach(p=>set.add(weekMondayISO(p.date)));
-  Object.keys(S.get('diet_done')||{}).forEach(d=>set.add(weekMondayISO(d)));
   set.add(weekMondayISO(today()));
   return [...set].sort();
 }
@@ -1307,7 +1224,8 @@ function renderResumTab(){
   const pesActual=sortedPes.length?parseFloat(sortedPes[sortedPes.length-1].pes):null;
   document.getElementById('r-sess').textContent=cur?cur.sessions:0;
   document.getElementById('r-pes').textContent=pesActual!=null?pesActual.toFixed(1):'—';
-  document.getElementById('r-dieta').textContent=(cur?cur.dietPct:0)+'%';
+  document.getElementById('r-gym').textContent=cur?cur.gym:0;
+  document.getElementById('r-run').textContent=cur?cur.run:0;
   document.getElementById('r-total').textContent=S.arr('gym_sessions_v2').length;
   const rp=document.getElementById('r-perdut');
   if(inici!=null&&pesActual!=null){
@@ -1315,8 +1233,8 @@ function renderResumTab(){
     rp.textContent=(perdut>=0?'-':'+')+Math.abs(perdut).toFixed(1)+' kg';
     rp.className='sc-n '+(perdut>0?'cg':perdut<0?'cr':'');
   }else{rp.textContent='—';rp.className='sc-n';}
-  renderResumChart(summaries.slice(-8));
   renderResumList(summaries.slice().reverse());
+  try{ renderResumChart(summaries.slice(-8)); }catch(e){} // si la gràfica no carrega (sense connexió), la resta es veu igual
 }
 
 function renderResumChart(sums){
@@ -1351,11 +1269,12 @@ function renderResumList(sums){
         ${s.wkMon===curWk?'<span class="wk-cur">Aquesta setmana</span>':''}
       </div>
       <div class="wk-metrics">
-        <div class="wk-m"><div class="wk-m-v">${s.sessions}</div><div class="wk-m-l">Sessions</div></div>
+        <div class="wk-m"><div class="wk-m-v">${s.gym}</div><div class="wk-m-l">Gym</div></div>
+        <div class="wk-m"><div class="wk-m-v">${s.run}</div><div class="wk-m-l">Running</div></div>
         <div class="wk-m"><div class="wk-m-v">${s.pes!=null?s.pes.toFixed(1):'—'}${delta}</div><div class="wk-m-l">Pes (kg)</div></div>
-        <div class="wk-m"><div class="wk-m-v">${s.dietPct}%</div><div class="wk-m-l">Dieta</div></div>
       </div>
-      ${s.sessions?`<div class="wk-sub">Dies: ${dies}</div>`:''}
+      ${s.sessions?`<div class="wk-sub">${s.sessions} ${s.sessions===1?"sessió":"sessions"} · ${dies}</div>`:''}
+      ${(s.runMin||s.runKm)?`<div class="wk-sub" style="color:#7fe0b3;margin-top:3px">Run lliure: ${[s.runMin?Math.round(s.runMin)+' min':'',s.runKm?(+s.runKm.toFixed(1))+' km':'',s.runPace?s.runPace+' /km':''].filter(Boolean).join(' · ')}</div>`:''}
     </div>`;
   }).join('');
 }
@@ -1366,7 +1285,7 @@ function renderResumList(sums){
 // ═══════════════════════════════════════════
 // CÒPIA DE SEGURETAT
 // ═══════════════════════════════════════════
-const BACKUP_KEYS=['gym_sessions_v2','pesos','diet_done','gym_draft_A','gym_draft_B','gym_draft_C','gym_draft_D','app_inited'];
+const BACKUP_KEYS=['gym_sessions_v2','pesos','gym_draft_A','gym_draft_B','gym_draft_C','gym_draft_D','app_inited'];
 function collectBackup(){
   const data={};
   BACKUP_KEYS.forEach(k=>{const v=localStorage.getItem(k);if(v!==null)data[k]=v;});
@@ -1417,7 +1336,7 @@ function importData(ev){
 }
 
 function resetAllData(){
-  if(!confirm('Esborrar TOTES les dades (entrenaments, pesos i dieta)?\nNo es pot desfer.')) return;
+  if(!confirm('Esborrar TOTES les dades (entrenaments i pesos)?\nNo es pot desfer.')) return;
   if(!confirm('Segur del tot? Començaràs de zero.')) return;
   ['gym_sessions_v2','gym_draft_A','gym_draft_B','gym_draft_C','gym_draft_D','pesos','diet_done'].forEach(k=>S.del(k));
   S.set('app_inited',true); // evita que es torni a sembrar la mesura inicial
