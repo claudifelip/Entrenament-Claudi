@@ -1380,7 +1380,7 @@ function renderResumList(sums){
     let delta='';
     if(s.pes!=null&&prev&&prev.pes!=null){const d=+(s.pes-prev.pes).toFixed(1);if(d!==0)delta=`<div class="wk-delta ${d<0?'cg':'cr'}">${d>0?'+':''}${d}</div>`;}
     const bt=s.byType;
-    const dies=((bt.A?'Gym A×'+bt.A+' ':'')+(bt.B?'Gym B×'+bt.B+' ':'')+(bt.C?'Gym C×'+bt.C+' ':'')+(bt.RUN?'Run×'+bt.RUN+' ':'')+(bt.D?'Altres×'+bt.D+(s.altresActs.length?' ('+s.altresActs.map(esportName).join(', ')+')':''):'')).trim();
+    const dies=((bt.A?'Gym A×'+bt.A+' ':'')+(bt.B?'Gym B×'+bt.B+' ':'')+(bt.C?'Gym C×'+bt.C+' ':'')+(bt.RUN?'Running×'+bt.RUN+' ':'')+(bt.D?'Altres×'+bt.D+(s.altresActs.length?' ('+s.altresActs.map(esportName).join(', ')+')':''):'')).trim();
     return `<div class="wk">
       <div class="wk-top">
         <div class="wk-range">${weekRangeLabel(s.wkMon)}</div>
@@ -1393,7 +1393,6 @@ function renderResumList(sums){
         <div class="wk-m"><div class="wk-m-v">${s.pes!=null?s.pes.toFixed(1):'—'}</div>${delta}<div class="wk-m-l">Pes (kg)</div></div>
       </div>
       ${s.sessions?`<div class="wk-sub">${s.sessions} ${s.sessions===1?"sessió":"sessions"} · ${dies}</div>`:''}
-      ${(s.runSec||s.runKm)?`<div class="wk-sub" style="color:#7fe0b3;margin-top:3px">Running: ${[s.runSec?fmtTime(s.runSec):'',s.runKm?(+s.runKm.toFixed(1))+' km':'',s.runPace?'corrent '+s.runPace+'/km':''].filter(Boolean).join(' · ')}</div>`:''}
     </div>`;
   }).join('');
 }
