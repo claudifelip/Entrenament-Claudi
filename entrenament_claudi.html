@@ -146,12 +146,17 @@ body{font-family:'DM Sans',sans-serif;background:var(--bg);color:var(--t);max-wi
 
 /* RUN */
 .run-card{background:var(--bg3);border:1px solid var(--bdr);border-left:4px solid var(--g);border-radius:var(--radsm);padding:12px 13px;margin-bottom:9px}
-.run-card-top{display:flex;justify-content:space-between;align-items:flex-start;gap:10px}
-.run-card-name{font-size:13px;font-weight:600;color:var(--t)}
-.run-card-sub{font-size:10px;color:var(--t3);margin-top:2px;text-transform:uppercase;letter-spacing:.4px}
-.run-steps{margin-top:9px;font-size:11px;color:var(--t2);line-height:1.65}
-.run-step{display:flex;gap:7px}
-.run-step .rs-b{color:var(--t3)}
+.run-grid{display:grid;grid-template-columns:76px 1fr 1fr 56px;gap:6px;align-items:center}
+.rg-h{font-size:9px;color:var(--t3);text-transform:uppercase;letter-spacing:.4px;text-align:center}
+.rg-l{font-size:11px;color:var(--t2);font-weight:600}
+.rg-in{padding:8px 4px;text-align:center;font-family:'DM Mono',monospace;font-size:13px}
+.rg-in.auto{color:#7fe0b3;border-style:dashed;border-color:rgba(52,199,130,.45)}
+.rg-in.bad{border-color:var(--r)}
+.rg-p{font-family:'DM Mono',monospace;font-size:12px;color:#7fe0b3;text-align:center}
+.rg-sep{grid-column:1/-1;height:1px;background:var(--bdr);margin:2px 0}
+.run-warn{font-size:10px;color:#fac775;margin-top:7px;display:none;line-height:1.5}
+.run-hl{font-size:11px;color:var(--t2);margin-top:3px;font-family:'DM Mono',monospace}
+.run-hl b{color:#7fe0b3;font-weight:500}
 .run-log-btn{width:100%;margin-top:11px;padding:11px;border:none;border-radius:var(--radsm);color:#fff;font-size:13px;font-weight:600;cursor:pointer;transition:filter .15s}
 .run-log-btn:active{filter:brightness(.88)}
 
@@ -178,7 +183,10 @@ body{font-family:'DM Sans',sans-serif;background:var(--bg);color:var(--t);max-wi
 .wk-top{display:flex;justify-content:space-between;align-items:center;margin-bottom:9px}
 .wk-range{font-size:13px;font-weight:600;color:var(--t)}
 .wk-cur{font-size:9px;font-weight:700;text-transform:uppercase;letter-spacing:.5px;color:var(--g);background:var(--gl);padding:3px 8px;border-radius:99px}
-.wk-metrics{display:grid;grid-template-columns:1fr 1fr 1fr;gap:8px}
+.wk-metrics{display:grid;grid-template-columns:repeat(4,1fr);gap:6px}
+.wk-delta{font-size:9px;margin-top:1px;font-family:'DM Mono',monospace}
+.sgrid4{display:grid;grid-template-columns:repeat(4,1fr);gap:7px;margin-bottom:10px}
+.sgrid4 .sc{padding:10px 8px}
 .wk-m{text-align:center;background:rgba(0,0,0,.18);border-radius:7px;padding:8px 4px}
 .wk-m-v{font-size:15px;font-weight:600;font-family:'DM Mono',monospace;color:var(--t)}
 .wk-m-l{font-size:9px;color:var(--t3);margin-top:2px;text-transform:uppercase;letter-spacing:.3px}
@@ -263,11 +271,36 @@ body{font-family:'DM Sans',sans-serif;background:var(--bg);color:var(--t);max-wi
   <div class="gympage" id="gympage-RUN">
     <div class="sess-hdr" style="background:linear-gradient(135deg,#123a2a 0%,#124a38 100%);border-color:rgba(52,199,130,.28);box-shadow:0 2px 12px rgba(52,199,130,.12)">
       <div><div class="sess-label" style="color:#c8f5e0">🏃 Run</div><div class="sess-sub" id="run-last-date" style="color:#7fe0b3">Sense sessions anteriors</div></div>
-      <input type="date" class="fi" id="run-date" style="width:auto;font-size:12px;padding:6px 9px" onchange="renderRunTab()">
+      <input type="date" class="fi" id="run-date" style="width:auto;font-size:12px;padding:6px 9px" onchange="autosaveRun()">
     </div>
-    <div class="st" style="margin-top:2px">Tria la sessió del dia i marca-la com feta</div>
-    <div id="run-cards"></div>
-    <div class="save-help">Tria l'entreno que has fet i registra'l. Comptarà al resum igual que una sessió de gym. Per treure'l, esborra'l de l'historial.</div>
+    <div class="st" style="margin-top:2px">Registra l'entreno</div>
+    <div class="run-card" style="border-left-color:#34c782">
+      <div class="run-grid">
+        <div></div><div class="rg-h">Temps</div><div class="rg-h">Km</div><div class="rg-h">Ritme /km</div>
+        <div class="rg-l">⏱ Total</div>
+        <input class="fi rg-in" id="rt-tot" inputmode="decimal" autocomplete="off" placeholder="40.30" oninput="onRunInput(this)" onblur="onRunBlur(this)">
+        <input class="fi rg-in" id="rd-tot" inputmode="decimal" autocomplete="off" placeholder="5.2" oninput="onRunInput(this)" onblur="onRunBlur(this)">
+        <div class="rg-p" id="rp-tot">—</div>
+        <div class="rg-sep"></div>
+        <div class="rg-l">🏃 Corrent</div>
+        <input class="fi rg-in" id="rt-run" inputmode="decimal" autocomplete="off" placeholder="25" oninput="onRunInput(this)" onblur="onRunBlur(this)">
+        <input class="fi rg-in" id="rd-run" inputmode="decimal" autocomplete="off" placeholder="4.0" oninput="onRunInput(this)" onblur="onRunBlur(this)">
+        <div class="rg-p" id="rp-run">—</div>
+        <div class="rg-l">🚶 Caminant</div>
+        <input class="fi rg-in" id="rt-walk" inputmode="decimal" autocomplete="off" placeholder="15.30" oninput="onRunInput(this)" onblur="onRunBlur(this)">
+        <input class="fi rg-in" id="rd-walk" inputmode="decimal" autocomplete="off" placeholder="1.2" oninput="onRunInput(this)" onblur="onRunBlur(this)">
+        <div class="rg-p" id="rp-walk">—</div>
+      </div>
+      <div class="run-warn" id="run-warn"></div>
+      <div style="margin-top:11px"><label class="fl">Nota (opcional)</label><input class="fi" id="run-nota" placeholder="Ex: rodatge suau, sèries, amb pujades..." oninput="autosaveRun()"></div>
+      <button class="run-log-btn" style="background:#34c782" onclick="logRun()">✓ Registrar entreno</button>
+      <button class="btn btn-sec" onclick="clearRunForm(true)">↺ Buidar</button>
+    </div>
+    <div class="save-help" style="text-align:left">
+      <b>Temps:</b> escriu <b>40.30</b> (o 40:30) = 40 min 30 s · <b>40</b> = 40 min · <b>1.05.00</b> = 1 h 5 min.<br>
+      <b>Només el mínim:</b> de cada columna (temps i km) n'omples 2 de 3 i la tercera es calcula sola (en verd). Si només fas la fila Corrent, el total és el mateix. Els ritmes són sempre automàtics.<br>
+      El que escrius es desa sol fins que el registres.
+    </div>
     <div class="st">Historial de running</div>
     <div id="run-hist"></div>
   </div>
@@ -334,10 +367,11 @@ body{font-family:'DM Sans',sans-serif;background:var(--bg);color:var(--t);max-wi
 <!-- TAB 2: RESUM -->
 <div class="page" id="tab-2">
   <div class="st" style="margin-top:2px">Aquesta setmana</div>
-  <div class="sgrid3">
-    <div class="sc"><div class="sc-n" id="r-sess">0</div><div class="sc-l">Sessions</div></div>
+  <div class="sgrid4">
+    <div class="sc"><div class="sc-n" id="r-sess">0</div><div class="sc-l">Total</div></div>
     <div class="sc"><div class="sc-n" id="r-gym">0</div><div class="sc-l">Gym</div></div>
     <div class="sc"><div class="sc-n" id="r-run">0</div><div class="sc-l">Running</div></div>
+    <div class="sc"><div class="sc-n" id="r-altres">0</div><div class="sc-l">Altres</div></div>
   </div>
   <div class="st">Global</div>
   <div class="sgrid3">
@@ -437,7 +471,7 @@ let pesChart=null, grasaChart=null;
 // ═══════════════════════════════════════════
 // UTILS
 // ═══════════════════════════════════════════
-function today(){return new Date().toISOString().slice(0,10);}
+function today(){return fmtISO(new Date());} // data local (abans UTC: entre 00:00 i 02:00 donava el dia anterior)
 function fmtDate(d){if(!d)return '';const p=d.split('-');return `${p[2]}/${p[1]}/${p[0]}`;}
 function showToast(msg){const t=document.getElementById('toast');t.textContent=msg;t.classList.add('on');setTimeout(()=>t.classList.remove('on'),2200);}
 
@@ -741,7 +775,7 @@ function hasAnyData(form){
 // Autosave: es guarda sol mentre entrenes, sense tancar res
 function autosave(tipus){
   if(!ready) return;
-  S.set('gym_draft_'+tipus, collectForm(tipus));
+  S.set('gym_draft_'+tipus, {...collectForm(tipus),day:today()});
 }
 
 // Restaura l'esborrany a la pantalla (el que estaves omplint)
@@ -780,7 +814,7 @@ function saveSession(tipus){
   if(idx>=0){all[idx]=record;showToast('✅ Sessió actualitzada');}
   else{all.push(record);showToast('✅ Sessió guardada!');}
   S.set('gym_sessions_v2',all);
-  S.set('gym_draft_'+tipus, form);
+  S.set('gym_draft_'+tipus, {...form,day:today()});
   const sub=document.getElementById(tipus.toLowerCase()+'-last-date');
   if(sub) sub.textContent='Sessió desada ✓ · pots seguir editant';
   renderGymHist(tipus);
@@ -792,96 +826,173 @@ function saveSession(tipus){
 function clearForm(tipus){
   if(!confirm('Buidar el formulari i començar una sessió nova?\n(Les sessions ja desades a l\'historial no es toquen.)')) return;
   S.del('gym_draft_'+tipus);
+  document.getElementById(tipus.toLowerCase()+'-date').value=today();
   renderExercises(tipus);
   showToast('Formulari buidat · sessió nova');
 }
 
 // ═══════════════════════════════════════════
-// RUN
+// RUN · un sol registre: total / corrent / caminant
 // ═══════════════════════════════════════════
-const RUN_SESSIONS=[
-  {id:'A', name:'Sessió A · La llarga', sub:'Blocs de 5 min', color:'#378add',
-   steps:['Caminar 5 min (escalfament)','Repeteix 4×: Córrer 5 min + Caminar 3 min','Caminar 5 min (calma)']},
-  {id:'B', name:'Sessió B · La mitjana', sub:'Blocs de 3 min', color:'#EF9F27',
-   steps:['Caminar 5 min (escalfament)','Repeteix 6×: Córrer 3 min + Caminar 1 min 30 s','Caminar 5 min (calma)']},
-  {id:'C', name:'Sessió C · La curta', sub:'Blocs d\'1 min · ideal post-gym', color:'#E24B4A',
-   steps:['Caminar 5 min (escalfament)','Repeteix 10×: Córrer 1 min + Caminar 1 min','Caminar 5 min (calma)']},
-  {id:'D', name:'Sessió D · Lliure', sub:'Un altre tipus de sessió · temps i ritme', color:'#34c782', free:true},
-];
-function runName(id){const r=RUN_SESSIONS.find(x=>x.id===id);return r?r.name:('Sessió '+id);}
+// Noms dels entrenos predefinits antics (només per mostrar l'historial vell)
+const OLD_RUN_NAMES={A:'Sessió A · La llarga',B:'Sessió B · La mitjana',C:'Sessió C · La curta',D:'Sessió lliure'};
+const RUN_F=['tot','run','walk'];
 
-// Ritme: accepta "5:30" o "5.5" (min/km) → segons/km
-function paceToSec(p){
-  if(!p) return null;
-  p=String(p).trim().replace(',','.');
-  if(p.includes(':')){const [m,s]=p.split(':');const v=(+m)*60+(+s||0);return isFinite(v)&&v>0?v:null;}
-  const v=parseFloat(p)*60;return isFinite(v)&&v>0?v:null;
+// Temps: "40" = 40 min · "40.30" / "40:30" / "40,30" = 40 min 30 s · "1.05.00" = 1 h 5 min
+function parseTime(str){
+  const s=String(str||'').trim(); if(!s) return null;
+  const p=s.split(/[:.,'\s]+/).filter(Boolean);
+  if(!p.length||p.length>3||p.some(x=>!/^\d+$/.test(x))) return NaN;
+  const n=p.map(Number);
+  let sec;
+  if(n.length===1) sec=n[0]*60;
+  else if(n.length===2){ if(n[1]>=60) return NaN; sec=n[0]*60+n[1]; }
+  else { if(n[1]>=60||n[2]>=60) return NaN; sec=n[0]*3600+n[1]*60+n[2]; }
+  return sec>0?sec:NaN;
 }
-function secToPace(sec){if(!sec||!isFinite(sec))return '';const m=Math.floor(sec/60),s=Math.round(sec-m*60);return s===60?`${m+1}:00`:`${m}:${pad2(s)}`;}
-function calcPace(temps,dist){const t=parseFloat(String(temps).replace(',','.')),d=parseFloat(String(dist).replace(',','.'));return (t>0&&d>0)?secToPace(t*60/d):'';}
-function updatePacePh(){
-  const el=document.getElementById('runD-ritme');if(!el)return;
-  const p=calcPace(val('runD-temps'),val('runD-dist'));
-  el.placeholder=p?p+' (auto)':'5:30';
+function fmtTime(sec){
+  if(sec==null||!isFinite(sec)) return '';
+  sec=Math.round(sec); const h=Math.floor(sec/3600), m=Math.floor(sec%3600/60), x=sec%60;
+  return h?`${h}:${pad2(m)}:${pad2(x)}`:`${m}:${pad2(x)}`;
 }
-function runDetail(s){
-  if(s.runType!=='D') return '';
-  const parts=[];
-  if(s.temps) parts.push(s.temps+' min');
-  if(s.dist) parts.push(s.dist+' km');
-  if(s.ritme) parts.push(s.ritme+' /km');
-  return parts.join(' · ');
+function parseKm(str){
+  const s=String(str||'').trim().replace(',','.'); if(!s) return null;
+  const v=Number(s); return (isFinite(v)&&v>0)?v:NaN;
+}
+function fmtKm(v){return (v==null||!isFinite(v))?'':String(+v.toFixed(2));}
+function secToPace(sec){if(!sec||!isFinite(sec))return '';const m=Math.floor(sec/60);let x=Math.round(sec-m*60);return x===60?`${m+1}:00`:`${m}:${pad2(x)}`;}
+function paceOf(sec,km){return (sec>0&&km>0)?secToPace(sec/km):'';}
+const okNum=v=>v!=null&&isFinite(v)&&v>0;
+
+// Resol una columna [total, corrent, caminant]: amb 2 valors calcula el 3r.
+// Amb només corrent o només caminant, el total és el mateix.
+function solveTriplet(v){
+  const r=v.map(x=>okNum(x)?x:null);
+  const n=r.filter(x=>x!=null).length;
+  if(n===2){
+    const i=r.indexOf(null); let x=null;
+    if(i===0) x=r[1]+r[2];
+    if(i===1) x=r[0]-r[2];
+    if(i===2) x=r[0]-r[1];
+    if(x!=null&&x>0.0001) r[i]=x;
+  } else if(n===1&&r[0]==null){
+    r[0]=r[1]!=null?r[1]:r[2];
+  }
+  return r;
+}
+// A partir dels valors escrits (text) calcula-ho tot
+function runCompute(raw){
+  const tv=RUN_F.map(f=>parseTime(raw['t_'+f])), dv=RUN_F.map(f=>parseKm(raw['d_'+f]));
+  const t=solveTriplet(tv), d=solveTriplet(dv);
+  const o={t:{},d:{},tIn:{},dIn:{}};
+  RUN_F.forEach((f,i)=>{o.t[f]=t[i];o.d[f]=d[i];o.tIn[f]=tv[i];o.dIn[f]=dv[i];});
+  return o;
+}
+function runEl(k,f){return document.getElementById((k==='t'?'rt-':'rd-')+f);}
+// Valors escrits a mà (els calculats en verd no compten)
+function runRaw(){
+  const raw={};
+  ['t','d'].forEach(k=>RUN_F.forEach(f=>{const e=runEl(k,f);raw[k+'_'+f]=(e&&!e.dataset.auto)?e.value.trim():'';}));
+  return raw;
+}
+function runCalc(){
+  const raw=runRaw();
+  const c=runCompute(raw);
+  ['t','d'].forEach(k=>RUN_F.forEach(f=>{
+    const e=runEl(k,f); const input=k==='t'?c.tIn[f]:c.dIn[f]; const val=k==='t'?c.t[f]:c.d[f];
+    if(raw[k+'_'+f]!==''){ e.classList.toggle('bad',Number.isNaN(input)); return; }
+    e.classList.remove('bad');
+    if(val!=null){ e.value=k==='t'?fmtTime(val):fmtKm(val); e.dataset.auto='1'; e.classList.add('auto'); }
+    else { e.value=''; e.dataset.auto=''; e.classList.remove('auto'); }
+  }));
+  RUN_F.forEach(f=>{document.getElementById('rp-'+f).textContent=paceOf(c.t[f],c.d[f])||'—';});
+  // Avís si les 3 dades escrites a mà no quadren
+  const w=[];
+  const all3=k=>RUN_F.every(f=>raw[k+'_'+f]!=='');
+  if(all3('t')&&okNum(c.t.tot)&&okNum(c.t.run)&&okNum(c.t.walk)&&Math.abs(c.t.tot-c.t.run-c.t.walk)>=1) w.push(`Temps: corrent + caminant = ${fmtTime(c.t.run+c.t.walk)}, no ${fmtTime(c.t.tot)}`);
+  if(all3('d')&&okNum(c.d.tot)&&okNum(c.d.run)&&okNum(c.d.walk)&&Math.abs(c.d.tot-c.d.run-c.d.walk)>0.005) w.push(`Km: corrent + caminant = ${fmtKm(c.d.run+c.d.walk)}, no ${fmtKm(c.d.tot)}`);
+  if(c.t.run!=null&&c.t.tot!=null&&c.t.run>c.t.tot) w.push('El temps corrent és més gran que el total');
+  if(c.d.run!=null&&c.d.tot!=null&&c.d.run>c.d.tot) w.push('Els km corrent són més que el total');
+  const we=document.getElementById('run-warn'); we.innerHTML=w.map(x=>'⚠ '+x).join('<br>'); we.style.display=w.length?'block':'none';
+  return c;
+}
+function onRunInput(el){ el.dataset.auto=''; el.classList.remove('auto'); runCalc(); autosaveRun(); }
+// En sortir del camp, normalitza el temps (40.30 → 40:30)
+function onRunBlur(el){
+  if(el.dataset.auto||!el.value.trim()) return;
+  if(el.id.startsWith('rt-')){const v=parseTime(el.value); if(okNum(v)) el.value=fmtTime(v);}
+  else {const v=parseKm(el.value); if(okNum(v)) el.value=fmtKm(v);}
+  runCalc(); autosaveRun();
+}
+function runHasData(c){return RUN_F.some(f=>okNum(c.t[f])||okNum(c.d[f]));}
+
+function autosaveRun(){
+  if(!ready) return;
+  S.set('gym_draft_RUN',{day:today(),data:val('run-date')||today(),raw:runRaw(),nota:val('run-nota')});
+}
+function restoreRunDraft(){
+  const d=S.get('gym_draft_RUN');
+  ['t','d'].forEach(k=>RUN_F.forEach(f=>{const e=runEl(k,f);e.value='';e.dataset.auto='';e.classList.remove('auto','bad');}));
+  document.getElementById('run-nota').value='';
+  document.getElementById('run-date').value=today();
+  if(d){
+    if(d.data) document.getElementById('run-date').value=d.data;
+    Object.entries(d.raw||{}).forEach(([key,v])=>{const [k,f]=key.split('_');const e=runEl(k,f);if(e&&v)e.value=v;});
+    if(d.nota) document.getElementById('run-nota').value=d.nota;
+  }
+  runCalc();
+}
+function runRecord(data,c,nota){
+  const r=x=>okNum(x)?Math.round(x):null, k=x=>okNum(x)?+x.toFixed(2):null;
+  return {tipus:'RUN',data,ts:Date.now(),
+    t:{tot:r(c.t.tot),run:r(c.t.run),walk:r(c.t.walk)},
+    d:{tot:k(c.d.tot),run:k(c.d.run),walk:k(c.d.walk)},
+    nota:nota||null};
+}
+function logRun(){
+  const c=runCalc();
+  if(!runHasData(c)){showToast('⚠ Posa almenys el temps o els km');return;}
+  const bad=document.querySelector('.rg-in.bad'); if(bad){showToast('⚠ Revisa el camp en vermell');return;}
+  S.push('gym_sessions_v2',runRecord(val('run-date')||today(),c,val('run-nota').trim()));
+  S.del('gym_draft_RUN');
+  restoreRunDraft();
+  showToast('✅ Entreno registrat!');
+  renderRunTab();
+}
+function clearRunForm(ask){
+  if(ask&&!confirm('Buidar el formulari de running?')) return;
+  S.del('gym_draft_RUN'); restoreRunDraft();
+}
+
+// Dades normalitzades d'una sessió de running (nova o antiga)
+function runStats(s){
+  if(s.t||s.d){
+    const t=s.t||{}, d=s.d||{};
+    return {sec:t.tot,km:d.tot,runSec:t.run,runKm:d.run,walkSec:t.walk,walkKm:d.walk};
+  }
+  if(s.runType==='D'){ // format lliure antic
+    const m=parseFloat(String(s.temps||'').replace(',','.')), km=parseFloat(String(s.dist||'').replace(',','.'));
+    return {sec:m>0?m*60:null,km:km>0?km:null};
+  }
+  return {};
+}
+function runLines(s){
+  const st=runStats(s); const L=[];
+  const line=(lb,sec,km)=>{
+    if(!okNum(sec)&&!okNum(km)) return;
+    const parts=[]; if(okNum(sec))parts.push(fmtTime(sec)); if(okNum(km))parts.push(fmtKm(km)+' km');
+    const p=paceOf(sec,km); L.push(`<div class="run-hl">${lb} ${parts.join(' · ')}${p?` · <b>${p}/km</b>`:''}</div>`);
+  };
+  line('⏱',st.sec,st.km);
+  if(okNum(st.walkSec)||okNum(st.walkKm)){ line('🏃',st.runSec,st.runKm); line('🚶',st.walkSec,st.walkKm); }
+  return L.join('');
 }
 
 function renderRunTab(){
-  const dt=document.getElementById('run-date');
-  if(dt&&!dt.value) dt.value=today();
   const last=getLastSession('RUN');
   const el=document.getElementById('run-last-date');
   if(el) el.textContent=last?('Última sessió: '+fmtDate(last.data)):'Sense sessions anteriors';
-  renderRunCards();
   renderRunHist();
-}
-function renderRunCards(){
-  const c=document.getElementById('run-cards'); if(!c) return;
-  c.innerHTML=RUN_SESSIONS.map(r=>{
-    if(r.free) return `<div class="run-card" style="border-left-color:${r.color}">
-      <div class="run-card-name">${r.name}</div>
-      <div class="run-card-sub">${r.sub}</div>
-      <div class="fg3" style="margin:10px 0 8px">
-        <div><label class="fl">Temps (min)</label><input class="fi" id="runD-temps" type="number" inputmode="decimal" step="1" placeholder="35" oninput="updatePacePh()"></div>
-        <div><label class="fl">Distància (km)</label><input class="fi" id="runD-dist" type="number" inputmode="decimal" step="0.1" placeholder="5.0" oninput="updatePacePh()"></div>
-        <div><label class="fl">Ritme (min/km)</label><input class="fi" id="runD-ritme" inputmode="decimal" placeholder="5:30"></div>
-      </div>
-      <div><label class="fl">Tipus / nota (opcional)</label><input class="fi" id="runD-nota" placeholder="Ex: rodatge suau, sèries, cursa..."></div>
-      <div class="save-help" style="text-align:left;margin:6px 2px 0">Si poses temps i distància, el ritme es calcula sol (el pots sobreescriure).</div>
-      <button class="run-log-btn" style="background:${r.color}" onclick="logRun('${r.id}')">✓ Registrar sessió lliure</button>
-    </div>`;
-    return `<div class="run-card" style="border-left-color:${r.color}">
-      <div class="run-card-name">${r.name}</div>
-      <div class="run-card-sub">${r.sub}</div>
-      <div class="run-steps">${r.steps.map(s=>`<div class="run-step"><span class="rs-b">•</span><span>${s}</span></div>`).join('')}</div>
-      <button class="run-log-btn" style="background:${r.color}" onclick="logRun('${r.id}')">✓ He fet aquesta sessió</button>
-    </div>`;
-  }).join('');
-}
-function logRun(id){
-  const date=val('run-date')||today();
-  const rec={tipus:'RUN',data:date,runType:id,ts:Date.now()};
-  if(id==='D'){
-    const temps=val('runD-temps').trim(), dist=val('runD-dist').trim();
-    let ritme=val('runD-ritme').trim();
-    const nota=val('runD-nota').trim();
-    if(!temps&&!dist&&!ritme){showToast('⚠ Posa almenys el temps o la distància');return;}
-    if(ritme){const sec=paceToSec(ritme); ritme=sec?secToPace(sec):ritme;}
-    else ritme=calcPace(temps,dist);
-    Object.assign(rec,{temps:temps||null,dist:dist||null,ritme:ritme||null,nota:nota||null});
-  }
-  const all=S.arr('gym_sessions_v2');
-  all.push(rec);
-  S.set('gym_sessions_v2',all);
-  showToast('✅ '+runName(id).split(' · ')[0]+' registrada!');
-  renderRunTab();
 }
 function renderRunHist(){
   const sessions=S.arr('gym_sessions_v2').filter(s=>s.tipus==='RUN').reverse();
@@ -890,13 +1001,13 @@ function renderRunHist(){
   const all=S.arr('gym_sessions_v2');
   c.innerHTML=sessions.map(s=>{
     const realIdx=all.findIndex(ss=>ss.ts===s.ts);
+    const old=(!s.t&&!s.d&&s.runType)?`<div style="font-size:10px;color:var(--t3);margin-top:2px">🏃 ${OLD_RUN_NAMES[s.runType]||'Sessió'}</div>`:'';
     return `<div class="gym-hist-card">
-      <div class="gym-hist-hdr" style="cursor:default">
+      <div class="gym-hist-hdr" style="cursor:default;align-items:flex-start">
         <div>
           <div style="font-size:13px;font-weight:500;color:var(--t)">${fmtDate(s.data)}</div>
-          <div style="font-size:10px;color:var(--t3);margin-top:2px">🏃 ${runName(s.runType)}</div>
-          ${runDetail(s)?`<div style="font-size:11px;color:#7fe0b3;margin-top:3px;font-family:'DM Mono',monospace">${runDetail(s)}</div>`:''}
-          ${s.nota?`<div style="font-size:10px;color:var(--t2);margin-top:2px">📝 ${s.nota}</div>`:''}
+          ${old}${runLines(s)}
+          ${s.nota?`<div style="font-size:10px;color:var(--t2);margin-top:3px">📝 ${s.nota}</div>`:''}
         </div>
         <button onclick="deleteSession(${realIdx},'RUN')" style="background:none;border:none;color:var(--t3);font-size:14px;cursor:pointer;padding:2px 6px">🗑</button>
       </div>
@@ -933,11 +1044,13 @@ function toggleEsport(id){
 
 function autosaveEsport(){
   if(!ready) return;
-  S.set('gym_draft_D',{data:val('d-date')||today(),activitats:[...esportSel],nota:val('d-nota')});
+  S.set('gym_draft_D',{day:today(),data:val('d-date')||today(),activitats:[...esportSel],nota:val('d-nota')});
 }
 function restoreEsportDraft(){
   const d=S.get('gym_draft_D');
   esportSel=new Set();
+  setVal('d-date',today());
+  const ne=document.getElementById('d-nota');if(ne)ne.value='';
   if(d){
     if(d.data) setVal('d-date',d.data);
     (d.activitats||[]).forEach(a=>esportSel.add(a));
@@ -963,7 +1076,7 @@ function saveEsport(){
   if(idx>=0){all[idx]=record;showToast('✅ Sessió actualitzada');}
   else{all.push(record);showToast('✅ Sessió guardada!');}
   S.set('gym_sessions_v2',all);
-  S.set('gym_draft_D',{data,activitats,nota});
+  S.set('gym_draft_D',{day:today(),data,activitats,nota});
   const el=document.getElementById('d-last-date');
   if(el) el.textContent='Sessió desada ✓ · pots seguir editant';
   renderEsportHist();
@@ -1196,16 +1309,20 @@ function weekSummary(wkMon){
   const sess=S.arr('gym_sessions_v2').filter(s=>weekMondayISO(s.data)===wkMon);
   const byType={A:0,B:0,C:0,RUN:0,D:0};sess.forEach(s=>{if(byType[s.tipus]!=null)byType[s.tipus]++;});
   const gym=byType.A+byType.B+byType.C;
-  // Totals de les sessions de running lliures (Sessió D), si n'hi ha
-  let runMin=0,runKm=0,pMin=0,pKm=0;
-  sess.filter(s=>s.tipus==='RUN'&&s.runType==='D').forEach(s=>{
-    const t=parseFloat(String(s.temps||'').replace(',','.')); if(t>0) runMin+=t;
-    const d=parseFloat(String(s.dist||'').replace(',','.')); if(d>0) runKm+=d;
-    if(t>0&&d>0){pMin+=t;pKm+=d;} // ritme mitjà només amb sessions que tenen temps i distància
+  // Totals de running de la setmana (temps, km i ritme corrent)
+  let runSec=0,runKm=0,pSec=0,pKm=0;
+  sess.filter(s=>s.tipus==='RUN').forEach(s=>{
+    const st=runStats(s);
+    if(okNum(st.sec)) runSec+=st.sec;
+    if(okNum(st.km)) runKm+=st.km;
+    // ritme corrent: part corrent si n'hi ha; si no hi ha part caminant, tot és corrent
+    const rs=okNum(st.runSec)?st.runSec:(!okNum(st.walkSec)?st.sec:null);
+    const rk=okNum(st.runKm)?st.runKm:(!okNum(st.walkKm)?st.km:null);
+    if(okNum(rs)&&okNum(rk)){pSec+=rs;pKm+=rk;}
   });
   const wpes=S.arr('pesos').filter(p=>weekMondayISO(p.date)===wkMon).sort((a,b)=>a.date<b.date?-1:1);
   const pes=wpes.length?parseFloat(wpes[wpes.length-1].pes):null;
-  return {wkMon,sessions:sess.length,byType,gym,run:byType.RUN,runMin,runKm,runPace:calcPace(pMin,pKm),pes};
+  return {wkMon,sessions:sess.length,byType,gym,run:byType.RUN,altres:byType.D,altresActs:[...new Set(sess.filter(s=>s.tipus==='D').flatMap(s=>s.activitats||[]))],runSec,runKm,runPace:paceOf(pSec,pKm),pes};
 }
 
 function allWeeksAsc(){
@@ -1226,11 +1343,12 @@ function renderResumTab(){
   document.getElementById('r-pes').textContent=pesActual!=null?pesActual.toFixed(1):'—';
   document.getElementById('r-gym').textContent=cur?cur.gym:0;
   document.getElementById('r-run').textContent=cur?cur.run:0;
+  document.getElementById('r-altres').textContent=cur?cur.altres:0;
   document.getElementById('r-total').textContent=S.arr('gym_sessions_v2').length;
   const rp=document.getElementById('r-perdut');
   if(inici!=null&&pesActual!=null){
     const perdut=inici-pesActual;
-    rp.textContent=(perdut>=0?'-':'+')+Math.abs(perdut).toFixed(1)+' kg';
+    rp.textContent=(Math.abs(perdut)<0.05?'':(perdut>0?'-':'+'))+Math.abs(perdut).toFixed(1)+' kg';
     rp.className='sc-n '+(perdut>0?'cg':perdut<0?'cr':'');
   }else{rp.textContent='—';rp.className='sc-n';}
   renderResumList(summaries.slice().reverse());
@@ -1260,9 +1378,9 @@ function renderResumList(sums){
   c.innerHTML=sums.map((s,i)=>{
     const prev=sums[i+1];
     let delta='';
-    if(s.pes!=null&&prev&&prev.pes!=null){const d=+(s.pes-prev.pes).toFixed(1);if(d!==0)delta=` <span class="${d<0?'cg':'cr'}">${d>0?'+':''}${d}</span>`;}
+    if(s.pes!=null&&prev&&prev.pes!=null){const d=+(s.pes-prev.pes).toFixed(1);if(d!==0)delta=`<div class="wk-delta ${d<0?'cg':'cr'}">${d>0?'+':''}${d}</div>`;}
     const bt=s.byType;
-    const dies=((bt.A?'Gym A×'+bt.A+' ':'')+(bt.B?'Gym B×'+bt.B+' ':'')+(bt.C?'Gym C×'+bt.C+' ':'')+(bt.RUN?'Run×'+bt.RUN+' ':'')+(bt.D?'Altres×'+bt.D:'')).trim();
+    const dies=((bt.A?'Gym A×'+bt.A+' ':'')+(bt.B?'Gym B×'+bt.B+' ':'')+(bt.C?'Gym C×'+bt.C+' ':'')+(bt.RUN?'Run×'+bt.RUN+' ':'')+(bt.D?'Altres×'+bt.D+(s.altresActs.length?' ('+s.altresActs.map(esportName).join(', ')+')':''):'')).trim();
     return `<div class="wk">
       <div class="wk-top">
         <div class="wk-range">${weekRangeLabel(s.wkMon)}</div>
@@ -1271,10 +1389,11 @@ function renderResumList(sums){
       <div class="wk-metrics">
         <div class="wk-m"><div class="wk-m-v">${s.gym}</div><div class="wk-m-l">Gym</div></div>
         <div class="wk-m"><div class="wk-m-v">${s.run}</div><div class="wk-m-l">Running</div></div>
-        <div class="wk-m"><div class="wk-m-v">${s.pes!=null?s.pes.toFixed(1):'—'}${delta}</div><div class="wk-m-l">Pes (kg)</div></div>
+        <div class="wk-m"><div class="wk-m-v">${s.altres}</div><div class="wk-m-l">Altres</div></div>
+        <div class="wk-m"><div class="wk-m-v">${s.pes!=null?s.pes.toFixed(1):'—'}</div>${delta}<div class="wk-m-l">Pes (kg)</div></div>
       </div>
       ${s.sessions?`<div class="wk-sub">${s.sessions} ${s.sessions===1?"sessió":"sessions"} · ${dies}</div>`:''}
-      ${(s.runMin||s.runKm)?`<div class="wk-sub" style="color:#7fe0b3;margin-top:3px">Run lliure: ${[s.runMin?Math.round(s.runMin)+' min':'',s.runKm?(+s.runKm.toFixed(1))+' km':'',s.runPace?s.runPace+' /km':''].filter(Boolean).join(' · ')}</div>`:''}
+      ${(s.runSec||s.runKm)?`<div class="wk-sub" style="color:#7fe0b3;margin-top:3px">Running: ${[s.runSec?fmtTime(s.runSec):'',s.runKm?(+s.runKm.toFixed(1))+' km':'',s.runPace?'corrent '+s.runPace+'/km':''].filter(Boolean).join(' · ')}</div>`:''}
     </div>`;
   }).join('');
 }
@@ -1285,7 +1404,7 @@ function renderResumList(sums){
 // ═══════════════════════════════════════════
 // CÒPIA DE SEGURETAT
 // ═══════════════════════════════════════════
-const BACKUP_KEYS=['gym_sessions_v2','pesos','gym_draft_A','gym_draft_B','gym_draft_C','gym_draft_D','app_inited'];
+const BACKUP_KEYS=['gym_sessions_v2','pesos','gym_draft_A','gym_draft_B','gym_draft_C','gym_draft_D','gym_draft_RUN','app_inited'];
 function collectBackup(){
   const data={};
   BACKUP_KEYS.forEach(k=>{const v=localStorage.getItem(k);if(v!==null)data[k]=v;});
@@ -1338,7 +1457,7 @@ function importData(ev){
 function resetAllData(){
   if(!confirm('Esborrar TOTES les dades (entrenaments i pesos)?\nNo es pot desfer.')) return;
   if(!confirm('Segur del tot? Començaràs de zero.')) return;
-  ['gym_sessions_v2','gym_draft_A','gym_draft_B','gym_draft_C','gym_draft_D','pesos','diet_done'].forEach(k=>S.del(k));
+  ['gym_sessions_v2','gym_draft_A','gym_draft_B','gym_draft_C','gym_draft_D','gym_draft_RUN','pesos','diet_done'].forEach(k=>S.del(k));
   S.set('app_inited',true); // evita que es torni a sembrar la mesura inicial
   location.reload();
 }
@@ -1354,28 +1473,83 @@ function seedInitialWeight(){
 // ═══════════════════════════════════════════
 // INIT
 // ═══════════════════════════════════════════
-function init(){
-  seedInitialWeight();
-
+function setHdrDate(){
   const now=new Date();
   const dies=['Diumenge','Dilluns','Dimarts','Dimecres','Dijous','Divendres','Dissabte'];
   const mes=['gen','feb','mar','abr','mai','jun','jul','ago','set','oct','nov','des'];
   document.getElementById('hdr-date').textContent=`${dies[now.getDay()]} ${now.getDate()} ${mes[now.getMonth()]}`;
+}
+function init(){
+  seedInitialWeight();
 
-  ['A','B','C'].forEach(t=>{
-    document.getElementById(t.toLowerCase()+'-date').value=today();
-    renderExercises(t);
-    renderGymHist(t);
-  });
+  setHdrDate();
 
-  document.getElementById('run-date').value=today();
-  renderRunTab();
-
-  document.getElementById('d-date').value=today();
-  renderEsportTab();
+  rolloverDrafts();
+  renderAllForms();
+  appDay=today();
 
   ready=true;
 }
+
+// ═══════════════════════════════════════════
+// CANVI DE DIA
+// ═══════════════════════════════════════════
+// Cada dia nou: el que quedava a mig omplir d'un dia anterior es desa a l'historial
+// (amb la seva data) i els formularis queden buits amb la data d'avui.
+let appDay=null;
+function upsertSession(rec){
+  const all=S.arr('gym_sessions_v2');
+  const idx=all.findIndex(s=>s.tipus===rec.tipus&&s.data===rec.data);
+  if(idx>=0) all[idx]={...rec,ts:all[idx].ts}; else all.push({...rec,ts:Date.now()+Math.random()});
+  S.set('gym_sessions_v2',all);
+}
+function draftIsOld(d){return !!d&&(d.day||d.data||'')!==today();}
+function rolloverDrafts(){
+  let saved=0;
+  ['A','B','C'].forEach(tp=>{
+    const d=S.get('gym_draft_'+tp); if(!draftIsOld(d)) return;
+    if(d.exercicis&&hasAnyData(d)){ upsertSession({tipus:tp,data:d.data||d.day,exercicis:d.exercicis}); saved++; }
+    S.del('gym_draft_'+tp);
+  });
+  const dd=S.get('gym_draft_D');
+  if(draftIsOld(dd)){
+    if(dd.activitats&&dd.activitats.length){ upsertSession({tipus:'D',data:dd.data||dd.day,activitats:dd.activitats,nota:dd.nota||''}); saved++; }
+    S.del('gym_draft_D');
+  }
+  const dr=S.get('gym_draft_RUN');
+  if(draftIsOld(dr)){
+    const c=runCompute(dr.raw||{});
+    if(runHasData(c)){ S.push('gym_sessions_v2',runRecord(dr.data||dr.day,c,dr.nota)); saved++; }
+    S.del('gym_draft_RUN');
+  }
+  return saved;
+}
+function renderAllForms(){
+  ['A','B','C'].forEach(t=>{
+    document.getElementById(t.toLowerCase()+'-date').value=today();
+    renderExercises(t);   // restoreDraft hi posa la data de l'esborrany si n'hi ha un d'avui
+    renderGymHist(t);
+  });
+  restoreRunDraft();
+  renderRunTab();
+  renderEsportTab();
+}
+// Si l'app es queda oberta al mòbil i passa la mitjanit, ho detecta en tornar-hi
+function checkNewDay(){
+  if(!ready||appDay===today()) return;
+  ready=false;
+  const saved=rolloverDrafts();
+  renderAllForms();
+  appDay=today();
+  ready=true;
+  const t=document.getElementById('hdr-date'); if(t) setHdrDate();
+  if(document.getElementById('tab-2').classList.contains('on')) renderResumTab();
+  showToast(saved?'📅 Nou dia · sessió d\'ahir desada':'📅 Nou dia · formularis a punt');
+}
+document.addEventListener('visibilitychange',()=>{if(document.visibilityState==='visible')checkNewDay();});
+window.addEventListener('focus',checkNewDay);
+setInterval(checkNewDay,60000);
+
 
 init();
 </script>
