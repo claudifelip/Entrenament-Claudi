@@ -63,6 +63,19 @@ body{font-family:'DM Sans',sans-serif;background:var(--bg);color:var(--t);max-wi
 .bloc-cames{background:rgba(55,138,221,.15);color:#7abaf7}
 .bloc-accessori{background:rgba(255,255,255,.07);color:var(--t3)}
 .bloc-abs{background:rgba(180,100,220,.15);color:#c8a0e8}
+.bloc-mob{background:rgba(52,199,130,.15);color:#7fe0b3}
+.mob-block{background:rgba(52,199,130,.05);border-color:rgba(52,199,130,.18)}
+.mob-block .abs-block-title{color:#7fe0b3}
+.mob-block .abs-check{border-color:rgba(52,199,130,.35)}
+.mob-block .abs-check.done{background:rgba(52,199,130,.2);border-color:rgba(52,199,130,.6)}
+.chk-grup{font-size:9px;font-weight:700;text-transform:uppercase;letter-spacing:.6px;color:var(--t3);margin:9px 0 1px}
+.chk-name{cursor:pointer}
+.chk-name .ex-arrow{font-size:11px;margin-left:4px;display:inline-block}
+.chk-row.open .chk-name .ex-arrow{transform:rotate(180deg)}
+.chk-det{display:none;font-size:11px;color:var(--t2);line-height:1.6;padding:6px 0 2px}
+.chk-row.open .chk-det{display:block}
+.chk-det b{color:var(--t)}
+.chk-det a,.ex-tip a{color:#7abaf7;font-weight:600;text-decoration:none}
 
 .ex-card{background:var(--bg3);border-radius:var(--radsm);border:1px solid var(--bdr);margin-bottom:8px;overflow:hidden}
 .ex-hdr{padding:11px 13px;display:flex;justify-content:space-between;align-items:center;cursor:pointer;user-select:none}
@@ -221,6 +234,7 @@ body{font-family:'DM Sans',sans-serif;background:var(--bg);color:var(--t);max-wi
     <div class="subtab on" id="subtab-A"   onclick="goGymTab('A')">GYM A</div>
     <div class="subtab"    id="subtab-B"   onclick="goGymTab('B')">GYM B</div>
     <div class="subtab"    id="subtab-C"   onclick="goGymTab('C')">GYM C</div>
+    <div class="subtab"    id="subtab-M"   onclick="goGymTab('M')">GYM M</div>
     <div class="subtab"    id="subtab-RUN" onclick="goGymTab('RUN')">RUN</div>
     <div class="subtab"    id="subtab-D"   onclick="goGymTab('D')">ALTRES</div>
   </div>
@@ -265,6 +279,21 @@ body{font-family:'DM Sans',sans-serif;background:var(--bg);color:var(--t);max-wi
     <div class="save-help">El que escrius es desa sol mentre entrenes. «Desar» la registra a l'historial i la pots seguir editant.</div>
     <div class="st">Historial Dia C</div>
     <div id="c-hist"></div>
+  </div>
+
+  <!-- DIA M -->
+  <div class="gympage" id="gympage-M">
+    <div class="sess-hdr" style="background:linear-gradient(135deg,#123a34 0%,#2a2450 100%);border-color:rgba(52,199,130,.25);box-shadow:0 2px 12px rgba(52,199,130,.1)">
+      <div><div class="sess-label">🧘 Dia M · Mobilitat + Abs</div><div class="sess-sub" id="m-last-date" style="color:#7fe0b3">Sense sessions anteriors</div></div>
+      <input type="date" class="fi" id="m-date" style="width:auto;font-size:12px;padding:6px 9px" onchange="autosave('M')">
+    </div>
+    <div class="save-help" style="text-align:left;margin:0 2px 10px">Dia de tenis: no arribis al fracàs. Toca el nom d'un exercici per veure com es fa i el vídeo.</div>
+    <div id="m-exercises"></div>
+    <button class="btn" onclick="saveSession('M')">💾 Desar / actualitzar sessió</button>
+    <button class="btn btn-sec" onclick="clearForm('M')">↺ Buidar (nova sessió)</button>
+    <div class="save-help">El que escrius es desa sol mentre entrenes. «Desar» la registra a l'historial i la pots seguir editant.</div>
+    <div class="st">Historial Dia M</div>
+    <div id="m-hist"></div>
   </div>
 
   <!-- RUN -->
@@ -438,8 +467,6 @@ const GYM={
       {id:'b_5', name:'Abductor gluti mig (obrir)',   mat:'Màquina abductor',            bloc:'cames',    series:3, optional:false, tip:'Coixinets per fora dels genolls. OBRIR les cames. Contracció màxima a dalt.'},
       // Bíceps: abans anava en superset al dia A (a_7, meitat A)
       {id:'b_6', name:'Bíceps politja o mancuerna',   mat:'Politja / mancuernes',        bloc:'accessori', series:3, optional:true,  tip:null, legacy:{tipus:'A',id:'a_7',part:'A'}},
-      // ABS bloc especial
-      {id:'b_abs', name:'Bloc Abdominals',            mat:'Sòl / estora',                bloc:'abs',      series:3, optional:true,  isAbs:true, tip:null},
     ]
   },
   C:{
@@ -453,8 +480,70 @@ const GYM={
       {id:'c_5', name:'Elevació bessons màquina',     mat:'Màquina bessons',             bloc:'cames',    series:3, optional:false, tip:'Baixa fins al final, puja lent i aguanta 1 seg a dalt.'},
       {id:'c_6', name:'Tríceps politja',              mat:'Politja alta',                bloc:'accessori', series:3, optional:true,  tip:null},
     ]
+  },
+  M:{
+    label:'Dia M · Mobilitat + Abs',
+    exercicis:[
+      {id:'m_mob',    name:'Mobilitat',                  bloc:'mobilitat', isChecks:true, items:'MOB', title:'Mobilitat · cadena posterior · ~17 min'},
+      {id:'m_abs',    name:'Circuit abdominals',         bloc:'abs',       isChecks:true, items:'ABS', title:'Circuit abdominals · 3 sèries'},
+      {id:'m_pallof', name:'Pallof press',               mat:'Politja a l\'alçada del pit · reps per costat', bloc:'abs', series:2, optional:false,
+       tip:'De costat a la politja, agafador al pit amb les dues mans. Estira els braços endavant i aguanta 2 s sense deixar que la politja et giri el tronc. Torna al pit. Core anti-rotació. <a href="https://www.youtube.com/results?search_query=pallof+press+tutorial" target="_blank" rel="noopener">▶ Vídeo</a>'},
+      {id:'m_rotext', name:'Rotació externa d\'espatlla', mat:'Politja a l\'alçada del colze · molt lleuger', bloc:'abs', series:2, optional:false,
+       tip:'Colze enganxat al cos i doblegat a 90° (tovallola entre colze i cos). Gira l\'avantbraç cap a fora sense separar el colze i torna lent. Prevenció d\'espatlla per al tenis. <a href="https://www.youtube.com/results?search_query=cable+external+rotation+rotator+cuff" target="_blank" rel="noopener">▶ Vídeo</a>'},
+    ]
   }
 };
+// Llistes de caselles (blocs sense pes)
+function checkItems(ex){return ex.items==='MOB'?MOB_EXERCICIS:ABS_EXERCICIS;}
+
+// Mobilitat Gym M: tot a l'esterilla i sense material. Ordre: quatre grapes → gambada → assegut → estirat.
+const YT=q=>'https://www.youtube.com/results?search_query='+encodeURIComponent(q).replace(/%20/g,'+');
+const MOB_EXERCICIS=[
+  {id:'mob_0', grup:'A quatre grapes', name:'Gat-vaca', reps:'10 reps lentes · 3 s cada costat', yt:YT('cat cow exercise tutorial'),
+   pos:'A quatre grapes: mans sota les espatlles, genolls sota els malucs.',
+   mov:'Treu l\'aire i arrodoneix l\'esquena cap amunt (gat). Agafa aire i deixa caure el ventre amb el pit endavant (vaca).',
+   clau:'El moviment surt de la pelvis, no del coll. Vèrtebra a vèrtebra.'},
+  {id:'mob_1', grup:'A quatre grapes', name:'Postura del nen', reps:'40 s', yt:YT("child's pose stretch tutorial"),
+   pos:'Des de quatre grapes, seu sobre els talons i estira els braços endavant, front a terra.',
+   mov:'Deixa anar el pes i respira cap a l\'esquena.',
+   clau:'Has de notar l\'estirament a la lumbar i als costats de l\'esquena.'},
+  {id:'mob_2', grup:'A quatre grapes', name:'Gos cap avall pedalant', reps:'40 s', yt:YT('downward dog pedal calves tutorial'),
+   pos:'Des de quatre grapes, aixeca el cul i fes una V invertida, braços i esquena rectes.',
+   mov:'Alterna doblegant un genoll i baixant l\'altre taló cap a terra, com si caminessis sense moure\'t.',
+   clau:'Esquena recta per sobre de tot. És normal que els talons no arribin a terra. Estirament a bessons i isquios.'},
+  {id:'mob_3', grup:'En gambada', name:'World\'s greatest stretch', reps:'5 per costat · 2–3 s cada fase', yt:YT('worlds greatest stretch tutorial'),
+   pos:'Gambada llarga, genoll de darrere a l\'esterilla, mà contrària a terra.',
+   mov:'1) Colze del costat de la cama del davant cap a dins del peu. 2) Obre aquest braç cap al sostre i segueix-lo amb la mirada. 3) Dues mans a terra, estira la cama del davant tirant el cul enrere. 4) Torna a la gambada.',
+   clau:'Lent. Treballa maluc, isquio i rotació d\'esquena alhora.'},
+  {id:'mob_4', grup:'Assegut', name:'90/90', reps:'8 canvis lents + 30 s per costat', yt:YT('90 90 hip switch tutorial'),
+   pos:'Assegut, les dues cames doblegades a 90°: una al davant (cara externa a terra) i l\'altra al costat (cara interna a terra).',
+   mov:'Gira els genolls cap a l\'altre costat sense moure els peus (mans a terra al darrere si cal). A l\'últim canvi de cada costat, inclina\'t endavant amb l\'esquena recta sobre la cama del davant i aguanta 30 s.',
+   clau:'Seu alt, sense arrodonir l\'esquena. L\'estirament es nota al gluti.'},
+  {id:'mob_5', grup:'Assegut', name:'Estirament d\'isquio a una cama', reps:'2 × 30 s per cama', yt:YT('seated single leg hamstring stretch'),
+   pos:'Assegut, una cama estirada i l\'altra doblegada amb la planta tocant la cuixa de l\'estirada.',
+   mov:'Inclina\'t endavant des del maluc, pit cap al genoll, fins notar tensió darrere la cuixa.',
+   clau:'Esquena recta: no arrodoneixis per arribar al peu. Si no hi arribes, és normal.'},
+  {id:'mob_6', grup:'Estirat', name:'Figura 4 estirat', reps:'40 s per costat', yt:YT('supine figure 4 stretch'),
+   pos:'Estirat d\'esquena, genolls doblegats. Creua el turmell dret sobre el genoll esquerre.',
+   mov:'Agafa la cuixa esquerra amb les dues mans i porta-la cap al pit.',
+   clau:'Cap i espatlles a terra. Estirament al gluti (piriforme) de la cama creuada.'},
+  {id:'mob_7', grup:'Estirat', name:'Genolls al pit', reps:'30 s', yt:YT('knees to chest stretch lower back'),
+   pos:'Estirat d\'esquena.',
+   mov:'Abraça els dos genolls cap al pit. Pots balancejar-te suaument de costat a costat.',
+   clau:'Relaxa la lumbar.'},
+  {id:'mob_8', grup:'Estirat', name:'Torsió lumbar estirat', reps:'30 s per costat', yt:YT('supine spinal twist stretch'),
+   pos:'Estirat d\'esquena, braços en creu.',
+   mov:'Deixa caure els dos genolls doblegats cap a un costat i gira el cap cap a l\'altre.',
+   clau:'Les dues espatlles es queden a terra.'},
+  {id:'mob_9', grup:'Estirat', name:'Llibre obert', reps:'8 per costat · 3 s obrir / 3 s tancar', yt:YT('open book thoracic rotation tutorial'),
+   pos:'Estirat de costat, genolls doblegats a 90°, braços estirats endavant un sobre l\'altre.',
+   mov:'Obre el braç de dalt cap a l\'altre costat seguint la mà amb la mirada, sense moure els genolls. Torna lent.',
+   clau:'Mobilitat d\'esquena alta: clau per al drive i el servei.'},
+  {id:'mob_10', grup:'Estirat', name:'Pont de glutis', reps:'2 × 12 · aguanta 2 s a dalt', yt:YT('glute bridge proper form'),
+   pos:'Estirat d\'esquena, genolls doblegats i peus a terra a l\'amplada del maluc.',
+   mov:'Prem el cul i puja el maluc fins fer línia recta genolls-maluc-espatlles. Aguanta 2 s i baixa en 2 s.',
+   clau:'L\'esforç al gluti, no a la lumbar. Activa el gluti abans del tenis.'},
+];
 
 const ABS_EXERCICIS=[
   {id:'abs_0', name:'Crunch bàsic',    reps:'3×20',       tip:'Mentó al pit, puja lent i baixa controlat.'},
@@ -481,7 +570,8 @@ const BLOC_META={
   esquena: {label:'Esquena', cls:'bloc-esquena'},
   cames:   {label:'Cames',   cls:'bloc-cames'},
   accessori:{label:'Accessori · Opcional', cls:'bloc-accessori'},
-  abs:     {label:'Abdominals · Opcional', cls:'bloc-abs'},
+  abs:     {label:'Abs', cls:'bloc-abs'},
+  mobilitat:{label:'Mobilitat', cls:'bloc-mob'},
 };
 
 // ═══════════════════════════════════════════
@@ -500,11 +590,11 @@ function goMainTab(i){
 let currentGymTab='A';
 function goGymTab(tipus){
   currentGymTab=tipus;
-  ['A','B','C','RUN','D'].forEach(t=>{
+  ['A','B','C','M','RUN','D'].forEach(t=>{
     document.getElementById('subtab-'+t).classList.toggle('on',t===tipus);
     document.getElementById('gympage-'+t).classList.toggle('on',t===tipus);
   });
-  const labels={A:'Gym A',B:'Gym B',C:'Gym C',RUN:'Run',D:'Altres'};
+  const labels={A:'Gym A',B:'Gym B',C:'Gym C',M:'Gym M',RUN:'Run',D:'Altres'};
   document.getElementById('hdr-title').textContent=labels[tipus];
   if(tipus==='RUN') renderRunTab();
   if(tipus==='D') renderEsportTab();
@@ -568,8 +658,8 @@ function renderExercises(tipus){
     }
 
     // Abs especial
-    if(ex.isAbs){
-      html+=renderAbsBlock(last);
+    if(ex.isChecks){
+      html+=renderCheckBlock(tipus,ex,ei,last);
       return;
     }
 
@@ -667,37 +757,42 @@ function renderExercises(tipus){
   container.oninput=function(){autosave(tipus);};
 }
 
-function renderAbsBlock(lastSession){
-  let lastAbs=null;
-  if(lastSession) lastAbs=lastSession.exercicis.find(e=>e.id==='b_abs');
-  const done=(lastAbs&&lastAbs.absDone)||[];
-
-  let html=`<div class="abs-block">
+// Bloc de caselles (mobilitat / circuit abs). No arrossega les marques de l'última sessió:
+// cada sessió comença buida; l'esborrany del dia es restaura a restoreDraft.
+function renderCheckBlock(tipus,ex,ei,lastSession){
+  const items=checkItems(ex);
+  const isMob=ex.items==='MOB';
+  let lastDone=null;
+  if(lastSession){const le=(lastSession.exercicis||[]).find(e=>e.id===ex.id); if(le&&le.absDone&&le.absDone.length) lastDone=le.absDone.length;}
+  let html=`<div class="abs-block${isMob?' mob-block':''}">
     <div class="abs-block-title">
-      <span>Abdominals · 3 sèries × ~20 reps</span>
-      <span style="font-size:9px;color:var(--t3)">${lastSession?'Última: '+fmtDate(lastSession.data):''}</span>
+      <span>${ex.title||ex.name}</span>
+      <span style="font-size:9px;color:var(--t3)">${lastDone!=null?'Última: '+lastDone+'/'+items.length:''}</span>
     </div>`;
-
-  ABS_EXERCICIS.forEach((ab,ai)=>{
-    const wasDone=done.includes(ab.id);
-    html+=`<div class="abs-ex-row">
-      <div style="flex:1">
-        <div class="abs-ex-name">${ab.name}</div>
-        <div class="abs-ex-meta">${ab.reps}${ab.tip?' · '+ab.tip:''}</div>
+  let grup='';
+  items.forEach((it,ai)=>{
+    if(it.grup&&it.grup!==grup){grup=it.grup;html+=`<div class="chk-grup">${grup}</div>`;}
+    const det=isMob
+      ? `<div class="chk-det"><b>Posició:</b> ${it.pos}<br><b>Moviment:</b> ${it.mov}<br><b>Clau:</b> ${it.clau}<br><a href="${it.yt}" target="_blank" rel="noopener">▶ Vídeo a YouTube</a></div>`
+      : (it.tip?`<div class="chk-det">${it.tip}</div>`:'');
+    html+=`<div class="abs-ex-row chk-row" id="chkrow-${tipus}-${ei}-${ai}" style="flex-wrap:wrap">
+      <div style="flex:1;min-width:0">
+        <div class="abs-ex-name chk-name" onclick="document.getElementById('chkrow-${tipus}-${ei}-${ai}').classList.toggle('open')">${it.name}${det?'<span class="ex-arrow">▾</span>':''}</div>
+        <div class="abs-ex-meta">${it.reps}</div>
       </div>
-      <button class="abs-check${wasDone?' done':''}" id="abs-check-${ai}" onclick="toggleAbs(${ai},'B')">${wasDone?'✓':''}</button>
+      <button class="abs-check" id="chk-${tipus}-${ei}-${ai}" onclick="toggleCheck('${tipus}',${ei},${ai})"></button>
+      <div style="flex-basis:100%">${det}</div>
     </div>`;
   });
-
   html+=`</div>`;
   return html;
 }
 
-function toggleAbs(ai,tipus){
-  const btn=document.getElementById('abs-check-'+ai);
+function toggleCheck(tipus,ei,ai){
+  const btn=document.getElementById(`chk-${tipus}-${ei}-${ai}`);
   btn.classList.toggle('done');
   btn.textContent=btn.classList.contains('done')?'✓':'';
-  autosave(tipus||'B');
+  autosave(tipus);
 }
 
 function toggleEx(tipus,i){
@@ -737,10 +832,10 @@ function collectForm(tipus){
   const id=tipus.toLowerCase();
   const data=document.getElementById(id+'-date').value||today();
   const exercicis=g.exercicis.map((ex,ei)=>{
-    if(ex.isAbs){
-      const absDone=ABS_EXERCICIS.map((ab,ai)=>{
-        const btn=document.getElementById('abs-check-'+ai);
-        return (btn&&btn.classList.contains('done'))?ab.id:null;
+    if(ex.isChecks){
+      const absDone=checkItems(ex).map((it,ai)=>{
+        const btn=document.getElementById(`chk-${tipus}-${ei}-${ai}`);
+        return (btn&&btn.classList.contains('done'))?it.id:null;
       }).filter(Boolean);
       return {id:ex.id,name:ex.name,isAbs:true,absDone};
     }
@@ -784,11 +879,18 @@ function restoreDraft(tipus){
   if(!d||!d.exercicis) return;
   const id=tipus.toLowerCase();
   if(d.data){const de=document.getElementById(id+'-date');if(de)de.value=d.data;}
-  d.exercicis.forEach((ex,ei)=>{
+  const g=GYM[tipus];
+  d.exercicis.forEach(ex=>{
+    // Es busca per id (no per posició): així un canvi de rutina no barreja exercicis
+    const ei=g.exercicis.findIndex(e=>e.id===ex.id);
+    if(ei<0) return;
+    const cur=g.exercicis[ei];
     if(ex.isAbs){
+      if(!cur.isChecks) return;
+      const items=checkItems(cur);
       (ex.absDone||[]).forEach(did=>{
-        const ai=ABS_EXERCICIS.findIndex(a=>a.id===did);
-        if(ai>=0){const b=document.getElementById('abs-check-'+ai);if(b){b.classList.add('done');b.textContent='✓';}}
+        const ai=items.findIndex(a=>a.id===did);
+        if(ai>=0){const b=document.getElementById(`chk-${tipus}-${ei}-${ai}`);if(b){b.classList.add('done');b.textContent='✓';}}
       });
       return;
     }
@@ -1145,7 +1247,7 @@ function renderGymHist(tipus){
     const realIdx=allSessions.findIndex(ss=>ss.ts===s.ts);
     const exLines=s.exercicis.map(ex=>{
       if(ex.isAbs){
-        if(ex.absDone&&ex.absDone.length) return `Abs: ${ex.absDone.map(id=>ABS_EXERCICIS.find(a=>a.id===id)?.name||id).join(', ')}`;
+        if(ex.absDone&&ex.absDone.length) return `${ex.id==='m_mob'?'Mobilitat':'Abs'} (${ex.absDone.length}): ${ex.absDone.map(id=>[...ABS_EXERCICIS,...MOB_EXERCICIS].find(a=>a.id===id)?.name||id).join(', ')}`;
         return null;
       }
       if(ex.isSuperset){
@@ -1307,8 +1409,8 @@ function weekRangeLabel(wkMon){const s=parseISO(wkMon);const e=new Date(s);e.set
 
 function weekSummary(wkMon){
   const sess=S.arr('gym_sessions_v2').filter(s=>weekMondayISO(s.data)===wkMon);
-  const byType={A:0,B:0,C:0,RUN:0,D:0};sess.forEach(s=>{if(byType[s.tipus]!=null)byType[s.tipus]++;});
-  const gym=byType.A+byType.B+byType.C;
+  const byType={A:0,B:0,C:0,M:0,RUN:0,D:0};sess.forEach(s=>{if(byType[s.tipus]!=null)byType[s.tipus]++;});
+  const gym=byType.A+byType.B+byType.C+byType.M;
   // Totals de running de la setmana (temps, km i ritme corrent)
   let runSec=0,runKm=0,pSec=0,pKm=0;
   sess.filter(s=>s.tipus==='RUN').forEach(s=>{
@@ -1380,7 +1482,7 @@ function renderResumList(sums){
     let delta='';
     if(s.pes!=null&&prev&&prev.pes!=null){const d=+(s.pes-prev.pes).toFixed(1);if(d!==0)delta=`<div class="wk-delta ${d<0?'cg':'cr'}">${d>0?'+':''}${d}</div>`;}
     const bt=s.byType;
-    const dies=((bt.A?'Gym A×'+bt.A+' ':'')+(bt.B?'Gym B×'+bt.B+' ':'')+(bt.C?'Gym C×'+bt.C+' ':'')+(bt.RUN?'Running×'+bt.RUN+' ':'')+(bt.D?'Altres×'+bt.D+(s.altresActs.length?' ('+s.altresActs.map(esportName).join(', ')+')':''):'')).trim();
+    const dies=((bt.A?'Gym A×'+bt.A+' ':'')+(bt.B?'Gym B×'+bt.B+' ':'')+(bt.C?'Gym C×'+bt.C+' ':'')+(bt.M?'Gym M×'+bt.M+' ':'')+(bt.RUN?'Running×'+bt.RUN+' ':'')+(bt.D?'Altres×'+bt.D+(s.altresActs.length?' ('+s.altresActs.map(esportName).join(', ')+')':''):'')).trim();
     return `<div class="wk">
       <div class="wk-top">
         <div class="wk-range">${weekRangeLabel(s.wkMon)}</div>
@@ -1403,7 +1505,7 @@ function renderResumList(sums){
 // ═══════════════════════════════════════════
 // CÒPIA DE SEGURETAT
 // ═══════════════════════════════════════════
-const BACKUP_KEYS=['gym_sessions_v2','pesos','gym_draft_A','gym_draft_B','gym_draft_C','gym_draft_D','gym_draft_RUN','app_inited'];
+const BACKUP_KEYS=['gym_sessions_v2','pesos','gym_draft_A','gym_draft_B','gym_draft_C','gym_draft_M','gym_draft_D','gym_draft_RUN','app_inited'];
 function collectBackup(){
   const data={};
   BACKUP_KEYS.forEach(k=>{const v=localStorage.getItem(k);if(v!==null)data[k]=v;});
@@ -1456,7 +1558,7 @@ function importData(ev){
 function resetAllData(){
   if(!confirm('Esborrar TOTES les dades (entrenaments i pesos)?\nNo es pot desfer.')) return;
   if(!confirm('Segur del tot? Començaràs de zero.')) return;
-  ['gym_sessions_v2','gym_draft_A','gym_draft_B','gym_draft_C','gym_draft_D','gym_draft_RUN','pesos','diet_done'].forEach(k=>S.del(k));
+  ['gym_sessions_v2','gym_draft_A','gym_draft_B','gym_draft_C','gym_draft_M','gym_draft_D','gym_draft_RUN','pesos','diet_done'].forEach(k=>S.del(k));
   S.set('app_inited',true); // evita que es torni a sembrar la mesura inicial
   location.reload();
 }
@@ -1505,7 +1607,7 @@ function upsertSession(rec){
 function draftIsOld(d){return !!d&&(d.day||d.data||'')!==today();}
 function rolloverDrafts(){
   let saved=0;
-  ['A','B','C'].forEach(tp=>{
+  ['A','B','C','M'].forEach(tp=>{
     const d=S.get('gym_draft_'+tp); if(!draftIsOld(d)) return;
     if(d.exercicis&&hasAnyData(d)){ upsertSession({tipus:tp,data:d.data||d.day,exercicis:d.exercicis}); saved++; }
     S.del('gym_draft_'+tp);
@@ -1524,7 +1626,7 @@ function rolloverDrafts(){
   return saved;
 }
 function renderAllForms(){
-  ['A','B','C'].forEach(t=>{
+  ['A','B','C','M'].forEach(t=>{
     document.getElementById(t.toLowerCase()+'-date').value=today();
     renderExercises(t);   // restoreDraft hi posa la data de l'esborrany si n'hi ha un d'avui
     renderGymHist(t);
